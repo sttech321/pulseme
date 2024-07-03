@@ -54,3 +54,23 @@ $paths = new Config\Paths();
 require $paths->systemDirectory . '/Boot.php';
 
 exit(CodeIgniter\Boot::bootWeb($paths));
+
+
+require_once __DIR__ . '/../vendor/autoload.php'; // Ensure Composer autoloader is included
+
+use Dotenv\Dotenv;
+
+// Load environment variables from .env file
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+// Define ROOTPATH if not already defined
+if (!defined('ROOTPATH')) {
+    define('ROOTPATH', realpath(__DIR__ . '/../') . DIRECTORY_SEPARATOR);
+}
+
+// The rest of your CodeIgniter application bootstrap...
+$app = require_once realpath(__DIR__ . '/../') . '/bootstrap/app.php';
+
+$app->run();
+

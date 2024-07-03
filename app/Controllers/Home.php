@@ -14,9 +14,9 @@ class Home extends BaseController
         return view('login');
     }
 
-    public function dashboard(): string
+    public function dashboard_copy(): string
     {
-        return view('dashboard');
+        return view('dashboard2');
     }
 
     public function summary(): string

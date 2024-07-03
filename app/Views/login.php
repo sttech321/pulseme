@@ -9,36 +9,41 @@
     <script async
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC_9G82Fa3wdn-p4QID43b_RVrJme66fQ&libraries=places">
     </script>
-    <style>* {
-  font-size: 14px;
-}
-html {
-  height: 100%;
-  margin: 0;
-}
-body, #app {
-  height: 100%;
-  margin: 0;
-}</style>
 </head>
-<body>
-<div data-v-139b8be6="" class="wrapper">
-    <img data-v-139b8be6="" width="120" src="https://kiliassets.speetra.com/logo/pulsem-vertical-light-medium.png">
-    <div data-v-139b8be6="">
-        <label data-v-139b8be6="">Email</label>
-        <input data-v-139b8be6="" autocomplete="off" type="text" placeholder="example@mail.com">
-        <div data-v-139b8be6="" style="display: none;">Please enter your email.</div>
-    </div>
-    <div data-v-139b8be6="">
-        <label data-v-139b8be6="">Password</label>
-        <input data-v-139b8be6="" autocomplete="off" type="password" placeholder="••••••••">
-        <i data-v-139b8be6="" class="icon-md-eye" style="font-size: 16px;"></i>
-    </div>
-    <div data-v-139b8be6="" class="buttons">
-        <button data-v-139b8be6="" type="button" class="btn">Log In</button>
-        <a data-v-139b8be6="" class="btn" href="https://know.pulsem.me/thank-you-demo-request-0?utm_source=dashboard&amp;utm_medium=web&amp;utm_campaign=login_form" target="_blank"> Sign Up </a>
-    </div>
-    <a data-v-139b8be6="" href="/password-recovery" class="">Forgot password?</a></div>
+<body class="userLoginBody">
+<div class="centeredbox1">
+<?php if(session()->getFlashdata('msg')):?>
+        <div class="alert alert-danger">
+            <?= session()->getFlashdata('msg') ?>
+        </div>
+    <?php endif;?>
+   <div class="innerBox">
+   <form method="post" action="<?= base_url('loginAuth') ?>">
+            <div class="loginForm" id="loginForms">
+            <div class="mainLoginBox">
+                <div class="loginVisibility" id="loginVisibility">
+                <img data-v-139b8be6="" width="120" src="https://kiliassets.speetra.com/logo/pulsem-vertical-light-medium.png">
+                    <div class="loginTitle">
+                        Sign in
+                    </div>
+                    <div class="loginFormInput">
+                        <div class="input">
+                            <input type="text" id="username" name="email" placeholder="Email or Username">
+                        </div>
 
+                        <div class="input">
+                            <input type="password" placeholder="Password" id="password" name="password">
+                        </div>
+                    </div>
+                    <div class="btnBox">
+                        <button class="LoginBtn" name="login" type="submit">Sign in</button>
+                        <button class="" name="reset" type="reset"><a href="<?= site_url('/forgotPassword') ?>">Reset password</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </form>
+   </div>
+</div>
 </body>
 </html>
