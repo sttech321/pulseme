@@ -182,16 +182,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="container-fluid">
+            </div> <!-- <div class="container-fluid"> -->
+            <div class="sidebarRightContentWrap">
                 <h2>Pro Sidebar</h2>
                 <hr>
 
                 <h5>More templates</h5>
                 <hr>
-
             </div>
-
         </main>
         <!-- page-content" -->
     </div>
