@@ -182,8 +182,8 @@
                         </div>
                     </div>
                 </div>
-            </div> <!-- <div class="container-fluid"> -->
-            <div class="sidebarRightContentWrap">
+            </div>
+            <div class="sidebarRightContent">
                 <h2>Pro Sidebar</h2>
                 <hr>
 

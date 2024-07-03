@@ -25,8 +25,10 @@ $routes->get('/employee-rewards', 'Home::rewards');
 
 $routes->get('/analyze/competitor-analysisg', 'Home::analysisg');
 
-$routes->get('/analyze/reviews/reviews', 'Home::review');
+$routes->get('/analyse/reviews/reviews', 'Home::reviews');
 
 $routes->get('/analyze/dispatching', 'Home::dispatching');
 
 $routes->get('/leaderboard/reports/departments', 'Home::departments');
+
+// $routes->get('/leaderboard/reports/departments', 'Home::departments');
