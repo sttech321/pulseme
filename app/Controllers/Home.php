@@ -11,7 +11,7 @@ class Home extends BaseController
 
     public function login(): string
     {
-        return view('login');
+        return view('login/login');
     }
 
     public function dashboard_copy(): string
@@ -27,54 +27,50 @@ class Home extends BaseController
     public function referral(): string
     {
         return view('referral');
- 
     }
 
     public function messaging(): string
     {
         return view('messaging');
- 
     }
 
     public function dispatch(): string
     {
         return view('dispatch');
- 
     }
 
     public function widget(): string
     {
         return view('widget');
- 
     }
 
     public function rewards(): string
     {
         return view('rewards');
- 
     }
 
     public function analysisg(): string
     {
         return view('analysisg');
- 
     }
 
     public function dispatching(): string
     {
         return view('dispatching');
- 
     }
 
     public function reviews(): string
     {
         return view('review');
- 
     }
 
     public function departments(): string
     {
         return view('departments');
- 
+    }
+
+    public function welcome(): string
+    {
+        return view('dashboard');
     }
 }
