@@ -92,7 +92,6 @@ class Filters extends BaseFilters
      *
      * @var array<string, list<string>>
      */
-    public array $methods = [];
 
     /**
      * List of filter aliases that should run on any

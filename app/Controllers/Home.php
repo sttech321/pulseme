@@ -14,9 +14,9 @@ class Home extends BaseController
         return view('login/login');
     }
 
-    public function dashboard(): string
+    public function dashboard_copy(): string
     {
-        return view('dashboard');
+        return view('dashboard2');
     }
 
     public function summary(): string
@@ -67,5 +67,10 @@ class Home extends BaseController
     public function departments(): string
     {
         return view('departments');
+    }
+
+    public function welcome(): string
+    {
+        return view('dashboard');
     }
 }

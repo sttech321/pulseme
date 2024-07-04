@@ -186,7 +186,7 @@
             <div class="sidebarRightContent">
                 <h2>Pro Sidebar</h2>
                 <hr>
-
+                <?= $this->renderSection('content') ?>
                 <h5>More templates</h5>
                 <hr>
             </div>

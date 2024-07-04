@@ -31,29 +31,30 @@
 </head>
 
 <body>
-  <div data-v-139b8be6="" class="wrapper sessionWrap">
-    <div class="contact-form-wrap">
-      <img data-v-139b8be6="" width="230" src="../image/login-img.png">
-      <div data-v-139b8be6="" class="formField">
-        <div class="inputBox">
-          <input data-v-139b8be6="" autocomplete="off" type="text" placeholder="Email Address">
+<form method="post" action="<?= base_url('loginAuth') ?>">
+    <div data-v-139b8be6="" class="wrapper sessionWrap">
+      <div class="contact-form-wrap">
+        <img data-v-139b8be6="" width="230" src="../image/login-img.png">
+        <div data-v-139b8be6="" class="formField">
+          <div class="inputBox">
+            <input data-v-139b8be6="" autocomplete="off" name="email" type="text" placeholder="Email Address">
+          </div>
+          <div data-v-139b8be6="" style="display: none;">Please enter your email.</div>
         </div>
-        <div data-v-139b8be6="" style="display: none;">Please enter your email.</div>
-      </div>
-      <div data-v-139b8be6="" class="formField">
-        <div class="inputBox">
-          <input data-v-139b8be6="" autocomplete="off" type="password" placeholder="••••••••">
+        <div data-v-139b8be6="" class="formField">
+          <div class="inputBox">
+            <input data-v-139b8be6="" autocomplete="off" type="password" name="password" placeholder="••••••••">
+          </div>
+          <i data-v-139b8be6="" class="icon-md-eye" style="font-size: 16px;"></i>
         </div>
-        <i data-v-139b8be6="" class="icon-md-eye" style="font-size: 16px;"></i>
+        <div data-v-139b8be6="" class="buttons">
+          <button class="btn btnPrimary" name="login" type="submit">Log In</button>
+          <!-- <a data-v-139b8be6="" class="btn btnGreen" href="https://know.pulsem.me/thank-you-demo-request-0?utm_source=dashboard&amp;utm_medium=web&amp;utm_campaign=login_form" target="_blank"> Sign Up </a> -->
+        </div>
+        <p class="bottomLineContent"><a data-v-139b8be6="" href="/password-recovery" class="">Forgot password? </a>Reset it securely</p>
       </div>
-      <div data-v-139b8be6="" class="buttons">
-        <button data-v-139b8be6="" type="button" class="btn btnPrimary">Log In</button>
-        <!-- <a data-v-139b8be6="" class="btn btnGreen" href="https://know.pulsem.me/thank-you-demo-request-0?utm_source=dashboard&amp;utm_medium=web&amp;utm_campaign=login_form" target="_blank"> Sign Up </a> -->
-      </div>
-      <p class="bottomLineContent"><a data-v-139b8be6="" href="/password-recovery" class="">Forgot password? </a>Reset it securely</p>
     </div>
-  </div>
-
+  </form>
 </body>
 
 </html>
