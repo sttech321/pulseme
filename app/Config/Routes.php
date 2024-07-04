@@ -32,5 +32,4 @@ $routes->get('logout', 'UserController::logout');
 $routes->add('/forgotPassword', 'UserController::forgotPassword');
 $routes->add('/password/verify', 'UserController::verifyOtp');
 $routes->add('/password/reset', 'UserController::resetPassword');
-
 $routes->get('/welcome', 'Home::welcome');
