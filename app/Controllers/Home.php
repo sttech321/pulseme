@@ -14,9 +14,9 @@ class Home extends BaseController
         return view('login/login');
     }
 
-    public function dashboard_copy(): string
+    public function overview(): string
     {
-        return view('dashboard2');
+        return view('overview');
     }
 
     public function summary(): string
@@ -61,9 +61,8 @@ class Home extends BaseController
 
     public function reviews(): string
     {
-        return view('review');
+        return view('reviews');
     }
-
     public function departments(): string
     {
         return view('departments');
@@ -72,5 +71,9 @@ class Home extends BaseController
     public function welcome(): string
     {
         return view('dashboard');
+    }
+    public function outbound(): string
+    {
+        return view('outbound');
     }
 }
