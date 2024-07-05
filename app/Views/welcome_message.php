@@ -9,10 +9,18 @@
     <link rel="icon" type="image/png" sizes="32x32" href="https://kiliassets.speetra.com/favicon/favicon-32x32.png">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/reviews.css">
+    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/all.min.css">
 </head>
 
 <body>
+    <!-- loading -->
+    <!-- <div class="loading">
+        <div class="dots-loader"></div>
+    </div> -->
+    <!-- closed -->
     <div class="page-wrapper chiller-theme toggled">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
@@ -76,13 +84,17 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-cog" aria-hidden="true"></i>
+                                <div class="imgIconWrap">
+                                    <img width="20" height="20" src="../image/operate.png" alt="sidebar icon">
+                                </div>
                                 <span> Operate </span>
                             </a>
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
-                                <i class="fa fa-search-minus" aria-hidden="true"></i>
+                                <div class="imgIconWrap">
+                                    <img width="20" height="20" src="../image/analyze.png" alt="sidebar icon">
+                                </div>
                                 <span>Analyze</span>
                             </a>
                             <div class="sidebar-submenu">
@@ -104,7 +116,9 @@
                         </li>
                         <li class=" sidebar-dropdown">
                             <a href="#">
-                                <i class="fa fa-male" aria-hidden="true"></i>
+                                <div class="imgIconWrap">
+                                    <img width="20" height="20" src="../image/leaderboard.png" alt="sidebar icon">
+                                </div>
                                 <span>Leaderboard</span>
                             </a>
                             <div class="sidebar-submenu">
@@ -120,43 +134,51 @@
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                <div class="imgIconWrap">
+                                    <img width="20" height="20" src="../image/marketplace.png" alt="sidebar icon">
+                                </div>
                                 <span>Marketplace</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
-                                    <li class="sidebar-dropdown-inner">
+                                    <li>
                                         <a href="#">
                                             <img width="15" src="../image/lead-generation.svg" alt="sidebar icon">
                                             Lead Generation
                                         </a>
-                                        <div class="sidebar-submenu-inner">
+                                        <!-- <div class="sidebar-submenu-inner">
                                             <ul>
                                                 <li>
                                                     <a href="#">
-
-                                                        <i class="fa fa-comments" aria-hidden="true"></i>
+                                                        <div class="imgIconWrap">
+                                                            <img width="20" height="20" src="../image/two-way-communication.png" alt="sidebar icon">
+                                                        </div>
                                                         Two Way Messaging
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="#">
-                                                        <i class="fa fa-comment" aria-hidden="true"></i>
-                                                        Chat Widget</a>
+                                                        <div class="imgIconWrap">
+                                                            <img width="20" height="20" src="../image/chat.png" alt="sidebar icon">
+                                                        </div>
+                                                        Chat Widget
+                                                    </a>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> -->
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="#"><img width="15" src="../image/employee-retention.svg" alt="sidebar icon">Employee Retention</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
 
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
+                                <div class="imgIconWrap">
+                                    <img width="20" height="20" src="../image/referrals.png" alt="sidebar icon">
+                                </div>
                                 <span>Referrals</span>
                             </a>
                         </li>
@@ -182,20 +204,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="sidebarRightContent">
-                <h2>Pro Sidebar</h2>
-                <hr>
-                <?= $this->renderSection('content') ?>
-                <h5>More templates</h5>
-                <hr>
+            </div> <!-- <div class="container-fluid"> -->
+            <div class="sidebarRightContentWrap">
+                <?= view('review') ?>
             </div>
         </main>
         <!-- page-content" -->
     </div>
     <!-- page-wrapper -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
             $(".sidebar-dropdown > a").click(function() {
@@ -238,6 +257,21 @@
             ) {
                 $('.toggle > input').prop('checked', false);
             }
+        })
+    </script>
+    <script>
+        // Initialize tooltips
+        $(document).ready(function() {
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    <script>
+        $(document).click(function(event) {
+            setTimeout(function() {
+                $('body')
+                    .removeClass('loading')
+                    .addClass('loaded');
+            }, 3000);
         })
     </script>
 </body>

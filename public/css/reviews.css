@@ -1,0 +1,136 @@
+.reviewsWrap .tabsSectionWrap .nav-pills button { background-color: transparent!important; color: #000!important; }
+.reviewsWrap .tabsSectionWrap  .nav-pills .nav-link.active { border-bottom: 2px solid #3490dc; border-radius: 0; }
+.reviewsWrap .tabsSectionWrap  .nav-pills { margin: 0 -40px; padding: 16px 40px; background-color: #fdfdff; box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.75); margin-top: -13px; }
+
+/* .dropdown-toggle */
+
+.dropdown-toggle.barsOnly, .dropdown-toggle.barsOnly:active:focus, .dropdown-toggle.barsOnly:after, .dropdown-toggle.barsOnly:focus, .dropdown-toggle.barsOnly:hover { box-shadow: none; outline: none; background-color: transparent; border: none; }
+.dropdown-toggle.barsOnly i { color: #9f9f9f; font-size: 23px; }
+.dropdown-toggle.barsOnly { padding: 0; }
+.reviewsPageContent .barsDropdown { text-align: right; }
+
+/* .formWrap .inputBox .form-control, .formWrap .inputBox .form-select { display: block; width: -webkit-fill-available; padding: 1rem 0; font-size: 1rem; font-weight: 400; line-height: 1.5; color: #495057; background-color: #fff; background-clip: padding-box; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; border: none; border-bottom: 1px solid #ced4da; border-radius: 0; } */
+
+.formWrap .inputBox .form-control, .formWrap .inputBox .form-select { display: block; width: -webkit-fill-available; padding: 1rem 8px; font-size: 1rem; font-weight: 400; line-height: 1.5; color: #495057; background-color: #fff; background-clip: padding-box; border: none; border-bottom: 1px solid #ced4da; border-radius: 0; transition: border-color 0.3s ease-in-out,box-shadow 0.3s ease-in-out; }
+.formWrap .inputBox .form-control:focus, .formWrap .inputBox .form-select:focus { border-color: #80bdff; box-shadow: none; }
+
+.formWrap .inputBox {margin-bottom: 10px;}
+
+.formWrap .form-control{
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    border-radius: 0;
+    resize: none;
+}
+.datepicker {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.datepicker .form-control{
+    border-radius: 100px;
+    border: none;
+    margin-top: 8px;
+    padding: 8px 21px;
+}
+.date-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.date-icon i {
+  color: #666;
+  font-size: 20px;
+}
+
+.modalContent .modal-footer{
+   border-top: none;
+}
+
+
+
+/* -----------tableListWrap-------------*/
+.allCheckLabel{
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.tableListWrap ul li{
+    list-style-type: none;
+}
+.listBoxWrap{
+    display: flex;
+    justify-content: space-between;
+}
+.listBoxWrap .leftSec{
+    display: flex;
+}
+.listBoxWrap .rightSec{
+    width: 16%;
+}
+.listBoxWrap .emojiIcon{
+    width: 40px;
+    margin-right: 20px;
+}
+.listBoxWrap .emojiIcon img{
+    width: 40px;
+    height: 40px;
+}
+.listBoxWrap .boxContentWrap{
+    width: calc(100% - 70px);
+}
+.listBoxWrap .emojiIcon img{
+    display: block;
+    margin-bottom: 10px;
+}
+.listBoxWrap .colorBox {
+    background-color: #17be6b;
+    color: #fff;
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+}
+
+.listBoxWrap span.colorBox.box-sm {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+}
+
+.listBoxWrap .cardListWrap  .cardList .font-bold{font-weight: 700;}
+.listBoxWrap .cardListWrap  .cardList{
+    margin-bottom: 0px;
+    background: #fcfcfc;
+    padding: 10px 20px;
+    border-radius: 100px;
+}
+
+.btnBoxWrap button {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.listBoxWrap .boxContentWrap .fieldText {
+    padding-left: 18px;
+    border-left: 3px solid #3490dc;
+}
+
+.reviewsPageContent .tableListWrap {margin-top: 30px;}
+.reviewsPageContent .tableListWrap li.listBoxTable {
+    background-color: #fff;
+    padding: 20px 20px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+}
+.reviewsPageContent .tableListWrap li.listBoxTable:nth-child(odd){
+    background: #ededed;
+}
+
