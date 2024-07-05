@@ -23,7 +23,6 @@ $routes->get('/analyze/competitor-analysisg', 'Home::analysisg');
 $routes->get('/analyze/reviews/reviews', 'Home::review');
 $routes->get('/analyze/dispatching', 'Home::dispatching');
 $routes->get('/leaderboard/reports/departments', 'Home::departments');
-
 $routes->get('/analyse/overview', 'UserController::dashboard');
 $routes->get('/login1', 'UserController::login');
 $routes->post('/loginAuth', 'UserController::loginAuth');
