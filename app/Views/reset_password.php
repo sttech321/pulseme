@@ -1,7 +1,15 @@
-<form action="<?= base_url('/password/reset') ?>" method="post">
-    <label for="password">New Password:</label><br>
-    <input type="password" id="password" name="password" required><br>
-    <!-- <label for="confirm_password">Confirm New Password:</label><br> -->
-    <input type="password" id="confirm_password" name="confirm_password" required><br>
-    <input type="submit" value="Submit">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reset Password</title>
+</head>
+<body>
+    <h2>Reset Password</h2>
+    <form action="" method="post">
+        <label for="password">New Password:</label>
+        <input type="password" name="password" required>
+        <button type="submit">Reset Password</button>
+    </form>
+</body>
+</html>

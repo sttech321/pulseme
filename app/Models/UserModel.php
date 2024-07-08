@@ -46,5 +46,20 @@ class UserModel extends Model
         }
         return false;
     }
+
+    public function verifyOtp($otp) {
+        $user = $this->where('otp', $otp)->first();
+        if ($user && strtotime($user['otp_expiry']) > time()) {
+            return true;
+        }
+        return false;
+    }
+
+    // Function to reset password
+    public function resetPassword($email, $password)
+    {
+        $hashedPassword = ($password);
+        return $this->where('email', $email)->set(['password' => $hashedPassword])->update();
+    }
 }
 

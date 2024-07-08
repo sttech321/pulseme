@@ -1,8 +1,15 @@
-<?PHP echo '<h1>Forget password page:</h1>'; ?>
-
-<form action="<?= base_url('forgotPassword') ?>" method="post">
-<?= csrf_field() ?>
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email" required><br>
-    <input type="submit" value="Submit">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Reset Request</title>
+</head>
+<body>
+    <h2>Forget Password</h2>
+    <form action="/forgotPassword" method="post">
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+        <button type="submit">Send OTP</button>
+    </form>
+</body>
+</html>

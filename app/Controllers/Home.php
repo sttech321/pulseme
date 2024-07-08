@@ -61,7 +61,12 @@ class Home extends BaseController
 
     public function reviews(): string
     {
-        return view('reviews');
+        // return view('reviews');
+        if (session()->get('isLoggedIn')){ 
+            return view('reviews');
+       }else{
+            return redirect()->to('/');
+       }
     }
     public function departments(): string
     {

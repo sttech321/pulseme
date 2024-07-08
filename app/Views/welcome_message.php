@@ -28,7 +28,7 @@
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
                 <div class="sidebar-brand">
-                    <a href="#"> <img data-v-139b8be6="" width="120" src="../image/login-img.png"></a>
+                    <a href="#"> <img  width="120" src="../image/login-img.png"></a>
                     <div id="close-sidebar">
                         <i class="fas fa-times"></i>
                     </div>
@@ -36,7 +36,7 @@
                 <div class="sidebar-header flexBetween">
                     <div class="leftSec">
                         <div class="user-pic">
-                            <img data-v-139b8be6="" width="230" src="../image/person.jpg" alt="user picture">
+                            <img  width="230" src="../image/person.jpg" alt="user picture">
                         </div>
                         <div class="user-info">
                             <span class="user-name">Jhon
@@ -54,7 +54,7 @@
                                     <div class="dropdown-top flexBetween">
                                         <div class="leftSec">
                                             <div class="user-pic">
-                                                <img data-v-139b8be6="" width="230" src="../image/person.jpg" alt="user picture">
+                                                <img  width="230" src="../image/person.jpg" alt="user picture">
                                             </div>
                                             <div class="user-info">
                                                 <span class="user-name">Jhon
@@ -68,7 +68,10 @@
                                 <li><a class="menuListItem" href="#"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
                                 <li><a class="menuListItem" href="#"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
                                 <li><a class="menuListItem" href="#"><i class="fa fa-envelope" aria-hidden="true"></i>Logs</a></li>
-                                <li><a class="menuListItem" href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                                <li> 
+                                    <?= session()->get('username') ?>
+                                    <a class="menuListItem" href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+                                </li>
 
                             </ul>
                         </div>
@@ -206,7 +209,7 @@
                 </div>
             </div> <!-- <div class="container-fluid"> -->
             <div class="sidebarRightContentWrap">
-                <?= view('review') ?>
+
             </div>
         </main>
         <!-- page-content" -->

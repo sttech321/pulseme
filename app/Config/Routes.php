@@ -6,9 +6,8 @@ use App\Controllers\Usercontroller;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::login');
 
-// $routes->get('/login', 'Home::login');
 // $routes->get('login2', 'Home::dashboard');
 // $routes->get('/forgetPass', 'UserController::forgetPass');
 
@@ -23,13 +22,14 @@ $routes->get('/analyze/competitor-analysisg', 'Home::analysisg');
 $routes->get('/analyze/reviews/reviews', 'Home::reviews');
 $routes->get('/analyze/dispatching', 'Home::dispatching');
 $routes->get('/leaderboard/reports/departments', 'Home::departments');
-$routes->get('/analyse/overview', 'UserController::dashboard');
+// $routes->get('/analyse/overview', 'UserController::dashboard');
 $routes->get('/logs/outbound', 'Home::outbound');
-$routes->get('/login', 'UserController::login');
+// $routes->get('/login', 'UserController::login');
 $routes->post('/loginAuth', 'UserController::loginAuth');
 $routes->get('logout', 'UserController::logout');
 
 $routes->add('/forgotPassword', 'UserController::forgotPassword');
 $routes->add('/password/verify', 'UserController::verifyOtp');
 $routes->add('/password/reset', 'UserController::resetPassword');
-$routes->get('/welcome', 'Home::welcome');
+// $routes->get('/welcome', 'Home::welcome');
+
