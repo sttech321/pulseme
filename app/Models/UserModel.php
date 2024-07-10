@@ -55,11 +55,12 @@ class UserModel extends Model
         return false;
     }
 
-    // Function to reset password
-    public function resetPassword($email, $password)
-    {
-        $hashedPassword = ($password);
-        return $this->where('email', $email)->set(['password' => $hashedPassword])->update();
+    public function updatePassword($id,$newpassword) {
+        $data = [
+            'password' => $newpassword,
+        ];
+        return $this->where('id', $id)->set($data)->update();
     }
+    
 }
 

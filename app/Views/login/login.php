@@ -39,13 +39,13 @@
         <div data-v-139b8be6="" class="formField">
         <p style="color:red;"><?= session()->get('error') ?></p>
           <div class="inputBox">
-            <input data-v-139b8be6="" autocomplete="off" name="email" type="text" placeholder="Email Address">
+            <input data-v-139b8be6="" autocomplete="on" name="email" type="text" placeholder="Email Address">
           </div>
           <div data-v-139b8be6="" style="display: none;">Please enter your email.</div>
         </div>
         <div data-v-139b8be6="" class="formField">
           <div class="inputBox">
-            <input data-v-139b8be6="" autocomplete="off" type="password" name="password" placeholder="••••••••">
+            <input data-v-139b8be6="" autocomplete="on" type="password" name="password" placeholder="••••••••">
           </div>
           <i data-v-139b8be6="" class="icon-md-eye" style="font-size: 16px;"></i>
         </div>

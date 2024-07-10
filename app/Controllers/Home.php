@@ -54,11 +54,6 @@ class Home extends BaseController
         return view('analysisg');
     }
 
-    public function dispatching(): string
-    {
-        return view('dispatching');
-    }
-
     public function reviews(): string
     {
         // return view('reviews');
@@ -81,4 +76,6 @@ class Home extends BaseController
     {
         return view('outbound');
     }
+
+ 
 }

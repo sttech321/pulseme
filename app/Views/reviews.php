@@ -94,7 +94,7 @@
 							</a>
 						</li>
 						<li class="sidebar-dropdown">
-							<a href="#">
+							<a href="#" >
 								<div class="imgIconWrap">
 									<img width="20" height="20" src="/image/analyze.png" alt="sidebar icon">
 								</div>
@@ -112,7 +112,7 @@
 										<a href="#"><img width="15" src="/image/competitor.svg" alt="sidebar icon">Competitor Analysis</a>
 									</li>
 									<li>
-										<a href="#"><img width="15" src="/image/dispatching.svg" alt="sidebar icon">Dispatching</a>
+										<a href="/analyze/dispatching"><img width="15" src="/image/dispatching.svg" alt="sidebar icon">Dispatching</a>
 									</li>
 								</ul>
 							</div>

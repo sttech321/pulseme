@@ -20,7 +20,7 @@ $routes->get('/chat-widget', 'Home::widget');
 $routes->get('/employee-rewards', 'Home::rewards');
 $routes->get('/analyze/competitor-analysisg', 'Home::analysisg');
 $routes->get('/analyze/reviews/reviews', 'Home::reviews');
-$routes->get('/analyze/dispatching', 'Home::dispatching');
+$routes->get('/analyze/dispatching', 'TechnicianController::dispatching');
 $routes->get('/leaderboard/reports/departments', 'Home::departments');
 // $routes->get('/analyse/overview', 'UserController::dashboard');
 $routes->get('/logs/outbound', 'Home::outbound');
@@ -31,5 +31,9 @@ $routes->get('logout', 'UserController::logout');
 $routes->add('/forgotPassword', 'UserController::forgotPassword');
 $routes->add('/password/verify', 'UserController::verifyOtp');
 $routes->add('/password/reset', 'UserController::resetPassword');
+$routes->get('/show-access-token', 'TechnicianController::showAccessToken');
+$routes->get('/get-response-data', 'TechnicianController::gettechniciandata');
+
+$routes->post('technician/uploadImage', 'TechnicianController::uploadImage');
 // $routes->get('/welcome', 'Home::welcome');
 

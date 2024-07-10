@@ -59,12 +59,14 @@ class UserController extends Controller
             if ($model->storeOtp($email, $otp)) {
                 $this->sendOtpEmail($email, $otp);
                 echo 'OTP has been sent to your email.';
-                return view('verify_otp');
+                // return view('verify_otp');
+                return redirect()->to('/password/verify');
             } else {
                 echo 'Failed to store OTP. Please try again.';
             }
-        } else {
-            echo 'User does not exist.';
+        } else if(!empty($email)){
+            // echo 'User does not exist.';
+            session()->setFlashdata('error', 'User does not exist.');
         }
         return view('forgotPassword');
     }
@@ -111,8 +113,7 @@ class UserController extends Controller
                 $model = new UserModel();
                 var_dump($otp);
                 if ($model->verifyOtp($otp)) {
-                    // return view('reset_password');
-                    echo'jshsh';
+                    return view('reset_password');
                 } else {
                     echo 'Incorrect OTP. Please try again.';
                 }
@@ -122,30 +123,37 @@ class UserController extends Controller
         return view('verify_otp');
     }
 
-
-    public function resetPassword() {
+   // Assuming this is in your controller method
+    public function resetPassword()
+    {
+        // Load necessary helpers and libraries
         helper(['form']);
-        
-        if ($this->request->getMethod() == 'post') {
-            $rules = [
-                'password' => 'required|min_length[6]',
-                'confirm_password' => 'required|matches[password]'
-            ];
-            
-            if (!$this->validate($rules)) {
-                return view('reset_password', [
-                    'validation' => $this->validator
-                ]);
-            } else {
-                $password = $this->request->getVar('password');
-                $model = new UserModel();
-                $model->resetPassword($password);
-                
-                return redirect()->to('/')->with('success', 'Password reset successful. Please login with your new password.');
-            }
+
+        // Retrieve the new password from the form
+        $newPassword = $this->request->getVar('password');
+
+        // Load the UserModel
+        $model = new UserModel();
+
+        // Example usage of updatePassword method from UserModel
+        $id = 1; // Replace with the actual user ID
+        $result = $model->updatePassword($id, $newPassword);
+
+        // Check if update was successful
+        if ($result && !empty($newPassword)) {
+            // echo "Password updated successfully.";
+            session()->setFlashdata('success', 'Password updated successfully.');
+            return redirect()->to('/');
+        } else if(!empty($newPassword)){
+            // echo "Failed to update password.";
+            session()->setFlashdata('error', 'Failed to update password.');
+            // return view('reset_password');
         }
-        
+
+        // Load view (if needed)
         return view('reset_password');
     }
-
+   
 }
+        
+       
