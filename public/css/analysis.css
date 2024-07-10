@@ -3172,7 +3172,7 @@ ul {
 }
 
 .btn-blue,.hover\:btn-blue:hover {
-    background-color: #3490dc;
+    background-color: #3490dc !important;
     color: #fff
 }
 
@@ -3199,7 +3199,7 @@ ul {
 }
 
 .btn-green,.hover\:btn-green:hover {
-    background-color: #17be6b;
+    background-color: #17be6b !important;
     color: #fff
 }
 

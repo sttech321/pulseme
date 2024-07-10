@@ -68,7 +68,7 @@ class Home extends BaseController
         return view('departments');
     }
 
-    public function welcome(): string
+    public function welcome(): string 
     {
         return view('dashboard');
     }
@@ -77,5 +77,14 @@ class Home extends BaseController
         return view('outbound');
     }
 
- 
+    public function campaigns(): string
+    {
+        return view('dispatch_campaigns');
+    }
+
+    public function connect_social_media(): string
+    {
+        return view('setting_connect-social-media');
+    }
+        
 }
