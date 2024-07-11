@@ -1011,7 +1011,7 @@ input[type=button] {
 <div class="row-fluid-wrapper row-depth-1 row-number-13 dnd-row">
 <div class="row-fluid ">
 <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
-<div id="hs_cos_wrapper_module_15990842715485" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span id="hs_cos_wrapper_module_15990842715485_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><h2 style="text-align: center; font-size: 30px;"><span style="font-family: helvetica; color: #17233d;">Benefits of pulseM Messaging</span></h2></span></div>
+<div id="hs_cos_wrapper_module_15990842715485" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span id="hs_cos_wrapper_module_15990842715485_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><h2 style="text-align: center; font-size: 30px;"><span style="font-family: helvetica; color: #17233d;">Benefits of summitRA Messaging</span></h2></span></div>
 
 </div><!--end widget-span -->
 </div><!--end row-->

@@ -4,16 +4,16 @@
     
       <link rel="shortcut icon" href="https://know.pulsem.me/hubfs/pulsem_favicon-32x32.png">
     
-    <meta name="description" content="Plan and implement an effective reward program with pulseM's Employee Rewards!">
+    <meta name="description" content="Plan and implement an effective reward program with summitRA's Employee Rewards!">
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script type="text/javascript" async="" src="https://snap.licdn.com/li.lms-analytics/insight.min.js"></script><script src="https://js.hs-analytics.net/analytics/1719589500000/6856781.js" type="text/javascript" id="hs-analytics"></script><script src="https://js.hsadspixel.net/fb.js" type="text/javascript" id="hs-ads-pixel-6856781" data-ads-portal-id="6856781" data-ads-env="prod" data-loader="hs-scriptloader" data-hsjs-portal="6856781" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="https://js.usemessages.com/conversations-embed.js" type="text/javascript" id="hubspot-messages-loader" data-loader="hs-scriptloader" data-hsjs-portal="6856781" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="https://js.hs-banner.com/v2/6856781/banner.js" type="text/javascript" id="cookieBanner-6856781" data-cookieconsent="ignore" data-hs-ignore="true" data-loader="hs-scriptloader" data-hsjs-portal="6856781" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="https://js.hscollectedforms.net/collectedforms.js" type="text/javascript" id="CollectedForms-6856781" crossorigin="anonymous" data-leadin-portal-id="6856781" data-leadin-env="prod" data-loader="hs-scriptloader" data-hsjs-portal="6856781" data-hsjs-env="prod" data-hsjs-hublet="na1"></script><script src="/hs/hsstatic/jquery-libs/static-1.1/jquery/jquery-1.7.1.js"></script>
 <script>hsjQuery = window['jQuery'];</script>
-    <meta property="og:description" content="Plan and implement an effective reward program with pulseM's Employee Rewards!">
+    <meta property="og:description" content="Plan and implement an effective reward program with summitRA's Employee Rewards!">
     <meta property="og:title" content="PulseM Employee Rewards">
-    <meta name="twitter:description" content="Plan and implement an effective reward program with pulseM's Employee Rewards!">
+    <meta name="twitter:description" content="Plan and implement an effective reward program with summitRA's Employee Rewards!">
     <meta name="twitter:title" content="PulseM Employee Rewards">
 
     

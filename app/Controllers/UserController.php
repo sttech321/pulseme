@@ -8,67 +8,60 @@ use CodeIgniter\I18n\Time;
 use CodeIgniter\Email\Email;
 
 class UserController extends Controller
-{
-    public function login()
-    {
-        // Check if user is already logged in
-        if (session()->get('isLoggedIn')) {
-            return redirect()->to('/analyze/reviews/reviews');
-        }
+{    
+    public function loginAuth() {
         helper(['form']);
-        return view('login/login');
-    }
-    
-    public function loginAuth()
-    {
         $model = new UserModel();
-        $usernameOrEmail = $this->request->getVar('email');
+        $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');      
-        $isLoggedIn = $model->userCanLogin($usernameOrEmail, $password);
+        $isLoggedIn = $model->userCanLogin($email, $password);
         
         if ($isLoggedIn) {
             // Set session data
             $userData = [ 
-                'username' => $usernameOrEmail,
+                'username' => $email,
                 'isLoggedIn' => true
-                // Add more data as needed
             ];
             session()->set($userData);
-            return redirect()->to('/analyze/reviews/reviews');
+            return redirect()->to('/analyse/overview');
         } else {
             session()->setFlashdata('error', 'Invalid username/email or password');
             return redirect()->to('/');
         }
     }
 
-    public function logout()
-    {
+    public function logout() {
         // Destroy session data on logout
         session()->destroy();
         return redirect()->to('/');
     }
 
-
     public function forgotPassword() {
-        $email = $this->request->getVar('email');
+        return view('forgotPassword');
+    }
+
+    public function sendOtp() {
+        helper(['form']);
         $model = new UserModel();
-        $user = $model->where('email', $email)->first();
-       
+        $email = $this->request->getVar('email');
+        $user = $model->getUserByEmail($email);
         if ($user) {
             $otp = rand(100000, 999999); // Generate a 6-digit OTP
-            if ($model->storeOtp($email, $otp)) {
+            if ($model->setOtp($email, $otp)) {
                 $this->sendOtpEmail($email, $otp);
-                echo 'OTP has been sent to your email.';
+                // Store email in session for use in verify OTP action
+                $this->session->set_userdata('otp_email', $email);
+                $this->session->set_flashdata('success', 'OTP has been sent to your email.');
                 // return view('verify_otp');
-                return redirect()->to('/password/verify');
+                return redirect()->to('/forgot-password/verify-otp');
             } else {
-                echo 'Failed to store OTP. Please try again.';
+                $this->session->set_flashdata('error', 'Failed to store OTP. Please try again.');
             }
         } else if(!empty($email)){
             // echo 'User does not exist.';
             session()->setFlashdata('error', 'User does not exist.');
         }
-        return view('forgotPassword');
+        return redirect()->to('/forgot-password');
     }
 
     public function sendOtpEmail($email, $otp) {
@@ -98,10 +91,13 @@ class UserController extends Controller
 
     public function verifyOtp() {
         helper(['form']);
-        
-        if ($this->request->getMethod() == 'post') {    
+
+        if ($this->request->getMethod() == 'post') {   
+            // Retrieve email from session
+            $email = $this->session->userdata('otp_email'); 
             $rules = [
-                'otp' => 'required'
+                'otp' => 'required',
+                'email' => $email
             ];
 
             if (!$this->validate($rules)) {
@@ -153,7 +149,4 @@ class UserController extends Controller
         // Load view (if needed)
         return view('reset_password');
     }
-   
 }
-        
-       

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>pulseM</title>
+    <title>summitRA</title>
     <meta name="description" content="The small framework with powerful features">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="32x32" href="https://kiliassets.speetra.com/favicon/favicon-32x32.png">
@@ -938,7 +938,7 @@
                                         <a href="#"><img width="15" src="../image/overview.svg" alt="sidebar icon">Overview </a>
                                     </li>
                                     <li>
-                                        <a href="/analyze/reviews/reviews"><img width="15" src="../image/reviews.svg" alt="sidebar icon">Reviews</a>
+                                        <a href="/analyze/reviews"><img width="15" src="../image/reviews.svg" alt="sidebar icon">Reviews</a>
                                     </li>
                                     <li>
                                         <a href="#"><img width="15" src="../image/competitor.svg" alt="sidebar icon">Competitor Analysis</a>

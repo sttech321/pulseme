@@ -37,7 +37,9 @@
     <div class="wrapper sessionWrap">
       <div class="contact-form-wrap">
         <img style="margin-bottom:35px;" width="230" src="/image/login-img.png">
-        <p style="color:red;"><?= session()->get('error') ?></p>
+        <?php if ($this->session->flashdata('error')): ?>
+          <p style="color:red;"><?php echo $this->session->flashdata('error'); ?></p>
+        <?php endif; ?>
         <div  class="formField">
           <div class="inputBox">
           <label>Enter Email Address</label>

@@ -1,12 +1,23 @@
 <?php
 
-use CodeIgniter\Router\RouteCollection;
-use App\Controllers\Usercontroller;
+namespace Config;
+
+// Create a new instance of our RouteCollection class.
+$routes = Services::routes();
+
+$routes->setDefaultNamespace('App\Controllers');
+$routes->setDefaultController('Home');
+$routes->setDefaultMethod('index');
+$routes->setTranslateURIDashes(false);
+$routes->set404Override();
 
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::login');
+$routes->get('/', 'Home::index');
+$routes->post('/loginAuth', 'UserController::loginAuth');
+$routes->add('/forgot-password', 'UserController::forgotPassword');
+$routes->add('/forgot-password/verify-otp', 'UserController::verifyOtp');
 
 // $routes->get('login2', 'Home::dashboard');
 // $routes->get('/forgetPass', 'UserController::forgetPass');
@@ -20,18 +31,18 @@ $routes->get('/operate/dispatch', 'TechnicianController::dispatch');
 $routes->get('/chat-widget', 'Home::widget');
 $routes->get('/employee-rewards', 'Home::rewards');
 $routes->get('/analyze/competitor-analysisg', 'Home::analysisg');
-$routes->get('/analyze/reviews/reviews', 'Home::reviews');
+$routes->get('/analyze/reviews', 'Home::reviews');
 // $routes->get('/analyze/dispatching', 'Home::dispatching');
 // $routes->get('/analyze/dispatching', 'TechnicianController::dispatching');
 $routes->get('/leaderboard/reports/departments', 'Home::departments');
 // $routes->get('/analyse/overview', 'UserController::dashboard');
 $routes->get('/logs/outbound', 'Home::outbound');
 // $routes->get('/login', 'UserController::login');
-$routes->post('/loginAuth', 'UserController::loginAuth');
+
 $routes->get('logout', 'UserController::logout');
 
-$routes->add('/forgotPassword', 'UserController::forgotPassword');
-$routes->add('/password/verify', 'UserController::verifyOtp');
+
+
 $routes->add('/password/reset', 'UserController::resetPassword');
 $routes->get('/show-access-token', 'TechnicianController::showAccessToken');
 $routes->get('/get-response-data', 'TechnicianController::gettechniciandata');

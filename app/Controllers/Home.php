@@ -6,12 +6,13 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view('welcome_message');
+        return view('login/login');
     }
 
     public function login(): string
     {
-        return view('login/login');
+        $data['title'] = 'Login Page';
+        return view('login/login', $data);
     }
 
     public function overview(): string
@@ -56,9 +57,11 @@ class Home extends BaseController
 
     public function reviews(): string
     {
+        $data = [];
         // return view('reviews');
         if (session()->get('isLoggedIn')){ 
-            return view('reviews');
+            $data['title'] = 'Reviews Page';
+            return view('reviews', $data);
        }else{
             return redirect()->to('/');
        }
