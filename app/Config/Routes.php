@@ -42,4 +42,5 @@ $routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
 $routes->get('settings/general/connect-social-media', 'Home::connect_social_media');
 
 // $routes->get('/welcome', 'Home::welcome');
+$routes->post('/insert_campaign', 'DispatchController::insert_campaign');
 
