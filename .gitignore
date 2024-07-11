@@ -1,1 +1,15 @@
-/.env
+# Ignore writable directory and logs
+/writable/
+
+# Ignore composer dependencies
+/vendor/
+composer
+composer.lock
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+
+# Ignore miscellaneous
+Thumbs.db
+.DS_Store
