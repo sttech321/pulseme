@@ -57,18 +57,18 @@ class Home extends BaseController
     public function reviews(): string
     {
         // return view('reviews');
-        if (session()->get('isLoggedIn')){ 
+        if (session()->get('isLoggedIn')) {
             return view('reviews');
-       }else{
+        } else {
             return redirect()->to('/');
-       }
+        }
     }
     public function departments(): string
     {
         return view('departments');
     }
 
-    public function welcome(): string 
+    public function welcome(): string
     {
         return view('dashboard');
     }
@@ -79,12 +79,54 @@ class Home extends BaseController
 
     public function campaigns(): string
     {
-        return view('dispatch_campaigns');
+        return view('dispatch-tab/dispatch_campaigns');
     }
 
+    public function notifications(): string
+    {
+        return view('dispatch-tab/dispatch_notifications');
+    }
+
+    public function review_widget(): string
+    {
+        return view('dispatch-tab/dispatch_review_widget');
+    }
+
+    public function web_widget(): string
+    {
+        return view('dispatch-tab/dispatch_web_widget');
+    }
     public function connect_social_media(): string
     {
-        return view('setting_connect-social-media');
+        return view('general-tab/general_connect_social_media');
     }
-        
+    public function branding(): string
+    {
+        return view('general-tab/general_branding');
+    }
+    public function users(): string
+    {
+        return view('general-tab/general_users');
+    }
+    public function reporting(): string
+    {
+        return view('general-tab/general_reporting');
+    }
+    public function contact_info(): string
+    {
+        return view('contact-card-tab/contact_information');
+    }
+    public function contact_template(): string
+    {
+        return view('contact-card-tab/contact_templates');
+    }
+    public function billing_subscription(): string
+    {
+        return view('billing/billing_subscription');
+    }
+
+    // public function connect_social_media(): string
+    // {
+    //     return view('setting_connect-social-media');
+    // }
 }

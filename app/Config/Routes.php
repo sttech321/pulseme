@@ -39,8 +39,17 @@ $routes->get('/get-response-data', 'TechnicianController::gettechniciandata');
 $routes->post('technician/uploadImage', 'TechnicianController::uploadImage');
 $routes->get('search', 'TechnicianController::search');
 $routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
-$routes->get('settings/general/connect-social-media', 'Home::connect_social_media');
+$routes->get('/settings/dispatch/notifications', 'Home::notifications');
+$routes->get('/settings/dispatch/review-widget', 'Home::review_widget');
+$routes->get('/settings/dispatch/web-widget', 'Home::web_widget');
+$routes->get('/settings/general/connect-social-media', 'Home::connect_social_media');
+$routes->get('/settings/general/users', 'Home::users');
+$routes->get('/settings/general/reporting', 'Home::reporting');
+$routes->get('/settings/contact-card/contact-information', 'Home::contact_info');
+$routes->get('/settings/contact-card/contact-templates', 'Home::contact_template');
+$routes->get('/settings/billing/subscriptions', 'Home::billing_subscription');
+
+// $routes->get('settings/general/connect-social-media', 'Home::connect_social_media');
 
 // $routes->get('/welcome', 'Home::welcome');
 $routes->post('/insert_campaign', 'DispatchController::insert_campaign');
-

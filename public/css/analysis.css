@@ -3173,7 +3173,7 @@ ul {
 
 .btn-blue,.hover\:btn-blue:hover {
     background-color: #3490dc !important;
-    color: #fff
+    color: #fff !important;
 }
 
 .btn-blue:hover,.hover\:btn-blue:hover:hover {
@@ -3181,8 +3181,8 @@ ul {
 }
 
 .btn-red {
-    background-color: #e3342f;
-    color: #fff
+    background-color: #e3342f !important;
+    color: #fff !important;
 }
 
 .btn-red:hover {
@@ -3655,7 +3655,7 @@ ul {
 }
 
 .rounded-2px {
-    border-radius: 2px
+    border-radius: 2px !important;
 }
 
 .rounded-b-4px {
