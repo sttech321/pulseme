@@ -15,6 +15,7 @@ $routes->set404Override();
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+$routes->get('/logout', 'UserController::logout');
 $routes->post('/loginAuth', 'UserController::loginAuth');
 $routes->add('/forgot-password', 'UserController::forgotPassword');
 $routes->post('/forgot-password/send-otp', 'UserController::sendOtp');
@@ -42,7 +43,7 @@ $routes->get('/leaderboard/reports/departments', 'Home::departments');
 $routes->get('/logs/outbound', 'Home::outbound');
 // $routes->get('/login', 'UserController::login');
 
-$routes->get('logout', 'UserController::logout');
+
 
 
 
