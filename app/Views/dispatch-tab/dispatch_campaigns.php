@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="/css/reviews.css">
     <link rel="stylesheet" type="text/css" href="/css/analysis.css">
     <link rel="stylesheet" type="text/css" href="/css/variables.css">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/all.min.css">
 </head>
 <style type="text/css">
@@ -1090,75 +1089,187 @@
                                                 <div data-v-24df4780="" class="batch-send flex-center">
                                                     <div class="leftSec">
                                                         <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#campaignModal">
                                                             <i class="fa fa-plus mr-3" aria-hidden="true"></i> Create Campaign
                                                         </button>
-
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="campaignModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <!-- Modal -->
                                                             <div class="modal-dialog modalContent mx-700">
+                                                           
                                                                 <div class="modal-content">
-                                                                    <form method="post" action="/insert_campaign" enctype="multipart/form-data">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Create campaign</h5>
-                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                                        <li class="nav-item" role="presentation">
+                                                                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">General</button>
+                                                                        </li>
+                                                                        <li class="nav-item" role="presentation">
+                                                                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#youtube-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Youtube</button>
+                                                                        </li>
+                                                                        <li class="nav-item" role="presentation">
+                                                                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Templates</button>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div class="tab-content" id="pills-tabContent">
+                                                                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                                            <form method="post" action="" enctype="multipart/form-data">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel">Create campaign</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div class="grid grid-cols-2 gap-20px auto-rows-auto">
+                                                                                        <div class="flex w-full flex-col row-span-3">
+                                                                                            <img class="w-200px h-auto" src="https://kiliassets.speetra.com/prod/account_images/15407/campaign/1B85A09AA6CF1/1711571243_original.jpg" alt="Aaron Krasnow">
+                                                                                            <p class="text-md">Upload your image</p>
+                                                                                            <p class="text-sm mb-3">The preferred size is 200x200</p>
+                                                                                            <input id="logo-upload" hidden="" type="file">
+                                                                                            <button class="btn btn-blue w-full mb-2">
+                                                                                                <input type="file" id="profile-image-upload-1" name="image" style="display: block;" accept="image/*">
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="input-group">
+                                                                                            <label class="font-bold text-sm" for="campaignName">Campaign Name</label>
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="Campaign_name" id="campaignName">
+                                                                                        </div>
+                                                                                        <div class="input-group row-span-2">
+                                                                                            <label class="font-bold text-sm" for="description">Campaign Description</label>
+                                                                                            <textarea class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaign_description" rows="5" id="description"></textarea>
+                                                                                        </div>
+                                                                                        <div class="input-group">
+                                                                                            <label class="font-bold text-sm" for="department">Department</label>
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaign_department" id="department">
+                                                                                        </div>
+                                                                                        <div class="input-group">
+                                                                                            <label class="font-bold text-sm" for="license">License</label>
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="license" id="license">
+                                                                                        </div>
+                                                                                        <div class="input-group">
+                                                                                            <label class="font-bold text-sm" for="employeeID">Employee ID <span class="text-xs">(Useful for API Integrations)</span></label>
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employee_id" id="employeeID">
+                                                                                        </div>
+                                                                                        <div class="input-group">
+                                                                                            <label class="font-bold text-sm" for="email">Email <span class="text-xs">(descriptor)</span></label>
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
+                                                                                        <button type="submit" class="btn btn-primary btn-md">Submit changes</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
                                                                         </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="grid grid-cols-2 gap-20px auto-rows-auto">
-                                                                                <div class="flex w-full flex-col row-span-3">
-                                                                                    <img class="w-200px h-auto" src="https://kiliassets.speetra.com/prod/account_images/15407/campaign/1B85A09AA6CF1/1711571243_original.jpg" alt="Aaron Krasnow">
-                                                                                    <p class="text-md">Upload your image</p>
-                                                                                    <p class="text-sm mb-3">The preferred size is 200x200</p>
-                                                                                    <input id="logo-upload" hidden="" type="file">
-                                                                                    <button class="btn btn-blue w-full mb-2">
-                                                                                        <input type="file" id="profile-image-upload-1" name="image" style="display: block;" accept="image/*">
-                                                                                    </button>
+                                                                        <div class="tab-pane fade" id="youtube-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                                        <div class="modal-body p-30px container">
+                                                                            <div class="mb-20px">
+                                                                                    <h2 class="text-23px">Create Campaign</h2>
+                                                                                    <p></p>
                                                                                 </div>
-                                                                                <div class="input-group">
-                                                                                    <label class="font-bold text-sm" for="campaignName">Campaign Name</label>
-                                                                                    <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="Campaign_name" id="campaignName">
+                                                                                <!---->
+                                                                                <div class="row flex w-full mb-20px">
+                                                                                    <div class="flex w-full flex-col justify-start items-start">
+                                                                                        <div class="input-group w-full"><label class="font-bold text-sm" for="youtube">Youtube Video Link</label><input class="w-full p-5px border-b outline-none focus:border-blue-500" type="text" name="youtube" id="youtube" /></div>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="input-group row-span-2">
-                                                                                    <label class="font-bold text-sm" for="description">Campaign Description</label>
-                                                                                    <textarea class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaign_description" rows="5" id="description"></textarea>
-                                                                                </div>
-                                                                                <div class="input-group">
-                                                                                    <label class="font-bold text-sm" for="department">Department</label>
-                                                                                    <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaign_department" id="department">
-                                                                                </div>
-                                                                                <div class="input-group">
-                                                                                    <label class="font-bold text-sm" for="license">License</label>
-                                                                                    <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="license" id="license">
-                                                                                </div>
-                                                                                <div class="input-group">
-                                                                                    <label class="font-bold text-sm" for="employeeID">Employee ID <span class="text-xs">(Useful for API Integrations)</span></label>
-                                                                                    <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employee_id" id="employeeID">
-                                                                                </div>
-                                                                                <div class="input-group">
-                                                                                    <label class="font-bold text-sm" for="email">Email <span class="text-xs">(descriptor)</span></label>
-                                                                                    <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
-                                                                                <button type="submit" class="btn btn-primary btn-md">Submit changes</button>
+                                                                                <!----><!---->
+                                                                                <!-- <div class="flex justify-end mt-20px"><button class="btn text-sm btn-blue">Add Campaign</button><button class="btn btn-gray text-sm ml-10px">Close</button></div> -->
                                                                             </div>
                                                                         </div>
-                                                                    </form>
+                                                                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                                        <div class="modal-body p-30px container">
+                                                                                <div class="mb-20px">
+                                                                                    <h2 class="text-23px">Create Campaign</h2>
+                                                                                    <p></p>
+                                                                                </div>
+                                                                                <!----><!---->
+                                                                                <div class="row">
+                                                                                    <h3 class="text-md">SMS Templates</h3>
+                                                                                    <div class="input-group mb-5">
+                                                                                        <label class="font-bold text-sm" for="sms-pulse-check">Pulse Check</label>
+                                                                                        <textarea class="w-full p-5px" placeholder="(Optional) Override Pulse SMS Templates" type="text" name="sms-pulse-check" rows="4" id="sms-pulse-check"></textarea>
+                                                                                    </div>
+                                                                                    <div class="input-group mb-5">
+                                                                                        <label class="font-bold text-sm" for="sms-bio-template">Bio Template</label>
+                                                                                        <textarea class="w-full p-5px" placeholder="(Optional) Override Bio SMS Templates" type="text" name="sms-bio-template" rows="4" id="sms-bio-template"></textarea>
+                                                                                    </div>
+                                                                                    <h3 class="text-md">Email Templates</h3>
+                                                                                    <div class="input-group w-full mb-5">
+                                                                                        <label class="font-bold text-sm" for="email-pulse-check">Pulse Check Template Name</label>
+                                                                                        <input class="w-full p-5px" type="text" placeholder="(Optional) Override Pulse Check Email Template Name" name="email-pulse-check" id="email-pulse-check" />
+                                                                                    </div>
+                                                                                    <div class="input-group w-full mb-5">
+                                                                                        <label class="font-bold text-sm" for="email-bio-template">Bio Template Name</label>
+                                                                                        <input class="w-full p-5px" type="text" placeholder="(Optional) Override Bio Email Template Name" name="email-bio-template" id="email-bio-template" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!---->
+                                                                            <div class="flex justify-end mt-20px"><button class="btn text-sm btn-blue">Add Campaign</button><button class="btn btn-gray text-sm ml-10px">Close</button>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <!-- <button data-v-24df4780="" class="btn btn-green ml-2"><svg data-v-24df4780="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                             <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z">
                                                             </path>
                                                         </svg> </button> -->
-
-                                                    <button type="button" class="btn btn-secondary btn-md ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                        <i class="fa fa-plus mr-3" aria-hidden="true"></i> Edit Defaults
-                                                    </button>
-
+                                                    <div class="rightSec">    
+                                                        <button type="button" class="btn btn-secondary btn-md ml-2" data-bs-toggle="modal" data-bs-target="#editdefaultModal">
+                                                            <i class="fa fa-plus mr-3" aria-hidden="true"></i> Edit Defaults
+                                                        </button>
+                                                        <div class="modal fade" id="editdefaultModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <!-- Modal -->
+                                                            <div class="modal-dialog modalContent mx-700">
+                                                                <div class="modal-content">
+                                                                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                                        <li class="nav-item" role="presentation">
+                                                                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Templates</button>
+                                                                        </li>
+                                                                        <li class="nav-item" role="presentation">
+                                                                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile1" type="button" role="tab" aria-controls="pills-profile1" aria-selected="false">Social Media</button>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div class="tab-content" id="pills-tabContent">
+                                                                        <div class="tab-pane fade show active" id="pills-home1" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                                            <form method="post" action="<?= base_url('demo_test'); ?>" enctype="multipart/form-data">
+                                                                                <div class="modal-header">
+                                                                                    <!-- <h5 class="modal-title" id="exampleModalLabel">Create campaign</h5> -->
+                                                                                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">close</button> -->
+                                                                                </div>
+                                                                                <div class="modal-body p-30px container">
+                                                                                    <h2 class="text-23px mb-3">Edit Defaults</h2>
+                                                                                    <div class="row">
+                                                                                        <h3 class="text-md">SMS Templates</h3>
+                                                                                        <div class="input-group mb-5">
+                                                                                            <label class="font-bold text-sm" for="sms-pulse-check">Pulse Check</label>
+                                                                                            <textarea class="w-full p-5px border-b border-gray-200 outline-none focus:border-blue-500 focus:border-b-2 resize-none" placeholder="(Optional) Override Pulse SMS Templates" type="text" name="sms-pulse-check" rows="4" id="sms-pulse-check"></textarea>
+                                                                                            <!---->
+                                                                                        </div>
+                                                                                        <div class="input-group mb-5">
+                                                                                            <label class="font-bold text-sm" for="sms-bio-template">Bio Template</label>
+                                                                                            <textarea class="w-full p-5px border-b border-gray-200 outline-none focus:border-blue-500 focus:border-b-2 resize-none" placeholder="(Optional) Override Bio SMS Templates" type="text" name="sms-bio-template" rows="4" id="sms-bio-template"></textarea>
+                                                                                            <!---->
+                                                                                        </div>
+                                                                                        <h3 class="text-md">Email Templates</h3>
+                                                                                        <div class="input-group w-full mb-5"><label class="font-bold text-sm" for="email-pulse-check">Pulse Check Template Name</label><input class="w-full p-5px border-b border-gray-200 outline-none focus:border-blue-500 focus:border-b-2" type="text" placeholder="(Optional) Override Pulse Check Email Template Name" name="email-pulse-check" id="email-pulse-check"></div>
+                                                                                        <div class="input-group w-full mb-5"><label class="font-bold text-sm" for="email-bio-template">Bio Template Name</label><input class="w-full p-5px border-b border-gray-200 outline-none focus:border-blue-500 focus:border-b-2" type="text" placeholder="(Optional) Override Bio Email Template Name" name="email-bio-template" id="email-bio-template"></div>
+                                                                                    </div>
+                                                                                    <!---->
+                                                                                    <div class="row flex justify-end"><button class="btn text-sm btn-blue" id="save-button"> Save Defaults </button><button class="btn bg-gray text-sm ml-10px" id="close-button"> Close </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="tab-pane fade" id="pills-profile1" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                                            sFDA
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>    
                                                 </div>
                                             </div>
                                             <div data-v-24df4780="" class="list">

@@ -89,5 +89,9 @@ class Home extends BaseController
     {
         return view('setting_connect-social-media');
     }
-        
+    public function billing_subscription(): string
+    {
+        return view('billing/billing_subscription');
+    }
+
 }

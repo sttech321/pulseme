@@ -12,7 +12,8 @@
 	<link rel="stylesheet" type="text/css" href="/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="/css/reviews.css">
 	<link rel="stylesheet" type="text/css" href="/css/variables.css">
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/analysis.css">
+	<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="/css/all.min.css">
 	<style>
     * {
