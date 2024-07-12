@@ -903,7 +903,7 @@
                                 <li><a class="menuListItem" href="#"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
                                 <li><a class="menuListItem" href="#"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
                                 <li><a class="menuListItem" href="/logs/outbound"><i class="fa fa-envelope" aria-hidden="true"></i>Logs</a></li>
-                                <li><a class="menuListItem" href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                                <li><a class="menuListItem" href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
 
                             </ul>
                         </div>
