@@ -17,8 +17,11 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 $routes->post('/loginAuth', 'UserController::loginAuth');
 $routes->add('/forgot-password', 'UserController::forgotPassword');
+$routes->post('/forgot-password/send-otp', 'UserController::sendOtp');
 $routes->add('/forgot-password/verify-otp', 'UserController::verifyOtp');
-
+$routes->post('/forgot-password/verify-otp/process', 'UserController::verifyOtpProcess');
+$routes->add('/forgot-password/reset', 'UserController::resetPassword');
+$routes->post('/forgot-password/reset/process', 'UserController::resetPasswordProcess');
 // $routes->get('login2', 'Home::dashboard');
 // $routes->get('/forgetPass', 'UserController::forgetPass');
 
@@ -43,7 +46,7 @@ $routes->get('logout', 'UserController::logout');
 
 
 
-$routes->add('/password/reset', 'UserController::resetPassword');
+
 $routes->get('/show-access-token', 'TechnicianController::showAccessToken');
 $routes->get('/get-response-data', 'TechnicianController::gettechniciandata');
 

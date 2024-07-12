@@ -3,15 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://kiliassets.speetra.com/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Verify OTP</title>
   <link rel="stylesheet" type="text/css" href="/css/reset.css">
   <link rel="stylesheet" type="text/css" href="/css/login.css">
   <link rel="stylesheet" type="text/css" href="/css/variables.css">
-
-  <script src="https://accounts.google.com/gsi/client" async></script>
-  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC_9G82Fa3wdn-p4QID43b_RVrJme66fQ&libraries=places">
   </script>
   <style>
     * {
@@ -30,12 +27,17 @@
     }
   </style>
 </head>
-
 <body>
-<form action="/password/reset" method="post">
+<form action="<?= base_url('/forgot-password/verify-otp/process') ?>" method="post">
     <div class="wrapper sessionWrap">
       <div class="contact-form-wrap">
         <img style="margin-bottom:35px;" width="230" src="/image/login-img.png">
+        <?php if ($session->getFlashdata('error')): ?>
+            <p style="color:red;"><?php echo $session->getFlashdata('error'); ?></p>
+        <?php endif; ?>
+        <?php if ($session->getFlashdata('success')): ?>
+            <p style="color:black;"><?php echo $session->getFlashdata('success'); ?></p>
+        <?php endif; ?>
         <div  class="formField">
           <div class="inputBox">
                 <label>Verify OTP</label>
@@ -49,6 +51,5 @@
     </div>
   </form>
 </body>
-
 </html>
 

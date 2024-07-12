@@ -207,7 +207,6 @@
 			</div>
 			<!-- sidebar-content  -->
 		</nav>
-ssss
     <main class="page-content">
         <?= $this->renderSection('content') ?>
     </main>

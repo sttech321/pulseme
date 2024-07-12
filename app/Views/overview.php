@@ -751,7 +751,7 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
 .fad.fa-inverse,
 .fa-duotone.fa-inverse {
   color: var(--fa-inverse, #fff);
-}</style><link rel="icon" type="image/png" sizes="32x32" href="https://kiliassets.speetra.com/favicon/favicon-32x32.png">
+}</style><link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>summitRA</title>
     <script async="" src="https://cdn.pendo.io/agent/static/6d51476c-08e2-444e-6fe4-beeaa484b62a/pendo-staging.js"></script><script async="" src="https://cdn.pendo.io/agent/static/6d51476c-08e2-444e-6fe4-beeaa484b62a/pendo.js"></script><script src="https://accounts.google.com/gsi/client" async=""></script>
