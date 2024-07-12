@@ -57,5 +57,24 @@ $routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
 $routes->get('settings/general/connect-social-media', 'Home::connect_social_media');
 
 // $routes->get('/welcome', 'Home::welcome');
+<<<<<<< .mine
 $routes->post('/insert_campaign', 'DispatchController::insert_campaign');
 
+
+
+
+
+
+
+
+=======
+
+$routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');
+// $routes->post('/insert_campaign', 'DispatchController::insert_campaign');
+// $routes->get('/display-tables', 'UserController::displayTableNames');
+$routes->get('/display-tables', 'CampaignController::create');
+$routes->post('/display-tables', 'CampaignController::create');
+
+
+
+>>>>>>> .theirs
