@@ -82,7 +82,7 @@ class Home extends BaseController
 
     public function campaigns(): string
     {
-        return view('dispatch-tab/dispatch_campaigns');
+        return view('dispatchTab/dispatchCampaigns');
     }
 
     public function dispatch_notifications(): string

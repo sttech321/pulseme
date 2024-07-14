@@ -67,58 +67,67 @@
                                                            
                                                                 <div class="modal-content">
                                                                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                                                        <li class="nav-item" role="presentation">
+                                                                        <li class="nav-item" role="presentation" style="display:none;">
                                                                             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">General</button>
                                                                         </li>
-                                                                        <li class="nav-item" role="presentation">
+                                                                        <li class="nav-item" role="presentation" style="display:none;">
                                                                             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#youtube-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Youtube</button>
                                                                         </li>
-                                                                        <li class="nav-item" role="presentation">
+                                                                        <li class="nav-item" role="presentation" style="display:none;">
                                                                             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Templates</button>
                                                                         </li>
                                                                     </ul>
                                                                     <div class="tab-content" id="pills-tabContent">
                                                                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                                                            <form method="post" action="" enctype="multipart/form-data">
+                                                                            <form method="post" action="<?= base_url('/settings/dispatch/campaigns/create') ?>" enctype="multipart/form-data">
                                                                                 <div class="modal-header">
                                                                                     <h5 class="modal-title" id="exampleModalLabel">Create campaign</h5>
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body">
+                                                                                    <!-- Display validation errors -->
+                                                                                    <?php $script = ''; ?>
+                                                                                    <?php if (session()->getFlashdata('validation')): ?>
+                                                                                        <div class="validation-errors">
+                                                                                        <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
+                                                                                                <p style="color: red;"><?php echo $error ?></p>
+                                                                                            <?php endforeach ?>
+                                                                                        </div>
+                                                                                    <?php $script = '$("#campaignModal").addClass("show").css("display","block")'; ?>
+                                                                                    <?php endif ?>
                                                                                     <div class="grid grid-cols-2 gap-20px auto-rows-auto">
                                                                                         <div class="flex w-full flex-col row-span-3">
-                                                                                            <img class="w-200px h-auto" src="https://kiliassets.speetra.com/prod/account_images/15407/campaign/1B85A09AA6CF1/1711571243_original.jpg" alt="Aaron Krasnow">
+                                                                                            <img id="preview" class="preview-image w-200px h-auto" src="/image/campaignProfile.jpg" alt="Image Preview">
                                                                                             <p class="text-md">Upload your image</p>
                                                                                             <p class="text-sm mb-3">The preferred size is 200x200</p>
-                                                                                            <input id="logo-upload" hidden="" type="file">
-                                                                                            <button class="btn btn-blue w-full mb-2">
-                                                                                                <input type="file" id="profile-image-upload-1" name="image" style="display: block;" accept="image/*">
+                                                                                            <!-- <input id="logo-upload" hidden="" type="file"> -->
+                                                                                            <button class="btn btn-blue w-full mb-2" type="button">
+                                                                                                <input type="file" id="profile-image-upload-1" name="campaignImage" style="display: block;" accept="image/*" onchange="previewImage(event)">
                                                                                             </button>
                                                                                         </div>
                                                                                         <div class="input-group">
                                                                                             <label class="font-bold text-sm" for="campaignName">Campaign Name</label>
-                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="Campaign_name" id="campaignName">
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="CampaignName" id="campaignName" value="<?php echo old('CampaignName') ?>">
                                                                                         </div>
                                                                                         <div class="input-group row-span-2">
                                                                                             <label class="font-bold text-sm" for="description">Campaign Description</label>
-                                                                                            <textarea class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaign_description" rows="5" id="description"></textarea>
+                                                                                            <textarea class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaignDescription" rows="5" id="description"><?php echo old('campaignDescription') ?></textarea>
                                                                                         </div>
                                                                                         <div class="input-group">
                                                                                             <label class="font-bold text-sm" for="department">Department</label>
-                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaign_department" id="department">
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaignDepartment" id="department" value="<?php echo old('campaignDepartment') ?>">
                                                                                         </div>
                                                                                         <div class="input-group">
                                                                                             <label class="font-bold text-sm" for="license">License</label>
-                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="license" id="license">
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="license" id="license" value="<?php echo old('license') ?>">
                                                                                         </div>
                                                                                         <div class="input-group">
                                                                                             <label class="font-bold text-sm" for="employeeID">Employee ID <span class="text-xs">(Useful for API Integrations)</span></label>
-                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employee_id" id="employeeID">
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employeeId" id="employeeID" value="<?php echo old('employeeId') ?>">
                                                                                         </div>
                                                                                         <div class="input-group">
                                                                                             <label class="font-bold text-sm" for="email">Email <span class="text-xs">(descriptor)</span></label>
-                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email">
-                                                                                        </div>
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email" value="<?php echo old('email') ?>">
                                                                                     </div>
                                                                                     <div class="modal-footer">
                                                                                         <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
@@ -127,6 +136,7 @@
                                                                                 </div>
                                                                             </form>
                                                                         </div>
+                                                                        <?php /*
                                                                         <div class="tab-pane fade" id="youtube-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                                                         <div class="modal-body p-30px container">
                                                                             <div class="mb-20px">
@@ -174,6 +184,8 @@
                                                                             <div class="flex justify-end mt-20px"><button class="btn text-sm btn-blue">Add Campaign</button><button class="btn btn-gray text-sm ml-10px">Close</button>
                                                                             </div>
                                                                             </div>
+                                                                        
+                                                                        */ ?>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -807,4 +819,27 @@
     </div>
     </div>
     </div>
+<style>
+    img#preview {
+    height: 300px;
+    object-fit: cover;
+    width: 250px;
+    margin: auto;
+}
+</style>
+<script>
+    $(document).ready(function() {
+        <?php echo $script;?>
+    });
+</script>
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('preview');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
     <?= $this->endsection('content') ?>

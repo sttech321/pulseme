@@ -23,13 +23,15 @@ $routes->add('/forgot-password/verify-otp', 'UserController::verifyOtp');
 $routes->post('/forgot-password/verify-otp/process', 'UserController::verifyOtpProcess');
 $routes->add('/forgot-password/reset', 'UserController::resetPassword');
 $routes->post('/forgot-password/reset/process', 'UserController::resetPasswordProcess');
+$routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
+$routes->post('/settings/dispatch/campaigns/create', 'Campaign::create');
 // $routes->get('login2', 'Home::dashboard');
 // $routes->get('/forgetPass', 'UserController::forgetPass');
 $routes->get('/settings/dispatch/notifications', 'Home::dispatch_notifications');
 $routes->get('/settings/dispatch/review-widget', 'Home::dispatch_review_widget');
 $routes->get('/settings/dispatch/web-widget', 'Home::dispatch_web_widget');
 $routes->get('/settings/billing', 'Home::billing_subscription');
-$routes->get('/settings/dispatch/campaign', 'Home::campaigns');
+
 $routes->get('/analyse/overview', 'Home::overview');
 $routes->get('/leaderboard/summary', 'Home::summary');
 $routes->get('/send-referral', 'Home::referral');
@@ -61,7 +63,7 @@ $routes->get('/get-response-data', 'TechnicianController::gettechniciandata');
 
 $routes->post('technician/uploadImage', 'TechnicianController::uploadImage');
 $routes->get('search', 'TechnicianController::search');
-$routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
+// $routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
 $routes->get('settings/general/connect-social-media', 'Home::connect_social_media');
 
 // $routes->get('/welcome', 'Home::welcome');
