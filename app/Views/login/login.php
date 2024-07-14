@@ -32,7 +32,8 @@
         <div class="contact-form-wrap">
           <img data-v-139b8be6="" width="230" src="/image/login-img.png">
           <div data-v-139b8be6="" class="formField">
-          <p style="color:red;"><?= session()->get('error') ?></p>
+            <p style="color:red;"><?= session()->get('error') ?></p>
+            <p style="color:green;"><?= session()->get('success') ?></p>
             <div class="inputBox">
               <input data-v-139b8be6="" autocomplete="on" name="email" type="text" placeholder="Email Address">
             </div>

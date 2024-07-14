@@ -1,3 +1,5 @@
+<?= $this->extend('layouts/main') ?>
+<?= $this->section('content') ?>
 <div class="p-25px web-widget">
     <div data-v-dc04488c="" class="rounded-4px bg-white flex flex-col p-15px">
         <div data-v-dc04488c="" class="menu w-full flex justify-end p-10px relative"><button data-v-dc04488c="" class="text-gray-500 relative"><svg data-v-dc04488c="" class="svg-inline--fa fa-bars text-xl" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -37,3 +39,4 @@
         </div><!----><!----><!----><!----><!---->
     </div>
 </div>
+<?= endsection('content')?>

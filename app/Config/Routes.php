@@ -25,7 +25,11 @@ $routes->add('/forgot-password/reset', 'UserController::resetPassword');
 $routes->post('/forgot-password/reset/process', 'UserController::resetPasswordProcess');
 // $routes->get('login2', 'Home::dashboard');
 // $routes->get('/forgetPass', 'UserController::forgetPass');
-
+$routes->get('/settings/dispatch/notifications', 'Home::dispatch_notifications');
+$routes->get('/settings/dispatch/review-widget', 'Home::dispatch_review_widget');
+$routes->get('/settings/dispatch/web-widget', 'Home::dispatch_web_widget');
+$routes->get('/settings/billing', 'Home::billing_subscription');
+$routes->get('/settings/dispatch/campaign', 'Home::campaigns');
 $routes->get('/analyse/overview', 'Home::overview');
 $routes->get('/leaderboard/summary', 'Home::summary');
 $routes->get('/send-referral', 'Home::referral');
@@ -42,6 +46,10 @@ $routes->get('/leaderboard/reports/departments', 'Home::departments');
 // $routes->get('/analyse/overview', 'UserController::dashboard');
 $routes->get('/logs/outbound', 'Home::outbound');
 // $routes->get('/login', 'UserController::login');
+$routes->get('/analyze/reviews/social-reviews', 'Home::social_review');
+$routes->get('/operate/contact-card', 'Home::contact_card');
+$routes->get('/operate/quick-actions', 'Home::quick_action');
+
 
 
 
@@ -57,17 +65,6 @@ $routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
 $routes->get('settings/general/connect-social-media', 'Home::connect_social_media');
 
 // $routes->get('/welcome', 'Home::welcome');
-<<<<<<< .mine
-$routes->post('/insert_campaign', 'DispatchController::insert_campaign');
-
-
-
-
-
-
-
-
-=======
 
 $routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');
 // $routes->post('/insert_campaign', 'DispatchController::insert_campaign');
@@ -77,4 +74,3 @@ $routes->post('/display-tables', 'CampaignController::create');
 
 
 
->>>>>>> .theirs
