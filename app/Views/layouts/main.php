@@ -77,13 +77,13 @@
 												<span class="user-name">Jhon
 													<strong>Smith</strong>
 												</span>
-												<span class="user-role">Administrator</span>
+												<span class="user-role">Administrator</span>social_review
 											</div>
 										</div>
 									</div>
 								</li>
 								<li><a class="menuListItem" href="#"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
-								<li><a class="menuListItem" href="#"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
+								<li><a class="menuListItem" href="/settings/dispatch/campaign"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
 								<li><a class="menuListItem" href="/logs/outbound"><i class="fa fa-envelope" aria-hidden="true"></i>Logs</a></li>
 								<li> 
                              
@@ -103,7 +103,7 @@
 							<span>General</span>
 						</li>
 						<li>
-							<a href="#">
+							<a href="/operate/dispatch">
 								<div class="imgIconWrap">
 									<img width="20" height="20" src="/image/operate.png" alt="sidebar icon">
 								</div>

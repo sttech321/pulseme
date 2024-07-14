@@ -82,7 +82,22 @@ class Home extends BaseController
 
     public function campaigns(): string
     {
-        return view('dispatch_campaigns');
+        return view('dispatch-tab/dispatch_campaigns');
+    }
+
+    public function dispatch_notifications(): string
+    {
+        return view('dispatch-tab/dispatch_notifications');
+    }
+
+    public function dispatch_review_widget(): string
+    {
+        return view('dispatch-tab/dispatch_review_widget');
+    }
+
+    public function dispatch_web_widget(): string
+    {
+        return view('dispatch-tab/dispatch_web_widget');
     }
 
     public function connect_social_media(): string
@@ -93,5 +108,21 @@ class Home extends BaseController
     {
         return view('billing/billing_subscription');
     }
+
+    public function social_review(): string
+    {
+        return view('social_review');
+    }
+
+    public function contact_card(): string
+    {
+        return view('contact_card');
+    }
+
+    public function quick_action(): string
+    {
+        return view('quick_action');
+    }
+    
 
 }
