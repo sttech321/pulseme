@@ -95,7 +95,7 @@ class Home extends BaseController
         return view('dispatch-tab/dispatch_review_widget');
     }
 
-    public function dispatch_web_widget(): string
+    public function dispatch_web_widget()
     {
         return view('dispatch-tab/dispatch_web_widget');
     }
@@ -124,5 +124,35 @@ class Home extends BaseController
         return view('quick_action');
     }
     
+    public function general_connect_social_media(): string
+    {
+        return view('general-tab/general_connect_social_media');
+    }
 
+    public function general_branding(): string
+    {
+        return view('general-tab/general_branding');
+    }
+
+    public function general_reporting(): string
+    {
+        return view('general-tab/general_reporting');
+    }
+
+    public function general_users(): string
+    {
+        return view('general-tab/general_users');
+    }
+    
+    public function contact_information(): string
+    {
+        return view('contact-card-tab/contact_information');
+    }
+
+    public function contact_templates(): string
+    {
+        return view('contact-card-tab/contact_templates');
+    }
+
+    
 }

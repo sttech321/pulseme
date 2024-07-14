@@ -15,13 +15,7 @@
     <link rel="stylesheet" type="text/css" href="/css/all.min.css">
 </head>
  <div class="leftSec">
- <p>Dispatch Table: <?= esc($dispatchTable) ?></p>
- <p>Dispatch column: <?= esc($dispatchcolumn) ?></p>
-           <?php if (session()->getFlashdata('message')): ?>
-            <div class="alert alert-success"><?= session()->getFlashdata('message') ?></div>
-        <?php elseif (session()->getFlashdata('error')): ?>
-            <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
-        <?php endif; ?>
+
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#campaignModal">
         <i class="fa fa-plus mr-3" aria-hidden="true"></i> Create Campaign

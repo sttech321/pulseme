@@ -27,8 +27,8 @@ $routes->post('/forgot-password/reset/process', 'UserController::resetPasswordPr
 // $routes->get('/forgetPass', 'UserController::forgetPass');
 $routes->get('/settings/dispatch/notifications', 'Home::dispatch_notifications');
 $routes->get('/settings/dispatch/review-widget', 'Home::dispatch_review_widget');
-$routes->get('/settings/dispatch/web-widget', 'Home::dispatch_web_widget');
-$routes->get('/settings/billing', 'Home::billing_subscription');
+$routes->get('/settings/dispatch/web_widget', 'Home::dispatch_web_widget');
+
 $routes->get('/settings/dispatch/campaign', 'Home::campaigns');
 $routes->get('/analyse/overview', 'Home::overview');
 $routes->get('/leaderboard/summary', 'Home::summary');
@@ -49,9 +49,15 @@ $routes->get('/logs/outbound', 'Home::outbound');
 $routes->get('/analyze/reviews/social-reviews', 'Home::social_review');
 $routes->get('/operate/contact-card', 'Home::contact_card');
 $routes->get('/operate/quick-actions', 'Home::quick_action');
+$routes->get('/settings/general/connect-social-media', 'Home::general_connect_social_media');
+$routes->get('/settings/general/branding', 'Home::general_branding');
+$routes->get('/settings/general/users', 'Home::general_users');
+$routes->get('/settings/general/reporting', 'Home::general_reporting');
 
+$routes->get('/settings/contact-card/contact-information', 'Home::contact_information');
+$routes->get('/settings/contact-card/templates', 'Home::contact_templates');
 
-
+$routes->get('/settings/billing/billing_subscription', 'Home::billing_subscription');
 
 
 
@@ -62,7 +68,7 @@ $routes->get('/get-response-data', 'TechnicianController::gettechniciandata');
 $routes->post('technician/uploadImage', 'TechnicianController::uploadImage');
 $routes->get('search', 'TechnicianController::search');
 $routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
-$routes->get('settings/general/connect-social-media', 'Home::connect_social_media');
+// $routes->get('settings/general/connect-social-media', 'Home::connect_social_media');
 
 // $routes->get('/welcome', 'Home::welcome');
 
