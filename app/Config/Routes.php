@@ -14,7 +14,6 @@ $routes->set404Override();
 /**
  * @var RouteCollection $routes
  */
-
 $routes->get('/', 'Home::index');
 $routes->get('/logout', 'UserController::logout');
 $routes->post('/loginAuth', 'UserController::loginAuth');
@@ -32,6 +31,7 @@ $routes->get('/settings/dispatch/notifications', 'Home::dispatch_notifications')
 $routes->get('/settings/dispatch/review-widget', 'Home::dispatch_review_widget');
 $routes->get('/settings/dispatch/web_widget', 'Home::dispatch_web_widget');
 $routes->get('/settings/billing', 'Home::billing_subscription');
+
 $routes->get('/settings/dispatch/campaign', 'Home::campaigns');
 $routes->get('/analyse/overview', 'Home::overview');
 $routes->get('/leaderboard/summary', 'Home::summary');
@@ -67,7 +67,7 @@ $routes->get('/get-response-data', 'TechnicianController::gettechniciandata');
 
 $routes->post('technician/uploadImage', 'TechnicianController::uploadImage');
 $routes->get('search', 'TechnicianController::search');
-$routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
+// $routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
 $routes->get('settings/general/connect-social-media', 'Home::connect_social_media');
 
 // $routes->get('/welcome', 'Home::welcome');

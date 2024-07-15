@@ -27,7 +27,7 @@ class Campaign extends BaseController {
             'employeeId' => 'required',
             'email' => 'required|valid_email'
         ];
-        
+
         if (!$this->validate($rules)) {
             return redirect()->to('/settings/dispatch/campaigns')->withInput()->with('validation', $this->validator);
         }
@@ -60,5 +60,26 @@ class Campaign extends BaseController {
         // Redirect to a success page or display success message
         return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign saved successfully.');
     }
-   
+    public function add() {
+        echo view('add');
+    }
+
+    public function save() {
+        $first_name = $this->request->getPost('txtLastName');
+        $last_name  = $this->request->getPost('txtLastName');
+        $email      = $this->request->getPost('txtEmail');
+
+        $data = [
+            'first_name'        => $first_name,
+            'last_name'     => $last_name,
+            'email'         => $email,
+        ];
+
+        $result = $this->userModel->add($data);
+        if($result) {
+            echo "New user is registered successfully.";
+        } else {
+            echo "Something went wrong";
+        }
+    }
 }

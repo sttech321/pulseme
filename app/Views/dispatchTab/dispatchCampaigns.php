@@ -27,7 +27,7 @@
                                         <svg class="svg-inline--fa fa-chart-line mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-line" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                             <path class="" fill="currentColor" d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z">
                                             </path>
-                                        </svg> General </a><a href="/settings/dispatch/campaigns" class="border-blue-500 text-blue-500 border-l-2 p-15px"><svg class="svg-inline--fa fa-arrow-right-arrow-left mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right-arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        </svg> General </a><a href="/settings/dispatch" class="border-blue-500 text-blue-500 border-l-2 p-15px"><svg class="svg-inline--fa fa-arrow-right-arrow-left mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right-arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                             <path class="" fill="currentColor" d="M438.6 150.6c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 96 32 96C14.3 96 0 110.3 0 128s14.3 32 32 32l306.7 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96zm-333.3 352c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 416 416 416c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96z">
                                             </path>
                                         </svg> Dispatch </a><!----><a href="/settings/contact-card" class="p-15px"><svg class="svg-inline--fa fa-address-card mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="address-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -67,58 +67,67 @@
                                                            
                                                                 <div class="modal-content">
                                                                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                                                        <li class="nav-item" role="presentation">
+                                                                        <li class="nav-item" role="presentation" style="display:none;">
                                                                             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">General</button>
                                                                         </li>
-                                                                        <li class="nav-item" role="presentation">
+                                                                        <li class="nav-item" role="presentation" style="display:none;">
                                                                             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#youtube-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Youtube</button>
                                                                         </li>
-                                                                        <li class="nav-item" role="presentation">
+                                                                        <li class="nav-item" role="presentation" style="display:none;">
                                                                             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Templates</button>
                                                                         </li>
                                                                     </ul>
                                                                     <div class="tab-content" id="pills-tabContent">
                                                                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                                                            <form method="post" action="" enctype="multipart/form-data">
+                                                                            <form method="post" action="<?= base_url('/settings/dispatch/campaigns/create') ?>" enctype="multipart/form-data">
                                                                                 <div class="modal-header">
                                                                                     <h5 class="modal-title" id="exampleModalLabel">Create campaign</h5>
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body">
+                                                                                    <!-- Display validation errors -->
+                                                                                    <?php $script = ''; ?>
+                                                                                    <?php if (session()->getFlashdata('validation')): ?>
+                                                                                        <div class="validation-errors">
+                                                                                        <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
+                                                                                                <p style="color: red;"><?php echo $error ?></p>
+                                                                                            <?php endforeach ?>
+                                                                                        </div>
+                                                                                    <?php $script = '$("#campaignModal").addClass("show").css("display","block")'; ?>
+                                                                                    <?php endif ?>
                                                                                     <div class="grid grid-cols-2 gap-20px auto-rows-auto">
                                                                                         <div class="flex w-full flex-col row-span-3">
-                                                                                            <img class="w-200px h-auto" src="https://kiliassets.speetra.com/prod/account_images/15407/campaign/1B85A09AA6CF1/1711571243_original.jpg" alt="Aaron Krasnow">
+                                                                                            <img id="preview" class="preview-image w-200px h-auto" src="/image/campaignProfile.jpg" alt="Image Preview">
                                                                                             <p class="text-md">Upload your image</p>
                                                                                             <p class="text-sm mb-3">The preferred size is 200x200</p>
-                                                                                            <input id="logo-upload" hidden="" type="file">
-                                                                                            <button class="btn btn-blue w-full mb-2">
-                                                                                                <input type="file" id="profile-image-upload-1" name="image" style="display: block;" accept="image/*">
+                                                                                            <!-- <input id="logo-upload" hidden="" type="file"> -->
+                                                                                            <button class="btn btn-blue w-full mb-2" type="button">
+                                                                                                <input type="file" id="profile-image-upload-1" name="campaignImage" style="display: block;" accept="image/*" onchange="previewImage(event)">
                                                                                             </button>
                                                                                         </div>
                                                                                         <div class="input-group">
                                                                                             <label class="font-bold text-sm" for="campaignName">Campaign Name</label>
-                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="Campaign_name" id="campaignName">
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="CampaignName" id="campaignName" value="<?php echo old('CampaignName') ?>">
                                                                                         </div>
                                                                                         <div class="input-group row-span-2">
                                                                                             <label class="font-bold text-sm" for="description">Campaign Description</label>
-                                                                                            <textarea class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaign_description" rows="5" id="description"></textarea>
+                                                                                            <textarea class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaignDescription" rows="5" id="description"><?php echo old('campaignDescription') ?></textarea>
                                                                                         </div>
                                                                                         <div class="input-group">
                                                                                             <label class="font-bold text-sm" for="department">Department</label>
-                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaign_department" id="department">
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaignDepartment" id="department" value="<?php echo old('campaignDepartment') ?>">
                                                                                         </div>
                                                                                         <div class="input-group">
                                                                                             <label class="font-bold text-sm" for="license">License</label>
-                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="license" id="license">
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="license" id="license" value="<?php echo old('license') ?>">
                                                                                         </div>
                                                                                         <div class="input-group">
                                                                                             <label class="font-bold text-sm" for="employeeID">Employee ID <span class="text-xs">(Useful for API Integrations)</span></label>
-                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employee_id" id="employeeID">
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employeeId" id="employeeID" value="<?php echo old('employeeId') ?>">
                                                                                         </div>
                                                                                         <div class="input-group">
                                                                                             <label class="font-bold text-sm" for="email">Email <span class="text-xs">(descriptor)</span></label>
-                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email">
-                                                                                        </div>
+                                                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email" value="<?php echo old('email') ?>">
                                                                                     </div>
                                                                                     <div class="modal-footer">
                                                                                         <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
@@ -127,6 +136,7 @@
                                                                                 </div>
                                                                             </form>
                                                                         </div>
+                                                                        <?php /*
                                                                         <div class="tab-pane fade" id="youtube-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                                                         <div class="modal-body p-30px container">
                                                                             <div class="mb-20px">
@@ -174,6 +184,8 @@
                                                                             <div class="flex justify-end mt-20px"><button class="btn text-sm btn-blue">Add Campaign</button><button class="btn btn-gray text-sm ml-10px">Close</button>
                                                                             </div>
                                                                             </div>
+                                                                        
+                                                                        */ ?>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -241,9 +253,6 @@
                                                     </div>    
                                                 </div>
                                             </div>
-
-                                            
-
                                             <div data-v-24df4780="" class="list">
                                                 <table data-v-24df4780="" class="campaigns w-full">
                                                     <tr class="flex odd:bg-sky-100 odd:bg-opacity-50 py-15px px-10px">
@@ -270,7 +279,7 @@
                                                                 comfort and safety.</p>
                                                         </td>
                                                         <td class="flex flex-col justify-center items-end col-span-3 flex-shrink-0 px-10px w-1/4">
-                                                            <div class="grid grid-rows-2 grid-flow-col gap-10px"><button class="btn btn-blue w-full rounded-2px" data-bs-toggle="modal" data-bs-target="#editcampaignModal"><svg class="svg-inline--fa fa-face-grin" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                            <div class="grid grid-rows-2 grid-flow-col gap-10px"><button class="btn btn-blue w-full rounded-2px" id="editCampaign-undefined"><svg class="svg-inline--fa fa-face-grin" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                                         <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z">
                                                                         </path>
                                                                     </svg> Edit Campaign </button><button class="btn btn-blue w-full rounded-2px" id="showFieldOps-AARON"><svg class="svg-inline--fa fa-mobile-screen-button" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="mobile-screen-button" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -810,4 +819,27 @@
     </div>
     </div>
     </div>
+<style>
+    img#preview {
+    height: 300px;
+    object-fit: cover;
+    width: 250px;
+    margin: auto;
+}
+</style>
+<script>
+    $(document).ready(function() {
+        <?php echo $script;?>
+    });
+</script>
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('preview');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
     <?= $this->endsection('content') ?>
