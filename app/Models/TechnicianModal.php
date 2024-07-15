@@ -96,6 +96,7 @@ class technicianModal extends Model
             }
         } else {
             echo 'No technician data found.';
+            echo 'No technician data found.';
         }
 
     }
