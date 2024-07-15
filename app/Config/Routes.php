@@ -78,5 +78,5 @@ $routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');
 $routes->get('/display-tables', 'CampaignController::create');
 $routes->post('/display-tables', 'CampaignController::create');
 
-
+$routes->post('/display-tables', 'CampaignController::create');
 
