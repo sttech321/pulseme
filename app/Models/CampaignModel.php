@@ -1,20 +1,21 @@
-<?php 
-namespace AppModels;
+<?php
+namespace App\Models;
+use CodeIgniter\Model;
+class CampaignModel extends Model
+{    
+    protected $table;
+    protected $allowedFields;
+    protected $primaryKey;
+    protected $useTimestamps = true;
 
-use CodeIgniterModel;
-use CodeIgniterDatabase\ConnectionInterface;
-
-class CampaignModel extends Model {
-    
-    protected $db;
-    public function __construct(ConnectionInterface &$db) {
-        $this->db =& $db;
+    // Construc Function
+    public function __construct() {
+        parent::__construct();
+        // Load table name from environment variable
+        $this->table = getenv('CAMPAIGN_TABLE');
+        // Load allowed fields from environment variable and convert to array
+        $fields = getenv('CAMPAIGN_FIELD');
+        $this->primaryKey = getenv('CAMPAIGN_TABLE_PRIMARY_KEY');
+        $this->allowedFields = explode(',', $fields);
     }
-
-    function add($data) {
-        return $this->db
-                        ->table('user_info')
-                        ->insert($data);
-    }
-    
 }

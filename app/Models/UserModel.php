@@ -5,6 +5,7 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
     protected $table;
+    protected $primarykey;
     protected $allowedFields;
 
     // Construc Function

@@ -1,6 +1,6 @@
 # Ignore writable directory and logs
 /writable/
-
+/public/image/campaign
 # Ignore composer dependencies
 /vendor/
 composer
@@ -13,3 +13,4 @@ composer.lock
 # Ignore miscellaneous
 Thumbs.db
 .DS_Store
+.env

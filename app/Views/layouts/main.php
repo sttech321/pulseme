@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/analysis.css">
 	<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="/css/all.min.css">
+	<script src="/js/jquery.js"></script>
 	<style>
     * {
       font-size: 14px;
@@ -215,7 +216,7 @@
   		<!-- page-content" -->
 	</div>
 	<!-- page-wrapper -->
-	<script src="/js/jquery.js"></script>
+
 	<script src="/js/bootstrap.bundle.min.js"></script>
 
 	<script>

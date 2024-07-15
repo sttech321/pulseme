@@ -22,7 +22,7 @@
          <div class="p-20px bg-white">
             <h2 class="text-2xl">Reviews</h2>
          </div>
-         <div class="px-15px bg-white flex justify-start items-center"><a href="/analyze/reviews/reviews" class="border-b-2 border-blue-500 router-link-exact-active p-10px" aria-current="page">Reviews</a><a href="/analyze/reviews/social-reviews" class="p-10px">Social Reviews</a></div>
+         <div class="px-15px bg-white flex justify-start items-center"><a href="/analyze/reviews" class="border-b-2 border-blue-500 router-link-exact-active p-10px" aria-current="page">Reviews</a><a href="/analyze/reviews/social-reviews" class="p-10px">Social Reviews</a></div>
          <div class="flex-grow">
             <div data-v-428084ba="" class="p-25px">
                <div data-v-428084ba="" class="bg-white rounded-4px shadow p-10px">

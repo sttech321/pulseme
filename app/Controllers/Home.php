@@ -82,22 +82,22 @@ class Home extends BaseController
 
     public function campaigns(): string
     {
-        return view('dispatch-tab/dispatch_campaigns');
+        return view('dispatchTab/dispatchCampaigns');
     }
 
     public function dispatch_notifications(): string
     {
-        return view('dispatch-tab/dispatch_notifications');
+        return view('dispatchTab/dispatch_notifications');
     }
 
     public function dispatch_review_widget(): string
     {
-        return view('dispatch-tab/dispatch_review_widget');
+        return view('dispatchTab/dispatch_review_widget');
     }
 
     public function dispatch_web_widget()
     {
-        return view('dispatch-tab/dispatch_web_widget');
+        return view('dispatchTab/dispatch_web_widget');
     }
 
     public function connect_social_media(): string
