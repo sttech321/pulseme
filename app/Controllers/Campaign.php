@@ -11,8 +11,14 @@ class Campaign extends BaseController {
     public function __construct() {
         // Load session service
         $this->session = \Config\Services::session();
-        // $db = db_connect();
-        // $this->userModel = new CampaignModel($db);
+
+    }
+
+    public function index()
+    {
+        $model = new CampaignModel();
+        $data['campaigns'] = $model->findAll();
+        return view('dispatchTab/dispatchCampaigns',$data);
     }
 
     public function create() {
@@ -23,9 +29,6 @@ class Campaign extends BaseController {
             'CampaignName' => 'required',
             'campaignDescription' => 'required',
             'campaignDepartment' => 'required',
-            'license' => 'required',
-            'employeeId' => 'required',
-            'email' => 'required|valid_email'
         ];
 
         if (!$this->validate($rules)) {
@@ -47,6 +50,7 @@ class Campaign extends BaseController {
         // Save campaign data to database
         $campaignModel = new CampaignModel(); // Replace with your actual model name
         $data = [
+            'ID'    => null,
             'name' => $this->request->getPost('CampaignName'),
             'description' => $this->request->getPost('campaignDescription'),
             'department' => $this->request->getPost('campaignDepartment'),
@@ -60,26 +64,67 @@ class Campaign extends BaseController {
         // Redirect to a success page or display success message
         return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign saved successfully.');
     }
-    public function add() {
-        echo view('add');
-    }
 
-    public function save() {
-        $first_name = $this->request->getPost('txtLastName');
-        $last_name  = $this->request->getPost('txtLastName');
-        $email      = $this->request->getPost('txtEmail');
-
-        $data = [
-            'first_name'        => $first_name,
-            'last_name'     => $last_name,
-            'email'         => $email,
+    public function update()
+    {
+        helper(['form']);
+        
+        // Validation rules
+        $rules = [
+            'CampaignName' => 'required',
+            'campaignDescription' => 'required',
+            'campaignDepartment' => 'required',
         ];
 
-        $result = $this->userModel->add($data);
-        if($result) {
-            echo "New user is registered successfully.";
-        } else {
-            echo "Something went wrong";
+        // Handle file upload
+        $campaignImage = $this->request->getFile('campaignImage');
+        if ($campaignImage && $campaignImage->isValid()) {
+            $rules['campaignImage'] = 'uploaded[campaignImage]|max_size[campaignImage,1024]|is_image[campaignImage]';
         }
+
+        // Validate form input
+        if (!$this->validate($rules)) {
+            return redirect()->to('/settings/dispatch/campaigns')->withInput()->with('validation', $this->validator);
+        }
+
+        // Move uploaded file to designated directory
+        if ($campaignImage && $campaignImage->isValid() && !$campaignImage->hasMoved()) {
+            $newName = $campaignImage->getRandomName();
+            $uploadPath = '/image/campaign/';
+            $campaignImage->move(ROOTPATH . 'public/image/campaign', $newName);
+            $imagePath = $uploadPath . $newName;
+        } else {
+            $imagePath = ''; // Handle case where no new image is uploaded
+        }
+
+        // Update campaign data in database
+        $model = new CampaignModel();
+        $data = [
+            'name' => $this->request->getPost('CampaignName'),
+            'description' => $this->request->getPost('campaignDescription'),
+            'department' => $this->request->getPost('campaignDepartment'),
+            'license' => $this->request->getPost('license'),
+            'employeeId' => $this->request->getPost('employeeId'),
+            'email' => $this->request->getPost('email'),
+        ];
+
+        // Include image path in data if uploaded
+        if (!empty($imagePath)) {
+            $data['image'] = $imagePath;
+        }
+
+        // Perform the update
+        $model->update($data);
+
+        // Redirect with success message
+        return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign updated successfully.');
     }
+
+    public function delete($id)
+    {
+        $model = new CampaignModel();
+        $model->delete($id);
+        return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign deleted successfully.');
+    }
+
 }

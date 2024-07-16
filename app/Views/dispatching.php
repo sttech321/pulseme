@@ -79,43 +79,43 @@
                         <tr class="flex p-20px odd:bg-sky-50">
                            <td class="employee flex items-center w-1/4">
                               <div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0"
-                                 style="position: relative; background-image: url('<?= $technician['technician_image'] ?>');">
-                                 <i class="fa fa-pencil editProfile"></i>
+                                 style="position: relative; background-image: url('<?= $technician['image'] ?>');">
+                                 <!-- <i class="fa fa-pencil editProfile"></i> -->
                                  <!-- Example form snippet for uploading profile images --> 
-                                 <button type="button" class=" btn-md" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                 <!-- <button type="button" class=" btn-md" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                  <i class="fa fa-plus mr-3" aria-hidden="true"></i>
-                                 </button>
+                                 </button> -->
                                  <!-- Modal -->
-                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
                                        <div class="modal-content">
                                           <div class="modal-header">
                                              <h5 class="modal-title" id="exampleModalLabel">Add Review
                                              </h5>
                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <div class="modal-body">
-                                             <form method="post" action="<?= base_url('technician/uploadImage') ?>" enctype="multipart/form-data">
-                                                <input type="hidden" name="technician_id" value="<?= $technician['id'] ?>">
-                                                <label for="profile-image-upload-<?= $technician['id'] ?>" class="upload-icon">
+                                          </div> -->
+                                          <!-- <div class="modal-body"> -->
+                                             <!-- <form method="post" action="" enctype="multipart/form-data"> -->
+                                                <!-- <input type="hidden" name="technician_id" value="<?= $technician['ID'] ?>"> -->
+                                                <!-- <label for="profile-image-upload-<?= $technician['ID'] ?>" class="upload-icon"> -->
                                                    <!-- <i class="fa fa-pencil editProfile">*</i> -->
-                                                </label>
-                                                <input type="file" id="profile-image-upload-<?= $technician['id'] ?>" name="profile_image" style="display: block;" accept="image/*">
+                                                <!-- </label> -->
+                                                <!-- <input type="file" id="profile-image-upload-<?= $technician['ID'] ?>" name="profile_image" style="display: block;" accept="image/*"> -->
                                                 <!-- <button type="submit" id="submit">upload image</button> -->
-                                                <div class="modal-footer">
+                                                <!-- <div class="modal-footer">
                                                    <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
                                                    <button type="submit" class="btn btn-primary btn-md">Submit changes</button>
                                                 </div>
-                                             </form>
-                                          </div>
-                                       </div>
+                                             </form> -->
+                                          <!-- </div> -->
+                                       <!-- </div>
                                     </div>
-                                 </div>
+                                 </div> -->
                               </div>
                               <div class="flex-grow">
-                                 <p class="name"><?= $technician['technician_name'] ?></p>
+                                 <p class="name"><?= $technician['name'] ?></p>
                                  <!-- <p class="department text-gray-400">Service Technician</p>  -->
-                                 <p class="department text-gray-400"><?= $technician['technician_code'] ?></p>
+                                 <p class="department text-gray-400"><?= $technician['department'] ?></p>
                               </div>
                            </td>
                            <td class="recipient-info grid grid-cols-6 gap-5px flex-grow">

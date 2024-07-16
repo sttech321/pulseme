@@ -8,14 +8,11 @@ class CampaignModel extends Model
     protected $primaryKey;
     protected $useTimestamps = true;
 
-    // Construc Function
     public function __construct() {
         parent::__construct();
-        // Load table name from environment variable
         $this->table = getenv('CAMPAIGN_TABLE');
-        // Load allowed fields from environment variable and convert to array
-        $fields = getenv('CAMPAIGN_FIELD');
         $this->primaryKey = getenv('CAMPAIGN_TABLE_PRIMARY_KEY');
+        $fields = getenv('CAMPAIGN_FIELD');
         $this->allowedFields = explode(',', $fields);
     }
 }

@@ -23,8 +23,10 @@ $routes->add('/forgot-password/verify-otp', 'UserController::verifyOtp');
 $routes->post('/forgot-password/verify-otp/process', 'UserController::verifyOtpProcess');
 $routes->add('/forgot-password/reset', 'UserController::resetPassword');
 $routes->post('/forgot-password/reset/process', 'UserController::resetPasswordProcess');
-$routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
+$routes->get('/settings/dispatch/campaigns', 'Campaign::index');
 $routes->post('/settings/dispatch/campaigns/create', 'Campaign::create');
+$routes->post('/settings/dispatch/campaigns/update', 'Campaign::update');
+$routes->get('/settings/dispatch/campaigns/delete/(:num)', 'Campaign::delete/$1');
 // $routes->get('login2', 'Home::dashboard');
 // $routes->get('/forgetPass', 'UserController::forgetPass');
 $routes->get('/settings/dispatch/notifications', 'Home::dispatch_notifications');
@@ -65,7 +67,7 @@ $routes->get('/settings/billing/billing_subscription', 'Home::billing_subscripti
 $routes->get('/show-access-token', 'TechnicianController::showAccessToken');
 $routes->get('/get-response-data', 'TechnicianController::gettechniciandata');
 
-$routes->post('technician/uploadImage', 'TechnicianController::uploadImage');
+// $routes->post('technician/uploadImage', 'TechnicianController::uploadImage');
 $routes->get('search', 'TechnicianController::search');
 // $routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
 $routes->get('settings/general/connect-social-media', 'Home::connect_social_media');
@@ -75,8 +77,10 @@ $routes->get('settings/general/connect-social-media', 'Home::connect_social_medi
 $routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');
 // $routes->post('/insert_campaign', 'DispatchController::insert_campaign');
 // $routes->get('/display-tables', 'UserController::displayTableNames');
-$routes->get('/display-tables', 'CampaignController::create');
-$routes->post('/display-tables', 'CampaignController::create');
+// $routes->get('/display-tables', 'CampaignController::create');
+// $routes->post('/display-tables', 'CampaignController::create');
+$routes->get('/settings/dispatch/campaigns', 'Campaign::index');
+
 
 
 
