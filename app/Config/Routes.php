@@ -74,14 +74,7 @@ $routes->get('settings/general/connect-social-media', 'Home::connect_social_medi
 // $routes->get('/welcome', 'Home::welcome');
 
 $routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');
-<<<<<<< HEAD
-// $routes->post('/insert_campaign', 'DispatchController::insert_campaign');
-// $routes->get('/display-tables', 'UserController::displayTableNames');
-$routes->get('/display-tables', 'CampaignController::create');
-$routes->post('/display-tables', 'CampaignController::create');
 
-$routes->post('/display-tables', 'CampaignController::create');
-=======
 $routes->post('/analyze/reviews/create', 'ReviewController::insert');
 $routes->get('/settings/dispatch/campaigns', 'Campaign::index');
 $routes->get('/analyze/reviews', 'Campaign::reviews');
@@ -91,6 +84,3 @@ $routes->post('/operate/dispatch/create', 'CustomerController::create');
 $routes->get('application/bio/(:num)', 'Campaign::technician_bio/$1');
 $routes->get('application/pulsecheck/(:num)', 'Campaign::pulse_check/$1');
 
->>>>>>> remotes/origin/master
-
-// $routes->get('/fetch-reviews', 'Review::fetchAndStore');
