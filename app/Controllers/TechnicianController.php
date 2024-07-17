@@ -11,21 +11,6 @@ class TechnicianController extends Controller
         helper('url');
     }
     
-    public function showAccessToken()
-    {
-        $technicianModel = new technicianModal();
-        $accessToken = $technicianModel->getAccessToken();
-        echo $accessToken;
-
-    }
-
-    public function gettechniciandata()
-    {
-        $technicianModel = new technicianModal();
-        $response = $technicianModel->get_technician_data();
-        echo $response;
-   
-    }
 
     public function dispatch(){
         $technicianModel = new technicianModal(); // Create an instance of your model
@@ -36,42 +21,25 @@ class TechnicianController extends Controller
         return view('dispatching', $data);
     }
    
- 
-    public function uploadImage()
-    {
-        $technicianId = $this->request->getPost('technician_id');
-        $file = $this->request->getFile('profile_image');
-        if ($file->isValid() && !$file->hasMoved()) {
-            $newName = $file->getRandomName();
-            $file->move(ROOTPATH . 'public/uploads', $newName);
-            $technicianModel = new TechnicianModal();
-            $imagePath = base_url('uploads/' . $newName);
-            $technicianModel->uploadImage($technicianId, $imagePath);
-            // return view('dispatch');
-            return redirect()->to('/operate/dispatch');
-            // echo'image uploaded';
-        } else {
-            echo 'Failed to upload image';
-        }
-    }
 
     public function search()
     {
         $db = \Config\Database::connect();
-        $builder = $db->table('dispatch');
-
+        $builder = $db->table(getenv('CAMPAIGN_TABLE'));
+    
         $searchTerm = $this->request->getVar('search');
-
+    
         if (strlen($searchTerm) >= 2) {
-            $builder->like('technician_name', $searchTerm);
-            $builder->orLike('technician_code', $searchTerm);
+            $builder->like('name', $searchTerm);
+            $builder->orLike('department', $searchTerm);
         }
-
+    
         $query = $builder->get();
         $data['technicians'] = $query->getResultArray();
-
+    
         return $this->response->setJSON($data);
     }
+
 
 }
 

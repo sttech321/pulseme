@@ -4,7 +4,7 @@
 <div class="headerTop">
    <div class="dropMenuWrap flexBetween">
       <div class="pageNameWrap">
-         <h3 class="secTitle">Operate</h3>
+         <h3 class="secTitle">Reviews</h3>
       </div>
       <div class="rightWrap">
          <div class="location-info flex flex-col justify-center items-end mr-10px">
@@ -47,36 +47,50 @@
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                            <div class="modal-dialog modalContent mx-700">
                               <div class="modal-content">
+                                 <form method="post" action="<?= base_url('/analyze/reviews/create') ?>">
                                  <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Add Review
                                     </h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                  </div>
+                        
                                  <div class="modal-body">
+                                 <?php $script = ''; ?>
+                                    <?php if (session()->getFlashdata('validation')): ?>
+                                    <div class="validation-errors">
+                                       <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
+                                       <p style="color: red;"><?php echo $error ?></p>
+                                       <?php endforeach ?>
+                                    </div>
+                                    <?php $script = '$("#campaignModal").addClass("show").css("display","block")'; ?>
+                                    <?php endif ?>
                                     <div class="formWrap row">
-                                       <div class="col-12 col-md-6">
-                                          <div class="inputBox">
-                                             <input class="form-control" autocomplete="off" name="source" type="text" placeholder="Select Source">
-                                          </div>
-                                       </div>
-                                       <div class="col-12 col-md-6">
-                                          <div class="inputBox">
-                                             <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
-                                                <option disabled selected>Open this select menu</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                             </select>
-                                          </div>
+                                       <div class="flex flex-col items-stretch col-span-3">
+                                          <!-- <p class="text-17px">Source</p> -->
+                                          <select class="py-7px border-b outline-none bg-transparent" name="source" id="">
+                                             <option value="" selected="" hidden="">Select Source</option>
+                                             <option value="facebook">Facebook</option>
+                                             <option value="google">Google</option>
+                                             <option value="bbb">Better Business Bureau</option>
+                                             <option value="yp">Yellow Pages</option>
+                                             <option value="angieslist">Angi</option>
+                                             <option value="houzz">Houzz</option>
+                                             <option value="homeadvisor">Home Advisor</option>
+                                             <option value="homestar">Home Stars</option>
+                                             <option value="porch">Porch</option>
+                                             <option value="nextdoor">Nextdoor</option>
+                                             <option value="other">Other</option>
+                                          </select>
+                                          <!---->
                                        </div>
                                        <div class="col-12 col-md-12">
                                           <div class="datepicker inputBox">
-                                             <input type="date" id="datepicker" class="form-control" placeholder="Select a date">
+                                             <input type="date" id="datepicker" name="date" class="form-control" placeholder="Select a date">
                                           </div>
                                        </div>
                                        <div class="col-12 col-md-6">
                                           <div class="inputBox">
-                                             <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                             <select class="form-select form-select-md mb-3" name="sentiment" namearia-label=".form-select-lg example">
                                                 <option disabled selected>Sentiment</option>
                                                 <option value="1">Positive</option>
                                                 <option value="2">Neutral</option>
@@ -86,17 +100,17 @@
                                        </div>
                                        <div class="col-12 col-md-6">
                                           <div class="inputBox">
-                                             <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                             <select class="form-select form-select-md mb-3" name="campaign" aria-label=".form-select-lg example">
                                                 <option disabled selected>Campaign</option>
-                                                <option value="1">Aaron Krasnow</option>
-                                                <option value="2">Angel Torres</option>
-                                                <option value="3">Angelo vezquez </option>
+                                                <?php  foreach($reviews as $review) : ?>
+                                                   <option value="<?= esc($review['ID']) ?>"><?= esc($review['name']) ?></option>
+                                                <?php endforeach; ?>
                                              </select>
                                           </div>
                                        </div>
                                        <div class="col-12 col-md-12">
                                           <div class="inputBox">
-                                             <textarea type="textarea" class="form-control" placeholder="Leave a comment here"></textarea>
+                                             <textarea type="textarea" name="comment" class="form-control" placeholder="Leave a comment here"></textarea>
                                           </div>
                                        </div>
                                        <div class="col-12 col-md-12 mt-3">
@@ -109,28 +123,30 @@
                                        </div>
                                        <div class="col-12 col-md-4">
                                           <div class="inputBox">
-                                             <input class="form-control" autocomplete="off" name="source" type="text" placeholder="City">
+                                             <input class="form-control" autocomplete="off" name="City" type="text" placeholder="City">
                                           </div>
                                        </div>
                                        <div class="col-12 col-md-4">
                                           <div class="inputBox">
-                                             <input class="form-control" autocomplete="off" name="source" type="text" placeholder="State">
+                                             <input class="form-control" autocomplete="off" name="State" type="text" placeholder="State">
                                           </div>
                                        </div>
                                        <div class="col-12 col-md-4">
                                           <div class="inputBox">
-                                             <input class="form-control" autocomplete="off" name="source" type="text" placeholder="Zipcode">
+                                             <input class="form-control" autocomplete="off" name="Zipcode" type="text" placeholder="Zipcode">
                                           </div>
                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                        <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
-                                       <button type="button" class="btn btn-primary btn-md">Submit changes</button>
+                                       <button type="Submit" class="btn btn-primary btn-md">Submit changes</button>
                                     </div>
                                  </div>
+                                 </form>
                               </div>
                            </div>
                         </div>
+
                      </div>
                      <div data-v-428084ba="" class="filter flex justify-end items-baseline">
                         <svg class="svg-inline--fa fa-calendar-day" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -157,21 +173,9 @@
                               </svg>
                               <select data-v-428084ba="" class="border-0 !ring-transparent !outline-none min-w-250px ml-10px w-full" name="filter-campaings" id="filter-campaings">
                                  <option data-v-428084ba="" value="">All Campaigns</option>
-                                 <option data-v-428084ba="" value="1B85A09AA6CF1">Aaron Krasnow</option>
-                                 <option data-v-428084ba="" value="1D24325B63641">Angelo Vazquez</option>
-                                 <option data-v-428084ba="" value="1C14AED7C0389">Austin Harper</option>
-                                 <option data-v-428084ba="" value="1D42E41457559">Casey Evett</option>
-                                 <option data-v-428084ba="" value="1C12F272792B9">Chad Carncross</option>
-                                 <option data-v-428084ba="" value="1DE1BA473C7B1">Dave Smith</option>
-                                 <option data-v-428084ba="" value="1D5FD968043A1">Derek Kijowski</option>
-                                 <option data-v-428084ba="" value="1B8877CC03CD1">George McPherson</option>
-                                 <option data-v-428084ba="" value="1DAE0B68A7A69">Greg Bark </option>
-                                 <option data-v-428084ba="" value="1B7EFFD223291">Hales AC Service</option>
-                                 <option data-v-428084ba="" value="1E3CDD0C4EA59">Jesse Smith</option>
-                                 <option data-v-428084ba="" value="1DD593824B201">Johnathan Jordan</option>
-                                 <option data-v-428084ba="" value="1D430C7AA39C9">Kiefer Hutcheson</option>
-                                 <option data-v-428084ba="" value="1C13D0A51CB21">Paul Hoang</option>
-                                 <option data-v-428084ba="" value="1D8A897F9D3F9">Scott Neubert</option>
+                                 <?php foreach($reviews as $review): ?>
+                                 <option data-v-428084ba="" value="<?= esc($review['ID']) ?>"><?= esc($review['name']) ?></option>
+                                    <?php endforeach; ?>
                               </select>
                            </div>
                            <div data-v-428084ba="" class="filter flex justify-center items-center border-x border-gray-300 p-10px">
@@ -843,83 +847,6 @@
                                     <p data-v-f15ab7a3="">Quality of Service</p>
                                     <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">9</div>
                                  </div>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-200px">
-                              <div data-v-f15ab7a3="" class="flex flex-col items-center justify-center h-full">
-                                 <button data-v-f15ab7a3="" class="btn w-full mb-5px btn-green">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                       <path class="" fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
-                                    </svg>
-                                    Approve
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full mb-5px">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
-                                    </svg>
-                                    Archive
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
-                                    </svg>
-                                    Edit
-                                 </button>
-                              </div>
-                           </td>
-                           <!----><!----><!---->
-                        </tr>
-                        <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
-                           <td data-v-f15ab7a3="" class="p-10px w-auto">
-                              <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">
-                                 <svg class="svg-inline--fa fa-square mr-5px text-17px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path class="" fill="currentColor" d="M384 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path>
-                                 </svg>
-                                 <p></p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
-                              <div data-v-f15ab7a3="" class="sm-badge sm-google"><i data-v-f15ab7a3=""></i></div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-full">
-                              <!---->
-                              <div data-v-f15ab7a3="" class="comment border-l-5 border-blue-500 py-9px px-18px mb-5px">
-                                 <p data-v-f15ab7a3="">My technician, Angelo Vazquez, was extremely knowledgeable and thorough. He repaired my A/C issue quickly and answered any questions that I had. Great service!</p>
-                              </div>
-                              <div data-v-f15ab7a3="" class="info flex flex-wrap">
-                                 <!----><!----><!----><!---->
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> 2024-07-09</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span> Hales AC Service</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span> General</p>
-                                 </div>
-                              </div>
-                              <div data-v-f15ab7a3="" class="ratings flex flex-wrap"></div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-200px">
-                              <div data-v-f15ab7a3="" class="flex flex-col items-center justify-center h-full">
-                                 <button data-v-f15ab7a3="" class="btn w-full mb-5px btn-green">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                       <path class="" fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
-                                    </svg>
-                                    Approve
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full mb-5px">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
-                                    </svg>
-                                    Archive
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
-                                    </svg>
-                                    Edit
-                                 </button>
                               </div>
                            </td>
                            <!----><!----><!---->
