@@ -1,7 +1,5 @@
 <?php
-
 namespace Config;
-
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -39,8 +37,8 @@ $routes->get('/analyse/overview', 'Home::overview');
 $routes->get('/leaderboard/summary', 'Home::summary');
 $routes->get('/send-referral', 'Home::referral');
 $routes->get('/two-way-messaging', 'Home::messaging');
-$routes->get('/operate/dispatch', 'TechnicianController::dispatch');
-$routes->get('search', 'TechnicianController::search');
+$routes->get('/operate/dispatch', 'CustomerController::dispatch');
+$routes->get('search', 'CustomerController::search');
 $routes->get('/chat-widget', 'Home::widget');
 $routes->get('/employee-rewards', 'Home::rewards');
 $routes->get('/analyze/competitor-analysisg', 'Home::analysisg');
@@ -64,23 +62,22 @@ $routes->get('/settings/contact-card/templates', 'Home::contact_templates');
 
 $routes->get('/settings/billing/billing_subscription', 'Home::billing_subscription');
 
-$routes->get('/show-access-token', 'TechnicianController::showAccessToken');
-$routes->get('/get-response-data', 'TechnicianController::gettechniciandata');
-
-// $routes->post('technician/uploadImage', 'TechnicianController::uploadImage');
 // $routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
 $routes->get('settings/general/connect-social-media', 'Home::connect_social_media');
 
 // $routes->get('/welcome', 'Home::welcome');
 
 $routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');
-
 $routes->post('/analyze/reviews/create', 'ReviewController::insert');
 $routes->get('/settings/dispatch/campaigns', 'Campaign::index');
 $routes->get('/analyze/reviews', 'Campaign::reviews');
 
-$routes->post('/operate/dispatch/create', 'CustomerController::create');
+// $routes->post('/operate/dispatch/create', 'CustomerController::create');
+$routes->post('/operate/dispatch/create/:num', 'CustomerController::create/$1');
 
 $routes->get('application/bio/(:num)', 'Campaign::technician_bio/$1');
 $routes->get('application/pulsecheck/(:num)', 'Campaign::pulse_check/$1');
 
+// $routes->post('/send-bio', 'CustomerController::sendbioEmail');
+// $routes->post('/dispatch', 'CustomerController::sendbioEmail');
+// $routes->post('submit-ratings', 'Campaign::submitRatings');

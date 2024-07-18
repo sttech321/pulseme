@@ -148,14 +148,14 @@ class Campaign extends BaseController {
 
     public function technician_bio($id) {
         $model = new CampaignModel();
-        $data['technician'] = $model->find($id); // Fetch technician by ID
+        $data['technician'] = $model->find($id);
         // print_r($data['technician']);
         return view('/dispatchTab/Technician_bio', $data);
     }
     
     public function pulse_check($id){
         $model = new CampaignModel();
-        $data['technician'] = $model->find($id); // Fetch technician by ID
+        $data['technician'] = $model->find($id);
         return view('/dispatchTab/pulse_check',$data);
     }
 

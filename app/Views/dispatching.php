@@ -3,7 +3,7 @@
 <div class="headerTop">
    <div class="dropMenuWrap flexBetween">
       <div class="pageNameWrap">
-         <h3 class="secTitle">Operate</h3>
+         <h3 class="secTitle">Dispatch</h3>
       </div>
       <div class="rightWrap">
          <div class="location-info flex flex-col justify-center items-end mr-10px">
@@ -19,16 +19,12 @@
    <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
       <div class="sub-menu-bar flex flex-col items-stretch h-full">
          <div class="bg-white p-20px">
-            <h2 class="text-2xl">Operate</h2>
+            <h2 class="text-2xl">Dispatch</h2>
          </div>
          <div class="bg-white px-15px flex justify-start items-center"><a aria-current="page" href="/operate/dispatch"
             class="border-b-2 border-blue-500 router-link-exact-active p-10px" id="dispatch-link">Dispatch</a><a
             href="/operate/contact-card" class="p-10px" id="contact-card-link">Contact Card</a><a
             href="/operate/quick-actions" class="p-10px" id="quick-actions-link">Quick Actions</a></div>
-         <!-- <form action="UploadContent.php" method="POST" enctype="multipart/form-data">
-            Technician Image:
-                <input type="file" name="image"> <input type="submit" value="Upload">
-            </form> -->
          <div class="flex-grow">
             <div class="p-25px">
                <div class="main p-2rem bg-white rounded">
@@ -73,31 +69,29 @@
                      </div>
                   </div>
                   <?php if (!empty($technicians)): ?>
-                  <div class="list">
-                     <table class="w-full">
-                        <?php foreach ($technicians as $technician): ?>
-                        <tr class="flex p-20px odd:bg-sky-50">
-                           <td class="employee flex items-center w-1/4">
-                              <div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0"
-                                 style="position: relative; background-image: url('<?= $technician['image'] ?>');">
+                     <div class="list">
+                        <table class="w-full">
+                           <?php if (session()->getFlashdata('validation')): ?>
+                              <div class="validation-errors">
+                                 <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
+                                       <p style="color: red;"><?= $error ?></p>
+                                 <?php endforeach ?>
                               </div>
-                              <form method="post" action="<?= base_url('/operate/dispatch/create') ?>" enctype="">
-                              <div class="flex-grow">
-                                 <p class="name"><?= $technician['name'] ?></p>
-                                 <!-- <p class="department text-gray-400">Service Technician</p>  -->
-                                 <p class="department text-gray-400"><?= $technician['department'] ?></p>
+                           <?php endif ?>
+                           <?php foreach ($technicians as $technician): ?>
+                              <tr class="flex p-20px odd:bg-sky-50" id="<?= $technician['ID'] ?>">
+                                 <form method="post" action="<?= base_url('/operate/dispatch/create/'.$technician['ID'])?>">
+                                    <td class="employee flex items-center w-1/4">
+                                       <div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0"
+                                       id="<?= $technician['ID'] ?>" style="position: relative; background-image: url('<?= $technician['image'] ?>');">
+                                    </div>
+                                    <div class="flex-grow">
+                                       <p class="name"><?= $technician['name'] ?></p>
+                                       <!-- <p class="department text-gray-400">Service Technician</p>  -->
+                                       <p class="department text-gray-400"><?= $technician['department'] ?></p>       
                               </div>
                            </td>
                            <td class="recipient-info grid grid-cols-6 gap-5px flex-grow">
-                           <?php $script = ''; ?>
-                                 <?php if (session()->getFlashdata('validation')): ?>
-                                 <div class="validation-errors">
-                                    <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
-                                    <p style="color: red;"><?php echo $error ?></p>
-                                    <?php endforeach ?>
-                                 </div>
-                                 <?php $script = '$("#campaignModal").addClass("show").css("display","block")'; ?>
-                                 <?php endif ?>
                               <div class="input-group col-span-3 flex items-center">
                                  <div class="mr-10px flex justify-center items-center">
                                     <svg
@@ -111,7 +105,7 @@
                                  </div>
                                  <input
                                     class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px"
-                                    type="tel" name="phone" id="phone-1B85A09AA6CF1" placeholder="Phone Number">
+                                    type="tel" name="customer_phone" id="phone-1B85A09AA6CF1" placeholder="Phone Number">
                               </div>
                               <div class="input-group col-span-3 flex items-center">
                                  <div class="mr-10px flex justify-center items-center">
@@ -126,7 +120,7 @@
                                  </div>
                                  <input
                                     class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px"
-                                    type="email" name="email" id="email-1B85A09AA6CF1" placeholder="Email">
+                                    type="email" name="customer_email" id="email-1B85A09AA6CF1" placeholder="Email">
                               </div>
                               <div class="input-group col-span-3 lg:col-span-2 flex items-center">
                                  <div class="mr-10px flex justify-center items-center">
@@ -141,7 +135,7 @@
                                  </div>
                                  <input
                                     class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px"
-                                    type="text" name="name" id="name-1B85A09AA6CF1"
+                                    type="text" name="customer_name" id="name-1B85A09AA6CF1"
                                     placeholder="Name (Optional)">
                               </div>
                               <div class="input-group col-span-3 lg:col-span-4 flex items-center">
@@ -155,7 +149,7 @@
                                        </path>
                                     </svg>
                                  </div>
-                                 <input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="text" name="address" id="address-1B85A09AA6CF1" placeholder="Address (Optional)">
+                                 <input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="text" name="customer_address" id="address-1B85A09AA6CF1" placeholder="Address (Optional)">
                               </div>
                               <div class="flex justify-start items-center py-5px col-span-6">
                                  <div class="flex justify-start items-center col-span-3 cursor-pointer">
@@ -174,7 +168,7 @@
                            <td class="buttons flex flex-col justify-center items-end px-4 w-1/4">
                               <button
                                  class="btn btn-blue max-w-200px w-full rounded-2px mb-2"
-                                 id="sendBio-1B85A09AA6CF1" type="submit">
+                                 id="<?= $technician['ID'] ?>" type="submit">
                                  <svg class="svg-inline--fa fa-user text-15px"
                                     aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user"
                                     role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -182,11 +176,11 @@
                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z">
                                     </path>
                                  </svg>
-                                 Send Bio
+                                 <a href="<?= base_url('/dispatch') ?>"> Send Bio</a>
                               </button>
                               <button
                                  class="btn btn-green max-w-200px w-full rounded-2px"
-                                 id="sendPulseCheck-1B85A09AA6CF1">
+                                 id="sendPulseCheck">
                                  <svg
                                     class="svg-inline--fa fa-face-grin text-15px" aria-hidden="true"
                                     focusable="false" data-prefix="fas" data-icon="face-grin" role="img"
