@@ -56,5 +56,33 @@ class ReviewController extends BaseController
 
         // Redirect to a success page or display success message
         return redirect()->to('/analyze/reviews')->with('success', 'Review saved successfully.');
+
     }
+
+    public function submitRatings()
+    {
+        // Get the raw POST data
+        $jsonData = $this->request->getRawInput();
+    
+        // Decode JSON data to an array
+        $ratingsData = json_decode($jsonData['ratings'], true);
+    
+        // Convert array to JSON format for database storage
+        $jsonRatings = json_encode($ratingsData);
+    
+        // Save to the database using your ReviewModal model
+        $reviewModel = new ReviewModal();
+    
+        $data = [
+            'ratings' => $jsonRatings,
+        ];
+    
+        // Insert data into the database
+        $reviewModel->insert($data);
+    
+        // Redirect to the reviews page with a success message
+        return redirect()->to('/application/pulsecheck//(:num)#rating.63')->with('success', 'Ratings saved successfully.');
+    }
+    
+    
 }
