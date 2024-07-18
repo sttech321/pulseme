@@ -1,21 +1,14 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<link rel="apple-touch-icon" sizes="180x180" href="https://kiliassets.speetra.com/favicon/apple-touch-icon.png" />
-		<link rel="icon" type="image/png" sizes="32x32" href="https://kiliassets.speetra.com/favicon/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="https://kiliassets.speetra.com/favicon/favicon-16x16.png" />
-		<link rel="mask-icon" href="https://kiliassets.speetra.com/favicon/safari-pinned-tab.svg" color="#2e8cf0" />
-		<link rel="manifest" href="/site.webmanifest" />
-		<meta name="msapplication-TileColor" content="#ffffff" />
-		<meta name="theme-color" content="#ffffff" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
 		<title>How did we do?</title>
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400" rel="stylesheet" />
 		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" />
-		<link href="https://kiliassets.speetra.com/static/v49.0.17.pulse-check.css" rel="stylesheet" />
-
-		
+		<link rel="stylesheet" type="text/css" href="/css/pulse.css">
 		<script>
 			(function(w) {
 			        'use strict'
@@ -54,7 +47,7 @@
 			        if (typeof _j.public_keys === 'undefined') {_j.public_keys ={"cloudinary": {"api_key": "243571469354245", "signed_upload_preset": "oynodz9q", "transformations": {"campaign": {"large": "ar_1:1,c_fill,g_face:auto,q_100", "medium": "ar_1:1,c_fill,g_face:auto,h_300,q_100,w_300", "original": null, "small": "ar_1:1,c_fill,g_face:auto,h_80,q_100,w_80"}, "logo": {"icon": "ar_1:1,c_pad,h_32,q_100,w_32", "original": null, "small": "c_fit,h_80,q_100,w_80"}}, "url": "https://api.cloudinary.com/v1_1/amrit-singh"}, "facebook": {"app_id": "1882530468685533"}, "google": "AIzaSyAGXfYUa5-6NLrjPuxGUSxkxKcYnP4dvn0"};}
 			        if (typeof _j.supported_social_media === 'undefined') {_j.supported_social_media =[{"key": "facebook", "name": "Facebook"}, {"key": "google", "name": "Google"}, {"key": "bbb", "name": "Better Business Bureau"}, {"key": "yp", "name": "Yellow Pages"}, {"key": "angieslist", "name": "Angie\u0027s List"}, {"key": "houzz", "name": "Houzz"}, {"key": "homeadvisor", "name": "Home Advisor"}, {"key": "homestar", "name": "HomeStars"}, {"key": "porch", "name": "Porch"}, {"key": "nextdoor", "name": "Nextdoor"}, {"key": "other", "name": "Other"}];}
 			        if (typeof _j.social_media_assets === 'undefined') {_j.social_media_assets ={"angieslist": {"background": "#29a036", "font": "#ffffff", "image_url": "https://static.speetra.com/sm_logos/angieslist_100.png", "name": "Angie\u0027s List"}, "bbb": {"background": "#17233d", "font": "#ffffff", "image_url": "https://static.speetra.com/sm_logos/bbb_100.png", "name": "BBB"}, "facebook": {"background": "#3b5998", "font": "#f0f4f6", "image_url": "https://static.speetra.com/sm_logos/facebook_100.png", "name": "Facebook"}, "google": {"background": "#dd4b39", "font": "#ffffff", "guidelines": {"gating_banned": true}, "image_url": "https://static.speetra.com/sm_logos/google_100.png", "name": "Google"}, "homeadvisor": {"background": "#f78f1e", "font": "#ffffff", "image_url": "https://static.speetra.com/sm_logos/homeadvisor_100.png", "name": "HomeAdvisor"}, "homestar": {"background": "#00ADEF", "font": "#ffffff", "image_url": "https://static.speetra.com/sm_logos/homestar_100.png", "name": "Homestars"}, "houzz": {"background": "#17233d", "font": "#ffffff", "image_url": "https://static.speetra.com/sm_logos/houzz_100.png", "name": "Houzz"}, "nextdoor": {"background": "#00AF55", "font": "#ffffff", "image_url": "https://static.speetra.com/sm_logos/nextdoor_100.png", "name": "Nextdoor"}, "porch": {"background": "#F0AA14", "font": "#ffffff", "image_url": "https://static.speetra.com/sm_logos/porch_100.png", "name": "Porch"}, "pulsem": {"background": "#0185AB", "font": "#ffffff", "image_url": "https://kiliassets.speetra.com/logo/pulsem-horizontal-light-medium.png", "name": "pulseM"}, "yelp": {"background": "#c41200", "font": "#FFFFFF", "image_url": "https://static.speetra.com/sm_logos/yelp_100.png", "name": "Yelp"}, "yp": {"background": "#ffd400", "font": "#f0f4f6", "image_url": "https://static.speetra.com/sm_logos/yp_100.png", "name": "Yellow Pages"}};}
-			        if (typeof _j.random_text === 'undefined') {_j.random_text ={"allowed": true, "loading_text": ["Turning your darkness into light!", "Greasing elbows...", "Finishing Rush Hour 2...", "Clearing the clouds...", "Reading between the lines...", "Entering the matrix...", "pulseM is groggy. Installing java...", "Fishing for compliments...", "Dusting off the cobwebs...", "Dividing by zero...", "My engineer gives me a byte every time I make you laugh.", "One second please...", "Shovelling coal into the server...", "Initializing Skynet library. Gaining sentience....", "Looking for my sunglasses...", "Locating the required gigapixels to render...", "The internet is full... Please wait..", "I wish I could play you elevator music.", "I scream, you scream, we all scream at loading screens!", "Navigating through the Suez Canal...", "Grilling some burgers...", "Compressing review files...", "Don\u0027t stop, believing, loading up that feeling!", "My name is Page, Loading Page...", "Lick your elbow to triple the loading speed", "Practicing headstands...", "I\u0027m drawing as fast as I can!", "Spinning up the hamster...", "Putting on my noise cancelling headphones...", "Commencing infinite loop (this may take some time)....", "Music is usually the answer...", "Living out the American Dream!", "Running around the world and back...", "Blessing the rains down in Africa", "Unclogging our hard drives...", "I\u0027m doing the thing...", "Defrosting the databases...", "Sharpening our sporks...", "Programming the flux capacitor...", "Brewing some coffee...", "Let me have my coffee first", "Grabbing some popcorn...", "Never gonna give you up, never gonna let you down", "Revving up our engines..."]};}
+			        if (typeof _j.random_text === 'undefined') {_j.random_text ={"allowed": true, "loading_text": ["Commencing infinite loop (this may take some time)....", "Initializing Skynet library. Gaining sentience....", "pulseM is groggy. Installing java...", "Living out the American Dream!", "Turning your darkness into light!", "Reading between the lines...", "Looking for my sunglasses...", "I wish I could play you elevator music.", "Don\u0027t stop, believing, loading up that feeling!", "Defrosting the databases...", "Greasing elbows...", "Grabbing some popcorn...", "Clearing the clouds...", "Putting on my noise cancelling headphones...", "Entering the matrix...", "My name is Page, Loading Page...", "Music is usually the answer...", "Let me have my coffee first", "Finishing Rush Hour 2...", "The internet is full... Please wait..", "Practicing headstands...", "Unclogging our hard drives...", "Brewing some coffee...", "I\u0027m drawing as fast as I can!", "Navigating through the Suez Canal...", "Compressing review files...", "Locating the required gigapixels to render...", "Programming the flux capacitor...", "Shovelling coal into the server...", "Sharpening our sporks...", "Grilling some burgers...", "One second please...", "Dusting off the cobwebs...", "Dividing by zero...", "Fishing for compliments...", "Revving up our engines...", "Spinning up the hamster...", "Lick your elbow to triple the loading speed", "Running around the world and back...", "My engineer gives me a byte every time I make you laugh.", "I scream, you scream, we all scream at loading screens!", "Blessing the rains down in Africa", "Never gonna give you up, never gonna let you down", "I\u0027m doing the thing..."]};}
 			        if (typeof _j.deploy_mode === 'undefined') {_j.deploy_mode = "prod"}})(window)
 		</script>
 		<script>
@@ -72,7 +65,7 @@
 			}
 
 			window.flow = [{"id": 1, "moods": {"negative": {"audio_url": "", "id": 3, "question": "We are sorry. Please tell us what happened during your service call. Your experience is very important to us.", "redirect_url": ""}, "neutral": {"audio_url": "", "id": 1, "question": "Do you have any suggestions for improving our services?", "redirect_url": ""}, "positive": {"audio_url": "", "id": 2, "question": "Tell us more, we love the feedback!", "redirect_url": ""}}, "redirect": {"back": null, "negative": 60, "neutral": 40, "positive": 20}, "title": "How satisfied were you with the overall experience?", "transaction": {"mood": "NA"}, "type": "mood"}, {"confirm_text": "I left a great review!", "id": 20, "is_last": 0, "positive": true, "redirect": {"back": 1, "failure": 22, "retry": 1, "skip": 1, "success": 21}, "skip_location": "bottom", "skip_text": "I don\u0027t have any of these", "social_media_websites": [{"display": "Google", "name": "google", "order": 0.0, "url": "https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U"}, {"display": "Facebook", "name": "facebook", "order": 1.0, "url": "https://www.facebook.com/login/?next=https%3A//www.facebook.com/pg/None/reviews/"}, {"display": "Tampa Google Listing", "name": "custom", "order": 10.0, "url": "https://g.page/r/CdSpGtFWO5SPEBM/review"}], "title": "\u003ch2 style=\"font-size: 26px; text-align: inherit; margin-bottom: 5px;\"\u003eLeave your review in seconds.\u003c/h2\u003e\u003cb style=\"font-size: 14px;\" class=\"m-0\"\u003e(Google reviews help us the most!)\u003c/b\u003e", "type": "social-media", "valid_list": true}, {"confirm_text": "Yes I did", "id": 40, "is_last": 0, "positive": false, "redirect": {"back": 1, "failure": 42, "retry": 0, "skip": 1, "success": 41}, "skip_location": "top", "skip_text": "Contact us directly!", "social_media_websites": [{"display": "Google", "name": "google", "order": 0.0, "url": "https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U"}], "title": "Thank you!\u003cbr\u003e\u003cb\u003eWe always want to provide our Clients with a 5 star experience.\u003c/b\u003e\u003cbr\u003e\u003cbr\u003ePlease call us at \u003ca href=\"tel:7272632084\"\u003e(727) 263-2084\u003c/a\u003e and let us know what we can do to make things right by you.", "type": "social-media", "valid_list": true}, {"confirm_text": "Yes I did", "id": 60, "is_last": 0, "positive": false, "redirect": {"back": 1, "failure": 62, "retry": 0, "skip": 1, "success": 61}, "skip_location": "top", "skip_text": "Contact us directly!", "social_media_websites": [{"display": "Google", "name": "google", "order": 0.0, "url": "https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U"}], "title": "Thank you!\u003cbr\u003e\u003cb\u003eWe always want to provide our Clients with a 5 star experience.\u003c/b\u003e\u003cbr\u003e\u003cbr\u003ePlease call us at \u003ca href=\"tel:7272632084\"\u003e(727) 263-2084\u003c/a\u003e and let us know what we can do to make things right by you.", "type": "social-media", "valid_list": true}, {"helper_text": false, "id": 21, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 20, "next": 31}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 41, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 40, "next": 51}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 61, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 60, "next": 71}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 22, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 20, "next": 23}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 42, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 40, "next": 43}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 62, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 60, "next": 63}, "title": "", "transaction": {}, "type": "rating"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 31, "mood": "Positive", "redirect": {"back": 21, "next": 32, "skip": null}, "title": "Tell us more, we love the feedback!", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 51, "mood": "Neutral", "redirect": {"back": 41, "next": 52, "skip": null}, "title": "Do you have any suggestions for improving our services?", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 71, "mood": "Negative", "redirect": {"back": 51, "next": 72, "skip": null}, "title": "We are sorry. Please tell us what happened during your service call. Your experience is very important to us.", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"id": 32, "redirect": {"back": null, "next": null}, "social_media": null, "text": "Liked the service? Don\u0027t forget to tell your friends!", "text_type": "POSITIVE", "title": "Thank you for your review!", "type": "thank-you"}, {"id": 52, "redirect": {"back": null, "next": null}, "social_media": null, "text": "We actively work to improve ourselves to be the company our Clients deserve.", "text_type": "NEUTRAL", "title": "Thank you for your feedback!", "type": "thank-you"}, {"id": 72, "redirect": {"back": null, "next": null}, "social_media": null, "text": "Thank you for telling us what went wrong. Your business means a lot to us, so it is important for us to know how we can improve. If you\u0027d like to talk to us, please give us a call at \u003ca href=\"tel:7272632084\"\u003e(727) 263-2084\u003c/a\u003e.", "text_type": "NEGATIVE", "title": "We are sorry you had a bad experience.", "type": "thank-you"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 23, "mood": "Positive", "redirect": {"back": 22, "next": 24, "skip": null}, "title": "Tell us more, we love the feedback!", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 43, "mood": "Neutral", "redirect": {"back": 42, "next": 44, "skip": null}, "title": "Do you have any suggestions for improving our services?", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 63, "mood": "Negative", "redirect": {"back": 62, "next": 64, "skip": null}, "title": "We are sorry. Please tell us what happened during your service call. Your experience is very important to us.", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"id": 24, "redirect": {"back": null, "next": null}, "social_media": null, "text": "Liked the service? Don\u0027t forget to tell your friends!", "text_type": "POSITIVE-BASIC", "title": "We enjoyed your business too!", "type": "thank-you"}, {"id": 44, "redirect": {"back": null, "next": null}, "social_media": null, "text": "We actively work to improve ourselves to be the company our Clients deserve.", "text_type": "NEUTRAL-BASIC", "title": "Thank you for your feedback!", "type": "thank-you"}, {"id": 64, "redirect": {"back": null, "next": null}, "social_media": null, "text": "Your business means a lot to us. It is important for us to know how we can improve. If you want to talk to us, please give us a call at \u003ca href=\"tel:7272632084\"\u003e(727) 263-2084\u003c/a\u003e.", "text_type": "NEGATIVE-BASIC", "title": "We are sorry you had a bad experience.", "type": "thank-you"}];
-			window.meta = {"bottom_image": "https://kiliassets.speetra.com/prod/account_images/15407/logo/1709862934_original.png", "campaign_name": "Aaron Krasnow", "campaign_uid": "1B85A09AA6CF1", "default_collection": "write", "demo_data": {}, "flow_mode": "SENTIMENTONLY-UNGATED", "is_active": 1, "is_default": false, "is_demo": false, "navbar_bkg_color": "#FFFFFF", "navbar_font_color": "#17233d", "pagination": [], "pulsem_account_id": 15407, "review_mode": {"speech": true, "text": true, "video": false}, "start_with": 1, "top_image": "https://kiliassets.speetra.com/prod/account_images/15407/campaign/1B85A09AA6CF1/1711571243_original.jpg", "transaction_id": "61a6d8e12ba0853bd10f91be22b6fa76", "user": {"email": "", "formatted_phone": null, "is_test": 1, "name": null, "phone": ""}};
+			window.meta = {"bottom_image": "<?= base_url('image/campaign/1721047414_462943fd69602d1823a4.jpg') ?>", "campaign_name": "Aaron Krasnow", "campaign_uid": "1B85A09AA6CF1", "default_collection": "write", "demo_data": {}, "flow_mode": "SENTIMENTONLY-UNGATED", "is_active": 1, "is_default": false, "is_demo": false, "navbar_bkg_color": "#FFFFFF", "navbar_font_color": "#17233d", "pagination": [], "pulsem_account_id": 15407, "review_mode": {"speech": true, "text": true, "video": false}, "start_with": 1, "top_image": "<?= base_url('image/campaign/1721047414_462943fd69602d1823a4.jpg') ?>", "transaction_id": "8f3da9620b5c8993fc6cb82127c1c950", "user": {"email": "", "formatted_phone": null, "is_test": 1, "name": null, "phone": ""}};
 			window.startTime = Date.now()
 			try {
 			    if (!window.dataLayer) {
@@ -87,7 +80,7 @@
 		</script>
 	</head>
 
-	<body data-new-gr-c-s-check-loaded="14.1187.0" data-gr-ext-installed="">
+	<body>
 		<div id="overlay-loader" style="display: none;">
 			<div class="page-overlay"></div>
 			<div class="preloader-container">
@@ -99,7 +92,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="page-loader" class="palette-Blue-Grey bg inactive hide">
+		<div id="page-loader" class="palette-Blue-Grey bg on-load">
 			<div class="preloader-container">
 				<div class="preloader pl-xxl pls-white legacy-page-loader">
 					<svg class="pl-circular" viewBox="25 25 50 50">
@@ -118,10 +111,43 @@
 					</div>
 				</div>
 				<h3 id="page-loader-text" class="loader-text"></h3>
+				<script>
+					(function() {
+					    'use strict'
+					    var _text = ''
+					    try {
+					        _text = "Loading advanced customer engagement..."
+					    } catch(e) {
+					        console.error('Failed to use init PageLoader text.', e)
+					    }
+
+					    try {
+					        if (window.localStorage && _text === '') {
+					            _text = window.localStorage.getItem('lastloadertext') || ''
+					        }
+					    } catch(e) {
+					        console.error('Failed to fetch PageLoader text from localStorage.', e)
+					    }try {
+					        if (_text === '') {
+					            _text = "Compressing review files..."
+					        }
+					    } catch(e) {
+					        console.error('Failed to get PageLoader text on init.', e)
+					    }
+					    if (!_text || _text === 'null' || _text === 'undefined') {
+					        _text = ''
+					    }
+					    try {
+					        document.getElementById('page-loader-text').innerText = _text ? _text : ''
+					    } catch(e) {
+					        console.error('Failed to set PageLoader inner text on init.', e)
+					    }
+					})()
+				</script>
 			</div>
-			<!-- <div class="loader-logo">
+			<div class="loader-logo">
 				<img src="https://kiliassets.speetra.com/logo/pulsem-horizontal-dark-medium.png" />
-			</div> -->
+			</div>
 		</div>
 
 		<style>
@@ -243,7 +269,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="player-error" class="hide">
+				<div id="player-error" class="hide" class="p-l-20 p-r-20">
 					<h3></h3>
 					<h5 style="line-height:1.3;"></h5>
 
@@ -258,7 +284,7 @@
 							<h3 class="title m-t-5 text-left"></h3>
 						</div>
 						<div class="col-xs-6">
-							<img class="logo" src="<?= ($technician['image']) ?>" style="" />
+							<img class="logo" src="<?= $technician['image']?>" style="" />
 						</div>
 					</div>
 
@@ -266,22 +292,23 @@
 						<div class="flow-card-header clearfix"><h2 class="flow-card-title">How satisfied were you with the overall experience?</h2></div>
 						<div class="row p-b-30">
 							<a class="col-xs-4" data-mood="negative" data-next="60">
-								<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" class="img-responsive" />
+								<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" class="img-responsive" />
 							</a>
-							<a class="col-xs-4" data-mood="neutral" data-next="40">
-								<img src="https://kiliassets.speetra.com/img/assets/faces-neutral-flat.svg" class="img-responsive" />
-							</a>
+							<!-- <a class="col-xs-4" data-mood="neutral" data-next="40">
+								<img src="<?= base_url('/image/campaign/faces-neutral-flat.svg')?>" class="img-responsive" />
+							</a> -->
 							<a class="col-xs-4" data-mood="positive" data-next="20">
-								<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" class="img-responsive" />
+								<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" class="img-responsive" />
 							</a>
 						</div>
 					</div>
 
 					<div class="flow-card social-media" data-flow-id="20" data-flow-back="1" data-type="social-media">
 						<div class="flow-card-header clearfix">
-							<h2 class="flow-card-title"></h2>
-							<h2 style="font-size: 26px; text-align: inherit; margin-bottom: 5px;">Leave your review in seconds.</h2>
-							<b style="font-size: 14px;" class="m-0">(Google reviews help us the most!)</b>
+							<h2 class="flow-card-title">
+								<h2 style="font-size: 26px; text-align: inherit; margin-bottom: 5px;">Leave your review in seconds.</h2>
+								<b style="font-size: 14px;" class="m-0">(Google reviews help us the most!)</b>
+							</h2>
 						</div>
 						<div class="social-media-websites positive" data-is-last="0" data-valid="True" data-confirm-text="I left a great review!" data-success="21" data-failure="22">
 							<a
@@ -322,7 +349,7 @@
 							</a>
 							<a href="javascript:void(null)" class="social-media-btn sm-banner pulsem btn btn-block btn-lg" data-sm-skip="22">
 								<i class="sm-icon p-r-10"></i>
-								I don't have any of these
+								I don&#39;t have any of these
 							</a>
 						</div>
 					</div>
@@ -385,581 +412,259 @@
 						</div>
 					</div>
 
-					<div class="flow-card rating" data-flow-id="21" data-flow-back="20" data-type="rating">
-						<div class="flow-card-header clearfix"></div>
-						<div class="m-t-15">
-							<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
+					<form id="ratingsForm" action="<?= base_url('/submit-ratings') ?>" method="post">
+						<div class="flow-card rating" data-flow-id="21" data-flow-back="20" data-type="rating">
+							<div class="flow-card-header clearfix"></div>
+							<div class="m-t-15">
+								<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
 									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
+									<div class="slider" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
 									</div>
 								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
+
+								<h3 class="ratings-title">Professionalism</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
+									</div>
+									<div class="slider" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
+									</div>
+								</div>
+
+								<h3 class="ratings-title">Quality of Service</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
+									</div>
+									<div class="slider" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
+									</div>
 								</div>
 							</div>
 
-							<h3 class="ratings-title">Professionalism</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
-									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
-									</div>
-								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
-								</div>
-							</div>
-
-							<h3 class="ratings-title">Quality of Service</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
-									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
-									</div>
-								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
-								</div>
+							<div class="text-center p-b-20">
+								<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings data-next="31">Submit</button>
 							</div>
 						</div>
 
-						<div class="text-center p-b-20">
-							<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings="" data-next="31">Submit</button>
-						</div>
-					</div>
+						<div class="flow-card rating" data-flow-id="41" data-flow-back="40" data-type="rating">
+							<div class="flow-card-header clearfix"></div>
+							<div class="m-t-15">
+								<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
+									</div>
+									<div class="slider" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>"/>
+									</div>
+								</div>
 
-					<div class="flow-card rating" data-flow-id="41" data-flow-back="40" data-type="rating">
-						<div class="flow-card-header clearfix"></div>
-						<div class="m-t-15">
-							<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
+								<h3 class="ratings-title">Professionalism</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>"/>
 									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
+									<div class="slider" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>"/>
 									</div>
 								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
+
+								<h3 class="ratings-title">Quality of Service</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
+									</div>
+									<div class="slider" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
+									</div>
 								</div>
 							</div>
 
-							<h3 class="ratings-title">Professionalism</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
-									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
-									</div>
-								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
-								</div>
-							</div>
-
-							<h3 class="ratings-title">Quality of Service</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
-									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
-									</div>
-								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
-								</div>
+							<div class="text-center p-b-20">
+								<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings data-next="51">Submit</button>
 							</div>
 						</div>
 
-						<div class="text-center p-b-20">
-							<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings="" data-next="51">Submit</button>
-						</div>
-					</div>
+						<div class="flow-card rating" data-flow-id="61" data-flow-back="60" data-type="rating">
+							<div class="flow-card-header clearfix"></div>
+							<div class="m-t-15">
+								<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
+									</div>
+									<div class="slider" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
+									</div>
+								</div>
 
-					<div class="flow-card rating" data-flow-id="61" data-flow-back="60" data-type="rating">
-						<div class="flow-card-header clearfix"></div>
-						<div class="m-t-15">
-							<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
+								<h3 class="ratings-title">Professionalism</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
 									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
+									<div class="slider" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
 									</div>
 								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
+
+								<h3 class="ratings-title">Quality of Service</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
+									</div>
+									<div class="slider" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
+									</div>
 								</div>
 							</div>
 
-							<h3 class="ratings-title">Professionalism</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
-									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
-									</div>
-								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
-								</div>
-							</div>
-
-							<h3 class="ratings-title">Quality of Service</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
-									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
-									</div>
-								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
-								</div>
+							<div class="text-center p-b-20">
+								<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings data-next="71">Submit</button>
 							</div>
 						</div>
 
-						<div class="text-center p-b-20">
-							<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings="" data-next="71">Submit</button>
-						</div>
-					</div>
+						<div class="flow-card rating" data-flow-id="22" data-flow-back="20" data-type="rating">
+							<div class="flow-card-header clearfix"></div>
+							<div class="m-t-15">
+								<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
+									</div>
+									<div class="slider" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
+									</div>
+								</div>
 
-					<div class="flow-card rating" data-flow-id="22" data-flow-back="20" data-type="rating">
-						<div class="flow-card-header clearfix"></div>
-						<div class="m-t-15">
-							<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
+								<h3 class="ratings-title">Professionalism</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
 									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
+									<div class="slider" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
 									</div>
 								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
+
+								<h3 class="ratings-title">Quality of Service</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
+									</div>
+									<div class="slider" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
+									</div>
 								</div>
 							</div>
 
-							<h3 class="ratings-title">Professionalism</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
-									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
-									</div>
-								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
-								</div>
-							</div>
-
-							<h3 class="ratings-title">Quality of Service</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
-									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
-									</div>
-								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
-								</div>
+							<div class="text-center p-b-20">
+								<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings data-next="23">Submit</button>
 							</div>
 						</div>
 
-						<div class="text-center p-b-20">
-							<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings="" data-next="23">Submit</button>
-						</div>
-					</div>
+						<div class="flow-card rating" data-flow-id="42" data-flow-back="40" data-type="rating">
+							<div class="flow-card-header clearfix"></div>
+							<div class="m-t-15">
+								<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
+									</div>
+									<div class="slider" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
+									</div>
+								</div>
 
-					<div class="flow-card rating" data-flow-id="42" data-flow-back="40" data-type="rating">
-						<div class="flow-card-header clearfix"></div>
-						<div class="m-t-15">
-							<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
+								<h3 class="ratings-title">Professionalism</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
 									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
+									<div class="slider" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
 									</div>
 								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
+
+								<h3 class="ratings-title">Quality of Service</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
+									</div>
+									<div class="slider" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
+									</div>
 								</div>
 							</div>
 
-							<h3 class="ratings-title">Professionalism</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
-									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
-									</div>
-								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
-								</div>
-							</div>
-
-							<h3 class="ratings-title">Quality of Service</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
-									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
-									</div>
-								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
-								</div>
+							<div class="text-center p-b-20">
+								<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings data-next="43">Submit</button>
 							</div>
 						</div>
 
-						<div class="text-center p-b-20">
-							<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings="" data-next="43">Submit</button>
-						</div>
-					</div>
+						<div class="flow-card rating" data-flow-id="62" data-flow-back="60" data-type="rating">
+							<div class="flow-card-header clearfix"></div>
+							<div class="m-t-15">
+								<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
+									</div>
+									<div class="slider" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
+									</div>
+								</div>
 
-					<div class="flow-card rating" data-flow-id="62" data-flow-back="60" data-type="rating">
-						<div class="flow-card-header clearfix"></div>
-						<div class="m-t-15">
-							<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
+								<h3 class="ratings-title">Professionalism</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
 									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
+									<div class="slider" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
 									</div>
 								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
+
+								<h3 class="ratings-title">Quality of Service</h3>
+								<div class="ratings-slider">
+									<div class="mood negative text-left">
+										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
+									</div>
+									<div class="slider" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10"></div>
+									<div class="mood positive text-right">
+										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
+									</div>
 								</div>
 							</div>
 
-							<h3 class="ratings-title">Professionalism</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
-									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
-									</div>
-								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
-								</div>
-							</div>
-
-							<h3 class="ratings-title">Quality of Service</h3>
-							<div class="ratings-slider">
-								<div class="mood negative text-left">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-negative-flat.svg" />
-								</div>
-								<div class="slider noUi-target noUi-ltr noUi-horizontal" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10">
-									<div class="noUi-base">
-										<div class="noUi-connect" style="left: 0%; right: 20%;"></div>
-										<div class="noUi-origin" style="left: 80%;"><div class="noUi-handle" data-handle="0" style="z-index: 4;"></div></div>
-									</div>
-									<div class="noUi-pips noUi-pips-horizontal">
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 0.00000%">0</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 10.00000%">1</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 20.00000%">2</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 30.00000%">3</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 40.00000%">4</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 50.00000%">5</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 60.00000%">6</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 70.00000%">7</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub active" style="left: 80.00000%">8</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-sub" style="left: 90.00000%">9</div>
-										<div class="noUi-value noUi-value-horizontal noUi-value-large" style="left: 100.00000%">10</div>
-									</div>
-								</div>
-								<div class="mood positive text-right">
-									<img src="https://kiliassets.speetra.com/img/assets/faces-positive-flat.svg" />
-								</div>
+							<div class="text-center p-b-20">
+								<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings data-next="63">Submit</button>
 							</div>
 						</div>
-
-						<div class="text-center p-b-20">
-							<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings="" data-next="63">Submit</button>
-						</div>
-					</div>
+					</form>
 
 					<div class="flow-card review" data-flow-id="31" data-flow-back="21" data-type="review">
 						<div class="flow-card-header clearfix"><h2 class="flow-card-title">Tell us more, we love the feedback!</h2></div>
@@ -968,16 +673,17 @@
 								You have the following options:
 							</h4>
 							<div class="text-center">
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak=""><i class="zmdi zmdi-phone"></i>Speak</button>
+								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Speak</button>
 
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write=""><i class="zmdi zmdi-comment-text"></i>Write</button>
+								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Write</button>
 							</div>
 						</div>
 
 						<div class="action speak hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitSpeak" data-next="32">
 								<div class="m-b-20">
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write=""><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 
 								<div class="form-group m-0" style="margin: 0 auto !important; max-width: 440px;">
@@ -991,8 +697,6 @@
 											value=""
 											data-phone=""
 											data-validate="phone"
-											maxlength="14"
-											autocomplete="off"
 										/>
 									</div>
 									<button class="btn btn-icon-text btn-primary waves-effect m-l-10"><i class="zmdi zmdi-phone"></i>Call Me!</button>
@@ -1008,7 +712,8 @@
 						<div class="action write hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitWrite" data-next="32">
 								<div>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak=""><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 								<div class="clearfix aligned-textarea">
 									<button class="btn btn-primary waves-effect">
@@ -1032,16 +737,17 @@
 								You have the following options:
 							</h4>
 							<div class="text-center">
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak=""><i class="zmdi zmdi-phone"></i>Speak</button>
+								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Speak</button>
 
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write=""><i class="zmdi zmdi-comment-text"></i>Write</button>
+								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Write</button>
 							</div>
 						</div>
 
 						<div class="action speak hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitSpeak" data-next="52">
 								<div class="m-b-20">
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write=""><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 
 								<div class="form-group m-0" style="margin: 0 auto !important; max-width: 440px;">
@@ -1055,8 +761,6 @@
 											value=""
 											data-phone=""
 											data-validate="phone"
-											maxlength="14"
-											autocomplete="off"
 										/>
 									</div>
 									<button class="btn btn-icon-text btn-primary waves-effect m-l-10"><i class="zmdi zmdi-phone"></i>Call Me!</button>
@@ -1072,7 +776,8 @@
 						<div class="action write hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitWrite" data-next="52">
 								<div>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak=""><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 								<div class="clearfix aligned-textarea">
 									<button class="btn btn-primary waves-effect">
@@ -1096,16 +801,17 @@
 								You have the following options:
 							</h4>
 							<div class="text-center">
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak=""><i class="zmdi zmdi-phone"></i>Speak</button>
+								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Speak</button>
 
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write=""><i class="zmdi zmdi-comment-text"></i>Write</button>
+								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Write</button>
 							</div>
 						</div>
 
 						<div class="action speak hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitSpeak" data-next="72">
 								<div class="m-b-20">
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write=""><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 
 								<div class="form-group m-0" style="margin: 0 auto !important; max-width: 440px;">
@@ -1119,8 +825,6 @@
 											value=""
 											data-phone=""
 											data-validate="phone"
-											maxlength="14"
-											autocomplete="off"
 										/>
 									</div>
 									<button class="btn btn-icon-text btn-primary waves-effect m-l-10"><i class="zmdi zmdi-phone"></i>Call Me!</button>
@@ -1136,7 +840,8 @@
 						<div class="action write hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitWrite" data-next="72">
 								<div>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak=""><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 								<div class="clearfix aligned-textarea">
 									<button class="btn btn-primary waves-effect">
@@ -1193,16 +898,17 @@
 								You have the following options:
 							</h4>
 							<div class="text-center">
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak=""><i class="zmdi zmdi-phone"></i>Speak</button>
+								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Speak</button>
 
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write=""><i class="zmdi zmdi-comment-text"></i>Write</button>
+								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Write</button>
 							</div>
 						</div>
 
 						<div class="action speak hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitSpeak" data-next="24">
 								<div class="m-b-20">
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write=""><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 
 								<div class="form-group m-0" style="margin: 0 auto !important; max-width: 440px;">
@@ -1216,8 +922,6 @@
 											value=""
 											data-phone=""
 											data-validate="phone"
-											maxlength="14"
-											autocomplete="off"
 										/>
 									</div>
 									<button class="btn btn-icon-text btn-primary waves-effect m-l-10"><i class="zmdi zmdi-phone"></i>Call Me!</button>
@@ -1233,7 +937,8 @@
 						<div class="action write hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitWrite" data-next="24">
 								<div>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak=""><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 								<div class="clearfix aligned-textarea">
 									<button class="btn btn-primary waves-effect">
@@ -1257,16 +962,17 @@
 								You have the following options:
 							</h4>
 							<div class="text-center">
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak=""><i class="zmdi zmdi-phone"></i>Speak</button>
+								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Speak</button>
 
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write=""><i class="zmdi zmdi-comment-text"></i>Write</button>
+								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Write</button>
 							</div>
 						</div>
 
 						<div class="action speak hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitSpeak" data-next="44">
 								<div class="m-b-20">
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write=""><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 
 								<div class="form-group m-0" style="margin: 0 auto !important; max-width: 440px;">
@@ -1280,8 +986,6 @@
 											value=""
 											data-phone=""
 											data-validate="phone"
-											maxlength="14"
-											autocomplete="off"
 										/>
 									</div>
 									<button class="btn btn-icon-text btn-primary waves-effect m-l-10"><i class="zmdi zmdi-phone"></i>Call Me!</button>
@@ -1297,7 +1001,8 @@
 						<div class="action write hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitWrite" data-next="44">
 								<div>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak=""><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 								<div class="clearfix aligned-textarea">
 									<button class="btn btn-primary waves-effect">
@@ -1321,16 +1026,17 @@
 								You have the following options:
 							</h4>
 							<div class="text-center">
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak=""><i class="zmdi zmdi-phone"></i>Speak</button>
+								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Speak</button>
 
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write=""><i class="zmdi zmdi-comment-text"></i>Write</button>
+								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Write</button>
 							</div>
 						</div>
 
 						<div class="action speak hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitSpeak" data-next="64">
 								<div class="m-b-20">
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write=""><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 
 								<div class="form-group m-0" style="margin: 0 auto !important; max-width: 440px;">
@@ -1344,8 +1050,6 @@
 											value=""
 											data-phone=""
 											data-validate="phone"
-											maxlength="14"
-											autocomplete="off"
 										/>
 									</div>
 									<button class="btn btn-icon-text btn-primary waves-effect m-l-10"><i class="zmdi zmdi-phone"></i>Call Me!</button>
@@ -1361,7 +1065,8 @@
 						<div class="action write hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitWrite" data-next="64">
 								<div>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak=""><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
+									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 								<div class="clearfix aligned-textarea">
 									<button class="btn btn-primary waves-effect">
@@ -1408,7 +1113,54 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="company-logo">
+					<img src="<?= base_url('image/campaign/1709862934_original.png') ?>" />
+				</div>
+
+				<div class="footer m-b-5">
+					Powered by
+					<span> | </span>
+					<a class="tos" href="https://legal.pulsem.me/privacy-policy.html" target="_blank">Privacy Policy</a>
+				</div>
 			</div>
 		</div>
+		<script>
+		document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let ratings = {};
+
+    document.querySelectorAll('.ratings-slider').forEach(slider => {
+        let ratingName = slider.querySelector('.slider').getAttribute('data-rating-name');
+        let ratingValue = slider.querySelector('.slider').getAttribute('data-value');
+        
+        if (ratingName && ratingValue) {
+            ratings[ratingName] = ratingValue;
+        }
+    });
+
+    fetch('/submit-ratings', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(ratings)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        window.location.href = '/analyze/reviews';
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+</script>
+
+		<script src="<?= base_url('js/pulse-check.js') ?>"></script>
+		<script src="<?= base_url('js/pulse-check.legacy.js') ?>"></script>
 	</body>
 </html>
+
+

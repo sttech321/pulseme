@@ -1,18 +1,10 @@
 <html>
-	<!--[if IE 9]><html class="ie9"><![endif]-->
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<link rel="apple-touch-icon" sizes="180x180" href="https://kiliassets.speetra.com/favicon/apple-touch-icon.png" />
-		<link rel="icon" type="image/png" sizes="32x32" href="https://kiliassets.speetra.com/favicon/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="https://kiliassets.speetra.com/favicon/favicon-16x16.png" />
-		<link rel="mask-icon" href="https://kiliassets.speetra.com/favicon/safari-pinned-tab.svg" color="#2e8cf0" />
-		<link rel="manifest" href="/site.webmanifest" />
-		<meta name="msapplication-TileColor" content="#ffffff" />
-		<meta name="theme-color" content="#ffffff" />
-		<title>Meet Aaron Krasnow</title>
-		<link href="https://kiliassets.speetra.com/static/v49.0.17.bio.css" rel="stylesheet" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
+		<title>Meet <?= esc($technician['name']) ?></title>
+		<link rel="stylesheet" type="text/css" href="/css/bio.css">
 	</head>
 
 	<body data-new-gr-c-s-check-loaded="14.1187.0" data-gr-ext-installed="">
@@ -22,8 +14,9 @@
 				<div class="row m-0">
 					<div id="title" class="text-center m-b-15" style="background-color: rgb(255, 255, 255); color: black;">
 						<div id="title-logo">
-							<img src="https://kiliassets.speetra.com/prod/account_images/15407/logo/1709862934_original.png" alt="logo" />
+							<img src="<?= base_url('image/campaign/1709862934_original.png') ?>" alt="logo">
 						</div>
+					</div>
 					</div>
 
 					<div id="bio" class="clearfix">
@@ -36,11 +29,11 @@
 								<h4 class="m-0" style="min-width:10px;">
 								<?= esc($technician['name']) ?>
 									<small class="p-l-15" style="color: #ff9900 !important;">
-										<!-- <i class="zmdi zmdi-star"></i>
 										<i class="zmdi zmdi-star"></i>
 										<i class="zmdi zmdi-star"></i>
 										<i class="zmdi zmdi-star"></i>
-										<i class="zmdi zmdi-star"></i> -->
+										<i class="zmdi zmdi-star"></i>
+										<i class="zmdi zmdi-star"></i>
 									</small>
 									<span>
 										<br />
@@ -196,20 +189,16 @@
 					</div>
 				</div>
 				<div id="bio-footer" class="footer">
-					Powered by
 					<a class="p-l-5" href="https://hubs.ly/H0n12Y10" target="_blank">
-						<img id="pulseM-logo" src="https://kiliassets.speetra.com/logo/pulsem-horizontal-light-medium.png" width="75px" />
 					</a>
 				</div>
 			</div>
 		</div>
 		<div id="bio-modal" class="modal fade" role="dialog" tabindex="-1">
 			<div class="modal-dialog" role="document">
-
-			</div>
-			<script type="text/javascript" src="https://kiliassets.speetra.com/static/v49.0.17.bio.js" defer=""></script>
+			</div>		
+		<script src="/js/bio.js"></script>
+		<script src="/js/legacy.js"></script>
 		</div>
-			<script type="text/javascript" src="https://kiliassets.speetra.com/static/v49.0.17.bio.legacy.js" defer=""></script>	
-		
 	</body>
 </html>
