@@ -1,17 +1,13 @@
 <?php
 namespace App\Models;
-use CodeIgniter\Model;
-class CustomerModel extends Model
-{    
-    protected $table;
-    protected $allowedFields;
-    protected $primaryKey;
 
-    public function __construct() {
-        parent::__construct();
-        $this->table = getenv('CUSTOMER_TABLE');
-        $this->primaryKey = getenv('CUSTOMER_TABLE_PRIMARY_KEY');
-        $fields = getenv('CUSTOMER_FIELD');
-        $this->allowedFields = explode(',', $fields);
-    }
+use CodeIgniter\Model;
+
+class CustomerModel extends Model
+{
+    protected $table = 'customers';
+    protected $primaryKey = 'id';
+    protected $allowedFields = [
+        'customer_name', 'customer_email', 'customer_phone', 'customer_address', 'customer_id', 'created_at', 'updated_at'
+    ];
 }
