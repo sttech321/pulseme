@@ -49,7 +49,7 @@ class CustomerController extends BaseController
 
         if (!$this->validate($rules)) {
             $buttonId = $this->request->getPost('button_id');
-            return redirect()->to('/operate')
+            return redirect()->to('/operate/dispatch')
                 ->withInput()
                 ->with('validation', $this->validator)
                 ->with('button_id', $buttonId);
@@ -71,14 +71,14 @@ class CustomerController extends BaseController
 
         $this->sendbioEmail($technicianId, $data['customer_email']);
 
-        return redirect()->to('/operate')->with('success', 'Customer info saved and email sent successfully.');
+        return redirect()->to('/operate/dispatch')->with('success', 'Customer info saved and email sent successfully.');
     }
 
     private function sendbioEmail($technicianId, $email)
     {
         $emailService = \Config\Services::email();
         $pagelink = '<a href="http://localhost:8080/application/bio/'.$technicianId.'">BIO link</a>';
-        $message = "Here is my link: ".$pagelink; // Replace with your actual page link
+        $message = "Here is technician bio link please click this link to see technician details: ".$pagelink; // Replace with your actual page link
 
         // Initialize email configuration
         $emailService->initialize([
@@ -106,7 +106,7 @@ class CustomerController extends BaseController
             echo $emailService->printDebugger(['headers', 'subject', 'body']);
         } else {
             // Successful send
-            echo 'Bio sent successfully';
+            return redirect()->to('/operate/dispatch')->with('success', 'Bio sent successfully');
         }
     }
 }
