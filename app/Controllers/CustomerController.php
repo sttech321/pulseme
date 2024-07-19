@@ -12,6 +12,24 @@ class CustomerController extends BaseController
         // Load session service
         $this->session = \Config\Services::session();
     }
+    
+    public function search()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('dispatch');
+
+        $searchTerm = $this->request->getVar('search');
+
+        if (strlen($searchTerm) >= 2) {
+            $builder->like('technician_name', $searchTerm);
+            $builder->orLike('technician_code', $searchTerm);
+        }
+
+        $query = $builder->get();
+        $data['technicians'] = $query->getResultArray();
+
+        return $this->response->setJSON($data);
+    }
 
     public function dispatch()
     {
