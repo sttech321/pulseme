@@ -64,7 +64,7 @@
 			    set_page: window.page_prefix + "mood"
 			}
 
-			window.flow = [{"id": 1, "moods": {"negative": {"audio_url": "", "id": 3, "question": "We are sorry. Please tell us what happened during your service call. Your experience is very important to us.", "redirect_url": ""}, "neutral": {"audio_url": "", "id": 1, "question": "Do you have any suggestions for improving our services?", "redirect_url": ""}, "positive": {"audio_url": "", "id": 2, "question": "Tell us more, we love the feedback!", "redirect_url": ""}}, "redirect": {"back": null, "negative": 60, "neutral": 40, "positive": 20}, "title": "How satisfied were you with the overall experience?", "transaction": {"mood": "NA"}, "type": "mood"}, {"confirm_text": "I left a great review!", "id": 20, "is_last": 0, "positive": true, "redirect": {"back": 1, "failure": 22, "retry": 1, "skip": 1, "success": 21}, "skip_location": "bottom", "skip_text": "I don\u0027t have any of these", "social_media_websites": [{"display": "Google", "name": "google", "order": 0.0, "url": "https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U"}, {"display": "Facebook", "name": "facebook", "order": 1.0, "url": "https://www.facebook.com/login/?next=https%3A//www.facebook.com/pg/None/reviews/"}, {"display": "Tampa Google Listing", "name": "custom", "order": 10.0, "url": "https://g.page/r/CdSpGtFWO5SPEBM/review"}], "title": "\u003ch2 style=\"font-size: 26px; text-align: inherit; margin-bottom: 5px;\"\u003eLeave your review in seconds.\u003c/h2\u003e\u003cb style=\"font-size: 14px;\" class=\"m-0\"\u003e(Google reviews help us the most!)\u003c/b\u003e", "type": "social-media", "valid_list": true}, {"confirm_text": "Yes I did", "id": 40, "is_last": 0, "positive": false, "redirect": {"back": 1, "failure": 42, "retry": 0, "skip": 1, "success": 41}, "skip_location": "top", "skip_text": "Contact us directly!", "social_media_websites": [{"display": "Google", "name": "google", "order": 0.0, "url": "https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U"}], "title": "Thank you!\u003cbr\u003e\u003cb\u003eWe always want to provide our Clients with a 5 star experience.\u003c/b\u003e\u003cbr\u003e\u003cbr\u003ePlease call us at \u003ca href=\"tel:7272632084\"\u003e(727) 263-2084\u003c/a\u003e and let us know what we can do to make things right by you.", "type": "social-media", "valid_list": true}, {"confirm_text": "Yes I did", "id": 60, "is_last": 0, "positive": false, "redirect": {"back": 1, "failure": 62, "retry": 0, "skip": 1, "success": 61}, "skip_location": "top", "skip_text": "Contact us directly!", "social_media_websites": [{"display": "Google", "name": "google", "order": 0.0, "url": "https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U"}], "title": "Thank you!\u003cbr\u003e\u003cb\u003eWe always want to provide our Clients with a 5 star experience.\u003c/b\u003e\u003cbr\u003e\u003cbr\u003ePlease call us at \u003ca href=\"tel:7272632084\"\u003e(727) 263-2084\u003c/a\u003e and let us know what we can do to make things right by you.", "type": "social-media", "valid_list": true}, {"helper_text": false, "id": 21, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 20, "next": 31}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 41, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 40, "next": 51}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 61, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 60, "next": 71}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 22, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 20, "next": 23}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 42, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 40, "next": 43}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 62, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 60, "next": 63}, "title": "", "transaction": {}, "type": "rating"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 31, "mood": "Positive", "redirect": {"back": 21, "next": 32, "skip": null}, "title": "Tell us more, we love the feedback!", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 51, "mood": "Neutral", "redirect": {"back": 41, "next": 52, "skip": null}, "title": "Do you have any suggestions for improving our services?", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 71, "mood": "Negative", "redirect": {"back": 51, "next": 72, "skip": null}, "title": "We are sorry. Please tell us what happened during your service call. Your experience is very important to us.", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"id": 32, "redirect": {"back": null, "next": null}, "social_media": null, "text": "Liked the service? Don\u0027t forget to tell your friends!", "text_type": "POSITIVE", "title": "Thank you for your review!", "type": "thank-you"}, {"id": 52, "redirect": {"back": null, "next": null}, "social_media": null, "text": "We actively work to improve ourselves to be the company our Clients deserve.", "text_type": "NEUTRAL", "title": "Thank you for your feedback!", "type": "thank-you"}, {"id": 72, "redirect": {"back": null, "next": null}, "social_media": null, "text": "Thank you for telling us what went wrong. Your business means a lot to us, so it is important for us to know how we can improve. If you\u0027d like to talk to us, please give us a call at \u003ca href=\"tel:7272632084\"\u003e(727) 263-2084\u003c/a\u003e.", "text_type": "NEGATIVE", "title": "We are sorry you had a bad experience.", "type": "thank-you"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 23, "mood": "Positive", "redirect": {"back": 22, "next": 24, "skip": null}, "title": "Tell us more, we love the feedback!", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 43, "mood": "Neutral", "redirect": {"back": 42, "next": 44, "skip": null}, "title": "Do you have any suggestions for improving our services?", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 63, "mood": "Negative", "redirect": {"back": 62, "next": 64, "skip": null}, "title": "We are sorry. Please tell us what happened during your service call. Your experience is very important to us.", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"id": 24, "redirect": {"back": null, "next": null}, "social_media": null, "text": "Liked the service? Don\u0027t forget to tell your friends!", "text_type": "POSITIVE-BASIC", "title": "We enjoyed your business too!", "type": "thank-you"}, {"id": 44, "redirect": {"back": null, "next": null}, "social_media": null, "text": "We actively work to improve ourselves to be the company our Clients deserve.", "text_type": "NEUTRAL-BASIC", "title": "Thank you for your feedback!", "type": "thank-you"}, {"id": 64, "redirect": {"back": null, "next": null}, "social_media": null, "text": "Your business means a lot to us. It is important for us to know how we can improve. If you want to talk to us, please give us a call at \u003ca href=\"tel:7272632084\"\u003e(727) 263-2084\u003c/a\u003e.", "text_type": "NEGATIVE-BASIC", "title": "We are sorry you had a bad experience.", "type": "thank-you"}];
+			window.flow = [{"id": 1, "moods": {"negative": {"audio_url": "", "id": 3, "question": "We are sorry. Please tell us what happened. Your experience is very important to us.", "redirect_url": ""}, "neutral": {"audio_url": "", "id": 1, "question": "Do you have any suggestions for improving our services?", "redirect_url": ""}, "positive": {"audio_url": "", "id": 2, "question": "Tell us more, we love the feedback!", "redirect_url": ""}}, "redirect": {"back": null, "negative": 60, "neutral": 40, "positive": 20}, "title": "How satisfied were you with the overall experience?", "transaction": {"mood": "NA"}, "type": "mood"}, {"confirm_text": "I left a great review!", "id": 20, "is_last": 0, "positive": true, "redirect": {"back": 1, "failure": 22, "retry": 1, "skip": 1, "success": 21}, "skip_location": "bottom", "skip_text": "I don\u0027t have any of these", "social_media_websites": [{"display": "Google", "name": "google", "order": 0.0, "url": "https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U"}, {"display": "Facebook", "name": "facebook", "order": 1.0, "url": "https://www.facebook.com/login/?next=https%3A//www.facebook.com/pg/None/reviews/"}, {"display": "Tampa Google Listing", "name": "custom", "order": 10.0, "url": "https://g.page/r/CdSpGtFWO5SPEBM/review"}], "title": "\u003ch2 style=\"font-size: 26px; text-align: inherit; margin-bottom: 5px;\"\u003eLeave your review in seconds.\u003c/h2\u003e\u003cb style=\"font-size: 14px;\" class=\"m-0\"\u003e(Google reviews help us the most!)\u003c/b\u003e", "type": "social-media", "valid_list": true}, {"confirm_text": "Yes I did", "id": 40, "is_last": 0, "positive": false, "redirect": {"back": 1, "failure": 42, "retry": 0, "skip": 1, "success": 41}, "skip_location": "top", "skip_text": "Contact us directly!", "social_media_websites": [{"display": "Google", "name": "google", "order": 0.0, "url": "https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U"}], "title": "Thank you!\u003cbr\u003e\u003cb\u003eWe always want to provide our Clients with a 5 star experience.\u003c/b\u003e\u003cbr\u003e\u003cbr\u003ePlease call us at \u003ca href=\"tel:7272632084\"\u003e(727) 263-2084\u003c/a\u003e and let us know what we can do to make things right by you.", "type": "social-media", "valid_list": true}, {"confirm_text": "Yes I did", "id": 60, "is_last": 0, "positive": false, "redirect": {"back": 1, "failure": 62, "retry": 0, "skip": 1, "success": 61}, "skip_location": "top", "skip_text": "Contact us directly!", "social_media_websites": [{"display": "Google", "name": "google", "order": 0.0, "url": "https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U"}], "title": "Thank you!\u003cbr\u003e\u003cb\u003eWe always want to provide our Clients with a 5 star experience.\u003c/b\u003e\u003cbr\u003e\u003cbr\u003ePlease call us at \u003ca href=\"tel:7272632084\"\u003e(727) 263-2084\u003c/a\u003e and let us know what we can do to make things right by you.", "type": "social-media", "valid_list": true}, {"helper_text": false, "id": 21, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 20, "next": 31}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 41, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 40, "next": 51}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 61, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 60, "next": 71}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 22, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 20, "next": 23}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 42, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 40, "next": 43}, "title": "", "transaction": {}, "type": "rating"}, {"helper_text": false, "id": 62, "rating_max": 10, "rating_min": 0, "ratings": [{"img_url": "", "title": "How likely are you to recommend us to your friends and family?"}, {"img_url": "", "title": "Professionalism"}, {"img_url": "", "title": "Quality of Service"}], "redirect": {"back": 60, "next": 63}, "title": "", "transaction": {}, "type": "rating"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 31, "mood": "Positive", "redirect": {"back": 21, "next": 32, "skip": null}, "title": "Tell us more, we love the feedback!", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 51, "mood": "Neutral", "redirect": {"back": 41, "next": 52, "skip": null}, "title": "Do you have any suggestions for improving our services?", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 71, "mood": "Negative", "redirect": {"back": 51, "next": 72, "skip": null}, "title": "We are sorry. Please tell us what happened. Your experience is very important to us.", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"id": 32, "redirect": {"back": null, "next": null}, "social_media": null, "text": "Liked the service? Don\u0027t forget to tell your friends!", "text_type": "POSITIVE", "title": "Thank you for your review!", "type": "thank-you"}, {"id": 52, "redirect": {"back": null, "next": null}, "social_media": null, "text": "We actively work to improve ourselves to be the company our Clients deserve.", "text_type": "NEUTRAL", "title": "Thank you for your feedback!", "type": "thank-you"}, {"id": 72, "redirect": {"back": null, "next": null}, "social_media": null, "text": "Thank you for telling us what went wrong. Your business means a lot to us, so it is important for us to know how we can improve. If you\u0027d like to talk to us, please give us a call at \u003ca href=\"tel:7272632084\"\u003e(727) 263-2084\u003c/a\u003e.", "text_type": "NEGATIVE", "title": "We are sorry you had a bad experience.", "type": "thank-you"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 23, "mood": "Positive", "redirect": {"back": 22, "next": 24, "skip": null}, "title": "Tell us more, we love the feedback!", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 43, "mood": "Neutral", "redirect": {"back": 42, "next": 44, "skip": null}, "title": "Do you have any suggestions for improving our services?", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"account_number": "(844) 478-5736", "from_number": "", "id": 63, "mood": "Negative", "redirect": {"back": 62, "next": 64, "skip": null}, "title": "We are sorry. Please tell us what happened. Your experience is very important to us.", "transaction": {"audio_url": null, "text": null}, "type": "review"}, {"id": 24, "redirect": {"back": null, "next": null}, "social_media": null, "text": "Liked the service? Don\u0027t forget to tell your friends!", "text_type": "POSITIVE-BASIC", "title": "We enjoyed your business too!", "type": "thank-you"}, {"id": 44, "redirect": {"back": null, "next": null}, "social_media": null, "text": "We actively work to improve ourselves to be the company our Clients deserve.", "text_type": "NEUTRAL-BASIC", "title": "Thank you for your feedback!", "type": "thank-you"}, {"id": 64, "redirect": {"back": null, "next": null}, "social_media": null, "text": "Your business means a lot to us. It is important for us to know how we can improve. If you want to talk to us, please give us a call at \u003ca href=\"tel:7272632084\"\u003e(727) 263-2084\u003c/a\u003e.", "text_type": "NEGATIVE-BASIC", "title": "We are sorry you had a bad experience.", "type": "thank-you"}];
 			window.meta = {"bottom_image": "<?= base_url('image/campaign/1721047414_462943fd69602d1823a4.jpg') ?>", "campaign_name": "Aaron Krasnow", "campaign_uid": "1B85A09AA6CF1", "default_collection": "write", "demo_data": {}, "flow_mode": "SENTIMENTONLY-UNGATED", "is_active": 1, "is_default": false, "is_demo": false, "navbar_bkg_color": "#FFFFFF", "navbar_font_color": "#17233d", "pagination": [], "pulsem_account_id": 15407, "review_mode": {"speech": true, "text": true, "video": false}, "start_with": 1, "top_image": "<?= base_url('image/campaign/1721047414_462943fd69602d1823a4.jpg') ?>", "transaction_id": "8f3da9620b5c8993fc6cb82127c1c950", "user": {"email": "", "formatted_phone": null, "is_test": 1, "name": null, "phone": ""}};
 			window.startTime = Date.now()
 			try {
@@ -144,9 +144,6 @@
 					    }
 					})()
 				</script>
-			</div>
-			<div class="loader-logo">
-				<img src="https://kiliassets.speetra.com/logo/pulsem-horizontal-dark-medium.png" />
 			</div>
 		</div>
 
@@ -335,51 +332,6 @@
 							>
 								<i class="sm-icon p-r-10"></i>Facebook
 							</a>
-							<a
-								href="https://g.page/r/CdSpGtFWO5SPEBM/review"
-								target="_blank"
-								data-sm="custom"
-								class="social-media-btn sm-banner custom btn btn-block btn-lg btn-primary"
-								data-success="21"
-								data-failure="22"
-								data-retry="1"
-								data-app="custom"
-							>
-								Tampa Google Listing
-							</a>
-							<a href="javascript:void(null)" class="social-media-btn sm-banner pulsem btn btn-block btn-lg" data-sm-skip="22">
-								<i class="sm-icon p-r-10"></i>
-								I don&#39;t have any of these
-							</a>
-						</div>
-					</div>
-
-					<div class="flow-card social-media" data-flow-id="40" data-flow-back="1" data-type="social-media">
-						<div class="flow-card-header clearfix">
-							<h2 class="flow-card-title">
-								Thank you!<br />
-								<b>We always want to provide our Clients with a 5 star experience.</b><br />
-								<br />
-								Please call us at <a href="tel:7272632084">(727) 263-2084</a> and let us know what we can do to make things right by you.
-							</h2>
-						</div>
-						<div class="social-media-websites" data-is-last="0" data-valid="True" data-confirm-text="Yes I did" data-success="41" data-failure="42">
-							<a href="javascript:void(null);" class="social-media-btn sm-banner contact-us btn btn-block btn-lg" data-sm-skip="42">
-								<i class="zmdi zmdi-sun p-r-10"></i>
-								Contact us directly!
-							</a>
-							<a
-								href="https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U"
-								target="_blank"
-								data-sm="google"
-								class="social-media-btn sm-banner google btn btn-block btn-lg"
-								data-success="41"
-								data-failure="42"
-								data-retry="False"
-								data-app="google"
-							>
-								<i class="sm-icon p-r-10"></i>Google
-							</a>
 						</div>
 					</div>
 
@@ -389,7 +341,6 @@
 								Thank you!<br />
 								<b>We always want to provide our Clients with a 5 star experience.</b><br />
 								<br />
-								Please call us at <a href="tel:7272632084">(727) 263-2084</a> and let us know what we can do to make things right by you.
 							</h2>
 						</div>
 						<div class="social-media-websites" data-is-last="0" data-valid="True" data-confirm-text="Yes I did" data-success="61" data-failure="62">
@@ -397,235 +348,13 @@
 								<i class="zmdi zmdi-sun p-r-10"></i>
 								Contact us directly!
 							</a>
-							<a
-								href="https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U"
-								target="_blank"
-								data-sm="google"
-								class="social-media-btn sm-banner google btn btn-block btn-lg"
-								data-success="61"
-								data-failure="62"
-								data-retry="False"
-								data-app="google"
-							>
-								<i class="sm-icon p-r-10"></i>Google
-							</a>
 						</div>
 					</div>
-
-					<form id="ratingsForm" action="<?= base_url('/submit-ratings') ?>" method="post">
-						<div class="flow-card rating" data-flow-id="21" data-flow-back="20" data-type="rating">
-							<div class="flow-card-header clearfix"></div>
-							<div class="m-t-15">
-								<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-
-								<h3 class="ratings-title">Professionalism</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-
-								<h3 class="ratings-title">Quality of Service</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-							</div>
-
-							<div class="text-center p-b-20">
-								<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings data-next="31">Submit</button>
-							</div>
-						</div>
-
-						<div class="flow-card rating" data-flow-id="41" data-flow-back="40" data-type="rating">
-							<div class="flow-card-header clearfix"></div>
-							<div class="m-t-15">
-								<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>"/>
-									</div>
-								</div>
-
-								<h3 class="ratings-title">Professionalism</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>"/>
-									</div>
-									<div class="slider" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>"/>
-									</div>
-								</div>
-
-								<h3 class="ratings-title">Quality of Service</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-							</div>
-
-							<div class="text-center p-b-20">
-								<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings data-next="51">Submit</button>
-							</div>
-						</div>
-
-						<div class="flow-card rating" data-flow-id="61" data-flow-back="60" data-type="rating">
-							<div class="flow-card-header clearfix"></div>
-							<div class="m-t-15">
-								<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-
-								<h3 class="ratings-title">Professionalism</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-
-								<h3 class="ratings-title">Quality of Service</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-							</div>
-
-							<div class="text-center p-b-20">
-								<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings data-next="71">Submit</button>
-							</div>
-						</div>
-
-						<div class="flow-card rating" data-flow-id="22" data-flow-back="20" data-type="rating">
-							<div class="flow-card-header clearfix"></div>
-							<div class="m-t-15">
-								<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-
-								<h3 class="ratings-title">Professionalism</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-
-								<h3 class="ratings-title">Quality of Service</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-							</div>
-
-							<div class="text-center p-b-20">
-								<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings data-next="23">Submit</button>
-							</div>
-						</div>
-
-						<div class="flow-card rating" data-flow-id="42" data-flow-back="40" data-type="rating">
-							<div class="flow-card-header clearfix"></div>
-							<div class="m-t-15">
-								<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="How likely are you to recommend us to your friends and family?" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-
-								<h3 class="ratings-title">Professionalism</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="Professionalism" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-
-								<h3 class="ratings-title">Quality of Service</h3>
-								<div class="ratings-slider">
-									<div class="mood negative text-left">
-										<img src="<?= base_url('/image/campaign/faces-negative-flat.svg')?>" />
-									</div>
-									<div class="slider" data-rating-name="Quality of Service" data-value="" data-rating-min="0" data-rating-max="10"></div>
-									<div class="mood positive text-right">
-										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
-									</div>
-								</div>
-							</div>
-
-							<div class="text-center p-b-20">
-								<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings data-next="43">Submit</button>
-							</div>
-						</div>
 
 						<div class="flow-card rating" data-flow-id="62" data-flow-back="60" data-type="rating">
 							<div class="flow-card-header clearfix"></div>
 							<div class="m-t-15">
+							<form action="<?= base_url('survey/step1') ?>" method="post">	
 								<h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
 								<div class="ratings-slider">
 									<div class="mood negative text-left">
@@ -636,6 +365,8 @@
 										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
 									</div>
 								</div>
+								<input type="hidden" name="rating_name[]" value="How likely are you to recommend us to your friends and family?">
+								<input type="hidden" name="rating_value[]" value="">
 
 								<h3 class="ratings-title">Professionalism</h3>
 								<div class="ratings-slider">
@@ -648,6 +379,9 @@
 									</div>
 								</div>
 
+								<input type="hidden" name="rating_name[]" value="Professionalism">
+								<input type="hidden" name="rating_value[]" value="">
+
 								<h3 class="ratings-title">Quality of Service</h3>
 								<div class="ratings-slider">
 									<div class="mood negative text-left">
@@ -658,125 +392,20 @@
 										<img src="<?= base_url('/image/campaign/faces-positive-flat.svg')?>" />
 									</div>
 								</div>
+								
+								<input type="hidden" name="rating_name[]" value="Quality of Service">
+            					<input type="hidden" name="rating_value[]" value="">
 							</div>
-
 							<div class="text-center p-b-20">
 								<button class="btn btn-lg btn-primary waves-effect" data-submit-ratings data-next="63">Submit</button>
 							</div>
+						</form>
 						</div>
-					</form>
-
-					<div class="flow-card review" data-flow-id="31" data-flow-back="21" data-type="review">
-						<div class="flow-card-header clearfix"><h2 class="flow-card-title">Tell us more, we love the feedback!</h2></div>
-						<div class="row ask m-0">
-							<h4 class="m-b-10 m-t-0">
-								You have the following options:
-							</h4>
-							<div class="text-center">
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Speak</button>
-
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Write</button>
-							</div>
-						</div>
-
-						<div class="action speak hide">
-							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitSpeak" data-next="32">
-								<div class="m-b-20">
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
-								</div>
-
-								<div class="form-group m-0" style="margin: 0 auto !important; max-width: 440px;">
-									<div class="fg-line" style="max-width: 120px;">
-										<input
-											type="text"
-											class="input form-control fg-input"
-											placeholder="Phone Number"
-											data-empty-error="We need a phone number to call you!"
-											data-mask="(000) 000-0000"
-											value=""
-											data-phone=""
-											data-validate="phone"
-										/>
-									</div>
-									<button class="btn btn-icon-text btn-primary waves-effect m-l-10"><i class="zmdi zmdi-phone"></i>Call Me!</button>
-									<div class="help-block help-block-alt text-left"></div>
-								</div>
-
-								<div class="m-0 text-center" style="color: #17233d;">
-									You will receive a call from (844) 478-5736!
-								</div>
-							</form>
-						</div>
-
-						<div class="action write hide">
-							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitWrite" data-next="32">
-								<div>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
-								</div>
-								<div class="clearfix aligned-textarea">
-									<button class="btn btn-primary waves-effect">
-										Send
-									</button>
-									<div class="form-group p-0">
-										<div class="fg-line">
-											<textarea class="input form-control fg-input validate" rows="5" placeholder="Type your feedback..." data-empty-error="Feedback cannot be left blank" data-max-length="999"></textarea>
-										</div>
-										<div class="help-block help-block-alt text-left brd-t-l-0 brd-t-r-0 m-t-0"></div>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
 
 					<div class="flow-card review" data-flow-id="51" data-flow-back="41" data-type="review">
-						<div class="flow-card-header clearfix"><h2 class="flow-card-title">Do you have any suggestions for improving our services?</h2></div>
-						<div class="row ask m-0">
-							<h4 class="m-b-10 m-t-0">
-								You have the following options:
-							</h4>
-							<div class="text-center">
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Speak</button>
-
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Write</button>
-							</div>
-						</div>
-
-						<div class="action speak hide">
-							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitSpeak" data-next="52">
-								<div class="m-b-20">
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
-								</div>
-
-								<div class="form-group m-0" style="margin: 0 auto !important; max-width: 440px;">
-									<div class="fg-line" style="max-width: 120px;">
-										<input
-											type="text"
-											class="input form-control fg-input"
-											placeholder="Phone Number"
-											data-empty-error="We need a phone number to call you!"
-											data-mask="(000) 000-0000"
-											value=""
-											data-phone=""
-											data-validate="phone"
-										/>
-									</div>
-									<button class="btn btn-icon-text btn-primary waves-effect m-l-10"><i class="zmdi zmdi-phone"></i>Call Me!</button>
-									<div class="help-block help-block-alt text-left"></div>
-								</div>
-
-								<div class="m-0 text-center" style="color: #17233d;">
-									You will receive a call from (844) 478-5736!
-								</div>
-							</form>
-						</div>
-
 						<div class="action write hide">
-							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitWrite" data-next="52">
+							 <form action="<?= base_url('survey/step2') ?>" method="post" class="validate-form row m-0">
 								<div>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
 									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 								<div class="clearfix aligned-textarea">
@@ -793,167 +422,7 @@
 							</form>
 						</div>
 					</div>
-
-					<div class="flow-card review" data-flow-id="71" data-flow-back="51" data-type="review">
-						<div class="flow-card-header clearfix"><h2 class="flow-card-title">We are sorry. Please tell us what happened during your service call. Your experience is very important to us.</h2></div>
-						<div class="row ask m-0">
-							<h4 class="m-b-10 m-t-0">
-								You have the following options:
-							</h4>
-							<div class="text-center">
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Speak</button>
-
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Write</button>
-							</div>
-						</div>
-
-						<div class="action speak hide">
-							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitSpeak" data-next="72">
-								<div class="m-b-20">
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
-								</div>
-
-								<div class="form-group m-0" style="margin: 0 auto !important; max-width: 440px;">
-									<div class="fg-line" style="max-width: 120px;">
-										<input
-											type="text"
-											class="input form-control fg-input"
-											placeholder="Phone Number"
-											data-empty-error="We need a phone number to call you!"
-											data-mask="(000) 000-0000"
-											value=""
-											data-phone=""
-											data-validate="phone"
-										/>
-									</div>
-									<button class="btn btn-icon-text btn-primary waves-effect m-l-10"><i class="zmdi zmdi-phone"></i>Call Me!</button>
-									<div class="help-block help-block-alt text-left"></div>
-								</div>
-
-								<div class="m-0 text-center" style="color: #17233d;">
-									You will receive a call from (844) 478-5736!
-								</div>
-							</form>
-						</div>
-
-						<div class="action write hide">
-							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitWrite" data-next="72">
-								<div>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
-								</div>
-								<div class="clearfix aligned-textarea">
-									<button class="btn btn-primary waves-effect">
-										Send
-									</button>
-									<div class="form-group p-0">
-										<div class="fg-line">
-											<textarea class="input form-control fg-input validate" rows="5" placeholder="Type your feedback..." data-empty-error="Feedback cannot be left blank" data-max-length="999"></textarea>
-										</div>
-										<div class="help-block help-block-alt text-left brd-t-l-0 brd-t-r-0 m-t-0"></div>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-
-					<div class="flow-card thank-you" data-flow-id="32" data-flow-back="None" data-type="thank-you">
-						<div class="flow-card-header clearfix"></div>
-						<div class="p-20">
-							<h3 class="text-center m-t-0 m-b-25" data-text-type="POSITIVE">
-								Thank you for your review!
-							</h3>
-							<h4>Liked the service? Don't forget to tell your friends!</h4>
-						</div>
-					</div>
-
-					<div class="flow-card thank-you" data-flow-id="52" data-flow-back="None" data-type="thank-you">
-						<div class="flow-card-header clearfix"></div>
-						<div class="p-20">
-							<h3 class="text-center m-t-0 m-b-25" data-text-type="NEUTRAL">
-								Thank you for your feedback!
-							</h3>
-							<h4>We actively work to improve ourselves to be the company our Clients deserve.</h4>
-						</div>
-					</div>
-
-					<div class="flow-card thank-you" data-flow-id="72" data-flow-back="None" data-type="thank-you">
-						<div class="flow-card-header clearfix"></div>
-						<div class="p-20">
-							<h3 class="text-center m-t-0 m-b-25" data-text-type="NEGATIVE">
-								We are sorry you had a bad experience.
-							</h3>
-							<h4>
-								Thank you for telling us what went wrong. Your business means a lot to us, so it is important for us to know how we can improve. If you'd like to talk to us, please give us a call at
-								<a href="tel:7272632084">(727) 263-2084</a>.
-							</h4>
-						</div>
-					</div>
-
-					<div class="flow-card review" data-flow-id="23" data-flow-back="22" data-type="review">
-						<div class="flow-card-header clearfix"><h2 class="flow-card-title">Tell us more, we love the feedback!</h2></div>
-						<div class="row ask m-0">
-							<h4 class="m-b-10 m-t-0">
-								You have the following options:
-							</h4>
-							<div class="text-center">
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Speak</button>
-
-								<button class="btn btn-lg btn-icon-text btn-primary waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Write</button>
-							</div>
-						</div>
-
-						<div class="action speak hide">
-							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitSpeak" data-next="24">
-								<div class="m-b-20">
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
-								</div>
-
-								<div class="form-group m-0" style="margin: 0 auto !important; max-width: 440px;">
-									<div class="fg-line" style="max-width: 120px;">
-										<input
-											type="text"
-											class="input form-control fg-input"
-											placeholder="Phone Number"
-											data-empty-error="We need a phone number to call you!"
-											data-mask="(000) 000-0000"
-											value=""
-											data-phone=""
-											data-validate="phone"
-										/>
-									</div>
-									<button class="btn btn-icon-text btn-primary waves-effect m-l-10"><i class="zmdi zmdi-phone"></i>Call Me!</button>
-									<div class="help-block help-block-alt text-left"></div>
-								</div>
-
-								<div class="m-0 text-center" style="color: #17233d;">
-									You will receive a call from (844) 478-5736!
-								</div>
-							</form>
-						</div>
-
-						<div class="action write hide">
-							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitWrite" data-next="24">
-								<div>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
-								</div>
-								<div class="clearfix aligned-textarea">
-									<button class="btn btn-primary waves-effect">
-										Send
-									</button>
-									<div class="form-group p-0">
-										<div class="fg-line">
-											<textarea class="input form-control fg-input validate" rows="5" placeholder="Type your feedback..." data-empty-error="Feedback cannot be left blank" data-max-length="999"></textarea>
-										</div>
-										<div class="help-block help-block-alt text-left brd-t-l-0 brd-t-r-0 m-t-0"></div>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
+				</div>
 
 					<div class="flow-card review" data-flow-id="43" data-flow-back="42" data-type="review">
 						<div class="flow-card-header clearfix"><h2 class="flow-card-title">Do you have any suggestions for improving our services?</h2></div>
@@ -968,40 +437,9 @@
 							</div>
 						</div>
 
-						<div class="action speak hide">
-							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitSpeak" data-next="44">
-								<div class="m-b-20">
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
-								</div>
-
-								<div class="form-group m-0" style="margin: 0 auto !important; max-width: 440px;">
-									<div class="fg-line" style="max-width: 120px;">
-										<input
-											type="text"
-											class="input form-control fg-input"
-											placeholder="Phone Number"
-											data-empty-error="We need a phone number to call you!"
-											data-mask="(000) 000-0000"
-											value=""
-											data-phone=""
-											data-validate="phone"
-										/>
-									</div>
-									<button class="btn btn-icon-text btn-primary waves-effect m-l-10"><i class="zmdi zmdi-phone"></i>Call Me!</button>
-									<div class="help-block help-block-alt text-left"></div>
-								</div>
-
-								<div class="m-0 text-center" style="color: #17233d;">
-									You will receive a call from (844) 478-5736!
-								</div>
-							</form>
-						</div>
-
 						<div class="action write hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitWrite" data-next="44">
 								<div>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
 									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 								<div class="clearfix aligned-textarea">
@@ -1020,7 +458,7 @@
 					</div>
 
 					<div class="flow-card review" data-flow-id="63" data-flow-back="62" data-type="review">
-						<div class="flow-card-header clearfix"><h2 class="flow-card-title">We are sorry. Please tell us what happened during your service call. Your experience is very important to us.</h2></div>
+						<div class="flow-card-header clearfix"><h2 class="flow-card-title">We are sorry. Please tell us what happened. Your experience is very important to us.</h2></div>
 						<div class="row ask m-0">
 							<h4 class="m-b-10 m-t-0">
 								You have the following options:
@@ -1038,34 +476,12 @@
 									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-write><i class="zmdi zmdi-comment-text"></i>Eh, I'd rather write</button>
 									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
-
-								<div class="form-group m-0" style="margin: 0 auto !important; max-width: 440px;">
-									<div class="fg-line" style="max-width: 120px;">
-										<input
-											type="text"
-											class="input form-control fg-input"
-											placeholder="Phone Number"
-											data-empty-error="We need a phone number to call you!"
-											data-mask="(000) 000-0000"
-											value=""
-											data-phone=""
-											data-validate="phone"
-										/>
-									</div>
-									<button class="btn btn-icon-text btn-primary waves-effect m-l-10"><i class="zmdi zmdi-phone"></i>Call Me!</button>
-									<div class="help-block help-block-alt text-left"></div>
-								</div>
-
-								<div class="m-0 text-center" style="color: #17233d;">
-									You will receive a call from (844) 478-5736!
-								</div>
 							</form>
 						</div>
 
 						<div class="action write hide">
 							<form action="javascript:void(null)" class="validate-form row m-0" data-verbose="true" data-on-valid="submitWrite" data-next="64">
 								<div>
-									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-speak><i class="zmdi zmdi-phone"></i>Eh, I'd rather speak</button>
 									<button type="button" class="btn btn-icon-text btn-danger waves-effect m-10" data-review-video><i class="zmdi zmdi-videocam"></i>Eh, I'd rather record myself</button>
 								</div>
 								<div class="clearfix aligned-textarea">
@@ -1081,7 +497,7 @@
 								</div>
 							</form>
 						</div>
-					</div>
+					</div> 
 
 					<div class="flow-card thank-you" data-flow-id="24" data-flow-back="None" data-type="thank-you">
 						<div class="flow-card-header clearfix"></div>
@@ -1109,7 +525,7 @@
 							<h3 class="text-center m-t-0 m-b-25" data-text-type="NEGATIVE-BASIC">
 								We are sorry you had a bad experience.
 							</h3>
-							<h4>Your business means a lot to us. It is important for us to know how we can improve. If you want to talk to us, please give us a call at <a href="tel:7272632084">(727) 263-2084</a>.</h4>
+							<h4>Your business means a lot to us. It is important for us to know how we can improve.</h4>
 						</div>
 					</div>
 				</div>
@@ -1121,43 +537,9 @@
 				<div class="footer m-b-5">
 					Powered by
 					<span> | </span>
-					<a class="tos" href="https://legal.pulsem.me/privacy-policy.html" target="_blank">Privacy Policy</a>
 				</div>
 			</div>
 		</div>
-		<script>
-		document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    let ratings = {};
-
-    document.querySelectorAll('.ratings-slider').forEach(slider => {
-        let ratingName = slider.querySelector('.slider').getAttribute('data-rating-name');
-        let ratingValue = slider.querySelector('.slider').getAttribute('data-value');
-        
-        if (ratingName && ratingValue) {
-            ratings[ratingName] = ratingValue;
-        }
-    });
-
-    fetch('/submit-ratings', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(ratings)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-        window.location.href = '/analyze/reviews';
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-});
-</script>
-
 		<script src="<?= base_url('js/pulse-check.js') ?>"></script>
 		<script src="<?= base_url('js/pulse-check.legacy.js') ?>"></script>
 	</body>
