@@ -68,19 +68,25 @@
                         </button>
                      </div>
                   </div>
+
                   <?php if (!empty($technicians)): ?>
                      <div class="list">
                         <table class="w-full">
-                           <?php if (session()->getFlashdata('validation')): ?>
-                              <div class="validation-errors">
-                                 <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
-                                       <p style="color: red;"><?= $error ?></p>
-                                 <?php endforeach ?>
-                              </div>
-                           <?php endif ?>
-                           <?php foreach ($technicians as $technician): ?>
-                              <tr class="flex p-20px odd:bg-sky-50" id="<?= $technician['ID'] ?>">
-                                 <form method="post" action="<?= base_url('/operate/dispatch/create/'.$technician['ID'])?>">
+                        <?php if (session()->getFlashdata('validation')): ?>
+                                 <div class="validation-errors">
+                                    <?php
+                                    $validation = session()->getFlashdata('validation');
+                                    $buttonId = session()->getFlashdata('button_id');
+                                    foreach ($validation->getErrors() as $error):
+                                    ?>
+                                          <p style="color: red;" id="<?= $buttonId ?>"><?= $error ?></p>
+                                    <?php endforeach ?>
+                                 </div>
+                              <?php endif ?>
+                                 <?php foreach ($technicians as $technician): ?>
+                                    <tr class="flex p-20px odd:bg-sky-50" id="<?= $technician['ID'] ?>">
+                                       <form method="post" action="<?= base_url('/operate/dispatch/create/'.$technician['ID'])?>">
+                                 
                                     <td class="employee flex items-center w-1/4">
                                        <div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0"
                                        id="<?= $technician['ID'] ?>" style="position: relative; background-image: url('<?= $technician['image'] ?>');">
@@ -118,9 +124,11 @@
                                        </path>
                                     </svg>
                                  </div>
+                                
                                  <input
                                     class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px"
                                     type="email" name="customer_email" id="email-1B85A09AA6CF1" placeholder="Email">
+                                    
                               </div>
                               <div class="input-group col-span-3 lg:col-span-2 flex items-center">
                                  <div class="mr-10px flex justify-center items-center">
@@ -166,6 +174,7 @@
                               </div>
                            </td>
                            <td class="buttons flex flex-col justify-center items-end px-4 w-1/4">
+                           <input type="hidden" name="button_id" value="<?= $technician['ID'] ?>">
                               <button
                                  class="btn btn-blue max-w-200px w-full rounded-2px mb-2"
                                  id="<?= $technician['ID'] ?>" type="submit">
@@ -176,7 +185,7 @@
                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z">
                                     </path>
                                  </svg>
-                                 <a href="<?= base_url('/dispatch') ?>"> Send Bio</a>
+                                  Send Bio
                               </button>
                               <button
                                  class="btn btn-green max-w-200px w-full rounded-2px"
@@ -192,7 +201,7 @@
                                  Send pulseCheck
                               </button>
                            </td>
-                        </form>
+                           </form>
                         </tr>
                         <?php endforeach; ?>
                      </table>
@@ -201,6 +210,7 @@
                   <p>No technician data available.</p>
                   <?php endif; ?> 
                </div>
+              
             </div>
          </div>
       </div>
