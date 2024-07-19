@@ -82,4 +82,8 @@ $routes->post('/operate/dispatch/create/(:num)', 'CustomerController::create/$1'
 
 $routes->get('/operate', 'CustomerController::sendbioEmail');
 $routes->post('/operate', 'CustomerController::sendbioEmail');
-// $routes->post('submit-ratings', 'Campaign::submitRatings');
+
+$routes->get('/leaderboard/reports/campaigns', 'ReportsController::report_campaign');
+$routes->get('leaderboard/reports/campaign-reviews', 'ReportsController::report_campaign_reviews');
+$routes->get('/leaderboard/reports/departments', 'ReportsController::report_campaign_departments');
+$routes->get('/leaderboard/reports/fieldops-usage', 'ReportsController::report_campaign_fieldsops');
