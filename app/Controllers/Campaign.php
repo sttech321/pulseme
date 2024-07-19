@@ -159,4 +159,37 @@ class Campaign extends BaseController {
         return view('/dispatchTab/pulse_check',$data);
     }
 
+    // public function processStep1()
+    // {
+    //     $session = session();
+    //     $session->set('rating_name', $this->request->getPost('rating_name'));
+    //     $session->set('rating_value', $this->request->getPost('rating_value'));
+
+    //     return redirect()->to('/survey/step2');
+    // }
+
+    // public function processStep2()
+    // {
+    //     $session = session();
+    //     $surveyModel = new SurveyModel();
+
+    //     $data = [
+    //         'rating_name' => implode(',', $session->get('rating_name')),
+    //         'rating_value' => implode(',', $session->get('rating_value')),
+    //         'feedback' => $this->request->getPost('feedback'),
+    //         'created_at' => date('Y-m-d H:i:s'),
+    //     ];
+
+    //     $surveyModel->insert($data);
+
+    //     $session->remove(['rating_name', 'rating_value']);
+
+    //     return redirect()->to('/thank-you');
+    // }
+
+    // public function survey1(){
+    //     return view('dispatchTab/pulse_check_step1');
+    // }
+
+
 }
