@@ -1,49 +1,27 @@
 <?php
 namespace App\Controllers;
+
 use App\Models\CustomerModel;
-use App\Models\technicianModal;
+use App\Models\TechnicianModal;
 use CodeIgniter\Controller;
-use CodeIgniter\I18n\Time;
-use CodeIgniter\Email\Email;
 
-
-class CustomerController extends BaseController {
-
-    public function __construct() {
+class CustomerController extends BaseController
+{
+    public function __construct()
+    {
         // Load session service
         $this->session = \Config\Services::session();
-
     }
 
-    public function dispatch(){
-        $technicianModel = new technicianModal(); // Create an instance of your model
-        // Fetch only 5 technicians from the database
-        $data['technicians'] = $technicianModel->findAll(); // Adjust this based on your model setup
-    
-        // Load view with fetched data
+    public function dispatch()
+    {
+        $technicianModel = new TechnicianModal();
+        $data['technicians'] = $technicianModel->findAll();
         return view('dispatching', $data);
     }
 
-    public function search()
+    public function create()
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table(getenv('CAMPAIGN_TABLE'));
-    
-        $searchTerm = $this->request->getVar('search');
-    
-        if (strlen($searchTerm) >= 2) {
-            $builder->like('name', $searchTerm);
-            $builder->orLike('department', $searchTerm);
-        }
-    
-        $query = $builder->get();
-        $data['technicians'] = $query->getResultArray();
-    
-        return $this->response->setJSON($data);
-    }
-
-    public function create() {
-        // Load necessary helpers and libraries
         helper(['form']);
 
         $rules = [
@@ -52,33 +30,39 @@ class CustomerController extends BaseController {
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->to('/operate/dispatch')->withInput()->with('validation', $this->validator);
+            $buttonId = $this->request->getPost('button_id');
+            return redirect()->to('/operate')
+                ->withInput()
+                ->with('validation', $this->validator)
+                ->with('button_id', $buttonId);
         }
 
-        $campaignModel = new CustomerModel();
+        $technicianId = $this->request->getPost('button_id');
+        $customerModel = new CustomerModel();
         $data = [
-            'phone' => $this->request->getPost('customer_phone'),
-            'email' => $this->request->getPost('customer_email'),
-            'name' => $this->request->getPost('customer_name'),
-            'address' => $this->request->getPost('customer_address'),
+            'customer_id'   =>  $technicianId,
+            'customer_phone' => $this->request->getPost('customer_phone'),
+            'customer_email' => $this->request->getPost('customer_email'),
+            'customer_name' => $this->request->getPost('customer_name'),
+            'customer_address' => $this->request->getPost('customer_address'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ];
 
-        // Insert data into database
-        $campaignModel->insert($data);
+        $customerModel->insert($data);
 
-        // Redirect to a success page or display success message
-        return redirect()->to('/operate/dispatch')->with('success', 'Campaign saved successfully.');
+        $this->sendbioEmail($technicianId, $data['customer_email']);
+
+        return redirect()->to('/operate')->with('success', 'Customer info saved and email sent successfully.');
     }
 
-
-    public function sendbioEmail() {
-        helper(['form']);
+    private function sendbioEmail($technicianId, $email)
+    {
         $emailService = \Config\Services::email();
-        $campaignModel = new CustomerModel();
-        $email = 'vikashchoudhary15616@gmail.com';
-        // var_dump($email);
-        
-        // // Initialize email configuration
+        $pagelink = '<a href="http://localhost:8080/application/bio/'.$technicianId.'">BIO link</a>';
+        $message = "Here is my link: ".$pagelink; // Replace with your actual page link
+
+        // Initialize email configuration
         $emailService->initialize([
             'protocol' => 'smtp',
             'SMTPHost' => $_ENV['SMTP_HOST'],
@@ -89,25 +73,22 @@ class CustomerController extends BaseController {
             'charset'  => 'utf-8',
             'newline'  => "\r\n"
         ]);
-    
+
         // Set email parameters
         $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
         $emailService->setTo($email);
-        $emailService->setSubject('Technician Bio');
-        echo '<pre>';
-        var_dump($emailService);
-        echo '</pre>';
-        // // Send email and handle response
+        $emailService->setSubject('Technician Bio'); // Adjust subject as needed
+
+        // Set email message body
+        $emailService->setMessage($message);
+
+        // Send email and handle response
         if (!$emailService->send()) {
             // Display error message for debugging
-            echo $emailService->printDebugger(['headers']);
+            echo $emailService->printDebugger(['headers', 'subject', 'body']);
         } else {
             // Successful send
             echo 'Bio sent successfully';
-            return redirect()->to('/operate/dispatch');
         }
-        return view('dispatch');
     }
-    
-
 }
