@@ -153,43 +153,17 @@ class Campaign extends BaseController {
         return view('/dispatchTab/Technician_bio', $data);
     }
     
-    public function pulse_check($id){
+    public function pulse_check($empid)
+    {
         $model = new CampaignModel();
-        $data['technician'] = $model->find($id);
-        return view('/dispatchTab/pulse_check',$data);
+        $data['technician'] = $model->where('employeeId', $empid)->first();
+
+        if ($data['technician']) {
+            return view('dispatchTab/pulse_check', $data);
+        } else {
+            // Handle case where technician is not found
+            return redirect()->to(base_url('/some-error-page'))->with('error', 'Technician not found');
+        }
     }
-
-    // public function processStep1()
-    // {
-    //     $session = session();
-    //     $session->set('rating_name', $this->request->getPost('rating_name'));
-    //     $session->set('rating_value', $this->request->getPost('rating_value'));
-
-    //     return redirect()->to('/survey/step2');
-    // }
-
-    // public function processStep2()
-    // {
-    //     $session = session();
-    //     $surveyModel = new SurveyModel();
-
-    //     $data = [
-    //         'rating_name' => implode(',', $session->get('rating_name')),
-    //         'rating_value' => implode(',', $session->get('rating_value')),
-    //         'feedback' => $this->request->getPost('feedback'),
-    //         'created_at' => date('Y-m-d H:i:s'),
-    //     ];
-
-    //     $surveyModel->insert($data);
-
-    //     $session->remove(['rating_name', 'rating_value']);
-
-    //     return redirect()->to('/thank-you');
-    // }
-
-    // public function survey1(){
-    //     return view('dispatchTab/pulse_check_step1');
-    // }
-
 
 }

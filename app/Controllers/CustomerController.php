@@ -58,7 +58,7 @@ class CustomerController extends BaseController
         $technicianId = $this->request->getPost('button_id');
         $customerModel = new CustomerModel();
         $data = [
-            'customer_id'   =>  $technicianId,
+            'campaign_id' => $technicianId,
             'customer_phone' => $this->request->getPost('customer_phone'),
             'customer_email' => $this->request->getPost('customer_email'),
             'customer_name' => $this->request->getPost('customer_name'),
@@ -67,8 +67,13 @@ class CustomerController extends BaseController
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
+        // Insert customer data
         $customerModel->insert($data);
+        // $lastQuery = $customerModel->getLastQuery()->getQuery();
+        // log_message('debug', $lastQuery);
+        // session()->setFlashdata('last_query', $lastQuery);
 
+        // Send bio email
         $this->sendbioEmail($technicianId, $data['customer_email']);
 
         return redirect()->to('/operate/dispatch')->with('success', 'Customer info saved and email sent successfully.');
@@ -88,8 +93,8 @@ class CustomerController extends BaseController
             'SMTPUser' => $_ENV['SMTP_USER'],
             'SMTPPass' => $_ENV['SMTP_PASS'],
             'mailType' => 'html',
-            'charset'  => 'utf-8',
-            'newline'  => "\r\n"
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
         ]);
 
         // Set email parameters
