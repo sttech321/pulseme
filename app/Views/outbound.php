@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>pulseM</title>
+    <title>summitRA</title>
     <meta name="description" content="The small framework with powerful features">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://kiliassets.speetra.com/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/reviews.css">
@@ -903,7 +903,7 @@
                                 <li><a class="menuListItem" href="#"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
                                 <li><a class="menuListItem" href="#"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
                                 <li><a class="menuListItem" href="/logs/outbound"><i class="fa fa-envelope" aria-hidden="true"></i>Logs</a></li>
-                                <li><a class="menuListItem" href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                                <li><a class="menuListItem" href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
 
                             </ul>
                         </div>
@@ -938,7 +938,7 @@
                                         <a href="#"><img width="15" src="../image/overview.svg" alt="sidebar icon">Overview </a>
                                     </li>
                                     <li>
-                                        <a href="/analyze/reviews/reviews"><img width="15" src="../image/reviews.svg" alt="sidebar icon">Reviews</a>
+                                        <a href="/analyze/reviews"><img width="15" src="../image/reviews.svg" alt="sidebar icon">Reviews</a>
                                     </li>
                                     <li>
                                         <a href="#"><img width="15" src="../image/competitor.svg" alt="sidebar icon">Competitor Analysis</a>

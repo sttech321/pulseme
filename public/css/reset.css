@@ -3,8 +3,6 @@ html body { margin: 0; background: #f3f4f6; }
 body, body a, body h1, body h2, body h3, body h4, body h5, body h6, body p { font-family: var(--font-family); }
 /* reset css */
 p { font-size: 1rem; line-height: 1.74; color: #555; }
-body p{margin-bottom: 0; }
-
 a { font-size: 14px; }
 .whiteText { color: #fff; }
 .flexBetween { display: flex; align-items: center; justify-content: space-between; }
@@ -13,39 +11,7 @@ body h3 { font-size: 1.5rem; font-weight: 600; }
 .mx-700 { max-width: 700px!important; }
 .form-control:focus { box-shadow: none!important; }
 .opacity-70{opacity: 0.7;}
-.rounded-2px {border-radius: 2px;}
-.btn-red {background-color: #e3342f;color: #fff;}
-body .input-group{display: block;}
 
-/* body .row{
-  flex-wrap: inherit;
-  flex-shrink: inherit;
-  margin: 0;
-}
-body  .row>* {
-  flex-shrink: inherit;
-} */
-
-.btn {
-  padding: .5rem 1rem;
-  border-radius: 2px;
-  font-weight: 400;
-}
-.w-full {
-    width: 100%;
-}
-.rounded-2px {
-    border-radius: 2px;
-}
-.btn-blue, .hover\:btn-blue:hover {
-    background-color: #3490dc;
-    color: #fff;
-}
-.btn {
-    padding: .5rem 1rem;
-    border-radius: 2px;
-    font-weight: 400;
-}
 /* flex */
 .gridWrapFlex{
       display: flex !important;

@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>pulseM</title>
+    <title>summitRA</title>
     <meta name="description" content="The small framework with powerful features">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://kiliassets.speetra.com/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/reviews.css">

@@ -1,21 +1,21 @@
 
 <!doctype html><html lang="en"><head>
     <meta charset="utf-8">
-    <title>Share your pulseM experience!</title>
+    <title>Share your summitRA experience!</title>
     
       <link rel="shortcut icon" href="https://know.pulsem.me/hubfs/pulsem_favicon-32x32.png">
     
-    <meta name="description" content="Share the pulseM experience and refer your friends for rewards">
+    <meta name="description" content="Share the summitRA experience and refer your friends for rewards">
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script src="/hs/hsstatic/jquery-libs/static-1.1/jquery/jquery-1.7.1.js"></script>
 <script>hsjQuery = window['jQuery'];</script>
-    <meta property="og:description" content="Share the pulseM experience and refer your friends for rewards">
-    <meta property="og:title" content="Share your pulseM experience!">
-    <meta name="twitter:description" content="Share the pulseM experience and refer your friends for rewards">
-    <meta name="twitter:title" content="Share your pulseM experience!">
+    <meta property="og:description" content="Share the summitRA experience and refer your friends for rewards">
+    <meta property="og:title" content="Share your summitRA experience!">
+    <meta name="twitter:description" content="Share the summitRA experience and refer your friends for rewards">
+    <meta name="twitter:title" content="Share your summitRA experience!">
 
     
 
@@ -413,7 +413,7 @@ input[type=button] {
 <div class="row-fluid-wrapper row-depth-1 row-number-7 dnd-row">
 <div class="row-fluid ">
 <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
-<div id="hs_cos_wrapper_widget_1595872501038" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span id="hs_cos_wrapper_widget_1595872501038_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p style="text-align: center;">You and your referral get <strong>$100</strong>&nbsp;after their purchase of a pulseM subscription</p></span></div>
+<div id="hs_cos_wrapper_widget_1595872501038" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span id="hs_cos_wrapper_widget_1595872501038_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p style="text-align: center;">You and your referral get <strong>$100</strong>&nbsp;after their purchase of a summitRA subscription</p></span></div>
 
 </div><!--end widget-span -->
 </div><!--end row-->
@@ -640,7 +640,7 @@ var hsVars = hsVars || {}; hsVars['language'] = 'en';
             
             
             
-            pageName: "Share your pulseM experience!",
+            pageName: "Share your summitRA experience!",
             
             
             

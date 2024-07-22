@@ -1,25 +1,15 @@
 <?php
-
 namespace App\Models;
-
 use CodeIgniter\Model;
 
 class UserModel extends Model
 {
     protected $table;
+    protected $primarykey;
     protected $allowedFields;
-    
-    // Function to store OTP
-    public function storeOtp($email, $otp) {
-        $data = [
-            'otp' => $otp,
-            'otp_expiry' => date('Y-m-d H:i:s', strtotime('+1 hour')) // Set OTP expiration time, e.g., 1 hour from now
-        ];
-        return $this->where('email', $email)->set($data)->update();
-    }
 
-    public function __construct()
-    {
+    // Construc Function
+    public function __construct() {
         parent::__construct();
         // Load table name from environment variable
         $this->table = getenv('USER_TABLE');
@@ -28,39 +18,75 @@ class UserModel extends Model
         $this->allowedFields = explode(',', $fields);
     }
 
-    public function userCanLogin($usernameOrEmail, $password)
-    {
-        // Fetch user by username or email
-        $user = $this->where('name', $usernameOrEmail)
-        ->orWhere('email', $usernameOrEmail)
-        ->first();
+    // Function to set OTP
+    public function setOtp($email, $otp) {
+        $data = [
+            'otp' => $otp,
+            'otp_expiry' => date('Y-m-d H:i:s', strtotime('+10 minutes', time()))// Set OTP expiration time, e.g., 10 minutes from now
+        ];
+        return $this->where('email', $email)->set($data)->update();
+    }
 
+    // Check user can login
+    public function userCanLogin($email, $password) {
+        // Fetch user by username or email
+        $user = $this->where('email', $email)->first();
         if ($user) {
+            // Load security library to hash the password
+            // $this->load->library('security');
             // Extract stored password hash from the database
             $storedPasswordHash = $user['password'];
-
             // Verify the provided password against the stored hash
-            if ($password === $storedPasswordHash) {
+            if (password_verify($password, $storedPasswordHash)) {
                 return true; // Passwords match, login successful
             }
         }
         return false;
     }
 
-    public function verifyOtp($otp) {
-        $user = $this->where('otp', $otp)->first();
-        if ($user && strtotime($user['otp_expiry']) > time()) {
+    // Function to get user by email
+    public function getUserByEmail($email) {
+        // Enable Database Profiler (optional, if not already enabled in config)
+        //if (ENVIRONMENT !== 'production') {
+            // $db = db_connect();
+            // $db->enableQueryLog();
+        //}
+        $user = $this->where('email', $email)->first();
+        // Accessing logged queries
+        //$db = db_connect();
+        $db = db_connect();
+            $queries = $db->getLastQuery(); // Get last executed query
+
+            //log_message('debug', 'Query: ' . $queries);
+        //var_dump($queries);
+        if($user){
+            return $user;
+        }
+        return false;
+    }
+
+    // Function to verify OTP
+    public function verifyOtp($email, $otp) {
+        $user = $this->where('email', $email)->where('otp', $otp)->first();
+        // $db = db_connect();
+        // $queries = $db->getLastQuery();
+        // var_dump($user);
+        // die;
+        if ($user && isset($user['otp_expiry']) && strtotime($user['otp_expiry']) > time()) {
             return true;
         }
         return false;
     }
 
-    public function updatePassword($id,$newpassword) {
+    // Function to update password
+    public function updatePassword($email,$password) {
+        // Load security library to hash the password
+        // $this->load->library('security');
+        // Hash the provided password using CodeIgniter's built-in hashing function
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $data = [
-            'password' => $newpassword,
+            'password' => $hashed_password,
         ];
-        return $this->where('id', $id)->set($data)->update();
+        return $this->where('email', $email)->set($data)->update();
     }
-    
 }
-

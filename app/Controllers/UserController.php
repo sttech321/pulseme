@@ -8,67 +8,68 @@ use CodeIgniter\I18n\Time;
 use CodeIgniter\Email\Email;
 
 class UserController extends Controller
-{
-    public function login()
-    {
-        // Check if user is already logged in
-        if (session()->get('isLoggedIn')) {
-            return redirect()->to('/analyze/reviews/reviews');
-        }
-        helper(['form']);
-        return view('login/login');
+{    
+    public function __construct() {
+        // Load session service
+        $this->session = \Config\Services::session();
     }
-    
-    public function loginAuth()
-    {
+
+    public function loginAuth() {
+        helper(['form']);
         $model = new UserModel();
-        $usernameOrEmail = $this->request->getVar('email');
+        $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');      
-        $isLoggedIn = $model->userCanLogin($usernameOrEmail, $password);
+        $isLoggedIn = $model->userCanLogin($email, $password);
         
         if ($isLoggedIn) {
             // Set session data
             $userData = [ 
-                'username' => $usernameOrEmail,
+                'username' => $email,
                 'isLoggedIn' => true
-                // Add more data as needed
             ];
             session()->set($userData);
-            return redirect()->to('/analyze/reviews/reviews');
+            return redirect()->to('/analyze/reviews');
         } else {
             session()->setFlashdata('error', 'Invalid username/email or password');
             return redirect()->to('/');
         }
     }
 
-    public function logout()
-    {
+    public function logout() {
         // Destroy session data on logout
         session()->destroy();
         return redirect()->to('/');
     }
 
-
     public function forgotPassword() {
-        $email = $this->request->getVar('email');
+       // Pass session to the view
+       $data['session'] = $this->session;
+
+       // Load the 'forgotPassword' view with data
+       return view('forgotPassword', $data);
+    }
+
+    public function sendOtp() {
+        helper(['form']);
         $model = new UserModel();
-        $user = $model->where('email', $email)->first();
-       
+        $email = $this->request->getVar('email');
+        $user = $model->getUserByEmail($email);
         if ($user) {
             $otp = rand(100000, 999999); // Generate a 6-digit OTP
-            if ($model->storeOtp($email, $otp)) {
+            if ($model->setOtp($email, $otp)) {
                 $this->sendOtpEmail($email, $otp);
-                echo 'OTP has been sent to your email.';
-                // return view('verify_otp');
-                return redirect()->to('/password/verify');
+                // Store email in session for use in verify OTP action
+                $expirationTime = Time::createFromTimestamp(time() + 3600);
+                session()->set('otp_email', $email, $expirationTime);
+                $this->session->setFlashdata('success', 'OTP has been sent to your email.');
+                return redirect()->to('/forgot-password/verify-otp');
             } else {
-                echo 'Failed to store OTP. Please try again.';
+                $this->session->setFlashdata('error', 'Failed to store OTP. Please try again.');
             }
         } else if(!empty($email)){
-            // echo 'User does not exist.';
             session()->setFlashdata('error', 'User does not exist.');
         }
-        return view('forgotPassword');
+        return redirect()->to('/forgot-password');
     }
 
     public function sendOtpEmail($email, $otp) {
@@ -84,7 +85,7 @@ class UserController extends Controller
             'newline'  => "\r\n"
         ]);
 
-        $emailService->setFrom($_ENV['SMTP_USER'], 'Your App Name');
+        $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
         $emailService->setTo($email);
         $emailService->setSubject('Password Reset OTP');
         $emailService->setMessage('Your OTP for password reset is: ' . $otp);
@@ -97,63 +98,89 @@ class UserController extends Controller
     }
 
     public function verifyOtp() {
-        helper(['form']);
-        
-        if ($this->request->getMethod() == 'post') {    
-            $rules = [
-                'otp' => 'required'
-            ];
-
-            if (!$this->validate($rules)) {
-                return view('verify_otp', [
-                    'validation' => $this->validator
-                ]);
-            } else {
-                $otp = $this->request->getVar('otp');
-                $model = new UserModel();
-                var_dump($otp);
-                if ($model->verifyOtp($otp)) {
-                    return view('reset_password');
-                } else {
-                    echo 'Incorrect OTP. Please try again.';
-                }
-            }
-        }
-        
-        return view('verify_otp');
+        // Pass session to the view
+       $data['session'] = $this->session;
+       //var_dump($data);
+       // Load the 'verifyOtp' view with data
+       return view('verifyOtp', $data);
     }
 
-   // Assuming this is in your controller method
-    public function resetPassword()
-    {
+    public function verifyOtpProcess() {
+        helper(['form']);
+
+        if ($this->request->getMethod() == 'POST') {
+            // Retrieve email from session
+            $email = session()->get('otp_email');
+            if ($email) {
+                $rules = [
+                    'otp' => 'required'
+                ];
+                if (!$this->validate($rules)) {
+                    return view('verifyOtp', [
+                        'validation' => $this->validator
+                    ]);
+                } else {
+                    $otp = $this->request->getVar('otp');
+                    $model = new UserModel();
+                    if ($model->verifyOtp($email, $otp)) {
+                        return redirect()->to('/forgot-password/reset');
+                    } else {
+                        $this->session->setFlashdata('error', 'Incorrect OTP. Please try again.');
+                        return redirect()->to('/forgot-password/verify-otp');
+                    }
+                }
+            }else{
+                $this->session->setFlashdata('error', 'Please try again.');
+                return redirect()->to('/forgot-password');
+            }
+        }
+       // Load the 'verifyOtp' view with data
+       return redirect()->to('/forgot-password/verify-otp');
+    }
+
+    public function resetPassword() {
+        // Pass session to the view
+        $data['session'] = $this->session;
+        // var_dump($data);
+        // Load the 'verifyOtp' view with data
+        return view('resetPassword', $data);
+    }
+
+    function resetPasswordProcess () {
         // Load necessary helpers and libraries
         helper(['form']);
 
-        // Retrieve the new password from the form
-        $newPassword = $this->request->getVar('password');
-
-        // Load the UserModel
-        $model = new UserModel();
-
-        // Example usage of updatePassword method from UserModel
-        $id = 1; // Replace with the actual user ID
-        $result = $model->updatePassword($id, $newPassword);
-
-        // Check if update was successful
-        if ($result && !empty($newPassword)) {
-            // echo "Password updated successfully.";
-            session()->setFlashdata('success', 'Password updated successfully.');
-            return redirect()->to('/');
-        } else if(!empty($newPassword)){
-            // echo "Failed to update password.";
-            session()->setFlashdata('error', 'Failed to update password.');
-            // return view('reset_password');
+        if ($this->request->getMethod() == 'POST') {
+            $rules = [
+                'password' => 'required',
+                'confirmPassword' => 'required'
+            ];
+            if (!$this->validate($rules)) {
+                return view('resetPassword', [
+                    'validation' => $this->validator
+                ]);
+            }else{
+                // Retrieve the passwordS from the form
+                $password = $this->request->getVar('password');
+                $confirmPassword = $this->request->getVar('confirmPassword');
+                if($password !== $confirmPassword){
+                    $this->session->setFlashdata('error', 'Confirm password does not match.');
+                    return redirect()->to('/forgot-password/verify-otp');
+                }
+                // Load the UserModel
+                $model = new UserModel();
+                $email = session()->get('otp_email');
+                $result = $model->updatePassword($email, $password);
+                if ($result) {
+                    // Clear the session data
+                    session()->remove('otp_email');
+                    session()->setFlashdata('success', 'Password updated successfully.');
+                    return redirect()->to('/');
+                } else {
+                    $this->session->setFlashdata('error', 'Failed to update password.');
+                    return redirect()->to('/forgot-password');
+                }
+            }
         }
-
-        // Load view (if needed)
-        return view('reset_password');
     }
-   
 }
-        
-       

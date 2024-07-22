@@ -6,12 +6,14 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view('welcome_message');
+        // die("555555555");
+        return view('login/login');
     }
 
     public function login(): string
     {
-        return view('login/login');
+        $data['title'] = 'Login Page';
+        return view('login/login', $data);
     }
 
     public function overview(): string
@@ -54,21 +56,25 @@ class Home extends BaseController
         return view('analysisg');
     }
 
-    public function reviews(): string
-    {
-        // return view('reviews');
-        if (session()->get('isLoggedIn')) {
-            return view('reviews');
-        } else {
-            return redirect()->to('/');
-        }
-    }
+    // public function reviews()
+    // {
+    //     // Ensure the session is started
+    //     if (session()->get('isLoggedIn')) { 
+    //         $data = [
+    //             'title' => 'Reviews Page',
+    //         ];
+    //         return view('reviews', $data);
+    //     } else {
+    //         return redirect()->to('/');
+    //     }
+    // }
+    
     public function departments(): string
     {
         return view('departments');
     }
 
-    public function welcome(): string
+    public function welcome(): string 
     {
         return view('dashboard');
     }
@@ -79,54 +85,77 @@ class Home extends BaseController
 
     public function campaigns(): string
     {
-        return view('dispatch-tab/dispatch_campaigns');
+        return view('dispatchTab/dispatchCampaigns');
     }
 
-    public function notifications(): string
+    public function dispatch_notifications(): string
     {
-        return view('dispatch-tab/dispatch_notifications');
+        return view('dispatchTab/dispatch_notifications');
     }
 
-    public function review_widget(): string
+    public function dispatch_review_widget(): string
     {
-        return view('dispatch-tab/dispatch_review_widget');
+        return view('dispatchTab/dispatch_review_widget');
     }
 
-    public function web_widget(): string
+    public function dispatch_web_widget()
     {
-        return view('dispatch-tab/dispatch_web_widget');
+        return view('dispatchTab/dispatch_web_widget');
     }
+
     public function connect_social_media(): string
     {
-        return view('general-tab/general_connect_social_media');
-    }
-    public function branding(): string
-    {
-        return view('general-tab/general_branding');
-    }
-    public function users(): string
-    {
-        return view('general-tab/general_users');
-    }
-    public function reporting(): string
-    {
-        return view('general-tab/general_reporting');
-    }
-    public function contact_info(): string
-    {
-        return view('contact-card-tab/contact_information');
-    }
-    public function contact_template(): string
-    {
-        return view('contact-card-tab/contact_templates');
+        return view('setting_connect-social-media');
     }
     public function billing_subscription(): string
     {
         return view('billing/billing_subscription');
     }
 
-    // public function connect_social_media(): string
-    // {
-    //     return view('setting_connect-social-media');
-    // }
+    public function social_review(): string
+    {
+        return view('social_review');
+    }
+
+    public function contact_card(): string
+    {
+        return view('contact_card');
+    }
+
+    public function quick_action(): string
+    {
+        return view('quick_action');
+    }
+    
+    public function general_connect_social_media(): string
+    {
+        return view('general-tab/general_connect_social_media');
+    }
+
+    public function general_branding(): string
+    {
+        return view('general-tab/general_branding');
+    }
+
+    public function general_reporting(): string
+    {
+        return view('general-tab/general_reporting');
+    }
+
+    public function general_users(): string
+    {
+        return view('general-tab/general_users');
+    }
+    
+    public function contact_information(): string
+    {
+        return view('contact-card-tab/contact_information');
+    }
+
+    public function contact_templates(): string
+    {
+        return view('contact-card-tab/contact_templates');
+    }
+
+    
 }
