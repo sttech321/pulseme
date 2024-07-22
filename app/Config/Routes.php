@@ -75,7 +75,7 @@ $routes->get('/settings/dispatch/campaigns', 'Campaign::index');
 $routes->get('/analyze/reviews', 'Campaign::reviews');
 
 $routes->get('application/bio/(:num)', 'Campaign::technician_bio/$1');
-$routes->get('application/pulsecheck/(:num)', 'Campaign::pulse_check/$1');
+$routes->get('application/pulsecheck/(:segment)', 'Campaign::pulse_check/$1');
 
 $routes->get('/operate', 'CustomerController::dispatch');
 $routes->post('/operate/dispatch/create/(:num)', 'CustomerController::create/$1');

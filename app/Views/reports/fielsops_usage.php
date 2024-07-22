@@ -4,10 +4,11 @@
 					<div class="sub-menu-bar flex flex-col items-stretch h-full">
 						<div class="p-20px bg-white"><h2 class="text-2xl">Reviews</h2></div>
 						<div class="px-15px flex justify-start items-center bg-white">
-							<a href="/leaderboard/reports/departments" class="p-10px">Departments</a><a href="/leaderboard/reports/campaigns" class="p-10px">Campaigns</a>
+							<a href="/leaderboard/reports/departments" class="p-10px">Departments</a>
+							<a href="/leaderboard/reports/campaigns" class="p-10px">Campaigns</a>
 							<a href="/leaderboard/reports/campaign-reviews" class="p-10px">Campaign Reviews</a>
 							<a href="/leaderboard/reports/fieldops-usage" class="border-b-2 border-blue-500 router-link-exact-active p-10px" aria-current="page">Fieldops Usage</a>
-							<a href="/leaderboard/reports/projection" class="p-10px">Projection</a>
+							<!-- <a href="/leaderboard/reports/projection" class="p-10px">Projection</a> -->
 						</div>
 						<div class="flex-grow">
 							<div class="p-25px">
@@ -79,27 +80,15 @@
 												</tr>
 											</thead>
 											<tbody>
+											<?php foreach ($campaigns as $campaign) : ?>
 												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1B85A09AA6CF1</td>
-													<td class="px-20px py-15px">Aaron Krasnow</td>
-													<td class="px-20px py-15px">65</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">67</td>
+													<td class="px-20px py-15px">1B85A09AA6CG<?= esc($campaign['ID']) ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign['name']) ?></td>
+													<td class="px-20px py-15px"></td>
+													<td class="px-20px py-15px"></td>
+													<td class="px-20px py-15px"></td>
 												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1D5FD968043A1</td>
-													<td class="px-20px py-15px">Derek Kijowski</td>
-													<td class="px-20px py-15px">22</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">22</td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1DE1BA473C7B1</td>
-													<td class="px-20px py-15px">Dave Smith</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">4</td>
-												</tr>
+												<?php endforeach; ?>
 											</tbody>
 										</table>
 										<!---->
@@ -109,26 +98,6 @@
 						</div>
 					</div>
 				</div>
-			
 			</div>
 		</div>
-
-		<svg
-			id="SvgjsSvg1001"
-			width="2"
-			height="0"
-			xmlns="http://www.w3.org/2000/svg"
-			version="1.1"
-			xmlns:xlink="http://www.w3.org/1999/xlink"
-			xmlns:svgjs="http://svgjs.dev"
-			style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"
-		>
-			<defs id="SvgjsDefs1002"></defs>
-			<polyline id="SvgjsPolyline1003" points="0,0"></polyline>
-			<path id="SvgjsPath1004" d="M0 0 "></path>
-		</svg>
-		<div id="fb-root" class="fb_reset">
-			<div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div>
-		</div>
-		<div class="pac-container pac-logo" style="display: none; width: 0px; position: absolute; left: 0px; top: 0px;"></div>
-		<?= $this->endsection('content') ?>
+<?= $this->endsection('content') ?>

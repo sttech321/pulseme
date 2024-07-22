@@ -4,9 +4,11 @@
 					<div class="sub-menu-bar flex flex-col items-stretch h-full">
 						<div class="p-20px bg-white"><h2 class="text-2xl">Reviews</h2></div>
 						<div class="px-15px flex justify-start items-center bg-white">
-							<a href="/leaderboard/reports/departments" class="p-10px">Departments</a><a href="/leaderboard/reports/campaigns" class="p-10px">Campaigns</a>
+							<a href="/leaderboard/reports/departments" class="p-10px">Departments</a>
+							<a href="/leaderboard/reports/campaigns" class="p-10px">Campaigns</a>
 							<a href="/leaderboard/reports/campaign-reviews" class="border-b-2 border-blue-500 router-link-exact-active p-10px" aria-current="page">Campaign Reviews</a>
-							<a href="/leaderboard/reports/fieldops-usage" class="p-10px">Fieldops Usage</a><a href="/leaderboard/reports/projection" class="p-10px">Projection</a>
+							<a href="/leaderboard/reports/fieldops-usage" class="p-10px">Fieldops Usage</a>
+							<!-- <a href="/leaderboard/reports/projection" class="p-10px">Projection</a> -->
 						</div>
 						<div class="flex-grow">
 							<div class="p-25px">
@@ -75,119 +77,39 @@
 														Google Rating
 														<!---->
 													</th>
-													<th class="text-left px-20px py-10px cursor-pointer">
-														Facebook Reviews
+													<!-- <th class="text-left px-20px py-10px cursor-pointer">
+														Facebook Reviews -->
 														<!---->
-													</th>
+													<!-- </th>
 													<th class="text-left px-20px py-10px cursor-pointer">
-														Facebook Rating
+														Facebook Rating -->
 														<!---->
-													</th>
+													<!-- </th> -->
 												</tr>
 											</thead>
+											<?php foreach ($Customers as $data) : ?>
+														<?= esc($data['campaign_id']) ?>
+												<?php endforeach; ?>
 											<tbody>
+											<?php foreach ($campaigns as $campaign) : ?>	
 												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1B85A09AA6CF1</td>
-													<td class="px-20px py-15px">Aaron Krasnow</td>
-													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">11</td>
-													<td class="px-20px py-15px">5</td>
-													<td class="px-20px py-15px">0</td>
+													<td class="px-20px py-15px">1B85A09AADDA<?= esc($campaign['ID']) ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign['name']) ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign['department']) ?></td>
 													<td class="px-20px py-15px"></td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1D24325B63641</td>
-													<td class="px-20px py-15px">Angelo Vazquez</td>
-													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">12</td>
-													<td class="px-20px py-15px">4.92</td>
-													<td class="px-20px py-15px">0</td>
 													<td class="px-20px py-15px"></td>
+													<!-- <td class="px-20px py-15px"></td>
+													<td class="px-20px py-15px"></td> -->
 												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1C12F272792B9</td>
-													<td class="px-20px py-15px">Chad Carncross</td>
-													<td class="px-20px py-15px">Install Team</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">5</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px"></td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1DE1BA473C7B1</td>
-													<td class="px-20px py-15px">Dave Smith</td>
-													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">5</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px"></td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1D5FD968043A1</td>
-													<td class="px-20px py-15px">Derek Kijowski</td>
-													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">6</td>
-													<td class="px-20px py-15px">4.33</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px"></td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1C13D0A51CB21</td>
-													<td class="px-20px py-15px">Paul Hoang</td>
-													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">5</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px"></td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1D8A897F9D3F9</td>
-													<td class="px-20px py-15px">Scott Neubert</td>
-													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">6</td>
-													<td class="px-20px py-15px">5</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px"></td>
-												</tr>
+												<?php endforeach; ?>
 											</tbody>
 										</table>
-										<!---->
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<footer class="footer bg-gray-100 p-20px text-center">
-					<div class="text-gray-400">
-						<p>© 2024 2.0.10 | v49.0.17</p>
-						<div class="flex justify-center">
-							<a href="/" target="_blank" class="hover:text-blue-300">pulseM</a><span class="mx-2">|</span><a href="https://legal.pulsem.me/privacy-policy" target="_blank" class="hover:text-blue-300">Privacy Policy</a>
-							<span class="mx-2">|</span><a href="https://legal.pulsem.me/terms-and-conditions" target="_blank" class="hover:text-blue-300">Terms and Conditions</a>
-							<!---->
-						</div>
-					</div>
-				</footer>
 			</div>
 		</div>
-
-		<svg
-			id="SvgjsSvg1001"
-			width="2"
-			height="0"
-			xmlns="http://www.w3.org/2000/svg"
-			version="1.1"
-			xmlns:xlink="http://www.w3.org/1999/xlink"
-			xmlns:svgjs="http://svgjs.dev"
-			style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"
-		>
-			<defs id="SvgjsDefs1002"></defs>
-			<polyline id="SvgjsPolyline1003" points="0,0"></polyline>
-			<path id="SvgjsPath1004" d="M0 0 "></path>
-		</svg>
-		<div id="fb-root" class="fb_reset">
-			<div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div>
-		</div>
-		<div class="pac-container pac-logo" style="display: none; width: 0px; position: absolute; left: 0px; top: 0px;"></div>
-
 <?= $this->endsection('content') ?>

@@ -8,8 +8,9 @@
 						<div class="px-15px flex justify-start items-center bg-white">
 							<a href="/leaderboard/reports/departments" class="p-10px">Departments</a>
 							<a href="/leaderboard/reports/campaigns" class="border-b-2 border-blue-500 router-link-exact-active p-10px" aria-current="page">Campaigns</a>
-							<a href="/leaderboard/reports/campaign-reviews" class="p-10px">Campaign Reviews</a><a href="/leaderboard/reports/fieldops-usage" class="p-10px">Fieldops Usage</a>
-							<a href="/leaderboard/reports/projection" class="p-10px">Projection</a>
+							<a href="/leaderboard/reports/campaign-reviews" class="p-10px">Campaign Reviews</a>
+							<a href="/leaderboard/reports/fieldops-usage" class="p-10px">Fieldops Usage</a>
+							<!-- <a href="/leaderboard/reports/projection" class="p-10px">Projection</a> -->
 						</div>
 						<div class="flex-grow">
 							<div class="p-25px">
@@ -140,10 +141,10 @@
 														Happy Count
 														<!---->
 													</th>
-													<th class="text-left px-20px py-10px cursor-pointer">
-														Neutral Count
+													<!-- <th class="text-left px-20px py-10px cursor-pointer">
+														Neutral Count -->
 														<!---->
-													</th>
+													<!-- </th> -->
 													<th class="text-left px-20px py-10px cursor-pointer">
 														Unhappy Count
 														<!---->
@@ -151,160 +152,26 @@
 												</tr>
 											</thead>
 											<tbody>
+											
+											<?php foreach ($campaign_reviews as $reviews) : ?>
+												<?php print_r($reviews); ?>
+												<?php endforeach; ?>
+											<?php foreach ($campaigns as $campaign) : ?>	
 												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1D5FD968043A1</td>
-													<td class="px-20px py-15px">Derek Kijowski</td>
-													<td class="px-20px py-15px">DERKIJ</td>
-													<td class="px-20px py-15px">Service Technician</td>
+													<td class="px-20px py-15px">1B85A09AA6CF<?= esc($campaign['ID']) ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign['name']) ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign['employeeId']) ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign['department']) ?></td>
 													<td class="px-20px py-15px">110</td>
 													<td class="px-20px py-15px">9.2</td>
 													<td class="px-20px py-15px">31</td>
 													<td class="px-20px py-15px">35</td>
 													<td class="px-20px py-15px">3</td>
 													<td class="px-20px py-15px">7</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1DE1BA473C7B1</td>
-													<td class="px-20px py-15px">Dave Smith</td>
-													<td class="px-20px py-15px">DAVSMI</td>
-													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">107</td>
-													<td class="px-20px py-15px">9.1</td>
-													<td class="px-20px py-15px">26</td>
-													<td class="px-20px py-15px">26</td>
-													<td class="px-20px py-15px">3</td>
-													<td class="px-20px py-15px">7</td>
-													<td class="px-20px py-15px">0</td>
+													<!-- <td class="px-20px py-15px">0</td> -->
 													<td class="px-20px py-15px">0</td>
 												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1D8A897F9D3F9</td>
-													<td class="px-20px py-15px">Scott Neubert</td>
-													<td class="px-20px py-15px">SCONEU</td>
-													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">81</td>
-													<td class="px-20px py-15px">9.1</td>
-													<td class="px-20px py-15px">33</td>
-													<td class="px-20px py-15px">30</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">6</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1C13D0A51CB21</td>
-													<td class="px-20px py-15px">Paul Hoang</td>
-													<td class="px-20px py-15px">PAUHOA</td>
-													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">66</td>
-													<td class="px-20px py-15px">9.0</td>
-													<td class="px-20px py-15px">32</td>
-													<td class="px-20px py-15px">14</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">4</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1B85A09AA6CF1</td>
-													<td class="px-20px py-15px">Aaron Krasnow</td>
-													<td class="px-20px py-15px">AARON</td>
-													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">63</td>
-													<td class="px-20px py-15px">9.3</td>
-													<td class="px-20px py-15px">14</td>
-													<td class="px-20px py-15px">26</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">3</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1D24325B63641</td>
-													<td class="px-20px py-15px">Angelo Vazquez</td>
-													<td class="px-20px py-15px">ANGVAZ</td>
-													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">56</td>
-													<td class="px-20px py-15px">9.1</td>
-													<td class="px-20px py-15px">23</td>
-													<td class="px-20px py-15px">24</td>
-													<td class="px-20px py-15px">1</td>
-													<td class="px-20px py-15px">5</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1D430C7AA39C9</td>
-													<td class="px-20px py-15px">Kiefer Hutcheson</td>
-													<td class="px-20px py-15px">KIEHUT</td>
-													<td class="px-20px py-15px">Duct Cleaning</td>
-													<td class="px-20px py-15px">33</td>
-													<td class="px-20px py-15px">9.0</td>
-													<td class="px-20px py-15px">10</td>
-													<td class="px-20px py-15px">8</td>
-													<td class="px-20px py-15px">1</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1E3CDD0C4EA59</td>
-													<td class="px-20px py-15px">Jesse Smith</td>
-													<td class="px-20px py-15px">JESSMI</td>
-													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">28</td>
-													<td class="px-20px py-15px">8.0</td>
-													<td class="px-20px py-15px">4</td>
-													<td class="px-20px py-15px">8</td>
-													<td class="px-20px py-15px">1</td>
-													<td class="px-20px py-15px">1</td>
-													<td class="px-20px py-15px">1</td>
-													<td class="px-20px py-15px">0</td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1D42E41457559</td>
-													<td class="px-20px py-15px">Casey Evett</td>
-													<td class="px-20px py-15px">CASEVE</td>
-													<td class="px-20px py-15px">Install Team</td>
-													<td class="px-20px py-15px">12</td>
-													<td class="px-20px py-15px">9.0</td>
-													<td class="px-20px py-15px">8</td>
-													<td class="px-20px py-15px">8</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1C14AED7C0389</td>
-													<td class="px-20px py-15px">Austin Harper</td>
-													<td class="px-20px py-15px">Austin</td>
-													<td class="px-20px py-15px">Install Team</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0.0</td>
-													<td class="px-20px py-15px">4</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1B7EFFD223291</td>
-													<td class="px-20px py-15px">Hales AC Service</td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px">General</td>
-													<td class="px-20px py-15px">-20</td>
-													<td class="px-20px py-15px">3.0</td>
-													<td class="px-20px py-15px">12</td>
-													<td class="px-20px py-15px">29</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">1</td>
-												</tr>
+												<?php endforeach; ?>
 											</tbody>
 										</table>
 										<!---->
@@ -314,36 +181,8 @@
 						</div>
 					</div>
 				</div>
-				<footer class="footer bg-gray-100 p-20px text-center">
-					<div class="text-gray-400">
-						<p>© 2024 2.0.10 | v49.0.17</p>
-						<div class="flex justify-center">
-							<a href="/" target="_blank" class="hover:text-blue-300">pulseM</a><span class="mx-2">|</span><a href="https://legal.pulsem.me/privacy-policy" target="_blank" class="hover:text-blue-300">Privacy Policy</a>
-							<span class="mx-2">|</span><a href="https://legal.pulsem.me/terms-and-conditions" target="_blank" class="hover:text-blue-300">Terms and Conditions</a>
-							<!---->
-						</div>
-					</div>
-				</footer>
+
 			</div>
 		</div>
 
-		<svg
-			id="SvgjsSvg1001"
-			width="2"
-			height="0"
-			xmlns="http://www.w3.org/2000/svg"
-			version="1.1"
-			xmlns:xlink="http://www.w3.org/1999/xlink"
-			xmlns:svgjs="http://svgjs.dev"
-			style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"
-		>
-			<defs id="SvgjsDefs1002"></defs>
-			<polyline id="SvgjsPolyline1003" points="0,0"></polyline>
-			<path id="SvgjsPath1004" d="M0 0 "></path>
-		</svg>
-		<div id="fb-root" class="fb_reset">
-			<div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div>
-		</div>
-		<div class="pac-container pac-logo" style="display: none; width: 0px; position: absolute; left: 0px; top: 0px;"></div>
-	
 <?= $this->endsection('content') ?>

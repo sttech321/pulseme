@@ -126,9 +126,9 @@
 									<li>
 										<a href="/analyze/reviews"><img width="15" src="/image/reviews.svg" alt="sidebar icon">Reviews</a>
 									</li>
-									<li>
+									<!-- <li>
 										<a href="#"><img width="15" src="/image/competitor.svg" alt="sidebar icon">Competitor Analysis</a>
-									</li>
+									</li> -->
 									<li>
 										<a href="/analyze/dispatching"><img width="15" src="/image/dispatching.svg" alt="sidebar icon">Dispatching</a>
 									</li>
@@ -148,25 +148,25 @@
 										<a href="#"><img width="15" src="/image/summary.svg" alt="sidebar icon">Summary</a>
 									</li>
 									<li>
-										<a href="#"><img width="15" src="/image/reports.svg" alt="sidebar icon">Reports</a>
+										<a href="/leaderboard/reports/campaigns"><img width="15" src="/image/reports.svg" alt="sidebar icon">Reports</a>
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class="sidebar-dropdown">
-							<a href="#">
+							<!-- <a href="#">
 								<div class="imgIconWrap">
 									<img width="20" height="20" src="/image/marketplace.png" alt="sidebar icon">
 								</div>
 								<span>Marketplace</span>
-							</a>
+							</a> -->
 							<div class="sidebar-submenu">
 								<ul>
-									<li>
-										<a href="#">
+									<!-- <li> -->
+										<!-- <a href="#">
 											<img width="15" src="/image/lead-generation.svg" alt="sidebar icon">
 											Lead Generation
-										</a>
+										</a> -->
 										<!-- <div class="sidebar-submenu-inner">
                                             <ul>
                                                 <li>
@@ -187,7 +187,7 @@
                                                 </li>
                                             </ul>
                                         </div> -->
-									</li>
+									<!-- </li> -->
 									<!-- <li>
                                         <a href="#"><img width="15" src="/image/employee-retention.svg" alt="sidebar icon">Employee Retention</a>
                                     </li> -->

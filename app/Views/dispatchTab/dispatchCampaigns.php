@@ -340,8 +340,22 @@
                                     </div>
                                 </div>
 
+<h1>Pulse Check</h1>
+<?php if (isset($technician)): ?>
+    <p>Employee ID: <?= esc($technician['employeeId']) ?></p>
+    <p>Name: <?= esc($technician['name']) ?></p>
+    <p>Email: <?= esc($technician['email']) ?></p>
+    <p>Description: <?= esc($technician['description']) ?></p>
+    <p>Department: <?= esc($technician['department']) ?></p>
+    <p>License: <?= esc($technician['license']) ?></p>
+    <?php if ($technician['image']): ?>
+        <p><img src="<?= base_url('uploads/' . esc($technician['image'])) ?>" alt="Technician Image"></p>
+    <?php endif; ?>
+<?php else: ?>
+    <p>No technician data found.</p>
+<?php endif; ?>
 
-                                <div class="modal fade" id="EDITscampaignModal-<?= $campaign['ID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="EDITscampaignModal-<?= $campaign['employeeId'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
                                         <div class="modal-content">
                                         <div class="modal-body bg-white relative  my-30px rounded-4px shadow p-30px text-center flex flex-col items-center">
@@ -354,7 +368,7 @@
                                                    </button>
                                                    <div class="flex">
                                                    <a href="<?= base_url('application/bio/' . $campaign['ID']) ?>" target="_blank" id="bio-button" class="btn btn-blue mr-10px">Bio</a>
-                                                      <a href="<?= base_url('application/pulsecheck/' . $campaign['ID']) ?>" target="_blank" id="pulse-check-button" class="btn btn-green">Pulse Check</a>
+                                                      <a href="<?= base_url('application/pulsecheck/' . $campaign['employeeId']) ?>" target="_blank" id="pulse-check-button" class="btn btn-green">Pulse Check</a>
                                                    </div>
                                               </div>
                                         </div>
@@ -408,7 +422,7 @@
                                           </svg>
                                        </button>
                                     </a>
-                                    <button data-bs-toggle="modal" data-bs-target="#EDITscampaignModal-<?= $campaign['ID'] ?>" class="btn btn-blue rounded-2px" id="showSample-<?= esc($campaign['employeeId']) ?>">
+                                    <button data-bs-toggle="modal" data-bs-target="#EDITscampaignModal-<?= $campaign['employeeId'] ?>" class="btn btn-blue rounded-2px" id="showSample-<?= esc($campaign['employeeId']) ?>">
                                        <svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                           <path class="" fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z">
                                           </path>

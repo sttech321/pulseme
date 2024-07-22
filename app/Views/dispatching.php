@@ -68,7 +68,6 @@
                         </button>
                      </div>
                   </div>
-
                   <?php if (!empty($technicians)): ?>
                      <div class="list">
                         <table class="w-full">

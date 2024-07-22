@@ -138,34 +138,23 @@
 											<tbody>
 												<tr class="!bg-opacity-50 odd:bg-sky-100">
 													<td class="px-20px py-15px">Service Technician</td>
-													<td class="px-20px py-15px">511</td>
+													<td class="px-20px py-15px">613</td>
 													<td class="px-20px py-15px">9.0</td>
-													<td class="px-20px py-15px">217</td>
-													<td class="px-20px py-15px">14</td>
-													<td class="px-20px py-15px">294</td>
-													<td class="px-20px py-15px">33</td>
+													<td class="px-20px py-15px">235</td>
+													<td class="px-20px py-15px">18</td>
+													<td class="px-20px py-15px">378</td>
+													<td class="px-20px py-15px">36</td>
 													<td class="px-20px py-15px">1</td>
 													<td class="px-20px py-15px">0</td>
 												</tr>
 												<tr class="!bg-opacity-50 odd:bg-sky-100">
 													<td class="px-20px py-15px">Duct Cleaning</td>
-													<td class="px-20px py-15px">33</td>
+													<td class="px-20px py-15px">27</td>
 													<td class="px-20px py-15px">9.0</td>
-													<td class="px-20px py-15px">12</td>
+													<td class="px-20px py-15px">6</td>
 													<td class="px-20px py-15px">1</td>
 													<td class="px-20px py-15px">21</td>
-													<td class="px-20px py-15px">2</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-												</tr>
-												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">Install Team</td>
-													<td class="px-20px py-15px">12</td>
-													<td class="px-20px py-15px">9.0</td>
-													<td class="px-20px py-15px">12</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">0</td>
-													<td class="px-20px py-15px">2</td>
+													<td class="px-20px py-15px">1</td>
 													<td class="px-20px py-15px">0</td>
 													<td class="px-20px py-15px">0</td>
 												</tr>
@@ -180,6 +169,17 @@
 													<td class="px-20px py-15px">0</td>
 													<td class="px-20px py-15px">1</td>
 												</tr>
+												<tr class="!bg-opacity-50 odd:bg-sky-100">
+													<td class="px-20px py-15px">Install Team</td>
+													<td class="px-20px py-15px">-28</td>
+													<td class="px-20px py-15px">6.0</td>
+													<td class="px-20px py-15px">-28</td>
+													<td class="px-20px py-15px">0</td>
+													<td class="px-20px py-15px">0</td>
+													<td class="px-20px py-15px">2</td>
+													<td class="px-20px py-15px">0</td>
+													<td class="px-20px py-15px">2</td>
+												</tr>
 											</tbody>
 										</table>
 										<!---->
@@ -189,37 +189,7 @@
 						</div>
 					</div>
 				</div>
-				<footer class="footer bg-gray-100 p-20px text-center">
-					<div class="text-gray-400">
-						<p>© 2024 2.0.10 | v49.0.17</p>
-						<div class="flex justify-center">
-							<a href="/" target="_blank" class="hover:text-blue-300">pulseM</a><span class="mx-2">|</span><a href="https://legal.pulsem.me/privacy-policy" target="_blank" class="hover:text-blue-300">Privacy Policy</a>
-							<span class="mx-2">|</span><a href="https://legal.pulsem.me/terms-and-conditions" target="_blank" class="hover:text-blue-300">Terms and Conditions</a>
-							<!---->
-						</div>
-					</div>
-				</footer>
 			</div>
 		</div>
 
-		<svg
-			id="SvgjsSvg1001"
-			width="2"
-			height="0"
-			xmlns="http://www.w3.org/2000/svg"
-			version="1.1"
-			xmlns:xlink="http://www.w3.org/1999/xlink"
-			xmlns:svgjs="http://svgjs.dev"
-			style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"
-		>
-			<defs id="SvgjsDefs1002"></defs>
-			<polyline id="SvgjsPolyline1003" points="0,0"></polyline>
-			<path id="SvgjsPath1004" d="M0 0 "></path>
-		</svg>
-		<div id="fb-root" class="fb_reset">
-			<div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div>
-		</div>
-		<div class="pac-container pac-logo" style="display: none; width: 0px; position: absolute; left: 0px; top: 0px;"></div>
-
-
-		<?= $this->endsection('content') ?>
+<?= $this->endsection('content') ?>

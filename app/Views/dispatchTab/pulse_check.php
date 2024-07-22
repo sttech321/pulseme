@@ -130,7 +130,7 @@
 					    }try {
 					        if (_text === '') {
 					            _text = "Compressing review files..."
-					        }
+					        }	
 					    } catch(e) {
 					        console.error('Failed to get PageLoader text on init.', e)
 					    }
