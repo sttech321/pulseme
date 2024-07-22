@@ -42,3 +42,4 @@ class TechnicianController extends Controller
 
 }
 
+

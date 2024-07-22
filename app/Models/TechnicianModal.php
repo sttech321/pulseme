@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class technicianModal extends Model
+class TechnicianModal extends Model
 {
     protected $table;
     protected $allowedFields;

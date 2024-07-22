@@ -21,6 +21,24 @@ class Campaign extends BaseController {
         return view('dispatchTab/dispatchCampaigns',$data);
     }
 
+    public function reviews()
+    {
+        // Ensure the session is started (if not started elsewhere)
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/');
+        }
+        // Load CampaignModel and fetch reviews
+        $model = new CampaignModel();
+        $data['reviews'] = $model->findAll(); // Fetch all reviews from the database
+    
+        // Prepare data for the view
+        $data['title'] = 'Reviews Page';
+    
+        // Load the view with data
+        return view('reviews', $data);
+    }
+    
+
     public function create() {
         // Load necessary helpers and libraries
         helper(['form']);
@@ -65,7 +83,14 @@ class Campaign extends BaseController {
         return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign saved successfully.');
     }
 
-    public function update()
+    public function delete($id)
+    {
+        $model = new CampaignModel();
+        $model->delete($id);
+        return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign deleted successfully.');
+    }
+
+    public function update($id)
     {
         helper(['form']);
         
@@ -112,19 +137,33 @@ class Campaign extends BaseController {
         if (!empty($imagePath)) {
             $data['image'] = $imagePath;
         }
-
+      
         // Perform the update
-        $model->update($data);
+        $model->update($id,$data);
 
         // Redirect with success message
         return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign updated successfully.');
     }
 
-    public function delete($id)
+
+    public function technician_bio($id) {
+        $model = new CampaignModel();
+        $data['technician'] = $model->find($id);
+        // print_r($data['technician']);
+        return view('/dispatchTab/Technician_bio', $data);
+    }
+    
+    public function pulse_check($empid)
     {
         $model = new CampaignModel();
-        $model->delete($id);
-        return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign deleted successfully.');
+        $data['technician'] = $model->where('employeeId', $empid)->first();
+
+        if ($data['technician']) {
+            return view('dispatchTab/pulse_check', $data);
+        } else {
+            // Handle case where technician is not found
+            return redirect()->to(base_url('/some-error-page'))->with('error', 'Technician not found');
+        }
     }
 
 }

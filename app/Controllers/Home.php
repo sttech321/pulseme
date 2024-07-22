@@ -6,6 +6,7 @@ class Home extends BaseController
 {
     public function index(): string
     {
+        // die("555555555");
         return view('login/login');
     }
 
@@ -55,17 +56,19 @@ class Home extends BaseController
         return view('analysisg');
     }
 
-    public function reviews(): string
-    {
-        $data = [];
-        // return view('reviews');
-        if (session()->get('isLoggedIn')){ 
-            $data['title'] = 'Reviews Page';
-            return view('reviews', $data);
-       }else{
-            return redirect()->to('/');
-       }
-    }
+    // public function reviews()
+    // {
+    //     // Ensure the session is started
+    //     if (session()->get('isLoggedIn')) { 
+    //         $data = [
+    //             'title' => 'Reviews Page',
+    //         ];
+    //         return view('reviews', $data);
+    //     } else {
+    //         return redirect()->to('/');
+    //     }
+    // }
+    
     public function departments(): string
     {
         return view('departments');

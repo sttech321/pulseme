@@ -32,7 +32,7 @@
                      </svg>
                      General 
                   </a>
-                  <a href="/settings/dispatch" class="border-blue-500 text-blue-500 border-l-2 p-15px">
+                  <a href="/settings/dispatch/campaigns" class="border-blue-500 text-blue-500 border-l-2 p-15px">
                      <svg class="svg-inline--fa fa-arrow-right-arrow-left mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right-arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                         <path class="" fill="currentColor" d="M438.6 150.6c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 96 32 96C14.3 96 0 110.3 0 128s14.3 32 32 32l306.7 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96zm-333.3 352c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 416 416 416c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96z">
                         </path>
@@ -40,7 +40,7 @@
                      Dispatch 
                   </a>
                   <!---->
-                  <a href="/settings/contact-card" class="p-15px">
+                  <a href="/settings/contact-card/contact-information" class="p-15px">
                      <svg class="svg-inline--fa fa-address-card mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="address-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                         <path class="" fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 256h64c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16z">
                         </path>
@@ -48,7 +48,7 @@
                      Contact Card 
                   </a>
                   <!---->
-                  <a href="/settings/billing" class="p-15px">
+                  <a href="/settings/billing/billing_subscription" class="p-15px">
                      <svg class="svg-inline--fa fa-credit-card mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="credit-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                         <path class="" fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96v32H576V96c0-35.3-28.7-64-64-64H64zM576 224H0V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V224zM112 352h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm112 16c0-8.8 7.2-16 16-16H368c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-8.8 0-16-7.2-16-16z">
                         </path>
@@ -272,52 +272,61 @@
                                        </div>
                                     </div>
                                  </div>
-                              
+                                 <?php foreach($campaigns as $campaign) : ?>
                                  <!-- Modal for editing a campaign -->
-                                 <div class="modal fade" id="EDITcampaignModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                 <div class="modal fade" id="EDITcampaignModal-<?= $campaign['ID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
                                         <div class="modal-content">
-                                        <?php foreach($campaigns as $campaign): ?>
-
-                                            <form method="post" action="<?= base_url('/settings/dispatch/campaigns/update/') ?>" enctype="multipart/form-data">
+                                       
+                                        <form method="post" action="<?= base_url('/settings/dispatch/campaigns/update/' . $campaign['ID']) ?>" enctype="multipart/form-data">
+                                        <input type="hidden" name="id" value="<?= $campaign['ID'] ?>">
+                                       
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Edit campaign</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
+                                                <?php $script = ''; ?>
+                                                      <?php if (session()->getFlashdata('validation')): ?>
+                                                      <div class="validation-errors">
+                                                         <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
+                                                         <p style="color: red;"><?php echo $error ?></p>
+                                                         <?php endforeach ?>
+                                                      </div>
+                                                      <?php $script = '$("#campaignModal").addClass("show").css("display","block")'; ?>
+                                                      <?php endif ?>
                                                     <div class="grid grid-cols-2 gap-20px auto-rows-auto">
                                                         <div class="flex w-full flex-col row-span-3">
-                                                            <img id="preview" class="preview-image w-200px h-auto" src="<?= base_url('image/campaignProfile.jpg') ?>" alt="Image Preview">
+                                                            <img id="preview" class="preview-image w-200px h-auto" src="<?= esc($campaign['image']) ?>" alt="Image Preview">
                                                             <p class="text-md">Upload your image</p>
                                                             <p class="text-sm mb-3">The preferred size is 200x200</p>
                                                             <button class="btn btn-blue w-full mb-2" type="button">
-                                                                <input type="file" id="profile-image-upload-1" name="campaignImage" style="display: block;" accept="image/*" onchange="previewImage(event)">
-                                                               
+                                                                <input type="file" id="profile-image-upload-1" value="" name="campaignImage" style="display: block;" accept="image/*" onchange="previewImage(event)">
                                                             </button>
                                                         </div>
                                                         <div class="input-group">
                                                             <label class="font-bold text-sm" for="campaignName">Campaign Name</label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="CampaignName" id="campaignName" value="">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="CampaignName" id="campaignName" value="<?= esc($campaign['name']) ?>">
                                                         </div>
                                                         <div class="input-group row-span-2">
                                                             <label class="font-bold text-sm" for="description">Campaign Description</label>
-                                                            <textarea class="w-full p-5px outline-none border-b focus:border-blue-500" name="campaignDescription" id="description"></textarea>
+                                                            <textarea class="w-full p-5px outline-none border-b focus:border-blue-500" name="campaignDescription" id="description"><?= esc($campaign['description']) ?></textarea>
                                                         </div>
                                                         <div class="input-group">
                                                             <label class="font-bold text-sm" for="department">Department</label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaignDepartment" id="department" value="">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaignDepartment" id="department" value="<?= esc($campaign['department']) ?>">
                                                         </div>
                                                         <div class="input-group">
                                                             <label class="font-bold text-sm" for="license">License</label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="license" id="license" value="">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="license" id="license" value="<?= esc($campaign['license']) ?>">
                                                         </div>
                                                         <div class="input-group">
                                                             <label class="font-bold text-sm" for="employeeID">Employee ID <span class="text-xs">(Useful for API Integrations)</span></label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employeeId" id="employeeID" value="">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employeeId" id="employeeID" value="<?= esc($campaign['employeeId']) ?>">
                                                         </div>
                                                         <div class="input-group">
                                                             <label class="font-bold text-sm" for="email">Email <span class="text-xs">(descriptor)</span></label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email" value="">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email" value="<?= esc($campaign['email']) ?>">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -326,7 +335,42 @@
                                                     <button type="submit" class="btn btn-blue">Save</button>
                                                 </div>
                                             </form>
-                                            <?php endforeach; ?>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+<h1>Pulse Check</h1>
+<?php if (isset($technician)): ?>
+    <p>Employee ID: <?= esc($technician['employeeId']) ?></p>
+    <p>Name: <?= esc($technician['name']) ?></p>
+    <p>Email: <?= esc($technician['email']) ?></p>
+    <p>Description: <?= esc($technician['description']) ?></p>
+    <p>Department: <?= esc($technician['department']) ?></p>
+    <p>License: <?= esc($technician['license']) ?></p>
+    <?php if ($technician['image']): ?>
+        <p><img src="<?= base_url('uploads/' . esc($technician['image'])) ?>" alt="Technician Image"></p>
+    <?php endif; ?>
+<?php else: ?>
+    <p>No technician data found.</p>
+<?php endif; ?>
+
+                                <div class="modal fade" id="EDITscampaignModal-<?= $campaign['employeeId'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modalContent mx-700">
+                                        <div class="modal-content">
+                                        <div class="modal-body bg-white relative  my-30px rounded-4px shadow p-30px text-center flex flex-col items-center">
+                                                   <div class="img"><img src="<?= esc($campaign['image']) ?>" alt=""></div>
+                                                   <h1 class="text-30px font-bold mb-15px">What would you like to see?</h1>
+                                                   <button type="button" class="btn-close text-gray-400 hover:text-black absolute top-10px right-10px" data-bs-dismiss="modal" aria-label="Close">  
+                                                      <svg class="svg-inline--fa fa-xmark text-30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                                         <path class="" fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
+                                                      </svg>
+                                                   </button>
+                                                   <div class="flex">
+                                                   <a href="<?= base_url('application/bio/' . $campaign['ID']) ?>" target="_blank" id="bio-button" class="btn btn-blue mr-10px">Bio</a>
+                                                      <a href="<?= base_url('application/pulsecheck/' . $campaign['employeeId']) ?>" target="_blank" id="pulse-check-button" class="btn btn-green">Pulse Check</a>
+                                                   </div>
+                                              </div>
                                         </div>
                                     </div>
                                 </div>
@@ -336,7 +380,7 @@
                      </div>
                      <div data-v-24df4780="" class="list">
                         <table data-v-24df4780="" class="campaigns w-full">
-                           <?php foreach($campaigns as $campaign) : ?>
+                           
                            <tr class="flex odd:bg-sky-100 odd:bg-opacity-50 py-15px px-10px">
                               <td class="employee flex items-center px-10px py-20px flex-shrink-0 w-1/12">
                                  <div class="profile-img w-full h-auto mr-10px flex justify-center items-center">
@@ -355,7 +399,7 @@
                               <td class="flex flex-col justify-center items-end col-span-3 flex-shrink-0 px-10px w-1/4">
                                  <div class="grid grid-rows-2 grid-flow-col gap-10px">
                                     <!-- <a href="<?= base_url('/settings/dispatch/campaigns/'.$campaign['ID']) ?>" class="btn btn-blue w-full rounded-2px"> -->
-                                       <button data-bs-toggle="modal" data-bs-target="#EDITcampaignModal" class="btn btn-blue w-full rounded-2px" id="editCampaign-<?= esc($campaign['ID']) ?>" onClick="updateCampaign('<?= esc($campaign['ID']) ?>');">
+                                       <button data-bs-toggle="modal" data-bs-target="#EDITcampaignModal-<?= $campaign['ID'] ?>" class="btn btn-blue w-full rounded-2px" id="editCampaign-<?= esc($campaign['ID']) ?>" >
                                           <svg class="svg-inline--fa fa-face-grin" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                              <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z">
                                              </path>
@@ -363,7 +407,7 @@
                                           Edit Campaign 
                                        </button>
                                     <!-- </a> -->
-                                    <button  class="btn btn-blue w-full rounded-2px" id="showFieldOps-<?= esc($campaign['employeeId']) ?>">
+                                    <button data-bs-toggle="modal" data-bs-target="#EDITcampaignModal-<?= $campaign['ID'] ?>" class="btn btn-blue w-full rounded-2px" id="showFieldOps-<?= esc($campaign['employeeId']) ?>">
                                        <svg class="svg-inline--fa fa-mobile-screen-button" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="mobile-screen-button" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                           <path class="" fill="currentColor" d="M16 64C16 28.7 44.7 0 80 0H304c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H80c-35.3 0-64-28.7-64-64V64zM224 448a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM304 64H80V384H304V64z">
                                           </path>
@@ -378,7 +422,7 @@
                                           </svg>
                                        </button>
                                     </a>
-                                    <button class="btn btn-blue rounded-2px" id="showSample-<?= esc($campaign['employeeId']) ?>">
+                                    <button data-bs-toggle="modal" data-bs-target="#EDITscampaignModal-<?= $campaign['employeeId'] ?>" class="btn btn-blue rounded-2px" id="showSample-<?= esc($campaign['employeeId']) ?>">
                                        <svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                           <path class="" fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z">
                                           </path>
@@ -426,38 +470,5 @@
        reader.readAsDataURL(event.target.files[0]);
    }
 </script>
-
-<script>
-    var campaigns = [];
-
-    <?php foreach($campaigns as $campaign): ?>
-        campaigns.push({
-            id: <?= json_encode($campaign['ID']) ?>,
-            name: <?= json_encode($campaign['name']) ?>,
-            description: <?= json_encode($campaign['description']) ?>,
-            department: <?= json_encode($campaign['department']) ?>,
-            license: <?= json_encode($campaign['license']) ?>,
-            employeeId: <?= json_encode($campaign['employeeId']) ?>,
-            email: <?= json_encode($campaign['email']) ?>,
-            image: <?= json_encode($campaign['image']) ?>
-        });
-    <?php endforeach; ?>
-</script>
-
-<script>
-    function updateCampaign(campaign) {
-        // global campaigns;
-        let elem = campaigns.find((elm) => elm.id == campaign);
-        console.log(elem);
-        $("#EDITcampaignModal #campaignName").val(elem.name);
-        $("#EDITcampaignModal #description").val(elem.description);
-        $("#EDITcampaignModal #department").val(elem.department);
-        $("#EDITcampaignModal #license").val(elem.license);
-        $("#EDITcampaignModal #employeeID").val(elem.employeeId);
-        $("#EDITcampaignModal #email").val(elem.email);
-        $("#EDITcampaignModal #preview").attr('src', elem.image);
-    }
-</script>
-
 
 <?= $this->endsection('content') ?>
