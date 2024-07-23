@@ -340,21 +340,6 @@
                                     </div>
                                 </div>
 
-<h1>Pulse Check</h1>
-<?php if (isset($technician)): ?>
-    <p>Employee ID: <?= esc($technician['employeeId']) ?></p>
-    <p>Name: <?= esc($technician['name']) ?></p>
-    <p>Email: <?= esc($technician['email']) ?></p>
-    <p>Description: <?= esc($technician['description']) ?></p>
-    <p>Department: <?= esc($technician['department']) ?></p>
-    <p>License: <?= esc($technician['license']) ?></p>
-    <?php if ($technician['image']): ?>
-        <p><img src="<?= base_url('uploads/' . esc($technician['image'])) ?>" alt="Technician Image"></p>
-    <?php endif; ?>
-<?php else: ?>
-    <p>No technician data found.</p>
-<?php endif; ?>
-
                                 <div class="modal fade" id="EDITscampaignModal-<?= $campaign['employeeId'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
                                         <div class="modal-content">

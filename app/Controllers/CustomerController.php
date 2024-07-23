@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\CustomerModel;
 use App\Models\TechnicianModal;
+use App\Services\MyGeotabService;
 use CodeIgniter\Controller;
 
 class CustomerController extends BaseController
@@ -12,7 +14,7 @@ class CustomerController extends BaseController
         // Load session service
         $this->session = \Config\Services::session();
     }
-    
+
     public function search()
     {
         $db = \Config\Database::connect();
@@ -30,7 +32,7 @@ class CustomerController extends BaseController
 
         return $this->response->setJSON($data);
     }
-
+    
     public function dispatch()
     {
         $technicianModel = new TechnicianModal();
@@ -69,21 +71,23 @@ class CustomerController extends BaseController
 
         // Insert customer data
         $customerModel->insert($data);
-        // $lastQuery = $customerModel->getLastQuery()->getQuery();
-        // log_message('debug', $lastQuery);
-        // session()->setFlashdata('last_query', $lastQuery);
 
         // Send bio email
         $this->sendbioEmail($technicianId, $data['customer_email']);
 
-        return redirect()->to('/operate/dispatch')->with('success', 'Customer info saved and email sent successfully.');
+        // Dispatch message using MyGeotabService
+        $this->sendDispatchMessage($technicianId, 'Technician dispatched to customer location');
+
+        return redirect()->to('/operate/dispatch')->with('success', 'Customer info saved, email sent, and dispatch message sent successfully.');
     }
 
     private function sendbioEmail($technicianId, $email)
     {
         $emailService = \Config\Services::email();
-        $pagelink = '<a href="http://localhost:8080/application/bio/'.$technicianId.'">BIO link</a>';
-        $message = "Here is technician bio link please click this link to see technician details: ".$pagelink; // Replace with your actual page link
+        $link = base_url('/application/bio/' . $technicianId);
+        
+        // Load the email template
+        $message = view('dispatchTab/bio-template', ['link' => $link]);
 
         // Initialize email configuration
         $emailService->initialize([
@@ -109,9 +113,46 @@ class CustomerController extends BaseController
         if (!$emailService->send()) {
             // Display error message for debugging
             echo $emailService->printDebugger(['headers', 'subject', 'body']);
-        } else {
-            // Successful send
-            return redirect()->to('/operate/dispatch')->with('success', 'Bio sent successfully');
         }
     }
+
+    private function sendDispatchMessage($technicianId, $message)
+    {
+        // Fetch device ID using technician ID
+        $technicianModel = new TechnicianModal();
+        $deviceId = $technicianModel->getDeviceIdByTechnicianId($technicianId);
+
+        $myGeotab = new MyGeotabService();
+        $response = $myGeotab->sendDispatchMessage($deviceId, $message);
+
+        if ($response['status'] != 'success') {
+            // Handle dispatch message failure
+            log_message('error', 'Dispatch message failed: ' . json_encode($response));
+        }
+    }
+
+    public function sendMessage()
+    {
+        $deviceId = $this->request->getPost('device_id');
+        $message = $this->request->getPost('message');
+
+        $myGeotab = new MyGeotabService();
+        $response = $myGeotab->sendDispatchMessage($deviceId, $message);
+
+        return $this->response->setJSON($response);
+    }
+
+    public function sendLiveLocation()
+    {
+        $deviceId = $this->request->getPost('device_id');
+        $latitude = $this->request->getPost('latitude');
+        $longitude = $this->request->getPost('longitude');
+
+        $myGeotab = new MyGeotabService();
+        $response = $myGeotab->sendLiveLocation($deviceId, $latitude, $longitude);
+
+        return $this->response->setJSON($response);
+    }
 }
+?>
+

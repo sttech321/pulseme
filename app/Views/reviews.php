@@ -69,17 +69,8 @@
                                           <!-- <p class="text-17px">Source</p> -->
                                           <select class="py-7px border-b outline-none bg-transparent" name="source" id="">
                                              <option value="" selected="" hidden="">Select Source</option>
-                                             <option value="facebook">Facebook</option>
                                              <option value="google">Google</option>
-                                             <option value="bbb">Better Business Bureau</option>
-                                             <option value="yp">Yellow Pages</option>
-                                             <option value="angieslist">Angi</option>
-                                             <option value="houzz">Houzz</option>
-                                             <option value="homeadvisor">Home Advisor</option>
-                                             <option value="homestar">Home Stars</option>
-                                             <option value="porch">Porch</option>
-                                             <option value="nextdoor">Nextdoor</option>
-                                             <option value="other">Other</option>
+                  
                                           </select>
                                           <!---->
                                        </div>
