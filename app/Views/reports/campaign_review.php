@@ -87,9 +87,6 @@
 													<!-- </th> -->
 												</tr>
 											</thead>
-											<?php foreach ($Customers as $data) : ?>
-														<?= esc($data['campaign_id']) ?>
-												<?php endforeach; ?>
 											<tbody>
 											<?php foreach ($campaigns as $campaign) : ?>	
 												<tr class="!bg-opacity-50 odd:bg-sky-100">

@@ -87,3 +87,9 @@ $routes->get('/leaderboard/reports/campaigns', 'ReportsController::report_campai
 $routes->get('leaderboard/reports/campaign-reviews', 'ReportsController::report_campaign_reviews');
 $routes->get('/leaderboard/reports/departments', 'ReportsController::report_campaign_departments');
 $routes->get('/leaderboard/reports/fieldops-usage', 'ReportsController::report_campaign_fieldsops');
+
+$routes->get('/leaderboard/reports/fieldops-usage', 'ReportsController::report_campaign_fieldsops');
+
+// $routes->get('/test-auth', 'CustomerController::testAuth');
+
+// $routes->get('/settings/dispatch/campaigns', 'Campaign::create');

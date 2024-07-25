@@ -1,69 +1,71 @@
 <?php
 
-namespace App\Services;
+namespace App\Models;
 
+use CodeIgniter\Model;
 use GuzzleHttp\Client;
+use Exception;
 
-class MyGeotabService
+class GeotabModel extends Model
 {
-    protected $client;
-    protected $apiUrl;
+    private $apiUrl = 'https://my.geotab.com/apiv1';
+    private $sessionId;
+    private $client;
 
     public function __construct()
     {
+        parent::__construct();
         $this->client = new Client();
-        $this->apiUrl = getenv('MYGEOTAB_API_URL');
     }
 
-    public function authenticate()
+    public function authenticate($username, $password, $database)
     {
-        $response = $this->client->post($this->apiUrl . '/apiv1', [
-            'json' => [
-                'method' => 'Authenticate',
-                'params' => [
-                    'username' => getenv('MYGEOTAB_API_USERNAME'),
-                    'password' => getenv('MYGEOTAB_API_PASSWORD')
-                ]
-            ]
-        ]);
+        $data = [
+            'method' => 'Authenticate',
+            'params' => [
+                'userName' => $username,
+                'password' => $password,
+                'database' => $database
+            ],
+            'id' => 1
+        ];
 
-        return json_decode($response->getBody(), true);
+        $response = $this->sendRequest($data);
+
+        if (isset($response->result->credentials->sessionId)) {
+            $this->sessionId = $response->result->credentials->sessionId;
+            return true;
+        }
+
+        throw new Exception('Authentication failed');
     }
 
-    public function sendDispatchMessage($deviceId, $message)
+    public function getDevices()
     {
-        $auth = $this->authenticate();
+        if (!$this->sessionId) {
+            throw new Exception('Session ID is not set');
+        }
 
-        $response = $this->client->post($this->apiUrl . '/apiv1', [
-            'json' => [
-                'method' => 'SendMessage',
-                'params' => [
-                    'device' => $deviceId,
-                    'message' => $message,
-                    'sessionId' => $auth['result']['sessionId']
-                ]
-            ]
-        ]);
+        $data = [
+            'method' => 'Get',
+            'params' => [
+                'typeName' => 'Device'
+            ],
+            'id' => 2,
+            'sessionId' => $this->sessionId
+        ];
 
-        return json_decode($response->getBody(), true);
+        $response = $this->sendRequest($data);
+
+        return $response->result;
     }
 
-    public function sendLiveLocation($deviceId, $latitude, $longitude)
+    private function sendRequest($data)
     {
-        $auth = $this->authenticate();
-
-        $response = $this->client->post($this->apiUrl . '/apiv1', [
-            'json' => [
-                'method' => 'SendLiveLocation',
-                'params' => [
-                    'device' => $deviceId,
-                    'latitude' => $latitude,
-                    'longitude' => $longitude,
-                    'sessionId' => $auth['result']['sessionId']
-                ]
-            ]
+        $response = $this->client->post($this->apiUrl, [
+            'json' => $data
         ]);
 
-        return json_decode($response->getBody(), true);
+        return json_decode($response->getBody());
     }
 }

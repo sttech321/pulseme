@@ -89,7 +89,7 @@
                                     <div class="modal-dialog modalContent mx-700">
                                        <div class="modal-content">
                                           <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                             <li class="nav-item" role="presentation" style="display:none;">
+                                             <!-- <li class="nav-item" role="presentation" style="display:none;">
                                                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">General</button>
                                              </li>
                                              <li class="nav-item" role="presentation" style="display:none;">
@@ -97,7 +97,7 @@
                                              </li>
                                              <li class="nav-item" role="presentation" style="display:none;">
                                                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Templates</button>
-                                             </li>
+                                             </li> -->
                                           </ul>
                                           <div class="tab-content" id="pills-tabContent">
                                              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -110,13 +110,17 @@
                                                       <!-- Display validation errors -->
                                                       <?php $script = ''; ?>
                                                       <?php if (session()->getFlashdata('validation')): ?>
-                                                      <div class="validation-errors">
-                                                         <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
-                                                         <p style="color: red;"><?php echo $error ?></p>
-                                                         <?php endforeach ?>
-                                                      </div>
-                                                      <?php $script = '$("#campaignModal").addClass("show").css("display","block")'; ?>
-                                                      <?php endif ?>
+                                                         <div class="validation-errors">
+                                                            <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
+                                                                  <p style="color: red;"><?php echo $error; ?></p>
+                                                            <?php endforeach; ?>
+                                                         </div>
+                                                         <?php $script = '$(document).ready(function() { $("#campaignModal").addClass("show").css("display", "block"); });'; ?>
+                                                      <?php endif; ?>
+                                                      <script>
+                                                         <?php echo $script; ?>
+                                                      </script>
+
                                                       <div class="grid grid-cols-2 gap-20px auto-rows-auto">
                                                          <div class="flex w-full flex-col row-span-3">
                                                             <img id="preview" class="preview-image w-200px h-auto" src="/image/campaignProfile.jpg" alt="Image Preview">
@@ -129,27 +133,31 @@
                                                          </div>
                                                          <div class="input-group">
                                                             <label class="font-bold text-sm" for="campaignName">Campaign Name</label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="CampaignName" id="campaignName" value="<?php echo old('CampaignName') ?>">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="CampaignName" id="campaignName" value="">
                                                          </div>
                                                          <div class="input-group row-span-2">
                                                             <label class="font-bold text-sm" for="description">Campaign Description</label>
-                                                            <textarea class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaignDescription" rows="5" id="description"><?php echo old('campaignDescription') ?></textarea>
+                                                            <textarea class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaignDescription" rows="5" id="description"></textarea>
                                                          </div>
                                                          <div class="input-group">
                                                             <label class="font-bold text-sm" for="department">Department</label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaignDepartment" id="department" value="<?php echo old('campaignDepartment') ?>">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaignDepartment" id="department" value="">
                                                          </div>
                                                          <div class="input-group">
                                                             <label class="font-bold text-sm" for="license">License</label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="license" id="license" value="<?php echo old('license') ?>">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="license" id="license" value="">
                                                          </div>
                                                          <div class="input-group">
                                                             <label class="font-bold text-sm" for="employeeID">Employee ID <span class="text-xs">(Useful for API Integrations)</span></label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employeeId" id="employeeID" value="<?php echo old('employeeId') ?>">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employeeId" id="employeeID" value="">
                                                          </div>
                                                          <div class="input-group">
                                                             <label class="font-bold text-sm" for="email">Email <span class="text-xs">(descriptor)</span></label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email" value="<?php echo old('email') ?>">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email" value="">
+                                                         </div>
+                                                         <div class="input-group">
+                                                            <label class="font-bold text-sm" for="device">Device ID <span class="text-xs">(deviceId)</span></label>
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="deviceId" id="device" value="">
                                                          </div>
                                                          <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
@@ -277,24 +285,27 @@
                                  <div class="modal fade" id="EDITcampaignModal-<?= $campaign['ID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
                                         <div class="modal-content">
-                                       
-                                        <form method="post" action="<?= base_url('/settings/dispatch/campaigns/update/' . $campaign['ID']) ?>" enctype="multipart/form-data">
-                                        <input type="hidden" name="id" value="<?= $campaign['ID'] ?>">
-                                       
+                                           <form method="post" action="<?= base_url('/settings/dispatch/campaigns/update/' . $campaign['ID']) ?>" enctype="multipart/form-data">
+                                           <input type="hidden" name="id" value="<?= $campaign['ID'] ?>">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Edit campaign</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                 <?php $script = ''; ?>
-                                                      <?php if (session()->getFlashdata('validation')): ?>
-                                                      <div class="validation-errors">
-                                                         <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
-                                                         <p style="color: red;"><?php echo $error ?></p>
-                                                         <?php endforeach ?>
-                                                      </div>
-                                                      <?php $script = '$("#campaignModal").addClass("show").css("display","block")'; ?>
-                                                      <?php endif ?>
+                                                <?php if (session()->getFlashdata('validation')): ?>
+                                                   <div class="validation-errors">
+                                                      <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
+                                                            <p style="color: red;"><?php echo $error; ?></p>
+                                                      <?php endforeach; ?>
+                                                   </div>
+                                                   <?php $script = '$(document).ready(function() { $("#campaignModal").addClass("show").css("display", "block"); });'; ?>
+                                                <?php endif; ?>
+
+                                                <script>
+                                                   <?php echo $script; ?>
+                                                </script>
+
                                                     <div class="grid grid-cols-2 gap-20px auto-rows-auto">
                                                         <div class="flex w-full flex-col row-span-3">
                                                             <img id="preview" class="preview-image w-200px h-auto" src="<?= esc($campaign['image']) ?>" alt="Image Preview">
@@ -322,11 +333,15 @@
                                                         </div>
                                                         <div class="input-group">
                                                             <label class="font-bold text-sm" for="employeeID">Employee ID <span class="text-xs">(Useful for API Integrations)</span></label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employeeId" id="employeeID" value="<?= esc($campaign['employeeId']) ?>">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employeeId" id="employeeId" value="<?= esc($campaign['employeeId']) ?>">
                                                         </div>
                                                         <div class="input-group">
                                                             <label class="font-bold text-sm" for="email">Email <span class="text-xs">(descriptor)</span></label>
                                                             <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email" value="<?= esc($campaign['email']) ?>">
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <label class="font-bold text-sm" for="device">Device ID <span class="text-xs">(deviceId)</span></label>
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="deviceId" id="deviceId" value="<?= esc($campaign['deviceId']) ?>">
                                                         </div>
                                                     </div>
                                                 </div>

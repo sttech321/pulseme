@@ -25,10 +25,4 @@ class TechnicianModal extends Model
         return $this->where('id', $technicianId)->first();
     }
 
-    // Fetch device_id by technician_id
-    public function getDeviceIdByTechnicianId($technicianId)
-    {
-        return $this->where('id', $technicianId)->first()['device_id'];
-    }
-
 }
