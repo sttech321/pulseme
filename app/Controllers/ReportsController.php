@@ -36,17 +36,17 @@ class ReportsController extends BaseController {
     }
     
     
-    public function report_campaign_departments(){
-        return view('reports/departments');
+    public function departments(): string
+    {
+        $model = new CampaignModel();
+        $data['campaigns'] = $model->findAll();
+        return view('reports/departments',$data);
     }
-
 
     public function report_campaign_fieldsops(){
         $model = new CampaignModel();
         $data['campaigns'] = $model->findAll();
         return view('reports/fielsops_usage',$data);
     }
-
-
 
 }

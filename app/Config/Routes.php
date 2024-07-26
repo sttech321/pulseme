@@ -44,13 +44,8 @@ $routes->get('search', 'CustomerController::search');
 $routes->get('/chat-widget', 'Home::widget');
 $routes->get('/employee-rewards', 'Home::rewards');
 $routes->get('/analyze/competitor-analysisg', 'Home::analysisg');
-// $routes->get('/analyze/reviews', 'Home::reviews');
-// $routes->get('/analyze/dispatching', 'Home::dispatching');
-// $routes->get('/analyze/dispatching', 'TechnicianController::dispatching');
-$routes->get('/leaderboard/reports/departments', 'Home::departments');
-// $routes->get('/analyse/overview', 'UserController::dashboard');
+
 $routes->get('/logs/outbound', 'Home::outbound');
-// $routes->get('/login', 'UserController::login');
 $routes->get('/analyze/reviews/social-reviews', 'Home::social_review');
 $routes->get('/operate/contact-card', 'Home::contact_card');
 $routes->get('/operate/quick-actions', 'Home::quick_action');
@@ -64,10 +59,7 @@ $routes->get('/settings/contact-card/templates', 'Home::contact_templates');
 
 $routes->get('/settings/billing/billing_subscription', 'Home::billing_subscription');
 
-// $routes->get('/settings/dispatch/campaigns', 'Home::campaigns');
-$routes->get('settings/general/connect-social-media', 'Home::connect_social_media');
-
-// $routes->get('/welcome', 'Home::welcome');
+$routes->get('settings/general/connect-social-media', 'Home::connect_social_media'); 
 
 $routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');
 $routes->post('/analyze/reviews/create', 'ReviewController::insert');
@@ -85,11 +77,7 @@ $routes->post('/operate', 'CustomerController::sendbioEmail');
 
 $routes->get('/leaderboard/reports/campaigns', 'ReportsController::report_campaign');
 $routes->get('leaderboard/reports/campaign-reviews', 'ReportsController::report_campaign_reviews');
-$routes->get('/leaderboard/reports/departments', 'ReportsController::report_campaign_departments');
+$routes->get('/leaderboard/reports/departments', 'ReportsController::departments');
 $routes->get('/leaderboard/reports/fieldops-usage', 'ReportsController::report_campaign_fieldsops');
 
-$routes->get('/leaderboard/reports/fieldops-usage', 'ReportsController::report_campaign_fieldsops');
 
-// $routes->get('/test-auth', 'CustomerController::testAuth');
-
-// $routes->get('/settings/dispatch/campaigns', 'Campaign::create');

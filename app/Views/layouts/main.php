@@ -130,7 +130,7 @@
 										<a href="#"><img width="15" src="/image/competitor.svg" alt="sidebar icon">Competitor Analysis</a>
 									</li> -->
 									<li>
-										<a href="/analyze/dispatching"><img width="15" src="/image/dispatching.svg" alt="sidebar icon">Dispatching</a>
+										<a href="#"><img width="15" src="/image/dispatching.svg" alt="sidebar icon">Dispatching</a>
 									</li>
 								</ul>
 							</div>

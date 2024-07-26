@@ -5,11 +5,18 @@ use CodeIgniter\Model;
 
 class CustomerModel extends Model
 {
-    protected $table = 'customers_bio';
-    protected $primaryKey = 'id';
-    protected $allowedFields = [
-        'customer_name', 'customer_email', 'customer_phone', 'customer_address', 'campaign_id', 'created_at', 'updated_at','device_id'
-    ];
+    protected $table;
+    protected $primaryKey;
+    protected $allowedFields;
+
+    public function __construct()
+    {
+        parent::__construct();
+        
+        $this->table = getenv('DB_CUSTOMER_TABLE');
+        $this->primaryKey = getenv('DB_CUSTOMER_PRIMARY_KEY');
+        $this->allowedFields = explode(',', getenv('DB_CUSTOMER_FIELDS'));
+    }
 
     public function getCustomersWithCampaigns()
     {

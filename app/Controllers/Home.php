@@ -69,10 +69,6 @@ class Home extends BaseController
     //     }
     // }
     
-    public function departments(): string
-    {
-        return view('departments');
-    }
 
     public function welcome(): string 
     {
