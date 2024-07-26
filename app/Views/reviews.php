@@ -18,7 +18,7 @@
 <?php
 
 foreach($fetchreview as $review){
-//  print_r($review['campaignID']);
+  print_r($review['campaignID']);
 //  print_r(($review['campaignName']));
 // if(!empty($campaignname)){
 //print_r($campaignname);
