@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\CampaignModel;
 use App\Models\ReviewModal;
 use CodeIgniter\Controller;
+use CodeIgniter\Pagination\Pager;
+
 
 class ReviewController extends BaseController
 {
@@ -43,11 +45,13 @@ class ReviewController extends BaseController
             'reviewType' => $this->request->getPost('source'),
             'createdOn' => $this->request->getPost('date'),
             'sentiment' => $this->request->getPost('sentiment'),
-            'companyID' => $this->request->getPost('campaign'),
+            'campaignID' => $this->request->getPost('campaign'),
             'reviewText' => $this->request->getPost('comment'),
+            'reviewerInfo' => json_encode([
             'city' => $this->request->getPost('City'),
             'state' => $this->request->getPost('State'),
             'zipcode' => $this->request->getPost('Zipcode'),
+            ])
         ];
         
 
@@ -59,30 +63,165 @@ class ReviewController extends BaseController
 
     }
 
-    public function submitRatings()
+    
+    public function reviews()
     {
-        // Get the raw POST data
-        $jsonData = $this->request->getRawInput();
+        // Ensure the session is started (if not started elsewhere)
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/');
+        }
+
+        // Load CampaignModel and fetch all campaigns
+        $campaignModel = new CampaignModel();
+        $campaigns = $campaignModel->findAll(); // Fetch all campaigns from the database
     
-        // Decode JSON data to an array
-        $ratingsData = json_decode($jsonData['ratings'], true);
-    
-        // Convert array to JSON format for database storage
-        $jsonRatings = json_encode($ratingsData);
-    
-        // Save to the database using your ReviewModal model
+        // Map campaign IDs to campaign names
+        $campaignNames = [];
+        foreach ($campaigns as $campaign) {
+           $campaignNames[$campaign['ID']] = [
+                'department' => $campaign['department'],
+                'name' => $campaign['name'],
+            ];
+        }
+       
         $reviewModel = new ReviewModal();
+        if (!empty($campaignID)) {
+            $reviews = $reviewModel->where('campaignID', $campaignID)->paginate(2, 'reviews');
+        } else {
+            $reviews = $reviewModel->paginate(2, 'reviews'); // No filter, get all reviews
+        } // Fetch 10 reviews per page
+        $pager = $reviewModel->pager;
+            
+       
+        foreach ($reviews as &$review) {
+            $ID = $review['ID'];
+            //print_r($ID);            
+            $campaignID = $review['campaignID'];
+            if (isset($campaignNames[$campaignID])) {
+                $review['campaignDepartment'] = $campaignNames[$campaignID]['department'];
+                $review['campaignName'] = $campaignNames[$campaignID]['name'];
+            } else {
+                $review['campaignDepartment'] = 'not known';
+                $review['campaignName'] = 'not known';
+            }
+
+        
+        }
+         
+      
+        // Prepare data for view
+        $data['fetchreview'] = $reviews;
+        $data['campaigns'] = $campaigns;
+        $data['pager'] = $pager;
+        
+        // Load the view with data
+        return view('reviews', $data);
+    }
+
+    public function getReviewsByCampaign()
+    {
+        if ($this->request->isAJAX()) {
+            $campaignID = $this->request->getPost('campaign_id');
+            $page = $this->request->getPost('page') ?? 1; 
+        $limit = $this->request->getPost('limit') ?? 1; 
+            // Load CampaignModel and fetch all campaigns
+            $campaignModel = new CampaignModel();
+            $campaigns = $campaignModel->findAll();
     
-        $data = [
-            'ratings' => $jsonRatings,
-        ];
+            // Map campaign IDs to campaign names
+            $campaignNames = [];
+            foreach ($campaigns as $campaign) {
+                $campaignNames[$campaign['ID']] = [
+                    'department' => $campaign['department'],
+                    'name' => $campaign['name'],
+                ];
+            }
     
-        // Insert data into the database
-        $reviewModel->insert($data);
+            // Load ReviewModel
+            $reviewModel = new ReviewModal();
+            $offset = ($page - 1) * $limit;
+            // Fetch reviews based on the campaign ID
+            $reviews = $reviewModel->where('campaignID', $campaignID)->findAll($limit, $offset);
     
-        // Redirect to the reviews page with a success message
-        return redirect()->to('/application/pulsecheck//(:num)#rating.63')->with('success', 'Ratings saved successfully.');
+            // Attach campaign names and departments to reviews
+            foreach ($reviews as &$review) {
+                $campaignID = $review['campaignID'];
+                if (isset($campaignNames[$campaignID])) {
+                    $review['campaignDepartment'] = $campaignNames[$campaignID]['department'];
+                    $review['campaignName'] = $campaignNames[$campaignID]['name'];
+                } else {
+                    $review['campaignDepartment'] = 'not known';
+                    $review['campaignName'] = 'not known';
+                }
+            }
+            $totalReviews = $reviewModel->where('campaignID', $campaignID)->countAllResults();
+            // Prepare the JSON response
+            $response = [
+                'success' => true,
+                'reviews' => $reviews,
+                'message' => !empty($reviews) ? 'Reviews found.' : 'No reviews found for this campaign.',
+                'pagination' => [
+                'total' => $totalReviews,
+                'page' => $page,
+                'limit' => $limit,
+                'total_pages' => ceil($totalReviews / $limit)
+            ]
+            ];
+            
+            // Set the content type to JSON and output the JSON response
+            $this->response->setHeader('Content-Type', 'application/json');
+            return $this->response->setBody(json_encode($response));
+        }
+    
+        return $this->response->setStatusCode(400, 'Bad Request');
     }
     
+    public function approveReview()
+    {
+        // Retrieve the data sent from the front end
+        $id = $this->request->getPost('ID');
+        $approved = $this->request->getPost('approved');
+        
+        // Print the data for debugging
+        // echo "<pre>";
+        // print_r([
+        //     'ID' => $id,
+        //     'approved' => $approved
+        // ]);
+        // echo "</pre>";
+    
+        // Optional: Stop further execution to see the output
+        //die();
+        $reviewModel = new ReviewModal();
+        // Fetch the current review
+        $review = $reviewModel->find($id);
+        
+        //print_r($review['isApproved']);
+        // die;
+        if ($review) {
+            // Get the current isApproved value
+            $currentApprovedStatus = $review['isApproved'];
+    
+            // Determine the new approved status
+            $newApprovedStatus = $currentApprovedStatus === '0' ? '1' : '0';
+    
+            // Update the review status
+            $reviewModel->update($id, ['isApproved' => $newApprovedStatus]);
+    
+            return $this->response->setJSON([
+                'status' => 'success',
+                'newStatus' => $newApprovedStatus
+            ]);
+        }
+    
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Review not found']);
+    }
+    
+    
+    
+    
+
+    
+
     
 }

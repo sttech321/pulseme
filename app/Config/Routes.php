@@ -70,7 +70,8 @@ $routes->get('settings/general/connect-social-media', 'Home::connect_social_medi
 $routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');
 $routes->post('/analyze/reviews/create', 'ReviewController::insert');
 $routes->get('/settings/dispatch/campaigns', 'Campaign::index');
-$routes->get('/analyze/reviews', 'Campaign::reviews');
+// $routes->get('/analyze/reviews', 'Campaign::reviews');
+$routes->get('/analyze/reviews', 'ReviewController::reviews');
 
 // $routes->post('/operate/dispatch/create', 'CustomerController::create');
 $routes->post('/operate/dispatch/create/:num', 'CustomerController::create/$1');
@@ -78,6 +79,9 @@ $routes->post('/operate/dispatch/create/:num', 'CustomerController::create/$1');
 $routes->get('application/bio/(:num)', 'Campaign::technician_bio/$1');
 $routes->get('application/pulsecheck/(:num)', 'Campaign::pulse_check/$1');
 
+
+$routes->post('/analyze/reviews/get', 'ReviewController::getReviewsByCampaign');
+$routes->post('/analyze/reviews/approve', 'ReviewController::approveReview');
 // $routes->post('/send-bio', 'CustomerController::sendbioEmail');
 // $routes->post('/dispatch', 'CustomerController::sendbioEmail');
 // $routes->post('submit-ratings', 'Campaign::submitRatings');

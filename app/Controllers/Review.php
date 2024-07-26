@@ -10,7 +10,6 @@ class Review extends BaseController
     {
         $client = \Config\Services::curlrequest();
 
-        // die('555555555555');
         $response = $client->get(''); // Replace with your actual JSON file URL
         $reviews = json_decode($response->getBody(), true);
 

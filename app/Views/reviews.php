@@ -15,6 +15,15 @@
       </div>
    </div>
 </div>
+<?php
+
+foreach($fetchreview as $review){
+//  print_r($review['campaignID']);
+//  print_r(($review['campaignName']));
+// if(!empty($campaignname)){
+//print_r($campaignname);
+}
+?>
 <!-- <div class="container-fluid"> -->
 <div class="sidebarRightContentWrap">
    <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
@@ -69,17 +78,9 @@
                                           <!-- <p class="text-17px">Source</p> -->
                                           <select class="py-7px border-b outline-none bg-transparent" name="source" id="">
                                              <option value="" selected="" hidden="">Select Source</option>
-                                             <option value="facebook">Facebook</option>
+                                             
                                              <option value="google">Google</option>
-                                             <option value="bbb">Better Business Bureau</option>
-                                             <option value="yp">Yellow Pages</option>
-                                             <option value="angieslist">Angi</option>
-                                             <option value="houzz">Houzz</option>
-                                             <option value="homeadvisor">Home Advisor</option>
-                                             <option value="homestar">Home Stars</option>
-                                             <option value="porch">Porch</option>
-                                             <option value="nextdoor">Nextdoor</option>
-                                             <option value="other">Other</option>
+                                            
                                           </select>
                                           <!---->
                                        </div>
@@ -102,7 +103,7 @@
                                           <div class="inputBox">
                                              <select class="form-select form-select-md mb-3" name="campaign" aria-label=".form-select-lg example">
                                                 <option disabled selected>Campaign</option>
-                                                <?php  foreach($reviews as $review) : ?>
+                                                <?php  foreach($campaigns as $review) : ?>
                                                    <option value="<?= esc($review['ID']) ?>"><?= esc($review['name']) ?></option>
                                                 <?php endforeach; ?>
                                              </select>
@@ -173,7 +174,7 @@
                               </svg>
                               <select data-v-428084ba="" class="border-0 !ring-transparent !outline-none min-w-250px ml-10px w-full" name="filter-campaings" id="filter-campaings">
                                  <option data-v-428084ba="" value="">All Campaigns</option>
-                                 <?php foreach($reviews as $review): ?>
+                                 <?php foreach($campaigns as $review): ?>
                                  <option data-v-428084ba="" value="<?= esc($review['ID']) ?>"><?= esc($review['name']) ?></option>
                                     <?php endforeach; ?>
                               </select>
@@ -187,13 +188,21 @@
                               </select>
                            </div>
                            <div data-v-428084ba="" class="filter py-10px px-30px flex items-center relative">
-                              <button data-v-428084ba="">
+                              <button data-v-428084ba="" data-review-id="">
                                  Filter Approved 
                                  <svg data-v-428084ba="" class="svg-inline--fa fa-filter" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="filter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                     <path class="" fill="currentColor" d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"></path>
                                  </svg>
                               </button>
+                              <div id="review-results"></div>
+
                               <!---->
+                           <div data-v-428084ba="" class="absolute bg-white shadow rounded-4px w-full p-10px top-full left-0 z-1">
+                              <div data-v-428084ba="" class="checkbox-group flex justify-start items-center mb-5px"><input data-v-428084ba="" class="mr-5px !ring-0" style="color: rgb(23, 190, 107);" type="checkbox" name="approved" id="approved"><label data-v-428084ba="" class="text-sm" for="approved">Approved Reviews</label></div>
+                              <div data-v-428084ba="" class="checkbox-group flex justify-start items-center mb-5px"><input data-v-428084ba="" class="mr-5px !ring-0" style="color: rgb(23, 190, 107);" type="checkbox" name="unapproved" id="unapproved"><label data-v-428084ba="" class="text-sm" for="unapproved">Unapproved Reviews</label></div>
+                              <div data-v-428084ba="" class="checkbox-group flex justify-start items-center mb-5px"><input data-v-428084ba="" class="mr-5px !ring-0" style="color: rgb(23, 190, 107);" type="checkbox" name="no-text" id="no-text"><label data-v-428084ba="" class="text-sm" for="no-text">No Text Reviews</label></div>
+                           </div>
+
                            </div>
                         </div>
                         <div data-v-428084ba="" class="mx-10px flex justify-evenly items-center w-150px">
@@ -233,6 +242,7 @@
                   <!---->
                   <div data-v-428084ba="" class="row table p-10px w-full">
                      <table data-v-428084ba="" class="w-full">
+                        <?php foreach($fetchreview as $review): ?>
                         <tr data-v-428084ba="" class="flex w-full">
                            <th data-v-428084ba="" class="p-10px w-auto">
                               <div data-v-428084ba="" class="flex justify-start items-center col-span-3 cursor-pointer">
@@ -246,6 +256,7 @@
                            <th data-v-428084ba="" class="p-10px w-full"></th>
                            <th data-v-428084ba="" class="p-10px w-150px"></th>
                         </tr>
+                        
                         <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
                            <td data-v-f15ab7a3="" class="p-10px w-auto">
                               <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">
@@ -260,13 +271,14 @@
                                  <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
                               </svg>
                               <div data-v-f15ab7a3="" class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">
-                                 <p data-v-f15ab7a3="">9.9</p>
+                                 <p data-v-f15ab7a3=""><?php echo $review['sentiment']?></p>
                               </div>
                            </td>
+                          
                            <td data-v-f15ab7a3="" class="p-10px w-full">
                               <!---->
                               <div data-v-f15ab7a3="" class="comment border-l-5 border-blue-500 py-9px px-18px mb-5px">
-                                 <p data-v-f15ab7a3="">Scott was helpful and professional.</p>
+                                 <p data-v-f15ab7a3=""><?= $review['reviewText'] ?></p>
                               </div>
                               <div data-v-f15ab7a3="" class="info flex flex-wrap">
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
@@ -283,10 +295,10 @@
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> 2024-07-11</p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span> Scott Neubert</p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span><?= $review['campaignName']?></p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span> Service Technician</p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span><?= $review['campaignDepartment']?></p>
                                  </div>
                               </div>
                               <div data-v-f15ab7a3="" class="ratings flex flex-wrap">
@@ -305,13 +317,15 @@
                               </div>
                            </td>
                            <td data-v-f15ab7a3="" class="p-10px w-200px">
-                              <div data-v-f15ab7a3="" class="flex flex-col items-center justify-center h-full">
-                                 <button data-v-f15ab7a3="" class="btn w-full mb-5px btn-green">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                       <path class="" fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
-                                    </svg>
-                                    Approve
-                                 </button>
+                              <?php echo $review['ID'] . ', ' . $review['isApproved']?>
+                              <div id="<?= $review['ID'] ?>" class="flex flex-col items-center justify-center h-full" data-id="<?= $review['ID'] ?>">
+                           <button class="btn btn-approve w-full mb-5px <?= $review['isApproved'] == '1' ? 'btn-gray' : 'btn-green' ?>" approved="<?= $review['isApproved'] ?>" onclick="handleApprovalClick(this)">
+                                 <svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
+                                 </svg>
+                                 <?= $review['isApproved'] == '1' ? 'Approved' : 'Approve' ?>
+                           </button>
+                           
                                  <button data-v-f15ab7a3="" class="btn btn-blue w-full mb-5px">
                                     <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                        <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
@@ -328,555 +342,65 @@
                            </td>
                            <!----><!----><!---->
                         </tr>
-                        <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
-                           <td data-v-f15ab7a3="" class="p-10px w-auto">
-                              <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">
-                                 <svg class="svg-inline--fa fa-square mr-5px text-17px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path class="" fill="currentColor" d="M384 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path>
-                                 </svg>
-                                 <p></p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
-                              <svg data-v-f15ab7a3="" class="svg-inline--fa fa-face-grin text-lime-500 text-40px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                 <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
-                              </svg>
-                              <div data-v-f15ab7a3="" class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">
-                                 <p data-v-f15ab7a3="">9.9</p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-full">
-                              <!---->
-                              <div data-v-f15ab7a3="" class="comment border-l-5 border-blue-500 py-9px px-18px mb-5px">
-                                 <p data-v-f15ab7a3="">Scott was awesome! He was very friendly and professional. You can tell he really cares about the customer.</p>
-                              </div>
-                              <div data-v-f15ab7a3="" class="info flex flex-wrap">
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> Odilma Bernate</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Phone:</span> +1 (239) 284-2194</p>
-                                 </div>
-                                 <!---->
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> 4311 22nd Avenue West</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> 2024-07-11</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span> Scott Neubert</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span> Service Technician</p>
-                                 </div>
-                              </div>
-                              <div data-v-f15ab7a3="" class="ratings flex flex-wrap">
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">How likely are you to recommend us to your friends and family?</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">Professionalism</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">Quality of Service</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
-                                 </div>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-200px">
-                              <div data-v-f15ab7a3="" class="flex flex-col items-center justify-center h-full">
-                                 <button data-v-f15ab7a3="" class="btn w-full mb-5px btn-green">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                       <path class="" fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
-                                    </svg>
-                                    Approve
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full mb-5px">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
-                                    </svg>
-                                    Archive
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
-                                    </svg>
-                                    Edit
-                                 </button>
-                              </div>
-                           </td>
-                           <!----><!----><!---->
-                        </tr>
-                        <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
-                           <td data-v-f15ab7a3="" class="p-10px w-auto">
-                              <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">
-                                 <svg class="svg-inline--fa fa-square mr-5px text-17px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path class="" fill="currentColor" d="M384 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path>
-                                 </svg>
-                                 <p></p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
-                              <div data-v-f15ab7a3="" class="sm-badge sm-google"><i data-v-f15ab7a3=""></i></div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-full">
-                              <!---->
-                              <div data-v-f15ab7a3="" class="comment border-l-5 border-blue-500 py-9px px-18px mb-5px">
-                                 <p data-v-f15ab7a3="">So my 16 year old ac system finally departed this earth,so I went A/C company shopping online and found HALES AIR CONDITIONING &amp; HEATING. Let me just say from the initial Sales Rep call to the final install it was a true pleasure. Mike and Nick {INSTALL TECHS} did a fantastic job installing the system and replacing the garage duct work to code. I highly recommend this company,they truly go above and beyond .</p>
-                              </div>
-                              <div data-v-f15ab7a3="" class="info flex flex-wrap">
-                                 <!----><!----><!----><!---->
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> 2024-07-10</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span> Hales AC Service</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span> General</p>
-                                 </div>
-                              </div>
-                              <div data-v-f15ab7a3="" class="ratings flex flex-wrap"></div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-200px">
-                              <div data-v-f15ab7a3="" class="flex flex-col items-center justify-center h-full">
-                                 <button data-v-f15ab7a3="" class="btn w-full mb-5px btn-green">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                       <path class="" fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
-                                    </svg>
-                                    Approve
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full mb-5px">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
-                                    </svg>
-                                    Archive
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
-                                    </svg>
-                                    Edit
-                                 </button>
-                              </div>
-                           </td>
-                           <!----><!----><!---->
-                        </tr>
-                        <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
-                           <td data-v-f15ab7a3="" class="p-10px w-auto">
-                              <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">
-                                 <svg class="svg-inline--fa fa-square mr-5px text-17px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path class="" fill="currentColor" d="M384 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path>
-                                 </svg>
-                                 <p></p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
-                              <svg data-v-f15ab7a3="" class="svg-inline--fa fa-face-grin text-lime-500 text-40px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                 <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
-                              </svg>
-                              <div data-v-f15ab7a3="" class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">
-                                 <p data-v-f15ab7a3="">9.9</p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-full">
-                              <!---->
-                              <div data-v-f15ab7a3="" class="comment border-l-5 border-blue-500 py-9px px-18px mb-5px">
-                                 <p data-v-f15ab7a3="">Aaron Krasnow was my technician today from Hales AC.It was as usual a complete pleasure to have him as my technician to not only clean and check my AC system but also install a ultra violet system to maintain my system.Hales can be proud to have such a professional and courteous employee represent their company.</p>
-                              </div>
-                              <div data-v-f15ab7a3="" class="info flex flex-wrap">
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> Kevin Cowan</p>
-                                 </div>
-                                 <!---->
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Email:</span> kcowlan@gmail.com</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> 5385 - 26th Ave N</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> 2024-07-10</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span> Aaron Krasnow</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span> Service Technician</p>
-                                 </div>
-                              </div>
-                              <div data-v-f15ab7a3="" class="ratings flex flex-wrap">
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">How likely are you to recommend us to your friends and family?</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">Professionalism</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">Quality of Service</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
-                                 </div>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-200px">
-                              <div data-v-f15ab7a3="" class="flex flex-col items-center justify-center h-full">
-                                 <button data-v-f15ab7a3="" class="btn w-full mb-5px btn-green">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                       <path class="" fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
-                                    </svg>
-                                    Approve
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full mb-5px">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
-                                    </svg>
-                                    Archive
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
-                                    </svg>
-                                    Edit
-                                 </button>
-                              </div>
-                           </td>
-                           <!----><!----><!---->
-                        </tr>
-                        <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
-                           <td data-v-f15ab7a3="" class="p-10px w-auto">
-                              <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">
-                                 <svg class="svg-inline--fa fa-square mr-5px text-17px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path class="" fill="currentColor" d="M384 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path>
-                                 </svg>
-                                 <p></p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
-                              <div data-v-f15ab7a3="" class="sm-badge sm-google"><i data-v-f15ab7a3=""></i></div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-full">
-                              <!----><!---->
-                              <div data-v-f15ab7a3="" class="info flex flex-wrap">
-                                 <!----><!----><!----><!---->
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> 2024-07-10</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span> Hales AC Service</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span> General</p>
-                                 </div>
-                              </div>
-                              <div data-v-f15ab7a3="" class="ratings flex flex-wrap"></div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-200px">
-                              <div data-v-f15ab7a3="" class="flex flex-col items-center justify-center h-full">
-                                 <button data-v-f15ab7a3="" class="btn w-full mb-5px btn-green">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                       <path class="" fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
-                                    </svg>
-                                    Approve
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full mb-5px">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
-                                    </svg>
-                                    Archive
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
-                                    </svg>
-                                    Edit
-                                 </button>
-                              </div>
-                           </td>
-                           <!----><!----><!---->
-                        </tr>
-                        <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
-                           <td data-v-f15ab7a3="" class="p-10px w-auto">
-                              <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">
-                                 <svg class="svg-inline--fa fa-square mr-5px text-17px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path class="" fill="currentColor" d="M384 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path>
-                                 </svg>
-                                 <p></p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
-                              <div data-v-f15ab7a3="" class="sm-badge sm-google"><i data-v-f15ab7a3=""></i></div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-full">
-                              <!---->
-                              <div data-v-f15ab7a3="" class="comment border-l-5 border-blue-500 py-9px px-18px mb-5px">
-                                 <p data-v-f15ab7a3="">Hales did a great job today and Aaron Krasnow was the reason! Thx Aaron</p>
-                              </div>
-                              <div data-v-f15ab7a3="" class="info flex flex-wrap">
-                                 <!----><!----><!----><!---->
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> 2024-07-10</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span> Hales AC Service</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span> General</p>
-                                 </div>
-                              </div>
-                              <div data-v-f15ab7a3="" class="ratings flex flex-wrap"></div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-200px">
-                              <div data-v-f15ab7a3="" class="flex flex-col items-center justify-center h-full">
-                                 <button data-v-f15ab7a3="" class="btn w-full mb-5px btn-green">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                       <path class="" fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
-                                    </svg>
-                                    Approve
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full mb-5px">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
-                                    </svg>
-                                    Archive
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
-                                    </svg>
-                                    Edit
-                                 </button>
-                              </div>
-                           </td>
-                           <!----><!----><!---->
-                        </tr>
-                        <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
-                           <td data-v-f15ab7a3="" class="p-10px w-auto">
-                              <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">
-                                 <svg class="svg-inline--fa fa-square mr-5px text-17px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path class="" fill="currentColor" d="M384 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path>
-                                 </svg>
-                                 <p></p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
-                              <svg data-v-f15ab7a3="" class="svg-inline--fa fa-face-grin text-lime-500 text-40px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                 <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
-                              </svg>
-                              <div data-v-f15ab7a3="" class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">
-                                 <p data-v-f15ab7a3="">9.9</p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-full">
-                              <!---->
-                              <div data-v-f15ab7a3="" class="comment border-l-5 border-blue-500 py-9px px-18px mb-5px">
-                                 <p data-v-f15ab7a3="">He was very helpful</p>
-                              </div>
-                              <div data-v-f15ab7a3="" class="info flex flex-wrap">
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> Todd Johnson</p>
-                                 </div>
-                                 <!---->
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Email:</span> todd2464@yahoo.com</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> 6916 Stones Throw CirN #9208</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> 2024-07-10</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span> Paul Hoang</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span> Service Technician</p>
-                                 </div>
-                              </div>
-                              <div data-v-f15ab7a3="" class="ratings flex flex-wrap">
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">How likely are you to recommend us to your friends and family?</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">Professionalism</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">Quality of Service</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
-                                 </div>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-200px">
-                              <div data-v-f15ab7a3="" class="flex flex-col items-center justify-center h-full">
-                                 <button data-v-f15ab7a3="" class="btn w-full mb-5px btn-green">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                       <path class="" fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
-                                    </svg>
-                                    Approve
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full mb-5px">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
-                                    </svg>
-                                    Archive
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
-                                    </svg>
-                                    Edit
-                                 </button>
-                              </div>
-                           </td>
-                           <!----><!----><!---->
-                        </tr>
-                        <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
-                           <td data-v-f15ab7a3="" class="p-10px w-auto">
-                              <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">
-                                 <svg class="svg-inline--fa fa-square mr-5px text-17px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path class="" fill="currentColor" d="M384 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path>
-                                 </svg>
-                                 <p></p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
-                              <div data-v-f15ab7a3="" class="sm-badge sm-google"><i data-v-f15ab7a3=""></i></div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-full">
-                              <!---->
-                              <div data-v-f15ab7a3="" class="comment border-l-5 border-blue-500 py-9px px-18px mb-5px">
-                                 <p data-v-f15ab7a3="">Paul from Hales was outstanding. Paul came on the Sat. of Fathers day weekend to diagnose my AC problem. Paul was extremely thorough &amp; very knowledgeable. Paul explained everything in layman’s terms. Why it happened, how it happened, &amp; what we need to fix it. Unfortunately it was the worst. Had to replace the whole system. The old one is over 20 years old. I am a disabled vet. of 26 years. Unfortunately I have numerous medical conditions that require a temperature controlled environment. Fortunately Paul went above and to ensure parts &amp; labor would be ready to start Mon. morning. Thank you Paul &amp; Hales</p>
-                              </div>
-                              <div data-v-f15ab7a3="" class="info flex flex-wrap">
-                                 <!----><!----><!----><!---->
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> 2024-07-09</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span> Hales AC Service</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span> General</p>
-                                 </div>
-                              </div>
-                              <div data-v-f15ab7a3="" class="ratings flex flex-wrap"></div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-200px">
-                              <div data-v-f15ab7a3="" class="flex flex-col items-center justify-center h-full">
-                                 <button data-v-f15ab7a3="" class="btn w-full mb-5px btn-gray">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                       <path class="" fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
-                                    </svg>
-                                    Approved
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full mb-5px">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
-                                    </svg>
-                                    Archive
-                                 </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full">
-                                    <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
-                                    </svg>
-                                    Edit
-                                 </button>
-                              </div>
-                           </td>
-                           <!----><!----><!---->
-                        </tr>
-                        <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
-                           <td data-v-f15ab7a3="" class="p-10px w-auto">
-                              <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">
-                                 <svg class="svg-inline--fa fa-square mr-5px text-17px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path class="" fill="currentColor" d="M384 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path>
-                                 </svg>
-                                 <p></p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
-                              <svg data-v-f15ab7a3="" class="svg-inline--fa fa-face-grin text-lime-500 text-40px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                 <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
-                              </svg>
-                              <div data-v-f15ab7a3="" class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">
-                                 <p data-v-f15ab7a3="">9.8</p>
-                              </div>
-                           </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-full">
-                              <!---->
-                              <div data-v-f15ab7a3="" class="comment border-l-5 border-blue-500 py-9px px-18px mb-5px">
-                                 <p data-v-f15ab7a3="">I said yesterday the work was done well and professionally.</p>
-                              </div>
-                              <div data-v-f15ab7a3="" class="info flex flex-wrap">
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> Jim &amp; Sara Mehltretter</p>
-                                 </div>
-                                 <!---->
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Email:</span> sara@mcengineers.com</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> 16124 4th St E</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> 2024-07-09</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span> Kiefer Hutcheson</p>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span> Duct Cleaning </p>
-                                 </div>
-                              </div>
-                              <div data-v-f15ab7a3="" class="ratings flex flex-wrap">
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">How likely are you to recommend us to your friends and family?</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">Professionalism</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">Quality of Service</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">9</div>
-                                 </div>
-                              </div>
-                           </td>
-                           <!----><!----><!---->
-                        </tr>
+                           <?php endforeach; ?>
+               
                      </table>
-                     <div data-v-428084ba="" class="pagination flex justify-between items-center">
-                        <div data-v-428084ba="" class="pagination-links grid grid-rows-1 grid-flow-col gap-5px">
-                           <button data-v-428084ba="" class="h-50px w-50px flex justify-center items-center rounded-1/2 bg-gray-100">
-                              <svg data-v-428084ba="" class="svg-inline--fa fa-ellipsis" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                 <path class="" fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path>
-                              </svg>
-                           </button>
-                           <button data-v-428084ba="" class="h-50px w-50px flex justify-center items-center rounded-1/2 bg-gray-100" disabled="">
-                              <svg data-v-428084ba="" class="svg-inline--fa fa-caret-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-                                 <path class="" fill="currentColor" d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6l0 256c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-128-128z"></path>
-                              </svg>
-                           </button>
-                           <button data-v-428084ba="" class="h-50px w-50px flex justify-center items-center rounded-1/2 bg-blue-500 text-white">1</button><button data-v-428084ba="" class="h-50px w-50px flex justify-center items-center rounded-1/2 bg-gray-100">2</button><button data-v-428084ba="" class="h-50px w-50px flex justify-center items-center rounded-1/2 bg-gray-100">3</button><button data-v-428084ba="" class="h-50px w-50px flex justify-center items-center rounded-1/2 bg-gray-100">4</button><button data-v-428084ba="" class="h-50px w-50px flex justify-center items-center rounded-1/2 bg-gray-100">5</button>
-                           <button data-v-428084ba="" class="h-50px w-50px flex justify-center items-center rounded-1/2 bg-gray-100">
-                              <svg data-v-428084ba="" class="svg-inline--fa fa-caret-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-                                 <path class="" fill="currentColor" d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"></path>
-                              </svg>
-                           </button>
-                           <button data-v-428084ba="" class="h-50px w-50px flex justify-center items-center rounded-1/2 bg-gray-100">
-                              <svg data-v-428084ba="" class="svg-inline--fa fa-ellipsis" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                 <path class="" fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path>
-                              </svg>
-                           </button>
-                        </div>
+                     <div class="pagination-container">
+                     <nav>
+                     <?php echo $pager->links('reviews', 'default_full'); ?>
+                     </nav>
                      </div>
+                     <style>
+                     /* Container styling */
+                     .pagination-container {
+                        text-align: center; /* Centers the pagination container */
+                        margin: 20px 0; /* Adds space around the pagination */
+                     }
+
+                     /* Pagination styling */
+                     .pagination {
+                        display: flex; /* Use flexbox for layout */
+                        justify-content: center; /* Centers items horizontally */
+                        align-items: center; /* Centers items vertically */
+                        padding: 0; /* Removes default padding */
+                        margin: 0; /* Removes default margin */
+                        list-style: none; /* Removes default list styles */
+                     }
+
+                     .pagination li {
+                        margin: 0 5px; /* Adds space between the list items */
+                     }
+
+                     .pagination a {
+                        display: inline-block; /* Ensures the links display inline */
+                        text-decoration: none; /* Removes underline from links */
+                        color: #007bff; /* Sets the color of the links */
+                        padding: 10px 15px; /* Adds padding around the links */
+                        border: 1px solid #ddd; /* Adds a border around the links */
+                        border-radius: 5px; /* Rounds the corners of the links */
+                        transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+                     }
+
+                     .pagination a:hover {
+                        background-color: #007bff; /* Changes background on hover */
+                        color: white; /* Changes text color on hover */
+                     }
+
+                     /* Styling for the active page */
+                     .pagination .active a {
+                        background-color: #007bff; /* Sets background for the active page */
+                        color: white; /* Sets text color for the active page */
+                        font-weight: bold; /* Makes the active page text bold */
+                        border: 1px solid #007bff; /* Adds border color */
+                     }
+
+                     /* Optional: additional styling for Next and Last links */
+                     .pagination a[aria-label="Next"],
+                     .pagination a[aria-label="Last"] {
+                        font-weight: bold; /* Makes Next and Last links bold */
+                     }
+                     </style>
+
                   </div>
                   <!----><!---->
                </div>
@@ -885,4 +409,212 @@
       </div>
    </div>
 </div>
+
+<script>
+function handleApprovalClick(button) {
+    var ID = button.parentElement.getAttribute('data-id');
+    var isApproved = button.getAttribute('approved');
+    console.log('ID:', ID, 'isApproved:', isApproved);
+
+    // Determine the new approval status
+    var newApprovedStatus = isApproved === '0' ? '1' : '0'; // Toggle status
+
+    // AJAX request
+    $.ajax({
+        url: '/analyze/reviews/approve', // URL for the defined route
+        type: 'POST',
+        data: { ID: ID, approved: newApprovedStatus },
+        success: function(response) {
+            // Handle success
+            console.log('Response:', response);
+            // Update the button state or UI based on the response
+            button.setAttribute('approved', newApprovedStatus);
+
+            // Update button styles and text
+            if (newApprovedStatus === '1') {
+                button.classList.remove('btn-green');
+                button.classList.add('btn-gray');
+                button.textContent = 'Approved';
+            } else {
+                button.classList.remove('btn-gray');
+                button.classList.add('btn-green');
+                button.textContent = 'Approve';
+            }
+
+            // Optional: Update button text with SVG
+            button.innerHTML = `
+                <svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
+                </svg>
+                ${newApprovedStatus === '1' ? 'Approved' : 'Approve'}
+            `;
+        },
+        error: function(xhr, status, error) {
+            // Handle error
+            console.error('Error:', error);
+        }
+    });
+}
+</script>
+
+<script>
+   $('#filter-campaings').on('change', function() {
+      var campaignID = $(this).val();
+      var currentPage = 1; 
+      var limit = 1;
+      
+      function fetchReviews(page) {
+
+         $.ajax({
+         url: '/analyze/reviews/get',
+         type: 'POST',
+         data: { 
+            campaign_id: campaignID,
+            page: page,
+            limit: limit
+         },
+         dataType: 'json',
+         success: function(response) {
+            var data = response;
+            console.log(data); // Inspect the object to confirm structure
+            
+            // Target the table body and pagination container
+            var tableBody = $('.row.table.p-10px.w-full table tbody'); 
+            var paginationContainer = $('.pagination-container');
+            
+            // Clear the table except for the header
+            tableBody.empty(); 
+            paginationContainer.empty(); // Clear previous pagination
+            
+            // Check if 'data.reviews' is an array
+            if (Array.isArray(data.reviews) && data.reviews.length > 0) {
+               data.reviews.forEach(function(review) {
+                  console.log(review);
+                  var id = review.ID;
+                  // console.log(id);
+                  var buttonClass = review.isApproved == '1' ? 'btn-gray' : 'btn-green';
+                  var buttonText = review.isApproved == '1' ? 'Approved' : 'Approve';
+                  var svgDisplay = review.isApproved == '1' ? 'none' : 'inline';
+               var newRow = '<tr class="flex w-full">' +
+                     '<td class="p-10px w-auto">' +
+                        '<div class="flex justify-start items-center col-span-3 cursor-pointer">' +
+                           '<svg class="svg-inline--fa fa-square mr-5px text-17px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">' +
+                                 '<path fill="currentColor" d="M384 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path>' +
+                           '</svg>' +
+                           '<p></p>' +
+                        '</div>' +
+                     '</td>' +
+                     '<td class="p-10px flex flex-col items-center justify-start w-60px">' +
+                        '<svg class="svg-inline--fa fa-face-grin text-lime-500 text-40px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+                           '<path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>' +
+                        '</svg>' +
+                        '<div class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">' +
+                           '<p>' + review.sentiment + '</p>' +
+                        '</div>' +
+                     '</td>' +
+                     '<td class="p-10px w-full">' +
+                        '<div class="comment border-l-5 border-blue-500 py-9px px-18px mb-5px">' +
+                           '<p>' + review.reviewText + '</p>' +
+                        '</div>' +
+                        '<div class="info flex flex-wrap">' +
+                           '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
+                                 '<p><span class="font-bold">Customer:</span> Michael Falk</p>' +
+                           '</div>' +
+                           '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
+                                 '<p><span class="font-bold">Customer Email:</span> mikefalk@aol.com</p>' +
+                           '</div>' +
+                           '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
+                                 '<p><span class="font-bold">Customer Address:</span> 3068 Braeloch Cir E</p>' +
+                           '</div>' +
+                           '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
+                                 '<p><span class="font-bold">Date:</span> 2024-07-11</p>' +
+                           '</div>' +
+                           '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
+                                 '<p><span class="font-bold">Campaign:</span>' + review.campaignName + '</p>' +
+                           '</div>' +
+                           '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
+                                 '<p><span class="font-bold">Department:</span>' + review.campaignDepartment + '</p>' +
+                           '</div>' +
+                        '</div>' +
+                        '<div class="ratings flex flex-wrap">' +
+                           '<div class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">' +
+                                 '<p>How likely are you to recommend us to your friends and family?</p>' +
+                                 '<div class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">' + review.recommendationRating + '</div>' +
+                           '</div>' +
+                           '<div class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">' +
+                                 '<p>Professionalism</p>' +
+                                 '<div class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">' + review.professionalismRating + '</div>' +
+                           '</div>' +
+                           '<div class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">' +
+                                 '<p>Quality of Service</p>' +
+                                 '<div class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">' + review.qualityRating + '</div>' +
+                           '</div>' +
+                        '</div>' +
+                     '</td>' +
+                     '<td class="p-10px w-200px">' +
+                        '<div class="flex flex-col items-center justify-center h-full" data-id="' + review.ID + '">' +
+                           '<button class="btn w-full mb-5px btn-approve ' + buttonClass + '" data-isapproved ="' + review.isApproved + '"  onclick="handleApprovalClick(this)">' +
+                                 '<svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">' +
+                                    '<path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>' +
+                                 '</svg>' +
+                                 buttonText +
+                           '</button>' +
+                           '<button class="btn btn-blue w-full mb-5px">' +
+                                 '<svg class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+                                    '<path fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>' +
+                                 '</svg>' +
+                                 'Archive' +
+                           '</button>' +
+                           '<button class="btn btn-blue w-full">' +
+                                 '<svg class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+                                    '<path fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>' +
+                                 '</svg>' +
+                                 'Edit' +
+                           '</button>' +
+                        '</div>' +
+                     '</td>' +
+               '</tr>';
+               // Append the new row to the table body
+               tableBody.append(newRow);
+               });
+
+               // Append pagination controls if they exist
+               if (data.pagination) {
+                  var paginationHtml = '<nav>';
+               var totalPages = data.pagination.total_pages;
+               var currentPage = data.pagination.page;
+               
+               for (var i = 1; i <= totalPages; i++) {
+                  paginationHtml += '<a href="#" class="page-link" data-page="' + i + '">' + i + '</a> ';
+               }
+               paginationHtml += '</nav>';
+               $('.pagination-container').html(paginationHtml);
+               }
+            } else {
+               var noReviewsRow = '<tr class="flex w-full">' +
+               '<td colspan="6" class="text-center">No reviews found....</td>' +
+               '</tr>';
+            tableBody.append(noReviewsRow);
+            }
+         },
+         error: function(xhr, status, error) {
+            console.error("AJAX Error:", status, error);
+         }
+         });
+      }
+
+      // Initial fetch
+      fetchReviews(currentPage);
+
+      // Handle pagination link clicks
+      $(document).on('click', '.page-link', function(e) {
+         e.preventDefault();
+         currentPage = $(this).data('page');
+         fetchReviews(currentPage);
+      });
+
+});
+   
+</script>
+
 <?= $this->endSection() ?>
