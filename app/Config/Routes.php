@@ -27,8 +27,7 @@ $routes->get('/settings/dispatch/campaigns', 'Campaign::index');
 $routes->post('/settings/dispatch/campaigns/create', 'Campaign::create');
 $routes->post('/settings/dispatch/campaigns/update/(:num)', 'Campaign::update/$1');
 $routes->get('/settings/dispatch/campaigns/delete/(:num)', 'Campaign::delete/$1');
-// $routes->get('login2', 'Home::dashboard');
-// $routes->get('/forgetPass', 'UserController::forgetPass');
+
 $routes->get('/settings/dispatch/notifications', 'Home::dispatch_notifications');
 $routes->get('/settings/dispatch/review-widget', 'Home::dispatch_review_widget');
 $routes->get('/settings/dispatch/web_widget', 'Home::dispatch_web_widget');

@@ -137,8 +137,8 @@
 												<td class="px-20px py-15px"><?= $campaign['name'] ?></td>
 												<td class="px-20px py-15px"><?= $campaign['employeeId'] ?></td>
 												<td class="px-20px py-15px"><?= $campaign['department'] ?></td>
-												<td class="px-20px py-15px">110</td>
-												<td class="px-20px py-15px">9.2</td>
+												<td class="px-20px py-15px"></td>
+												<td class="px-20px py-15px"></td>
 												<td class="px-20px py-15px">
 													<?php 
 													$matchCount = 0;
@@ -153,11 +153,11 @@
 													echo $matchCount;
 													?>
 												</td>
-												<td class="px-20px py-15px">35</td>
-												<td class="px-20px py-15px">3</td>
-												<td class="px-20px py-15px">7</td>
+												<td class="px-20px py-15px"></td>
+												<td class="px-20px py-15px"></td>
+												<td class="px-20px py-15px"></td>
 												<!-- <td class="px-20px py-15px">0</td> -->
-												<td class="px-20px py-15px">0</td>
+												<td class="px-20px py-15px"></td>
 											</tr>
 										<?php endforeach; ?>
 									</tbody>

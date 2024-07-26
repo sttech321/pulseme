@@ -13,9 +13,9 @@ class TechnicianModal extends Model
     {
         parent::__construct();
         // Load table name from environment variable
-        $this->table = getenv('CAMPAIGN_TABLE');
+        $this->table = getenv('campaign.table');
         // Load allowed fields from environment variable and convert to array
-        $fields = getenv('CAMPAIGN_FIELD');
+        $fields = getenv('campaign.allowedFields');
         $this->allowedFields = explode(',', $fields);
     }
 

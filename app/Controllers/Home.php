@@ -56,20 +56,6 @@ class Home extends BaseController
         return view('analysisg');
     }
 
-    // public function reviews()
-    // {
-    //     // Ensure the session is started
-    //     if (session()->get('isLoggedIn')) { 
-    //         $data = [
-    //             'title' => 'Reviews Page',
-    //         ];
-    //         return view('reviews', $data);
-    //     } else {
-    //         return redirect()->to('/');
-    //     }
-    // }
-    
-
     public function welcome(): string 
     {
         return view('dashboard');

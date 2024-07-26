@@ -160,15 +160,8 @@
                               </div>
                               <div class="flex justify-start items-center py-5px col-span-6">
                                  <div class="flex justify-start items-center col-span-3 cursor-pointer">
-                                    <svg
-                                       class="svg-inline--fa fa-square mr-5px text-17px" aria-hidden="true"
-                                       focusable="false" data-prefix="far" data-icon="square" role="img"
-                                       xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                       <path class="" fill="currentColor"
-                                          d="M384 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H384zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z">
-                                       </path>
-                                    </svg>
-                                    <p>Mark as test</p>
+                                 <input type="checkbox" id="test-checkbox">
+                                    <p style="margin-left:10px;">Mark as test</p>
                                  </div>
                               </div>
                            </td>
@@ -217,75 +210,75 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('#search').on('keyup', function() {
-        var search = $(this).val();
-        console.log(search);
-        if (search.length >= 2) {
-            $.ajax({
-                url: '<?= base_url('search') ?>',
-                type: 'GET',
-                data: { search: search },
-                success: function(response) {
-                   var technicianList = $('#technician-list');
-                   console.log(technicianList);
-                    technicianList.empty();
-                    if (response.technicians.length > 0) {
-                        $.each(response.technicians, function(index, technician) {
-                            var row = '<tr class="flex p-20px odd:bg-sky-50">' +
-                                '<td class="employee flex items-center w-1/4">' +
-                                    '<div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0" style="position: relative; background-image: url(' + technician.image + ');"></div>' +
-                                    '<div class="flex-grow">' +
-                                        '<p class="name">' + technician.name + '</p>' +
-                                        '<p class="department text-gray-400">' + technician.department + '</p>' +
-                                    '</div>' +
-                                '</td>' +
-                                '<td class="recipient-info grid grid-cols-6 gap-5px flex-grow">' +
-                                    '<div class="input-group col-span-3 flex items-center">' +
-                                        '<div class="mr-10px flex justify-center items-center">' +
-                                            '<svg class="svg-inline--fa fa-phone text-15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="phone" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
-                                                '<path class="" fill="currentColor" d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"></path>' +
-                                            '</svg>' +
-                                        '</div>' +
-                                        '<input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="tel" name="phone" id="phone-' + technician.id + '" placeholder="Phone Number">' +
-                                    '</div>' +
-                                    '<div class="input-group col-span-3 flex items-center">' +
-                                        '<div class="mr-10px flex justify-center items-center">' +
-                                            '<svg class="svg-inline--fa fa-envelope text-15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
-                                                '<path class="" fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"></path>' +
-                                            '</svg>' +
-                                        '</div>' +
-                                        '<input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="email" name="email" id="email-' + technician.id + '" placeholder="Email">' +
-                                    '</div>' +
-                                    '<div class="input-group col-span-3 lg:col-span-2 flex items-center">' +
-                                        '<div class="mr-10px flex justify-center items-center">' +
-                                            '<svg class="svg-inline--fa fa-circle-user text-15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
-                                                '<path class="" fill="currentColor" d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"></path>' +
-                                            '</svg>' +
-                                        '</div>' +
-                                        '<input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="text" name="name" id="name-' + technician.id + '" placeholder="Name (Optional)">' +
-                                    '</div>' +
-                                    '<div class="input-group col-span-3 lg:col-span-4 flex items-center">' +
-                                        '<div class="mr-10px flex justify-center items-center">' +
-                                            '<svg class="svg-inline--fa fa-location-dot text-15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="location-dot" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">' +
-                                                '<path class="" fill="currentColor" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path>' +
-                                            '</svg>' +
-                                        '</div>' +
-                                        '<input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="text" name="address" id="address-' + technician.id + '" placeholder="Address (Optional)">' +
-                                    '</div>' +
-                                '</td>' +
-                            '</tr>';
+// $(document).ready(function() {
+//     $('#search').on('keyup', function() {
+//         var search = $(this).val();
+//         console.log(search);
+//         if (search.length >= 2) {
+//             $.ajax({
+//                 url: '<?= base_url('search') ?>',
+//                 type: 'GET',
+//                 data: { search: search },
+//                 success: function(response) {
+//                    var technicianList = $('#technician-list');
+//                    console.log(technicianList);
+//                     technicianList.empty();
+//                     if (response.technicians.length > 0) {
+//                         $.each(response.technicians, function(index, technician) {
+//                             var row = '<tr class="flex p-20px odd:bg-sky-50">' +
+//                                 '<td class="employee flex items-center w-1/4">' +
+//                                     '<div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0" style="position: relative; background-image: url(' + technician.image + ');"></div>' +
+//                                     '<div class="flex-grow">' +
+//                                         '<p class="name">' + technician.name + '</p>' +
+//                                         '<p class="department text-gray-400">' + technician.department + '</p>' +
+//                                     '</div>' +
+//                                 '</td>' +
+//                                 '<td class="recipient-info grid grid-cols-6 gap-5px flex-grow">' +
+//                                     '<div class="input-group col-span-3 flex items-center">' +
+//                                         '<div class="mr-10px flex justify-center items-center">' +
+//                                             '<svg class="svg-inline--fa fa-phone text-15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="phone" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+//                                                 '<path class="" fill="currentColor" d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"></path>' +
+//                                             '</svg>' +
+//                                         '</div>' +
+//                                         '<input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="tel" name="phone" id="phone-' + technician.id + '" placeholder="Phone Number">' +
+//                                     '</div>' +
+//                                     '<div class="input-group col-span-3 flex items-center">' +
+//                                         '<div class="mr-10px flex justify-center items-center">' +
+//                                             '<svg class="svg-inline--fa fa-envelope text-15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+//                                                 '<path class="" fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"></path>' +
+//                                             '</svg>' +
+//                                         '</div>' +
+//                                         '<input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="email" name="email" id="email-' + technician.id + '" placeholder="Email">' +
+//                                     '</div>' +
+//                                     '<div class="input-group col-span-3 lg:col-span-2 flex items-center">' +
+//                                         '<div class="mr-10px flex justify-center items-center">' +
+//                                             '<svg class="svg-inline--fa fa-circle-user text-15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+//                                                 '<path class="" fill="currentColor" d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"></path>' +
+//                                             '</svg>' +
+//                                         '</div>' +
+//                                         '<input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="text" name="name" id="name-' + technician.id + '" placeholder="Name (Optional)">' +
+//                                     '</div>' +
+//                                     '<div class="input-group col-span-3 lg:col-span-4 flex items-center">' +
+//                                         '<div class="mr-10px flex justify-center items-center">' +
+//                                             '<svg class="svg-inline--fa fa-location-dot text-15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="location-dot" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">' +
+//                                                 '<path class="" fill="currentColor" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path>' +
+//                                             '</svg>' +
+//                                         '</div>' +
+//                                         '<input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="text" name="address" id="address-' + technician.id + '" placeholder="Address (Optional)">' +
+//                                     '</div>' +
+//                                 '</td>' +
+//                             '</tr>';
 
-                            technicianList.append(row);
-                        });
-                    } else {
-                        technicianList.append('<tr><td colspan="6">No technician data available.</td></tr>');
-                    }
-                }
-            });
-        }
-    });
-});
+//                             technicianList.append(row);
+//                         });
+//                     } else {
+//                         technicianList.append('<tr><td colspan="6">No technician data available.</td></tr>');
+//                     }
+//                 }
+//             });
+//         }
+//     });
+// });
 </script>
 <?= $this->endsection('content') ?>
 

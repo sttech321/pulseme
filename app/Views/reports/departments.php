@@ -140,14 +140,14 @@
 										<?php foreach ($campaigns as $campaign) : ?>
 												<tr class="!bg-opacity-50 odd:bg-sky-100">
 													<td class="px-20px py-15px"><?= esc($campaign['name']) ?></td>
-													<td class="px-20px py-15px">613</td>
-													<td class="px-20px py-15px">9.0</td>
-													<td class="px-20px py-15px">235</td>
-													<td class="px-20px py-15px">18</td>
-													<td class="px-20px py-15px">378</td>
-													<td class="px-20px py-15px">36</td>
-													<td class="px-20px py-15px">1</td>
-													<td class="px-20px py-15px">0</td>
+													<td class="px-20px py-15px"></td>
+													<td class="px-20px py-15px"></td>
+													<td class="px-20px py-15px"></td>
+													<td class="px-20px py-15px"></td>
+													<td class="px-20px py-15px"></td>
+													<td class="px-20px py-15px"></td>
+													<td class="px-20px py-15px"></td>
+													<td class="px-20px py-15px"></td>
 												</tr>
 												<?php endforeach; ?>
 									</tbody>

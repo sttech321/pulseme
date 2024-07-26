@@ -18,12 +18,12 @@ class CustomerController extends Controller
     public function dispatch()
     {
         $technicianModel = new TechnicianModal();
-        $customerModel = new CustomerModel();
+        // $customerModel = new CustomerModel();
     
         $data['technicians'] = $technicianModel->findAll();
-        $data['customers'] = $customerModel->findAll();
+        // $data['customers'] = $customerModel->findAll();
     
-        return view('dispatching', $data);
+        return view('dispatching',$data);
     }
 
     public function create()
@@ -93,37 +93,5 @@ class CustomerController extends Controller
     }
 
 
-    // private function sendDispatchMessage($deviceId, $message)
-    // {
-    //     $myGeotab = new MyGeotabService();
-    //     $response = $myGeotab->sendDispatchMessage($deviceId, $message);
-
-    //     if ($response['status'] != 'success') {
-    //         log_message('error', 'Dispatch message failed: ' . json_encode($response));
-    //     }
-    // }
-
-    // public function sendMessage()
-    // {
-    //     $deviceId = $this->request->getPost('device_id');
-    //     $message = $this->request->getPost('message');
-
-    //     $myGeotab = new MyGeotabService();
-    //     $response = $myGeotab->sendDispatchMessage($deviceId, $message);
-
-    //     return $this->response->setJSON($response);
-    // }
-
-    // public function sendLiveLocation()
-    // {
-    //     $deviceId = $this->request->getPost('device_id');
-    //     $latitude = $this->request->getPost('latitude');
-    //     $longitude = $this->request->getPost('longitude');
-
-    //     $myGeotab = new MyGeotabService();
-    //     $response = $myGeotab->sendLiveLocation($deviceId, $latitude, $longitude);
-
-    //     return $this->response->setJSON($response);
-    // }
 }
 ?>
