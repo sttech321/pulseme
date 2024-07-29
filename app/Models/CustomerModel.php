@@ -26,9 +26,5 @@ class CustomerModel extends Model
         $builder->groupBy('customers_bio.campaign_id');
         $query = $builder->get();
         return $query->getResult(); // Ensure this method returns the result
-    }
-    
-    
+    } 
 }
-
-

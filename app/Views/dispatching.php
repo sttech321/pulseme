@@ -77,8 +77,7 @@
                                     $validation = session()->getFlashdata('validation');
                                     $buttonId = session()->getFlashdata('button_id');
                                     foreach ($validation->getErrors() as $error):
-                                    ?>
-                                          <p style="color: red;" id="<?= $buttonId ?>"><?= $error ?></p>
+                                    ?><p style="color: red;" id="<?= $buttonId ?>"><?= $error ?></p>
                                     <?php endforeach ?>
                                  </div>
                               <?php endif ?>
@@ -202,30 +201,42 @@
                   <p>No technician data available.</p>
                   <?php endif; ?> 
                </div>
-              
             </div>
          </div>
       </div>
    </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script>
 // $(document).ready(function() {
-//     $('#search').on('keyup', function() {
-//         var search = $(this).val();
-//         console.log(search);
-//         if (search.length >= 2) {
-//             $.ajax({
-//                 url: '<?= base_url('search') ?>',
-//                 type: 'GET',
-//                 data: { search: search },
-//                 success: function(response) {
-//                    var technicianList = $('#technician-list');
-//                    console.log(technicianList);
-//                     technicianList.empty();
-//                     if (response.technicians.length > 0) {
-//                         $.each(response.technicians, function(index, technician) {
-//                             var row = '<tr class="flex p-20px odd:bg-sky-50">' +
+//    var technicianid =  $(this).val('#button_id');
+//    console.log(technicianid,'ddddddd');
+//      // Handle input changes in search bar
+//      $('#search').on('input', function() {
+//         var query = $(this).val();
+//         if (query) {
+//          loadTechnicians(query);
+//         } else {
+//          loadTechnicians();
+//         }
+//     });
+
+//     function loadTechnicians(query = '') {
+//         var url = query ? '<?= base_url('/search') ?>' : '<?= base_url('/getAllTechnicians') ?>';
+        
+//         $.ajax({
+//             url: url,
+//             type: 'GET',
+//             data: { query: query },
+//             success: function(data) {
+//                 var resultsContainer = $('.list');
+//                 resultsContainer.empty(); // Clear previous results
+
+//                 if (data.length > 0) {
+//                     var table = $('<table class="w-full"></table>');
+//                     $.each(data, function(index, technician) {
+//                         var row = '<tr class="flex p-20px odd:bg-sky-50">' +
+//                                  '<form method="post" action="<?= base_url('/operate/dispatch/create/'.$technician['ID'])?>">'+
 //                                 '<td class="employee flex items-center w-1/4">' +
 //                                     '<div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0" style="position: relative; background-image: url(' + technician.image + ');"></div>' +
 //                                     '<div class="flex-grow">' +
@@ -266,19 +277,20 @@
 //                                         '</div>' +
 //                                         '<input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="text" name="address" id="address-' + technician.id + '" placeholder="Address (Optional)">' +
 //                                     '</div>' +
-//                                 '</td>' +
-//                             '</tr>';
-
-//                             technicianList.append(row);
-//                         });
-//                     } else {
-//                         technicianList.append('<tr><td colspan="6">No technician data available.</td></tr>');
-//                     }
+//                                 '</td>' + '<td class="buttons flex flex-col justify-center items-end px-4 w-1/4"> <input type="hidden" name="button_id" value="= ' + technician.id  + '"> <button class="btn btn-blue max-w-200px w-full rounded-2px mb-2"  id="' + technician.id  + '" type="submit">' +'<svg class="svg-inline--fa fa-user text-15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"> <path class="" fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path> </svg> Send Bio</button>' +
+//                               '<button class="btn btn-green max-w-200px w-full rounded-2px" id="sendPulseCheck"> <svg class="svg-inline--fa fa-face-grin text-15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path></svg>Send pulseCheck</button>' +
+//                           '</td>' +
+//                             '</form></tr>';
+//                         table.append(row);
+//                     });
+//                     resultsContainer.append(table);
+//                 } else {
+//                     resultsContainer.html('<p>No results found.</p>');
 //                 }
-//             });
-//         }
-//     });
+//             }
+//         });
+//     }
 // });
 </script>
-<?= $this->endsection('content') ?>
 
+<?= $this->endsection('content') ?>

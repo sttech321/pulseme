@@ -15,4 +15,34 @@ class ReviewModal extends Model
         $fields = getenv('REVIEWS_FIELD');
         $this->allowedFields = explode(',', $fields);
     }
+
+    public function getEnumValues() {
+        $db = \Config\Database::connect();
+        $sql = "SHOW COLUMNS FROM {$this->table} LIKE 'reviewType'";
+        $builder = $db->query($sql);
+    
+        // Fetch the query result
+        $result = $builder->getResultArray();
+        $row = $builder->getRow();
+    
+        // Extract enum values if row is valid
+        if ($row) {
+            preg_match_all("/'([^\']+)'/", $row->Type, $matches);
+            $enumValues = $matches[1];
+        } else {
+            $enumValues = [];
+        }
+    
+        // Return both the query and the enum values
+        return [
+            'query' => $sql,
+            'enumValues' => $enumValues
+        ];
+    }
+
+    public function getReviewsByType($type)
+    {
+        return $this->where('reviewType', $type)->findAll();
+    }
+
 }

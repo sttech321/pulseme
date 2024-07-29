@@ -53,7 +53,6 @@
                                     </h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                  </div>
-                        
                                  <div class="modal-body">
                                  <?php $script = ''; ?>
                                     <?php if (session()->getFlashdata('validation')): ?>
@@ -66,12 +65,16 @@
                                     <?php endif ?>
                                     <div class="formWrap row">
                                        <div class="flex flex-col items-stretch col-span-3">
-                                          <!-- <p class="text-17px">Source</p> -->
-                                          <select class="py-7px border-b outline-none bg-transparent" name="source" id="">
-                                             <option value="" selected="" hidden="">Select Source</option>
-                                             <option value="google">Google</option>
-                  
-                                          </select>
+                                       <select class="py-7px border-b outline-none bg-transparent" name="source" id="">
+                                          <option value="" selected="" hidden="">Select Source</option>
+                                          <?php if (isset($enumValues['enumValues']) && is_array($enumValues['enumValues'])): ?>
+                                                <?php foreach ($enumValues['enumValues'] as $type): ?>
+                                                   <option value="<?= esc($type); ?>"><?= esc(ucfirst($type)); ?></option>
+                                                <?php endforeach; ?>
+                                          <?php else: ?>
+                                                <option value="">No values available</option>
+                                          <?php endif; ?>
+                                       </select>
                                           <!---->
                                        </div>
                                        <div class="col-12 col-md-12">
@@ -110,6 +113,11 @@
                                              <label class="form-check-label" for="disabledFieldsetCheck">
                                              Approve Comment
                                              </label>
+                                          </div>
+                                       </div>
+                                       <div class="col-12 col-md-4">
+                                          <div class="inputBox">
+                                             <input class="form-control" autocomplete="off" name="Name" type="text" placeholder="name">
                                           </div>
                                        </div>
                                        <div class="col-12 col-md-4">

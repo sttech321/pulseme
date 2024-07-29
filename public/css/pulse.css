@@ -28917,3 +28917,50 @@ ul {
     color: #fff!important;
     background-color: #16233d!important
 }
+
+.step {
+    display: none;
+}
+
+.step.active {
+    display: block;
+
+}
+
+.social-media-websites {
+    margin-left: 180px;
+}
+
+.form-control {
+    width: 100%;
+}
+
+textarea.input.form-control.fg-input.validate {
+    width: 300px;
+}
+
+.form-group.p-0 {
+    margin-left: 37px;
+}
+
+.social-media-websites.positive {
+margin-right: 150px;
+}
+
+.slider {
+    margin: 20px 0;
+}
+
+.noUi-connect {
+    height: 10px; /* Adjust the height of the color bar */
+}
+
+.noUi-origin {
+    width: 20px; /* Adjust the width of the handle */
+    height: 20px;
+}
+
+
+
+/* range slider css */
+

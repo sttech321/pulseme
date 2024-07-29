@@ -15,13 +15,33 @@ class CustomerController extends Controller
         $this->session = \Config\Services::session();
     }
 
-    public function dispatch()
+    public function getAllTechnicians()
     {
         $technicianModel = new TechnicianModal();
-        // $customerModel = new CustomerModel();
+        $technicians = $technicianModel->findAll();
+        return $this->response->setJSON($technicians);
+    }
+
+    public function search()
+    {
+        $search = $this->request->getVar('query');
     
+        $technicianModel = new TechnicianModal();
+        
+        if ($search) {
+            $results = $technicianModel->getTechniciansBySearch($search);
+        } else {
+            $results = $technicianModel->findAll(); // Return all technicians if no search query
+        }
+    
+        return $this->response->setJSON($results);
+    } 
+
+
+    public function dispatch()
+    {
+        $technicianModel = new TechnicianModal();    
         $data['technicians'] = $technicianModel->findAll();
-        // $data['customers'] = $customerModel->findAll();
     
         return view('dispatching',$data);
     }
@@ -29,7 +49,6 @@ class CustomerController extends Controller
     public function create()
     {
         helper(['form']);
-
         $rules = [
             'customer_phone' => 'required',
             'customer_email' => 'required|valid_email',
@@ -59,7 +78,6 @@ class CustomerController extends Controller
 
         $this->sendbioEmail($technicianId, $data['customer_email']);
         // $this->sendDispatchMessage($deviceId, 'Technician dispatched to customer location');
-
         return redirect()->to('/operate/dispatch')->with('success', 'Customer info saved, email sent, and dispatch message sent successfully.');
     }
 

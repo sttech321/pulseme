@@ -25,4 +25,11 @@ class TechnicianModal extends Model
         return $this->where('id', $technicianId)->first();
     }
 
+    public function getTechniciansBySearch($search)
+    {
+        return $this->like('name', $search)
+                    ->orLike('department', $search)
+                    ->findAll();
+    }
+
 }

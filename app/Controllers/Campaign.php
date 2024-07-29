@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Models\CampaignModel;
+use App\Models\ReviewModal;
 use CodeIgniter\Controller;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Email\Email;
@@ -30,11 +31,10 @@ class Campaign extends BaseController {
         }
         // Load CampaignModel and fetch reviews
         $model = new CampaignModel();
+        $model1 = new ReviewModal();
         $data['reviews'] = $model->findAll(); // Fetch all reviews from the database
-    
-        // Prepare data for the view
-        $data['title'] = 'Reviews Page';
-    
+ 
+        $data['enumValues'] = $model1->getEnumValues();
         // Load the view with data
         return view('reviews', $data);
     }
