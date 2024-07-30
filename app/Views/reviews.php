@@ -65,16 +65,15 @@
                                     <?php endif ?>
                                     <div class="formWrap row">
                                        <div class="flex flex-col items-stretch col-span-3">
-                                       <select class="py-7px border-b outline-none bg-transparent" name="source" id="">
-                                          <option value="" selected="" hidden="">Select Source</option>
-                                          <?php if (isset($enumValues['enumValues']) && is_array($enumValues['enumValues'])): ?>
-                                                <?php foreach ($enumValues['enumValues'] as $type): ?>
+                                       <?php if (isset($enumValues['enumValues']['reviewType']) && is_array($enumValues['enumValues']['reviewType'])): ?>
+                                          <select class="py-7px border-b outline-none bg-transparent" name="reviewType">
+                                             <option value="" selected="" hidden="">Select Source</option>
+                                             <?php foreach ($enumValues['enumValues']['reviewType'] as $type): ?>
                                                    <option value="<?= esc($type); ?>"><?= esc(ucfirst($type)); ?></option>
-                                                <?php endforeach; ?>
-                                          <?php else: ?>
-                                                <option value="">No values available</option>
-                                          <?php endif; ?>
-                                       </select>
+                                             <?php endforeach; ?>
+                                          </select>
+                                       <?php endif; ?>
+
                                           <!---->
                                        </div>
                                        <div class="col-12 col-md-12">
@@ -84,12 +83,14 @@
                                        </div>
                                        <div class="col-12 col-md-6">
                                           <div class="inputBox">
-                                             <select class="form-select form-select-md mb-3" name="sentiment" namearia-label=".form-select-lg example">
-                                                <option disabled selected>Sentiment</option>
-                                                <option value="1">Positive</option>
-                                                <option value="2">Neutral</option>
-                                                <option value="3">Negative</option>
-                                             </select>
+                                       <?php if (isset($enumValues['enumValues']['sentiment']) && is_array($enumValues['enumValues']['sentiment'])): ?>
+                                          <select class="form-select form-select-md mb-3" name="sentiment">
+                                             <option value="" selected="" hidden="">Sentiment</option>
+                                             <?php foreach ($enumValues['enumValues']['sentiment'] as $type): ?>
+                                                   <option value="<?= esc($type); ?>"><?= esc(ucfirst($type)); ?></option>
+                                             <?php endforeach; ?>
+                                          </select>
+                                       <?php endif; ?>
                                           </div>
                                        </div>
                                        <div class="col-12 col-md-6">
@@ -117,7 +118,7 @@
                                        </div>
                                        <div class="col-12 col-md-4">
                                           <div class="inputBox">
-                                             <input class="form-control" autocomplete="off" name="Name" type="text" placeholder="name">
+                                             <input class="form-control" autocomplete="off" name="Name" type="text" placeholder="customer_name">
                                           </div>
                                        </div>
                                        <div class="col-12 col-md-4">

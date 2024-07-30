@@ -16,33 +16,44 @@ class ReviewModal extends Model
         $this->allowedFields = explode(',', $fields);
     }
 
-    public function getEnumValues() {
+    public function getEnumValues()
+    {
         $db = \Config\Database::connect();
-        $sql = "SHOW COLUMNS FROM {$this->table} LIKE 'reviewType'";
-        $builder = $db->query($sql);
-    
-        // Fetch the query result
-        $result = $builder->getResultArray();
-        $row = $builder->getRow();
-    
-        // Extract enum values if row is valid
-        if ($row) {
-            preg_match_all("/'([^\']+)'/", $row->Type, $matches);
-            $enumValues = $matches[1];
-        } else {
-            $enumValues = [];
+        
+        // Define the columns to fetch enum values from
+        $columns = ['reviewType', 'sentiment'];
+        $enumValues = [];
+        $queries = [];
+
+        foreach ($columns as $column) {
+            // Query to get column details
+            $sql = "SHOW COLUMNS FROM {$this->table} LIKE '$column'";
+            $queries[] = $sql;
+            $builder = $db->query($sql);
+
+            // Fetch the query result
+            $row = $builder->getRow();
+            
+            // Extract enum values if row is valid
+            if ($row) {
+                preg_match_all("/'([^\']+)'/", $row->Type, $matches);
+                $enumValues[$column] = $matches[1];
+            } else {
+                $enumValues[$column] = [];
+            }
         }
-    
-        // Return both the query and the enum values
+
+        // Return the queries and the enum values for each column
         return [
-            'query' => $sql,
             'enumValues' => $enumValues
         ];
     }
+
 
     public function getReviewsByType($type)
     {
         return $this->where('reviewType', $type)->findAll();
     }
+
 
 }

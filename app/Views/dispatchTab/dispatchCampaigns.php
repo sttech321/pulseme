@@ -227,9 +227,9 @@
                                  </path>
                                  </svg> </button> -->
                               <div class="rightSec">
-                                 <button type="button" class="btn btn-secondary btn-md ml-2" data-bs-toggle="modal" data-bs-target="#editdefaultModal">
+                                 <!-- <button type="button" class="btn btn-secondary btn-md ml-2" data-bs-toggle="modal" data-bs-target="#editdefaultModal">
                                  <i class="fa fa-plus mr-3" aria-hidden="true"></i> Edit Defaults
-                                 </button>
+                                 </button> -->
                                  <div class="modal fade" id="editdefaultModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <!-- Modal -->
                                     <div class="modal-dialog modalContent mx-700">
@@ -354,6 +354,28 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal fade" id="EDITDefault" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modalContent mx-700">
+                                       <div class="modal-content">
+                                             <div class="modal-body bg-white w-600px my-30px rounded-4px shadow p-30px text-center flex flex-col items-stretch">
+                                                <h1 class="text-30px font-bold mb-15px">FieldOps App</h1>
+                                                <p class="text-18px font-light mb-20px leading-tight">Enter the email or phone number of your technician. We will send them instructions on how to download the FieldOps App for their device!</p>
+                                                <div class="mb-20px text-left">
+                                                   <input class="w-full mb-5px border border-gray-400 focus:border-black p-10px outline-none rounded-3px" type="email" name="email" id="email" placeholder="Email" />
+                                                   <!---->
+                                                </div>
+                                                <div class="mb-20px text-left">
+                                                   <input class="w-full mb-5px border border-gray-400 focus:border-black p-10px outline-none rounded-3px" type="tel" name="phone" id="phone" placeholder="Phone Number" />
+                                                   <!---->
+                                                </div>
+                                                <div class="flex justify-center">
+                                                   <button id="ok-button" type="submit" class="btn btn-blue mr-10px">OK</button>
+                                                   <button id="cancel-button" class="btn bg-gray" type="button" data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                             </div>
+                                       </div>
+                                    </div>
+                                 </div>
 
                                 <div class="modal fade" id="EDITscampaignModal-<?= $campaign['employeeId'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
@@ -407,7 +429,7 @@
                                           Edit Campaign 
                                        </button>
                                     <!-- </a> -->
-                                    <button data-bs-toggle="modal" data-bs-target="#EDITcampaignModal-<?= $campaign['ID'] ?>" class="btn btn-blue w-full rounded-2px" id="showFieldOps-<?= esc($campaign['employeeId']) ?>">
+                                    <button data-bs-toggle="modal" data-bs-target="#EDITDefault" class="btn btn-blue w-full rounded-2px" id="showFieldOps-<?= esc($campaign['employeeId']) ?>">
                                        <svg class="svg-inline--fa fa-mobile-screen-button" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="mobile-screen-button" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                           <path class="" fill="currentColor" d="M16 64C16 28.7 44.7 0 80 0H304c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H80c-35.3 0-64-28.7-64-64V64zM224 448a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM304 64H80V384H304V64z">
                                           </path>
@@ -422,7 +444,7 @@
                                           </svg>
                                        </button>
                                     </a>
-                                    <button data-bs-toggle="modal" data-bs-target="#EDITscampaignModal-<?= $campaign['employeeId'] ?>" class="btn btn-blue rounded-2px" id="showSample-<?= esc($campaign['employeeId']) ?>">
+                                    <button data-bs-toggle="modal" data-bs-target="#EDITscampaignModal-<?= esc($campaign['employeeId']) ?>" class="btn btn-blue rounded-2px" id="showSample-<?= esc($campaign['employeeId']) ?>">
                                        <svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                           <path class="" fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z">
                                           </path>

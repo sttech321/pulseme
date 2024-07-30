@@ -13,7 +13,7 @@ class ReviewController extends BaseController
         // Load session service
         $this->session = \Config\Services::session();
     }
-
+    
     public function social_review()
     {
         $model = new ReviewModal();
