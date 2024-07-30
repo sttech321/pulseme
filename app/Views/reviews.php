@@ -137,6 +137,11 @@
                                              </div>
                                           </div>
                                        </div>
+                                       <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
+                                          <button type="Submit" class="btn btn-primary btn-md">Submit changes</button>
+                                       </div>
+                                    </div>
                                  </form>
                               </div>
                            </div>
