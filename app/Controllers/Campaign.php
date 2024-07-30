@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Models\CampaignModel;
+use App\Models\ReviewModal;
 use CodeIgniter\Controller;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Email\Email;
@@ -18,6 +19,7 @@ class Campaign extends BaseController {
     {
         $model = new CampaignModel();
         $data['campaigns'] = $model->findAll();
+        // print_r($data['campaigns'][0]);
         return view('dispatchTab/dispatchCampaigns',$data);
     }
 
@@ -29,11 +31,10 @@ class Campaign extends BaseController {
         }
         // Load CampaignModel and fetch reviews
         $model = new CampaignModel();
+        $model1 = new ReviewModal();
         $data['reviews'] = $model->findAll(); // Fetch all reviews from the database
-    
-        // Prepare data for the view
-        $data['title'] = 'Reviews Page';
-    
+ 
+        $data['enumValues'] = $model1->getEnumValues();
         // Load the view with data
         return view('reviews', $data);
     }
@@ -57,7 +58,7 @@ class Campaign extends BaseController {
         $newName = $campaignImage->getRandomName();
         $uploadPath = '/image/campaign/';
 
-        // Move uploaded file to designated directory
+        // // Move uploaded file to designated directory
         if ($campaignImage->isValid() && !$campaignImage->hasMoved()) {
            // $campaignImage->move($uploadPath, $newName);
             $campaignImage->move(ROOTPATH . 'public/image/campaign', $newName);
@@ -66,20 +67,21 @@ class Campaign extends BaseController {
             return redirect()->back()->with('error', 'Failed to upload image.');
         }
         // Save campaign data to database
-        $campaignModel = new CampaignModel(); // Replace with your actual model name
+        $campaignModel = new CampaignModel(); 
+        // var_dump($model);
         $data = [
-            'ID'    => null,
             'name' => $this->request->getPost('CampaignName'),
             'description' => $this->request->getPost('campaignDescription'),
             'department' => $this->request->getPost('campaignDepartment'),
             'license' => $this->request->getPost('license'),
             'employeeId' => $this->request->getPost('employeeId'),
             'email' => $this->request->getPost('email'),
-            'image' => $uploadPath . $newName // Store image path in database
+            'image' => $uploadPath . $newName ,// Store image path in database
+            'deviceId' => $this->request->getPost('deviceId'),
         ];
-        // Insert data into database
+        // // Insert data into database
         $campaignModel->insert($data);
-        // Redirect to a success page or display success message
+        // // Redirect to a success page or display success message
         return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign saved successfully.');
     }
 
@@ -124,6 +126,7 @@ class Campaign extends BaseController {
 
         // Update campaign data in database
         $model = new CampaignModel();
+
         $data = [
             'name' => $this->request->getPost('CampaignName'),
             'description' => $this->request->getPost('campaignDescription'),
@@ -131,6 +134,7 @@ class Campaign extends BaseController {
             'license' => $this->request->getPost('license'),
             'employeeId' => $this->request->getPost('employeeId'),
             'email' => $this->request->getPost('email'),
+            'deviceId' => $this->request->getPost('deviceId'),
         ];
 
         // Include image path in data if uploaded

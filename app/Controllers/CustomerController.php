@@ -1,47 +1,54 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\CustomerModel;
 use App\Models\TechnicianModal;
 use CodeIgniter\Controller;
+use Exception;
 
-class CustomerController extends BaseController
+class CustomerController extends Controller
 {
+    
     public function __construct()
     {
-        // Load session service
         $this->session = \Config\Services::session();
     }
-    
+
+    public function getAllTechnicians()
+    {
+        $technicianModel = new TechnicianModal();
+        $technicians = $technicianModel->findAll();
+        return $this->response->setJSON($technicians);
+    }
+
     public function search()
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('dispatch');
-
-        $searchTerm = $this->request->getVar('search');
-
-        if (strlen($searchTerm) >= 2) {
-            $builder->like('technician_name', $searchTerm);
-            $builder->orLike('technician_code', $searchTerm);
+        $search = $this->request->getVar('query');
+    
+        $technicianModel = new TechnicianModal();
+        
+        if ($search) {
+            $results = $technicianModel->getTechniciansBySearch($search);
+        } else {
+            $results = $technicianModel->findAll(); // Return all technicians if no search query
         }
+    
+        return $this->response->setJSON($results);
+    } 
 
-        $query = $builder->get();
-        $data['technicians'] = $query->getResultArray();
-
-        return $this->response->setJSON($data);
-    }
 
     public function dispatch()
     {
-        $technicianModel = new TechnicianModal();
+        $technicianModel = new TechnicianModal();    
         $data['technicians'] = $technicianModel->findAll();
-        return view('dispatching', $data);
+    
+        return view('dispatching',$data);
     }
 
     public function create()
     {
         helper(['form']);
-
         $rules = [
             'customer_phone' => 'required',
             'customer_email' => 'required|valid_email',
@@ -67,25 +74,19 @@ class CustomerController extends BaseController
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
-        // Insert customer data
         $customerModel->insert($data);
-        // $lastQuery = $customerModel->getLastQuery()->getQuery();
-        // log_message('debug', $lastQuery);
-        // session()->setFlashdata('last_query', $lastQuery);
 
-        // Send bio email
         $this->sendbioEmail($technicianId, $data['customer_email']);
-
-        return redirect()->to('/operate/dispatch')->with('success', 'Customer info saved and email sent successfully.');
+        // $this->sendDispatchMessage($deviceId, 'Technician dispatched to customer location');
+        return redirect()->to('/operate/dispatch')->with('success', 'Customer info saved, email sent, and dispatch message sent successfully.');
     }
 
     private function sendbioEmail($technicianId, $email)
     {
         $emailService = \Config\Services::email();
-        $pagelink = '<a href="http://localhost:8080/application/bio/'.$technicianId.'">BIO link</a>';
-        $message = "Here is technician bio link please click this link to see technician details: ".$pagelink; // Replace with your actual page link
+        $link = base_url('/application/bio/' . $technicianId);
+        $message = view('dispatchTab/bio-template', ['link' => $link]);
 
-        // Initialize email configuration
         $emailService->initialize([
             'protocol' => 'smtp',
             'SMTPHost' => $_ENV['SMTP_HOST'],
@@ -97,21 +98,17 @@ class CustomerController extends BaseController
             'newline' => "\r\n"
         ]);
 
-        // Set email parameters
         $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
         $emailService->setTo($email);
-        $emailService->setSubject('Technician Bio'); // Adjust subject as needed
-
-        // Set email message body
+        $emailService->setSubject('Technician Bio');
         $emailService->setMessage($message);
 
-        // Send email and handle response
         if (!$emailService->send()) {
-            // Display error message for debugging
             echo $emailService->printDebugger(['headers', 'subject', 'body']);
-        } else {
-            // Successful send
-            return redirect()->to('/operate/dispatch')->with('success', 'Bio sent successfully');
+        }else{
+            return redirect()->to('/operate/dispatch')->with('success', 'email sent successfully.');
         }
     }
+
 }
+?>

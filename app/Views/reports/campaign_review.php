@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 				<div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
 					<div class="sub-menu-bar flex flex-col items-stretch h-full">
-						<div class="p-20px bg-white"><h2 class="text-2xl">Reviews</h2></div>
+						<div class="p-20px bg-white"><h2 class="text-2xl">Reports</h2></div>
 						<div class="px-15px flex justify-start items-center bg-white">
 							<a href="/leaderboard/reports/departments" class="p-10px">Departments</a>
 							<a href="/leaderboard/reports/campaigns" class="p-10px">Campaigns</a>
@@ -87,9 +87,6 @@
 													<!-- </th> -->
 												</tr>
 											</thead>
-											<?php foreach ($Customers as $data) : ?>
-														<?= esc($data['campaign_id']) ?>
-												<?php endforeach; ?>
 											<tbody>
 											<?php foreach ($campaigns as $campaign) : ?>	
 												<tr class="!bg-opacity-50 odd:bg-sky-100">

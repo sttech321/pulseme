@@ -53,7 +53,6 @@
                                        </h5>
                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-
                                     <div class="modal-body">
                                        <?php $script = ''; ?>
                                        <?php if (session()->getFlashdata('validation')) : ?>
@@ -66,21 +65,15 @@
                                        <?php endif ?>
                                        <div class="formWrap row">
                                           <div class="flex flex-col items-stretch col-span-3">
-                                             <!-- <p class="text-17px">Source</p> -->
-                                             <select class="py-7px border-b outline-none bg-transparent" name="source" id="">
-                                                <option value="" selected="" hidden="">Select Source</option>
-                                                <option value="facebook">Facebook</option>
-                                                <option value="google">Google</option>
-                                                <option value="bbb">Better Business Bureau</option>
-                                                <option value="yp">Yellow Pages</option>
-                                                <option value="angieslist">Angi</option>
-                                                <option value="houzz">Houzz</option>
-                                                <option value="homeadvisor">Home Advisor</option>
-                                                <option value="homestar">Home Stars</option>
-                                                <option value="porch">Porch</option>
-                                                <option value="nextdoor">Nextdoor</option>
-                                                <option value="other">Other</option>
-                                             </select>
+                                             <?php if (isset($enumValues['enumValues']['reviewType']) && is_array($enumValues['enumValues']['reviewType'])) : ?>
+                                                <select class="py-7px border-b outline-none bg-transparent" name="reviewType">
+                                                   <option value="" selected="" hidden="">Select Source</option>
+                                                   <?php foreach ($enumValues['enumValues']['reviewType'] as $type) : ?>
+                                                      <option value="<?= esc($type); ?>"><?= esc(ucfirst($type)); ?></option>
+                                                   <?php endforeach; ?>
+                                                </select>
+                                             <?php endif; ?>
+
                                              <!---->
                                           </div>
                                           <div class="col-12 col-md-12">
@@ -90,12 +83,14 @@
                                           </div>
                                           <div class="col-12 col-md-6">
                                              <div class="inputBox">
-                                                <select class="form-select form-select-md mb-3" name="sentiment" namearia-label=".form-select-lg example">
-                                                   <option disabled selected>Sentiment</option>
-                                                   <option value="1">Positive</option>
-                                                   <option value="2">Neutral</option>
-                                                   <option value="3">Negative</option>
-                                                </select>
+                                                <?php if (isset($enumValues['enumValues']['sentiment']) && is_array($enumValues['enumValues']['sentiment'])) : ?>
+                                                   <select class="form-select form-select-md mb-3" name="sentiment">
+                                                      <option value="" selected="" hidden="">Sentiment</option>
+                                                      <?php foreach ($enumValues['enumValues']['sentiment'] as $type) : ?>
+                                                         <option value="<?= esc($type); ?>"><?= esc(ucfirst($type)); ?></option>
+                                                      <?php endforeach; ?>
+                                                   </select>
+                                                <?php endif; ?>
                                              </div>
                                           </div>
                                           <div class="col-12 col-md-6">
@@ -123,6 +118,11 @@
                                           </div>
                                           <div class="col-12 col-md-4">
                                              <div class="inputBox">
+                                                <input class="form-control" autocomplete="off" name="Name" type="text" placeholder="customer_name">
+                                             </div>
+                                          </div>
+                                          <div class="col-12 col-md-4">
+                                             <div class="inputBox">
                                                 <input class="form-control" autocomplete="off" name="City" type="text" placeholder="City">
                                              </div>
                                           </div>
@@ -137,11 +137,6 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <div class="modal-footer">
-                                          <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
-                                          <button type="Submit" class="btn btn-primary btn-md">Submit changes</button>
-                                       </div>
-                                    </div>
                                  </form>
                               </div>
                            </div>
