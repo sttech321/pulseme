@@ -69,7 +69,7 @@
 	</div>
 
 	<?php if (!empty($reviews)): ?>
-		<?php foreach ($reviews as $review): ?>
+		<?php foreach ($reviews as $index => $review): ?>
 	<div class="bg-white p-25px rounded flex">
 		<div class="logo flex justify-center mr-10px">
 			<svg class="svg-inline--fa fa-google text-4xl text-gray-400" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
@@ -82,15 +82,6 @@
 		</div>
 		<div class="flex flex-col items-start flex-grow">
 			<div class="top-line grid grid-rows-1 grid-flow-col gap-10px">
-				<div class="flex justify-evenly items-center">
-					<!---->
-					<div class="flex text-xl relative !text-amber-400">
-					
-						<div class="flex absolute overflow-hidden text-xl top-0 left-0 !text-amber-400" style="width: 100%;">
-								
-						</div>
-					</div>
-				</div>
 				<?php
 					// Get the JSON string from the reviewerInfo
 					$jsonString = json_decode($review['reviewerInfo'],true);
@@ -137,7 +128,8 @@
 						></path>
 					</svg>
 					<!----><!---->
-					<span id="name-span">Eugene Lewis</span>
+
+					<span id="name-span-<?php echo $index; ?>">Eugene Lewis</span>
 				</button>
 				<div class="give-credit relative">
 					<!---->
@@ -150,12 +142,12 @@
 							></path>
 						</svg>
 						
-						<select class="form-select form-select-md mb-3" name="campaign" aria-label=".form-select-lg example" style="margin-top:12px;">
-							<option disabled selected>Give Additional Credit</option>
-							<?php  foreach($reviewss as $review) : ?>
-								<option value="<?= esc($review['ID']) ?>"><?= esc($review['name']) ?></option>
-							<?php endforeach; ?>
-							</select>
+						<select class="form-select form-select-md mb-3" name="campaign-<?php echo $index; ?>" aria-label=".form-select-lg example" style="margin-top:12px;">
+                                <option disabled selected>Give Additional Credit</option>
+                                <?php foreach ($reviewss as $reviewOption): ?>
+                                    <option value="<?= esc($reviewOption['name']) ?>"><?= esc($reviewOption['name']) ?></option>
+                                <?php endforeach; ?>
+                        </select>
 					</button>
 					<!---->
 				</div>
@@ -170,11 +162,24 @@
 	<!---->
 </div>
 <script>
-  document.getElementById('name-select').addEventListener('change', function() {
-    const selectedOption = this.options[this.selectedIndex].text;
-    document.getElementById('name-display').textContent = selectedOption;
-  });
-</script>
+    // Load selected options from localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.form-select').forEach(function(select, index) {
+            const savedValue = localStorage.getItem('selectedOption-' + index);
+            if (savedValue) {
+                select.value = savedValue;
+                document.getElementById('name-span-' + index).textContent = savedValue;
+            }
 
+            select.addEventListener('change', function() {
+                const selectedOption = this.value;
+                document.getElementById('name-span-' + index).textContent = selectedOption;
+
+                // Save the selected option in localStorage
+                localStorage.setItem('selectedOption-' + index, selectedOption);
+            });
+        });
+    });
+</script>
 
 <?= $this->endsection('content') ?>
