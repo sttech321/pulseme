@@ -12,14 +12,11 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
   box-sizing: content-box;
 }
 
-<<<<<<< HEAD
-=======
 .shadow .img img{
     width: 600px;
     height: 600px;
 
 }
->>>>>>> remotes/origin/master
 .svg-inline--fa {
   display: var(--fa-display, inline-block);
   height: 1em;
@@ -758,11 +755,7 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
 .fa-duotone.fa-inverse {
   color: var(--fa-inverse, #fff);
 }
-<<<<<<< HEAD
-@charset "UTF-8";.vue-map {
-=======
 /* @charset "UTF-8";.vue-map {
->>>>>>> remotes/origin/master
     width: 100%;
     height: 100%;
     min-height: 2rem
