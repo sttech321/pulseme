@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-step Form</title>
     <link rel="stylesheet" type="text/css" href="/css/pulse.css">
 </head>
-
 <body>
-    
 <?php if (isset($validation)): ?>
     <div class="alert alert-danger">
         <?= $validation->listErrors(); ?>
@@ -203,31 +200,28 @@
             </div>
         </div>
 </form>
-
 <?php endif; ?>
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    const rangeInputs = document.querySelectorAll('input[type="range"]');
-    const form = document.getElementById('multiStepForm');
+        const rangeInputs = document.querySelectorAll('input[type="range"]');
+        const form = document.getElementById('multiStepForm');
 
-    // Update hidden input values based on range input changes
-    rangeInputs.forEach(function(rangeInput) {
-        const rangeId = rangeInput.getAttribute('data-range-id');
-        const hiddenValueInput = document.getElementById(`rating${rangeId}_value`);
-        const hiddenTextInput = document.getElementById(`rating${rangeId}_text`);
+        // Update hidden input values based on range input changes
+        rangeInputs.forEach(function(rangeInput) {
+            const rangeId = rangeInput.getAttribute('data-range-id');
+            const hiddenValueInput = document.getElementById(`rating${rangeId}_value`);
+            const hiddenTextInput = document.getElementById(`rating${rangeId}_text`);
 
-        rangeInput.addEventListener('input', function() {
-            hiddenValueInput.value = rangeInput.value;
+            rangeInput.addEventListener('input', function() {
+                hiddenValueInput.value = rangeInput.value;
+            });
+        });
+
+        // Handle form submission
+        form.addEventListener('submit', function(event) {
+    
         });
     });
-
-    // Handle form submission
-    form.addEventListener('submit', function(event) {
-   
-    });
-});
 
     let currentStep = 0;
     const steps = document.querySelectorAll('.step');
@@ -271,8 +265,6 @@
     }
     
 </script>
-
 </body>
-
 </html>
 

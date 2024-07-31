@@ -67,6 +67,7 @@ $routes->get('/settings/dispatch/campaigns', 'Campaign::index');
 $routes->get('/analyze/reviews', 'Campaign::reviews');
 $routes->get('application/bio/(:num)', 'Campaign::technician_bio/$1');
 $routes->get('application/pulsecheck/(:segment)', 'Campaign::pulse_check/$1');
+$routes->post('application/pulsecheck/(:segment)', 'ReviewController::submitReview/$1');
 
 $routes->get('/operate', 'CustomerController::dispatch');
 $routes->post('/operate/dispatch/create/(:num)', 'CustomerController::create/$1');
@@ -80,3 +81,6 @@ $routes->get('/leaderboard/reports/departments', 'ReportsController::departments
 $routes->get('/leaderboard/reports/fieldops-usage', 'ReportsController::report_campaign_fieldsops');
 
 // $routes->get('/rewards', 'ReviewController::rewards');
+
+$routes->post('analyze/reviews/social-reviews/(:num)', 'ReviewController::google_review_credit/$1');
+$routes->get('/thankyou', 'ReviewController::thankyou');

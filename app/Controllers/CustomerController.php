@@ -93,6 +93,7 @@ class CustomerController extends Controller
             'SMTPPort' => intval($_ENV['SMTP_PORT']),
             'SMTPUser' => $_ENV['SMTP_USER'],
             'SMTPPass' => $_ENV['SMTP_PASS'],
+            //'setSMTPCrypto' => '',
             'mailType' => 'html',
             'charset' => 'utf-8',
             'newline' => "\r\n"
@@ -105,6 +106,7 @@ class CustomerController extends Controller
 
         if (!$emailService->send()) {
             echo $emailService->printDebugger(['headers', 'subject', 'body']);
+            echo $emailService->printDebugger(['headers']);
         }else{
             return redirect()->to('/operate/dispatch')->with('success', 'email sent successfully.');
         }
