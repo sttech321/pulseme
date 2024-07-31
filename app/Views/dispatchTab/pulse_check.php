@@ -1,11 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-step Form</title>
     <link rel="stylesheet" type="text/css" href="/css/pulse.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js"></script>
+    <style>
+        .slider-wrapper {
+            width: 300px;
+            margin: 10px auto;
+        }
+
+        body .ratings-title {
+            padding: 0 0 18px;
+        }
+
+        .noUi-horizontal .noUi-handle {
+            left: auto;
+            position: inherit;
+            height: 33px;
+            width: 33px;
+            top: -7px;
+            background: #a6b7bf;
+            box-shadow: 0 0 2px #a6b7bf;
+            transition: height .3s, width .3s, top .3s, background .3s;
+        }
+
+        .slider-wrapper .noUi-handle.noUi-active {
+            background: #a6b7bf;
+            box-shadow: 0 0 0 13px rgba(0, 0, 0, .1);
+            height: 44px;
+            width: 44px;
+            top: -11px;
+        }
+
+        .slider-wrapper .noUi-connects,
+        .slider-wrapper .noUi-base,
+        .slider-wrapper .noUi-target {
+            height: 20px;
+            border-radius: 10px;
+        }
+
+        .noUi-value {
+            cursor: pointer;
+        }
+
+        .noUi-value-active {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .noUi-tooltip {
+            display: none;
+        }
+
+        .noUi-connect {
+            background: linear-gradient(to right, #f30 0%, #2babc9 35%, #88e113 100%);
+        }
+
+        .noUi-marker-horizontal.noUi-marker-large {
+            height: 0;
+        }
+
+        .noUi-pips-horizontal {
+            padding: 0px 0;
+        }
+    </style>
+
 </head>
+
 <body>
 <?php if (isset($validation)): ?>
     <div class="alert alert-danger">
@@ -14,7 +80,7 @@
 <?php endif; ?>
 
 <?php if($technician): ?>
-<form id="multiStepForm" method="POST" action="<?= base_url('/application/pulsecheck/' . $technician['employeeId']) ?>">
+    <form id="multiStepForm" method="POST" action="<?= base_url('/application/pulsecheck/' . $technician['employeeId']) ?>">
         <!-- Step 1 -->
         <div class="step active selected container" id="step1">
             <div class="wrapper test-transaction has-bottom-logo">
@@ -32,8 +98,8 @@
                             <h2 class="flow-card-title">How satisfied were you with the overall experience?</h2>
                         </div>
                         <div class="row p-b-30">
-                            <a class="col-xs-4" data-mood="negative" onclick="nextStep()">
-                                <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg" class="img-responsive">
+                            <a class="col-xs-4" data-mood="negative">
+                                <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg" onclick="nextStep()" class="img-responsive">
                             </a>
                             <a class="col-xs-4" data-mood="positive" onclick="nextpart()">
                                 <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg" class="img-responsive">
@@ -43,7 +109,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Step 2 -->
         <div class="step container" id="step2">
             <div class="wrapper test-transaction has-bottom-logo">
@@ -59,19 +124,17 @@
                     <div class="flow-card active mood" data-flow-id="1" data-flow-back="None" data-type="mood">
                         <div class="flow-card-header clearfix">
                             <h2 class="flow-card-title">
-                                Thank you!<br>
+                                <p class="mb-4">Thank you!</p>
                                 <b>We always want to provide our Clients with a 5 star experience.</b><br>
                                 <br>
                             </h2>
                         </div>
                         <div>
-                            <div class="social-media-websites">
-                                <a class="social-media-btn sm-banner contact-us btn btn-block btn-lg"
-                                    onclick="nextStep()">
+                            <div class="social-media-websites gap-flex-20">
+                                <a class="social-media-btn sm-banner contact-us btn btn-block btn-lg" onclick="nextStep()">
                                     <i class="zmdi zmdi-sun p-r-10"></i> Contact us directly!
                                 </a>
-                                <a class="btn btn-lg btn-primary waves-effect" data-submit-ratings=""
-                                    data-next="63" onclick="prevStep()">BACK</a>
+                                <a type="btn" class="btn btn-lg btn-success" onclick="prevStep()">BACk</a>
                             </div>
                         </div>
                     </div>
@@ -83,32 +146,69 @@
         <div class="step container" id="step3">
             <div class="wrapper test-transaction has-bottom-logo">
                 <div class="card text-center">
-                    <div id="pulsecheck-title" class="card-header row m-0">
+                    <div id="pulsecheck-title" class="card-header row m-0" style="">
                         <div class="col-xs-6">
                             <h3 class="title m-t-5 text-left"></h3>
                         </div>
                         <div class="col-xs-6">
-                            <img class="logo" src="<?= $technician['image'] ?>">
+                            <img class="logo" src="<?= $technician['image'] ?>" style="">
                         </div>
-                    </div> 
-                     <div class="flow-card active mood" data-flow-id="1" data-flow-back="None" data-type="mood">
-                        <h3 class="ratings-title">How likely are you to recommend us to your friends and family?</h3>
-                        <input type="range" min="0" max="10" data-range-id="1">
-                        <input type="hidden" name="rating1_value" id="rating1_value" value="5">
-                        <input type="hidden" name="rating1_text" id="rating1_text" value="How likely are you to recommend us to your friends and family?">
+                    </div>
+                    <div class="flow-card rating active" data-flow-id="62" data-flow-back="60" data-type="rating">
+                        <div class="flow-card-header clearfix"></div>
+                        <div class="m-t-15">
+                            <h3 class="ratings-title">How likely are you to recommend us to your friends and family?
+                            </h3>
+                            <div class="ratings-slider">
+                                <div class="mood negative text-left">
+                                    <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg">
+                                </div>
+                                <div class="slider-wrapper slider">
+                                    <div id="employees1"></div>
+                                </div>
+                                <div class="mood positive text-right">
+                                    <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg">
+                                </div>
+                            </div>
+                            <input type="hidden" name="rating_name[]" value="How likely are you to recommend us to your friends and family?">
+                            <input type="hidden" name="rating_value[]" value="">
 
-                        <h3 class="ratings-title">Professionalism</h3>
-                        <input type="range" min="0" max="10" data-range-id="2">
-                        <input type="hidden" name="rating2_value" id="rating2_value" value="5">
-                        <input type="hidden" name="rating2_text" id="rating2_text" value="Professionalism">
+                            <h3 class="ratings-title">Professionalism</h3>
+                            <div class="ratings-slider">
+                                <div class="mood negative text-left">
+                                    <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg">
+                                </div>
+                                <div class="slider-wrapper slider">
+                                    <div id="employees2"></div>
+                                </div>
+                                <div class="mood positive text-right">
+                                    <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg">
+                                </div>
+                            </div>
 
-                        <h3 class="ratings-title">Quality of Service</h3>
-                        <input type="range" min="0" max="10" data-range-id="3">
-                        <input type="hidden" name="rating3_value" id="rating3_value" value="5">
-                        <input type="hidden" name="rating3_text" id="rating3_text" value="Quality of Service"> 
+                            <input type="hidden" name="rating_name[]" value="Professionalism">
+                            <input type="hidden" name="rating_value[]" value="">
 
-                        <a class="btn btn-lg btn-primary waves-effect"  onclick="nextStep()">Submit</a> 
-                         <a class="btn btn-lg btn-primary waves-effect" onclick="prevStep()">BACK</a>
+                            <h3 class="ratings-title">Quality of Service</h3>
+                            <div class="ratings-slider">
+                                <div class="mood negative text-left">
+                                    <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg">
+                                </div>
+                                <div class="slider-wrapper slider">
+                                    <div id="employees3"></div>
+                                </div>
+                                <div class="mood positive text-right">
+                                    <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg">
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="rating_name[]" value="Quality of Service">
+                            <input type="hidden" name="rating_value[]" value="">
+                        </div>
+                        <div class="text-center p-b-20">
+                            <a class="btn btn-lg btn-primary waves-effect" data-submit-ratings="" data-next="63" onclick="nextStep()">Submit</a>
+                            <a type="btn" class="btn btn-lg btn-success" onclick="prevStep()">BACk</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -134,19 +234,17 @@
                         <div>
                             <div class="action write">
                                 <div class="clearfix aligned-textarea">
+                                    <button type="submit" class="btn btn-primary waves-effect">
+                                        Send
+                                    </button>
                                     <div class="form-group p-0">
                                         <div class="fg-line">
-                                            <textarea class="input form-control fg-input validate" name="feedback" rows="5"
-                                            placeholder="Type your feedback..."
-                                            data-empty-error="Feedback cannot be left blank" data-max-length="999"
-                                            spellcheck="false"></textarea>
+
+                                            <textarea class="input form-control fg-input validate" name="feedback" rows="5" placeholder="Type your feedback..." data-empty-error="Feedback cannot be left blank" data-max-length="999" spellcheck="false"></textarea>
                                         </div>
-                                        <button type="submit" class="btn btn-primary waves-effect">
-                                            Send
-                                        </button>
-                                        <div class="help-block help-block-alt text-left brd-t-l-0 brd-t-r-0 m-t-0"></div>
-                                            <a class="btn btn-lg btn-primary waves-effect" data-submit-ratings=""
-                                            data-next="63" onclick="prevStep()">BACK</a>
+                                        <div class="help-block help-block-alt text-left brd-t-l-0 brd-t-r-0 m-t-0">
+                                        </div>
+                                        <a type="btn" class="btn btn-lg btn-success" onclick="prevStep()">BACk</a>
                                     </div>
                                 </div>
                             </div>
@@ -160,7 +258,7 @@
         <div class="step container" id="step5">
             <div class="wrapper test-transaction has-bottom-logo">
                 <div class="card text-center">
-                    <div id="pulsecheck-title" class="card-header row m-0" style="">
+                    <div id="pulsecheck-title" class="card-header row m-0">
                         <div class="col-xs-6">
                             <h3 class="title m-t-5 text-left"></h3>
                         </div>
@@ -168,8 +266,7 @@
                             <img class="logo" src="<?= $technician['image'] ?>" style="">
                         </div>
                     </div>
-                    <div class="flow-card social-media active" data-flow-id="20" data-flow-back="1"
-                        data-type="social-media">
+                    <div class="flow-card social-media active" data-flow-id="20" data-flow-back="1" data-type="social-media">
                         <div class="flow-card-header clearfix">
                             <h2 class="flow-card-title">
                             </h2>
@@ -178,93 +275,144 @@
                             <b style="font-size: 14px;" class="m-0">(Google reviews help us the most!)</b>
 
                         </div>
-                        <div class="social-media-websites positive" data-is-last="0" data-valid="True"
-                            data-confirm-text="I left a great review!" data-success="21" data-failure="22">
-                            <a href="https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U"
-                                target="_blank" data-sm="google"
-                                class="social-media-btn sm-banner google btn btn-block btn-lg" data-success="21"
-                                data-failure="22" data-retry="1" data-app="google">
+                        <div class="social-media-websites positive" data-is-last="0" data-valid="True" data-confirm-text="I left a great review!" data-success="21" data-failure="22">
+                            <a href="https://search.google.com/local/writereview?placeid=ChIJV-VOPI_8wogRTehQ26NNi1U" target="_blank" data-sm="google" class="social-media-btn sm-banner google btn btn-block btn-lg" data-success="21" data-failure="22" data-retry="1" data-app="google">
                                 <i class="sm-icon p-r-10"></i>Google
                             </a>
-                            <a href="https://www.facebook.com/login/?next=https%3A//www.facebook.com/pg/None/reviews/"
-                                target="_blank" data-sm="facebook"
-                                class="social-media-btn sm-banner facebook btn btn-block btn-lg" data-success="21"
-                                data-failure="22" data-retry="1" data-app="facebook">
+                            <a href="https://www.facebook.com/login/?next=https%3A//www.facebook.com/pg/None/reviews/" target="_blank" data-sm="facebook" class="social-media-btn sm-banner facebook btn btn-block btn-lg" data-success="21" data-failure="22" data-retry="1" data-app="facebook">
                                 <i class="sm-icon p-r-10"></i>Facebook
                             </a>
-                            <a class="btn btn-lg btn-primary waves-effect" data-submit-ratings="" data-next="63"
-                                onclick="prevstep2()">BACK</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-</form>
-<?php endif; ?>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const rangeInputs = document.querySelectorAll('input[type="range"]');
-        const form = document.getElementById('multiStepForm');
 
-        // Update hidden input values based on range input changes
-        rangeInputs.forEach(function(rangeInput) {
-            const rangeId = rangeInput.getAttribute('data-range-id');
-            const hiddenValueInput = document.getElementById(`rating${rangeId}_value`);
-            const hiddenTextInput = document.getElementById(`rating${rangeId}_text`);
+    </form>
+    <?php endif; ?>
+    <script>
+        let currentStep = 0;
+        const steps = document.querySelectorAll('.step');
 
-            rangeInput.addEventListener('input', function() {
-                hiddenValueInput.value = rangeInput.value;
+        function showStep(step) {
+            steps.forEach((stepElement, index) => {
+                stepElement.classList.toggle('active', index === step);
             });
-        });
-
-        // Handle form submission
-        form.addEventListener('submit', function(event) {
-    
-        });
-    });
-
-    let currentStep = 0;
-    const steps = document.querySelectorAll('.step');
-
-    function showStep(step) {
-        steps.forEach((stepElement, index) => {
-            stepElement.classList.toggle('active', index === step);
-            console.log((stepElement), 'aaa');
-        });
-    }
-
-    function nextStep() {
-        if (currentStep < steps.length - 1) {
-            currentStep++;
-            showStep(currentStep);
-            console.log((currentStep), 'bbbb');
         }
-    }
 
-    function prevStep() {
-        if (currentStep > 0 && currentStep != 4) {
-            currentStep--;
-            showStep(currentStep);
-            console.log(currentStep, 'cccc');
+        function nextStep() {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
         }
-    }  
 
-    function prevstep2() {
-        if (currentStep >= 4) {
-            currentStep = 0;
-            showStep(currentStep);
-            console.log((currentStep), 'dddd');
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
         }
-    }
 
-    function nextpart() {
-        // Directly activate step 5
-        currentStep = 4; // Index 4 corresponds to step 5
-        showStep(currentStep);
-        console.log((currentStep), 'eeeee');
-    }
-    
-</script>
+        function nextpart() {
+            // Directly activate step 5
+            currentStep = 4; // Index 4 corresponds to step 5
+            showStep(currentStep);
+            console.log((currentStep));
+        }
+
+        document.getElementById('multiStepForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+        });
+    </script>
+
+    <script>
+        const labels = {
+            0: '0',
+            1: '1',
+            2: '2',
+            3: '3',
+            4: '4',
+            5: '5',
+            6: '6',
+            7: '7',
+            8: '8',
+            9: '9',
+            10: '10'
+        };
+
+        function createSlider(elementId) {
+            const slider = document.querySelector(elementId);
+
+            noUiSlider.create(slider, {
+                start: 1,
+                connect: [true, false],
+                tooltips: {
+                    to: function(value) {
+                        return value > 10 ? '10+' : parseInt(value);
+                    }
+                },
+                range: {
+                    'min': 0,
+                    '10%': 1,
+                    '20%': 2,
+                    '30%': 3,
+                    '40%': 4,
+                    '50%': 5,
+                    '60%': 6,
+                    '70%': 7,
+                    '80%': 8,
+                    '90%': 9,
+                    'max': 10
+                },
+                pips: {
+                    mode: 'steps',
+                    filter: function(value, type) {
+                        return type === 0 ? -1 : 1;
+                    },
+                    format: {
+                        to: function(value) {
+                            return labels[value];
+                        }
+                    }
+                }
+            });
+
+            slider.noUiSlider.on('update', function(values, handle) {
+                var value = parseInt(values[handle]);
+                var pipValues = slider.querySelectorAll('.noUi-value');
+
+                pipValues.forEach(function(pip) {
+                    pip.classList.remove('noUi-value-active');
+                    if (pip.innerHTML == value) {
+                        pip.classList.add('noUi-value-active');
+                    }
+                });
+
+                // Change the connect background color based on the slider value
+                var connect = slider.querySelector('.noUi-connect');
+                if (value <= 3) {
+                    connect.style.background = '#f30'; // Color for 0% to 35%
+                } else if (value > 3 && value < 10) {
+                    connect.style.background = '#2babc9'; // Color for 35% to 100%
+                } else {
+                    connect.style.background = '#88e113'; // Color for 100%
+                }
+            });
+
+            // Add click event to pips for setting the slider value
+            slider.querySelectorAll('.noUi-value').forEach(function(pip) {
+                pip.addEventListener('click', function() {
+                    slider.noUiSlider.set(this.innerHTML);
+                });
+            });
+        }
+
+        // Initialize sliders
+        createSlider('#employees1');
+        createSlider('#employees2');
+        createSlider('#employees3');
+    </script>
+
 </body>
 </html>
-
