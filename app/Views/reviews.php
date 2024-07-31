@@ -18,7 +18,7 @@
 <?php
 
 foreach($fetchreview as $review){
-  print_r($review['campaignID']);
+  //print_r($review['campaignID']);
 //  print_r(($review['campaignName']));
 // if(!empty($campaignname)){
 //print_r($campaignname);
@@ -154,10 +154,10 @@ foreach($fetchreview as $review){
                            <path class="" fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm80 64c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80z"></path>
                         </svg>
                         <p class="font-bold">From</p>
-                        <input min="2021-06-30" class="p-1" type="date" name="" id="">
+                        <input class="p-1" type="date" name="" id="">
                         <p class="font-bold">To</p>
                         <input class="p-1" type="date" name="" id="">
-                        <button class="btn btn-blue">
+                        <button class="btn btn-blue" id = "update">
                            <svg class="svg-inline--fa fa-rotate pr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rotate" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                               <path class="" fill="currentColor" d="M142.9 142.9c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5c0 0 0 0 0 0H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5c7.7-21.8 20.2-42.3 37.8-59.8zM16 312v7.6 .7V440c0 9.7 5.8 18.5 14.8 22.2s19.3 1.7 26.2-5.2l41.6-41.6c87.6 86.5 228.7 86.2 315.8-1c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.2 62.2-162.7 62.5-225.3 1L185 329c6.9-6.9 8.9-17.2 5.2-26.2s-12.5-14.8-22.2-14.8H48.4h-.7H40c-13.3 0-24 10.7-24 24z"></path>
                            </svg>
@@ -188,35 +188,40 @@ foreach($fetchreview as $review){
                               </select>
                            </div>
                            <div data-v-428084ba="" class="filter py-10px px-30px flex items-center relative">
-                              <button data-v-428084ba="" data-review-id="">
-                                 Filter Approved 
-                                 <svg data-v-428084ba="" class="svg-inline--fa fa-filter" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="filter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path class="" fill="currentColor" d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"></path>
-                                 </svg>
-                              </button>
-                              <div id="review-results"></div>
-
-                              <!---->
-                           <div data-v-428084ba="" class="absolute bg-white shadow rounded-4px w-full p-10px top-full left-0 z-1">
-                              <div data-v-428084ba="" class="checkbox-group flex justify-start items-center mb-5px"><input data-v-428084ba="" class="mr-5px !ring-0" style="color: rgb(23, 190, 107);" type="checkbox" name="approved" id="approved"><label data-v-428084ba="" class="text-sm" for="approved">Approved Reviews</label></div>
-                              <div data-v-428084ba="" class="checkbox-group flex justify-start items-center mb-5px"><input data-v-428084ba="" class="mr-5px !ring-0" style="color: rgb(23, 190, 107);" type="checkbox" name="unapproved" id="unapproved"><label data-v-428084ba="" class="text-sm" for="unapproved">Unapproved Reviews</label></div>
-                              <div data-v-428084ba="" class="checkbox-group flex justify-start items-center mb-5px"><input data-v-428084ba="" class="mr-5px !ring-0" style="color: rgb(23, 190, 107);" type="checkbox" name="no-text" id="no-text"><label data-v-428084ba="" class="text-sm" for="no-text">No Text Reviews</label></div>
+                           <button id="filter-button" data-v-428084ba="" data-review-id="">
+                              Filter Approved 
+                              <svg data-v-428084ba="" class="svg-inline--fa fa-filter" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="filter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                 <path class="" fill="currentColor" d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"></path>
+                              </svg>
+                           </button>
+                           <div id="filter-dropdown" data-v-428084ba="" class="absolute bg-white shadow rounded-4px w-full p-10px top-full left-0 z-1 hidden">
+                              <div data-v-428084ba="" class="checkbox-group flex justify-start items-center mb-5px">
+                                 <input data-v-428084ba="" class="mr-5px !ring-0" style="color: rgb(23, 190, 107);" type="checkbox" name="approved" id="approved">
+                                 <label data-v-428084ba="" class="text-sm" for="approved">Approved Reviews</label>
+                              </div>
+                              <div data-v-428084ba="" class="checkbox-group flex justify-start items-center mb-5px">
+                                 <input data-v-428084ba="" class="mr-5px !ring-0" style="color: rgb(23, 190, 107);" type="checkbox" name="unapproved" id="unapproved">
+                                 <label data-v-428084ba="" class="text-sm" for="unapproved">Unapproved Reviews</label>
+                              </div>
+                              <div data-v-428084ba="" class="checkbox-group flex justify-start items-center mb-5px">
+                                 <input data-v-428084ba="" class="mr-5px !ring-0" style="color: rgb(23, 190, 107);" type="checkbox" name="no-text" id="no-text">
+                                 <label data-v-428084ba="" class="text-sm" for="no-text">No Text Reviews</label>
+                              </div>
                            </div>
-
                            </div>
                         </div>
                         <div data-v-428084ba="" class="mx-10px flex justify-evenly items-center w-150px">
-                           <button data-v-428084ba="">
+                           <button data-v-428084ba="" id = "positive">
                               <svg data-v-428084ba="" class="svg-inline--fa fa-face-grin text-4xl text-lime-500 opacity-50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                  <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
                               </svg>
                            </button>
-                           <button data-v-428084ba="">
+                           <button data-v-428084ba="" id = "neutral">
                               <svg data-v-428084ba="" class="svg-inline--fa fa-face-meh text-4xl text-sky-500 opacity-50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-meh" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                  <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM176.4 176a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm128 32a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM160 336H352c8.8 0 16 7.2 16 16s-7.2 16-16 16H160c-8.8 0-16-7.2-16-16s7.2-16 16-16z"></path>
                               </svg>
                            </button>
-                           <button data-v-428084ba="">
+                           <button data-v-428084ba="" id = "negative">
                               <svg data-v-428084ba="" class="svg-inline--fa fa-face-frown text-4xl text-red-500 opacity-50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-frown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                  <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM159.3 388.7c-2.6 8.4-11.6 13.2-20 10.5s-13.2-11.6-10.5-20C145.2 326.1 196.3 288 256 288s110.8 38.1 127.3 91.3c2.6 8.4-2.1 17.4-10.5 20s-17.4-2.1-20-10.5C340.5 349.4 302.1 320 256 320s-84.5 29.4-96.7 68.7zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
                               </svg>
@@ -224,19 +229,19 @@ foreach($fetchreview as $review){
                         </div>
                      </div>
                      <div data-v-428084ba="" class="buttons flex">
-                        <button data-v-428084ba="" class="btn btn-blue mr-5px">
+                        <button data-v-428084ba="" class="btn btn-blue mr-5px" id = "archive">
                            <svg data-v-428084ba="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                               <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
                            </svg>
                            Show Archived
                         </button>
-                        <button data-v-428084ba="" class="btn btn-blue mr-5px">
+                        <!-- <button data-v-428084ba="" class="btn btn-blue mr-5px">
                            <svg data-v-428084ba="" class="svg-inline--fa fa-music" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="music" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                               <path class="" fill="currentColor" d="M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v72V368c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V147L192 223.8V432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V200 128c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z"></path>
                            </svg>
                            Audio &amp; Text
-                        </button>
-                        <button data-v-428084ba="" class="btn btn-green mr-5px"> Reset Filters </button>
+                        </button> -->
+                        <button data-v-428084ba="" class="btn btn-green mr-5px"  id = "reset"> Reset Filters </button>
                      </div>
                   </div>
                   <!---->
@@ -316,21 +321,22 @@ foreach($fetchreview as $review){
                                  </div>
                               </div>
                            </td>
-                           <td data-v-f15ab7a3="" class="p-10px w-200px">
+                           <td data-v-f15ab7a3="" class="p-10px w-200px">                              
+                              <div id="<?= $review['ID'] ?>" class="flex flex-col items-center justify-center h-full" data-id="<?= $review['ID'] ?>"  data-approved="<?= $review['isApproved'] ?>" 
+                              data-archive="<?= $review['isArchive'] ?>">
                               <?php echo $review['ID'] . ', ' . $review['isApproved']?>
-                              <div id="<?= $review['ID'] ?>" class="flex flex-col items-center justify-center h-full" data-id="<?= $review['ID'] ?>">
-                           <button class="btn btn-approve w-full mb-5px <?= $review['isApproved'] == '1' ? 'btn-gray' : 'btn-green' ?>" approved="<?= $review['isApproved'] ?>" onclick="handleApprovalClick(this)">
+                           <button class="btn btn-approve w-full mb-5px <?= $review['isApproved'] == '1' ? 'btn-gray' : 'btn-green' ?>" approved="<?= $review['isApproved'] ?>" onclick="handleApprovalClick(this,'approved')">
                                  <svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
                                  </svg>
                                  <?= $review['isApproved'] == '1' ? 'Approved' : 'Approve' ?>
                            </button>
-                           
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full mb-5px">
+                           <?php echo $review['ID'] . ', ' . $review['isArchive']?>
+                                 <button data-v-f15ab7a3="" class="btn w-full mb-5px <?= $review['isArchive'] == '1' ? 'btn-gray' : 'btn-blue' ?>" archive="<?= $review['isArchive'] ?>" onclick="handleApprovalClick(this,'archive')">
                                     <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                        <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
                                     </svg>
-                                    Archive
+                                    <?= $review['isArchive'] == '0' ? 'Archive' : 'Unarchive' ?>
                                  </button>
                                  <button data-v-f15ab7a3="" class="btn btn-blue w-full">
                                     <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -351,6 +357,10 @@ foreach($fetchreview as $review){
                      </nav>
                      </div>
                      <style>
+                        .hidden {
+                           display: none;
+                        }
+
                      /* Container styling */
                      .pagination-container {
                         text-align: center; /* Centers the pagination container */
@@ -409,93 +419,261 @@ foreach($fetchreview as $review){
       </div>
    </div>
 </div>
-
+<script>
+document.getElementById('filter-button').addEventListener('click', function() {
+    var dropdown = document.getElementById('filter-dropdown');
+    dropdown.classList.toggle('hidden');
+});
+</script>
 <script>
 function handleApprovalClick(button) {
-    var ID = button.parentElement.getAttribute('data-id');
-    var isApproved = button.getAttribute('approved');
-    console.log('ID:', ID, 'isApproved:', isApproved);
+    var parentDiv = button.parentElement;
+    var ID = parentDiv.getAttribute('data-id');  
+    var isApproved = parentDiv.getAttribute('data-approved');
+    var isArchive = parentDiv.getAttribute('data-archive');
 
-    // Determine the new approval status
-    var newApprovedStatus = isApproved === '0' ? '1' : '0'; // Toggle status
+    console.log('Before click handling - ID:', ID, 'isApproved:', isApproved, 'isArchive:', isArchive);
+
+    // Determine which button was clicked and update values accordingly
+    if (button.hasAttribute('approved')) {
+        isApproved = (isApproved === '1') ? '0' : '1';
+        console.log('Updated approve status:', isApproved);
+
+        // Update button text and class
+        button.textContent = isApproved === '1' ? 'Approved' : 'Approve';
+        button.classList.toggle('btn-gray', isApproved === '1');
+        button.classList.toggle('btn-green', isApproved === '0');
+    }
+
+    if (button.hasAttribute('archive')) {
+        isArchive = (isArchive === '1') ? '0' : '1';
+        console.log('Updated archive status:', isArchive);
+
+        // Update button text and class
+        button.textContent = isArchive === '0' ? 'Archive' : 'Unarchive';
+        button.classList.toggle('btn-gray', isArchive === '1');
+        button.classList.toggle('btn-blue', isArchive === '0');
+    }
+
+    parentDiv.setAttribute('data-approved', isApproved);
+    parentDiv.setAttribute('data-archive', isArchive);
 
     // AJAX request
     $.ajax({
         url: '/analyze/reviews/approve', // URL for the defined route
         type: 'POST',
-        data: { ID: ID, approved: newApprovedStatus },
+        dataType: 'json',
+        data: { ID: ID, approved: isApproved, archive: isArchive },
         success: function(response) {
             // Handle success
             console.log('Response:', response);
-            // Update the button state or UI based on the response
-            button.setAttribute('approved', newApprovedStatus);
+            var review = response;
+           
 
-            // Update button styles and text
-            if (newApprovedStatus === '1') {
-                button.classList.remove('btn-green');
-                button.classList.add('btn-gray');
-                button.textContent = 'Approved';
-            } else {
-                button.classList.remove('btn-gray');
-                button.classList.add('btn-green');
-                button.textContent = 'Approve';
-            }
+            // Construct new button HTML based on approval and archive statuses
+            var buttonHTML = 
+            '<td class="p-10px w-200px">' +
+                        '<div class="flex flex-col items-center justify-center h-full">' +
+                          '<button class="btn w-full mb-5px btn-approve">' +
 
-            // Optional: Update button text with SVG
-            button.innerHTML = `
-                <svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                    <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
-                </svg>
-                ${newApprovedStatus === '1' ? 'Approved' : 'Approve'}
-            `;
-        },
-        error: function(xhr, status, error) {
-            // Handle error
-            console.error('Error:', error);
-        }
+                                 '<svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">' +
+                                    '<path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>' +
+                                 '</svg>' +
+                                review.newApprovedStatus +
+                           '</button>' +
+                           '<button class="btn w-full mb-5px">' +
+                                 '<svg class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+                                    '<path fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>' +
+                                 '</svg>' +
+                                review.newArchiveStatus +
+                           '</button>' +
+                           '<button class="btn btn-blue w-full">' +
+                                 '<svg class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+                                    '<path fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>' +
+                                 '</svg>' +
+                                 'Edit' +
+                           '</button>' +
+                        '</div>' +
+                     '</td>' 
+          }
     });
 }
 </script>
 
-<script>
-   $('#filter-campaings').on('change', function() {
-      var campaignID = $(this).val();
-      var currentPage = 1; 
-      var limit = 1;
-      
-      function fetchReviews(page) {
 
-         $.ajax({
-         url: '/analyze/reviews/get',
-         type: 'POST',
-         data: { 
-            campaign_id: campaignID,
-            page: page,
-            limit: limit
-         },
-         dataType: 'json',
-         success: function(response) {
-            var data = response;
-            console.log(data); // Inspect the object to confirm structure
-            
-            // Target the table body and pagination container
-            var tableBody = $('.row.table.p-10px.w-full table tbody'); 
-            var paginationContainer = $('.pagination-container');
-            
-            // Clear the table except for the header
-            tableBody.empty(); 
-            paginationContainer.empty(); // Clear previous pagination
-            
-            // Check if 'data.reviews' is an array
-            if (Array.isArray(data.reviews) && data.reviews.length > 0) {
-               data.reviews.forEach(function(review) {
-                  console.log(review);
-                  var id = review.ID;
-                  // console.log(id);
-                  var buttonClass = review.isApproved == '1' ? 'btn-gray' : 'btn-green';
-                  var buttonText = review.isApproved == '1' ? 'Approved' : 'Approve';
-                  var svgDisplay = review.isApproved == '1' ? 'none' : 'inline';
-               var newRow = '<tr class="flex w-full">' +
+<script>
+
+$(document).ready(function() {
+ 
+    var filters = {
+        campaignID: '',
+        limit: '10',
+        approved: 0,
+        unapproved: 0,
+        includeAllReviews: false,
+        noText: 0,
+        archive: 0,
+        sentiment: '',
+        
+    };
+    
+    
+    $('#archive').removeClass('active');
+
+
+
+    function handleButtonClick(sentiment) {
+        // Update the sentiment in the filters object
+        filters.sentiment = sentiment;
+
+        $('#positive').removeClass('active');
+        $('#neutral').removeClass('active');
+        $('#negative').removeClass('active');
+        $('#' + sentiment).addClass('active');
+        // Optionally log the updated filters object
+        console.log('Updated filters:', filters);
+
+        // Call filterData to apply the new filters
+        filterData();
+    }
+
+    function filterData() {
+        console.log('Current Shared Data:', filters);
+        fetchReviews(currentPage); // Call fetchReviews whenever the filters are updated
+    }
+
+    $('#positive').on('click', function() {
+        handleButtonClick('Positive');
+    });
+
+    $('#neutral').on('click', function() {
+        handleButtonClick('Neutral');
+    });
+
+    $('#negative').on('click', function() {
+        handleButtonClick('Negative');
+    });
+    // Event handler for change events
+    $('#filter-campaings, #limit, #approved, #unapproved, #no-text').on('change', function() {
+        // Update the filters object with current values
+        filters.campaignID = $('#filter-campaings').val();
+        filters.limit = $('#limit').val();
+        filters.approved = $('#approved').is(':checked') ? 1 : 0;
+        filters.unapproved = $('#unapproved').is(':checked') ? 1 : 0;
+        filters.noText = $('#no-text').is(':checked') ? 1 : 0;
+
+        // Check if both approved and unapproved checkboxes are checked
+        filters.includeAllReviews = filters.approved && filters.unapproved;
+      
+        // Log the updated filters object and fetch reviews
+        filterData();
+    });
+
+    // Event handler for button clicks
+    $(document).on('click', '#reset', function() {
+        // Reset all filters to default values
+        filters = {
+            campaignID: '',
+            limit: '',
+            approved: 0,
+            unapproved: 0,
+            includeAllReviews: false,
+            noText: 0,
+            archive: 0,
+            sentiment:''
+        };
+
+        // Reset form fields to default values
+        $('#filter-campaings').val('');
+        $('#limit').val('10');
+        $('#approved').prop('checked', false);
+        $('#unapproved').prop('checked', false);
+        $('#no-text').prop('checked', false);
+        $('#archive').removeClass('active'); // Reset the archive button
+        $('#positive, #neutral, #negative').removeClass('active');
+        // Log the reset state and fetch reviews
+        console.log('Filters Reset:', filters);
+        filterData();
+    });
+    $(document).on('click', '#archive', function() {
+        var $button = $(this);
+
+        // Toggle the 'active' class on the button
+        $button.toggleClass('active');
+
+        // Update the 'archive' status based on the presence of the 'active' class
+        filters.archive = $button.hasClass('active') ? 1 : 0;
+
+        // Log the updated state and fetch reviews
+        console.log('Archive Status:', filters.archive);
+        filterData();
+    });
+    // Ensure fetchReviews is not called on initialization
+    // Initial log
+    //filterData(); // Comment out or remove this if it causes the issue
+
+    var currentPage = 1;
+    var fromDate, toDate;
+   $('#update').click(function() {
+      // Grab the values from the inputs
+       fromDate = $('input[type="date"]').eq(1).val();
+       toDate = $('input[type="date"]').eq(2).val();
+      console.log('Button clicked');
+      console.log('From:', fromDate);
+      console.log('To:', toDate);
+      fetchReviews(currentPage);
+   });
+    function fetchReviews(page) {
+   //    console.log('Sending AJAX request with data:', {
+   //    campaign_id: filters.campaignID,
+   //    page: page,
+   //    limit: filters.limit,
+   //    approved: filters.approved,
+   //    unapproved: filters.unapproved,
+   //    include_all_reviews: filters.includeAllReviews,
+   //    noText: filters.noText,
+   //    archive: filters.archive,
+   //    sentiment: filters.sentiment,
+   //    fromdate: fromDate,
+   //    todate: toDate
+   //  });
+
+        $.ajax({
+            url: '/analyze/reviews/get',
+            type: 'POST',
+            data: { 
+                campaign_id: filters.campaignID,
+                page: page,
+                limit: filters.limit,
+                approved: filters.approved,
+                unapproved: filters.unapproved, 
+                include_all_reviews: filters.includeAllReviews,
+                noText: filters.noText,
+                archive: filters.archive, // Ensure the key matches with what your server expects
+                sentiment: filters.sentiment,
+                fromdate: fromDate,
+                todate: toDate
+            },
+            dataType: 'json',
+            success: function(response) {
+                //console.log(response); 
+                
+                var data = response;        
+                var tableBody = $('.row.table.p-10px.w-full table tbody'); 
+                var paginationContainer = $('.pagination-container');
+                tableBody.empty(); 
+                paginationContainer.empty();
+                if (Array.isArray(data.reviews) && data.reviews.length > 0) {
+                data.reviews.forEach(function(review) {
+                console.log('...the reviews are...',review);
+                var id = review.ID;
+                var buttonClass_approve = review.isApproved == '1' ? 'btn-gray' : 'btn-green';
+                var buttonText_approve = review.isApproved == '1' ? 'Approved' : 'Approve';
+                var svgDisplay_approve = review.isApproved == '1' ? 'none' : 'inline';
+                var buttonClass_archive = review.isArchive == '1' ? 'btn-gray' : 'btn-blue';
+                var buttonText_archive = review.isArchive == '1' ? 'Unarchive' : 'Archive';
+                var svgDisplay_archive = review.isArchive == '1' ? 'none' : 'inline';
+                var newRow = '<tr class="flex w-full">' +
                      '<td class="p-10px w-auto">' +
                         '<div class="flex justify-start items-center col-span-3 cursor-pointer">' +
                            '<svg class="svg-inline--fa fa-square mr-5px text-17px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">' +
@@ -552,18 +730,18 @@ function handleApprovalClick(button) {
                         '</div>' +
                      '</td>' +
                      '<td class="p-10px w-200px">' +
-                        '<div class="flex flex-col items-center justify-center h-full" data-id="' + review.ID + '">' +
-                           '<button class="btn w-full mb-5px btn-approve ' + buttonClass + '" data-isapproved ="' + review.isApproved + '"  onclick="handleApprovalClick(this)">' +
+                       '<div class="flex flex-col items-center justify-center h-full" data-id="' + review.ID + '" data-approved="' + review.isApproved + '" data-archive="' + review.isArchive + '">'+
+                           '<button class="btn w-full mb-5px btn-approve ' + buttonClass_approve + '" approved ="' + review.isApproved + '"  onclick="handleApprovalClick(this)">' +
                                  '<svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">' +
                                     '<path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>' +
                                  '</svg>' +
-                                 buttonText +
+                                 buttonText_approve +
                            '</button>' +
-                           '<button class="btn btn-blue w-full mb-5px">' +
+                           '<button class="btn w-full mb-5px ' + buttonClass_archive + '" archive ="' + review.isArchive + '"  onclick="handleApprovalClick(this)">' +
                                  '<svg class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
                                     '<path fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>' +
                                  '</svg>' +
-                                 'Archive' +
+                                 buttonText_archive +
                            '</button>' +
                            '<button class="btn btn-blue w-full">' +
                                  '<svg class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
@@ -574,21 +752,20 @@ function handleApprovalClick(button) {
                         '</div>' +
                      '</td>' +
                '</tr>';
-               // Append the new row to the table body
                tableBody.append(newRow);
-               });
-
-               // Append pagination controls if they exist
-               if (data.pagination) {
-                  var paginationHtml = '<nav>';
+            });
+            if (data.pagination) {
+                  var paginationHtml = '<nav class="pagination-container">';
                var totalPages = data.pagination.total_pages;
                var currentPage = data.pagination.page;
-               
+               paginationHtml += '<ul class="pagination">';
                for (var i = 1; i <= totalPages; i++) {
                   paginationHtml += '<a href="#" class="page-link" data-page="' + i + '">' + i + '</a> ';
                }
+               paginationHtml += '</ul>';
                paginationHtml += '</nav>';
-               $('.pagination-container').html(paginationHtml);
+               var activeClass = (i === currentPage) ? 'active' : '';
+                paginationHtml += '<li class="' + activeClass + '"><a href="#" class="page-link" data-page="' + i + '">' + i + '</a></li> ';
                }
             } else {
                var noReviewsRow = '<tr class="flex w-full">' +
@@ -596,25 +773,21 @@ function handleApprovalClick(button) {
                '</tr>';
             tableBody.append(noReviewsRow);
             }
-         },
-         error: function(xhr, status, error) {
-            console.error("AJAX Error:", status, error);
-         }
-         });
-      }
-
-      // Initial fetch
-      fetchReviews(currentPage);
-
-      // Handle pagination link clicks
-      $(document).on('click', '.page-link', function(e) {
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching reviews:', error);
+            }
+        });
+    }
+    //fetchReviews(currentPage);
+    $(document).on('click', '.page-link', function(e) {
          e.preventDefault();
          currentPage = $(this).data('page');
          fetchReviews(currentPage);
       });
 
 });
-   
 </script>
+
 
 <?= $this->endSection() ?>

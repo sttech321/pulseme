@@ -118,17 +118,34 @@ class ReviewController extends BaseController
         return view('reviews', $data);
     }
 
+
+
+
     public function getReviewsByCampaign()
     {
         if ($this->request->isAJAX()) {
+            // Retrieve and sanitize POST data
             $campaignID = $this->request->getPost('campaign_id');
-            $page = $this->request->getPost('page') ?? 1; 
-        $limit = $this->request->getPost('limit') ?? 1; 
-            // Load CampaignModel and fetch all campaigns
-            $campaignModel = new CampaignModel();
-            $campaigns = $campaignModel->findAll();
+            $includeAllReviews = $this->request->getPost('include_all_reviews');
+            $page = intval($this->request->getPost('page')); 
+            $limit = intval($this->request->getPost('limit'));         
+            $noText = $this->request->getPost('noText');
+            $archive = $this->request->getPost('archive');
+            $sentiment = $this->request->getPost('sentiment');
+            $fromdate = $this->request->getPost('fromdate');
+            $todate = $this->request->getPost('todate');
+            if ($limit <= 0) {
+                $limit = 10; // Ensure limit is always positive
+            }
     
-            // Map campaign IDs to campaign names
+            // Load models
+            $campaignModel = new CampaignModel();
+            $reviewModel = new ReviewModal();
+            // var_dump($reviewModel);
+            // die;
+            
+            // Get all campaigns for mapping campaign IDs to names
+            $campaigns = $campaignModel->findAll();
             $campaignNames = [];
             foreach ($campaigns as $campaign) {
                 $campaignNames[$campaign['ID']] = [
@@ -136,13 +153,49 @@ class ReviewController extends BaseController
                     'name' => $campaign['name'],
                 ];
             }
-    
-            // Load ReviewModel
-            $reviewModel = new ReviewModal();
+        
+            // Calculate offset for pagination
             $offset = ($page - 1) * $limit;
-            // Fetch reviews based on the campaign ID
-            $reviews = $reviewModel->where('campaignID', $campaignID)->findAll($limit, $offset);
+        
+            // Prepare query to fetch reviews
+            $reviewsQuery = $reviewModel;
+          
+            if (!empty($campaignID)) {
+                $reviewsQuery = $reviewsQuery->where('campaignID', $campaignID);
+            }
+            
+            if (!$includeAllReviews) {
+                $approved = $this->request->getPost('approved');
+                $unapproved = $this->request->getPost('unapproved');
+                if ($approved) {
+                    $reviewsQuery = $reviewsQuery->where('isApproved', '1');
+                }
+                if ($unapproved) {
+                    $reviewsQuery = $reviewsQuery->where('isApproved', '0');
+                }
+            }
+        
+            if ($noText) {
+                $reviewsQuery = $reviewsQuery->groupStart()
+                                             ->where('reviewText', '')
+                                             ->orWhere('reviewText IS NULL')
+                                             ->groupEnd();
+            }
     
+            if ($archive) {
+                $reviewsQuery = $reviewsQuery->where('isArchive', $archive); // Assuming '1' is the value for archived
+            }
+            if($sentiment){
+                $reviewsQuery = $reviewsQuery->where('sentiment',$sentiment);
+            }
+            if($fromdate && $todate){
+                $reviewsQuery = $reviewsQuery->where('createdOn >=',$fromdate)
+                                             ->where('createdOn <=',$todate);   
+            }
+            // Fetch reviews with pagination
+            $reviews = $reviewsQuery->findAll($limit, $offset);
+            //  var_dump($reviews);
+            //  die;
             // Attach campaign names and departments to reviews
             foreach ($reviews as &$review) {
                 $campaignID = $review['campaignID'];
@@ -154,68 +207,89 @@ class ReviewController extends BaseController
                     $review['campaignName'] = 'not known';
                 }
             }
-            $totalReviews = $reviewModel->where('campaignID', $campaignID)->countAllResults();
+        
+            // Calculate total reviews for pagination
+            $totalReviewsQuery = clone $reviewsQuery; // Clone to avoid modifying the original query
+            
+            $totalReviews = $totalReviewsQuery->countAllResults();
+        
             // Prepare the JSON response
             $response = [
                 'success' => true,
                 'reviews' => $reviews,
-                'message' => !empty($reviews) ? 'Reviews found.' : 'No reviews found for this campaign.',
+                'message' => !empty($reviews) ? 'Reviews found.' : 'No reviews found.',
                 'pagination' => [
-                'total' => $totalReviews,
-                'page' => $page,
-                'limit' => $limit,
-                'total_pages' => ceil($totalReviews / $limit)
-            ]
+                    'total' => $totalReviews,
+                    'page' => $page,
+                    'limit' => $limit,
+                    'total_pages' => ceil($totalReviews / $limit)
+                ]
             ];
-            
+        
             // Set the content type to JSON and output the JSON response
             $this->response->setHeader('Content-Type', 'application/json');
             return $this->response->setBody(json_encode($response));
         }
-    
+        
         return $this->response->setStatusCode(400, 'Bad Request');
     }
     
-    public function approveReview()
-    {
-        // Retrieve the data sent from the front end
-        $id = $this->request->getPost('ID');
-        $approved = $this->request->getPost('approved');
+
+
+        public function approveReview()
+        {
+            // Retrieve the data sent from the front end
+            $id = $this->request->getPost('ID');
+            $approved = $this->request->getPost('approved');
+            $archive = $this->request->getPost('archive');
+            // Print the data for debugging
+            // echo "<pre>";
+            // print_r([
+            //     'ID' => $id,
+            //     'approved' => $approved,
+            //     'arhive' => $archive
+            // ]);
+            // echo "</pre>";
         
-        // Print the data for debugging
-        // echo "<pre>";
-        // print_r([
-        //     'ID' => $id,
-        //     'approved' => $approved
-        // ]);
-        // echo "</pre>";
-    
-        // Optional: Stop further execution to see the output
-        //die();
-        $reviewModel = new ReviewModal();
-        // Fetch the current review
-        $review = $reviewModel->find($id);
+            // Optional: Stop further execution to see the output
+           // die();
+            $reviewModel = new ReviewModal();
+            // Fetch the current review
+            $review = $reviewModel->find($id);
+            
+            //print_r($review['isApproved']);
+            // die;
+            if ($review) {
+                $id = $review['ID'];
+                // Get the current isApproved value
+                $currentApprovedStatus = $review['isApproved'];
+                $currentArchiveStatus = $review['isArchive'];
+                // Determine the new approved status
+                if ($approved !== null) {
+                    $newApprovedStatus = $approved === '1' ? '1' : '0'; // Only update if provided
+                } else {
+                    $newApprovedStatus = $currentApprovedStatus; // Keep the current value if not provided
+                }
         
-        //print_r($review['isApproved']);
-        // die;
-        if ($review) {
-            // Get the current isApproved value
-            $currentApprovedStatus = $review['isApproved'];
-    
-            // Determine the new approved status
-            $newApprovedStatus = $currentApprovedStatus === '0' ? '1' : '0';
-    
-            // Update the review status
-            $reviewModel->update($id, ['isApproved' => $newApprovedStatus]);
-    
-            return $this->response->setJSON([
-                'status' => 'success',
-                'newStatus' => $newApprovedStatus
-            ]);
+                // Determine the new archive status if provided
+                if ($archive !== null) {
+                    $newArchiveStatus = $archive === '1' ? '1' : '0'; // Only update if provided
+                } else {
+                    $newArchiveStatus = $currentArchiveStatus; // Keep the current value if not provided
+                }
+                // Update the review status
+                $reviewModel->update($id, ['isApproved' => $newApprovedStatus,'isArchive' => $newArchiveStatus]);
+        
+                return $this->response->setJSON([
+                    'id'=>$id,
+                    'status' => 'success',
+                    'newApprovedStatus' => $newApprovedStatus,
+                    'newArchiveStatus' => $newArchiveStatus
+                ]);
+            }
+        
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Review not found']);
         }
-    
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Review not found']);
-    }
     
     
     
