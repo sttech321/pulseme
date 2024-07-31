@@ -75,7 +75,7 @@ body h3 { font-size: 1.5rem; font-weight: 600; }
 .rightSec .dropdown-top span { color: #fff; }
 
 .rightSec .dropdown-menu-field .menuListItem { box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .11); margin: .3125rem; background-color: #fff; }
-.rightSec .dropdown.toggle > input:checked ~ ul .autoHeight { height: 65px; }
+.rightSec .dropdown.toggle > input:checked ~ ul .autoHeight { height: 79px; }
 .rightSec .dropdown-menu-field li:last-child .menuListItem { box-shadow: none; }
 .menuListItem i, .menuListItem img { margin-right: 10px; font-size: 17px!important; }
 

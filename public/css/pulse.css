@@ -28928,7 +28928,7 @@ ul {
 }
 
 .social-media-websites {
-    margin-left: 180px;
+    margin-left: 150px;
 }
 
 .form-control {
@@ -28964,3 +28964,7 @@ margin-right: 150px;
 
 /* range slider css */
 
+.gap-flex-20{
+    display: flex;
+    gap: 10px;
+}
