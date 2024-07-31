@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class technicianModal extends Model
+class TechnicianModal extends Model
 {
     protected $table;
     protected $allowedFields;
@@ -13,9 +13,9 @@ class technicianModal extends Model
     {
         parent::__construct();
         // Load table name from environment variable
-        $this->table = getenv('CAMPAIGN_TABLE');
+        $this->table = getenv('campaign.table');
         // Load allowed fields from environment variable and convert to array
-        $fields = getenv('CAMPAIGN_FIELD');
+        $fields = getenv('campaign.allowedFields');
         $this->allowedFields = explode(',', $fields);
     }
 
@@ -23,6 +23,13 @@ class technicianModal extends Model
     public function getTechnicianImage($technicianId)
     {
         return $this->where('id', $technicianId)->first();
+    }
+
+    public function getTechniciansBySearch($search)
+    {
+        return $this->like('name', $search)
+                    ->orLike('department', $search)
+                    ->findAll();
     }
 
 }

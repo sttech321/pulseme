@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Dispatch extends Migration
+class Customer extends Migration
 {
     public function up()
     {
@@ -15,35 +15,33 @@ class Dispatch extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'technician_name' => [
+            'customer_name' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => '50',
             ],
-            'technician_code' => [
+            'customer_email' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => '50',
             ],
-            'technician_gmail' => [
+            'customer_address' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => '50',
             ],
-            'technician_image' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-                'null'       => true,
+            'customer_phone' => [
+                'type'       => 'INT',
+                'constraint' => '11',
             ],
-            'departments' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '100',
+            'customerId' => [
+                'type'       => 'INT',
+                'constraint' => '3',
             ],
-
         ]); 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('dispatch');
+        $this->forge->createTable('customerdeatils');
     }
 
     public function down()
     {
-        $this->forge->dropTable('dispatch');
+        $this->forge->dropTable('customerdeatils');
     }
 }

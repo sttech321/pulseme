@@ -1,113 +1,116 @@
 <?php
+
 namespace App\Controllers;
+
 use App\Models\CustomerModel;
-use App\Models\technicianModal;
+use App\Models\TechnicianModal;
 use CodeIgniter\Controller;
-use CodeIgniter\I18n\Time;
-use CodeIgniter\Email\Email;
+use Exception;
 
-
-class CustomerController extends BaseController {
-
-    public function __construct() {
-        // Load session service
+class CustomerController extends Controller
+{
+    
+    public function __construct()
+    {
         $this->session = \Config\Services::session();
-
     }
 
-    public function dispatch(){
-        $technicianModel = new technicianModal(); // Create an instance of your model
-        // Fetch only 5 technicians from the database
-        $data['technicians'] = $technicianModel->findAll(); // Adjust this based on your model setup
-    
-        // Load view with fetched data
-        return view('dispatching', $data);
+    public function getAllTechnicians()
+    {
+        $technicianModel = new TechnicianModal();
+        $technicians = $technicianModel->findAll();
+        return $this->response->setJSON($technicians);
     }
 
     public function search()
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table(getenv('CAMPAIGN_TABLE'));
+        $search = $this->request->getVar('query');
     
-        $searchTerm = $this->request->getVar('search');
-    
-        if (strlen($searchTerm) >= 2) {
-            $builder->like('name', $searchTerm);
-            $builder->orLike('department', $searchTerm);
+        $technicianModel = new TechnicianModal();
+        
+        if ($search) {
+            $results = $technicianModel->getTechniciansBySearch($search);
+        } else {
+            $results = $technicianModel->findAll(); // Return all technicians if no search query
         }
     
-        $query = $builder->get();
-        $data['technicians'] = $query->getResultArray();
+        return $this->response->setJSON($results);
+    } 
+
+
+    public function dispatch()
+    {
+        $technicianModel = new TechnicianModal();    
+        $data['technicians'] = $technicianModel->findAll();
     
-        return $this->response->setJSON($data);
+        return view('dispatching',$data);
     }
 
-    public function create() {
-        // Load necessary helpers and libraries
+    public function create()
+    {
         helper(['form']);
-
         $rules = [
             'customer_phone' => 'required',
             'customer_email' => 'required|valid_email',
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->to('/operate/dispatch')->withInput()->with('validation', $this->validator);
+            $buttonId = $this->request->getPost('button_id');
+            return redirect()->to('/operate/dispatch')
+                ->withInput()
+                ->with('validation', $this->validator)
+                ->with('button_id', $buttonId);
         }
 
-        $campaignModel = new CustomerModel();
+        $technicianId = $this->request->getPost('button_id');
+        $customerModel = new CustomerModel();
         $data = [
-            'phone' => $this->request->getPost('customer_phone'),
-            'email' => $this->request->getPost('customer_email'),
-            'name' => $this->request->getPost('customer_name'),
-            'address' => $this->request->getPost('customer_address'),
+            'campaign_id' => $technicianId,
+            'customer_phone' => $this->request->getPost('customer_phone'),
+            'customer_email' => $this->request->getPost('customer_email'),
+            'customer_name' => $this->request->getPost('customer_name'),
+            'customer_address' => $this->request->getPost('customer_address'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ];
 
-        // Insert data into database
-        $campaignModel->insert($data);
+        $customerModel->insert($data);
 
-        // Redirect to a success page or display success message
-        return redirect()->to('/operate/dispatch')->with('success', 'Campaign saved successfully.');
+        $this->sendbioEmail($technicianId, $data['customer_email']);
+        // $this->sendDispatchMessage($deviceId, 'Technician dispatched to customer location');
+        return redirect()->to('/operate/dispatch')->with('success', 'Customer info saved, email sent, and dispatch message sent successfully.');
     }
 
-
-    public function sendbioEmail() {
-        helper(['form']);
+    private function sendbioEmail($technicianId, $email)
+    {
         $emailService = \Config\Services::email();
-        $campaignModel = new CustomerModel();
-        $email = 'vikashchoudhary15616@gmail.com';
-        // var_dump($email);
-        
-        // // Initialize email configuration
+        $link = base_url('/application/bio/' . $technicianId);
+        $message = view('dispatchTab/bio-template', ['link' => $link]);
+
         $emailService->initialize([
             'protocol' => 'smtp',
             'SMTPHost' => $_ENV['SMTP_HOST'],
             'SMTPPort' => intval($_ENV['SMTP_PORT']),
             'SMTPUser' => $_ENV['SMTP_USER'],
             'SMTPPass' => $_ENV['SMTP_PASS'],
+            //'setSMTPCrypto' => '',
             'mailType' => 'html',
-            'charset'  => 'utf-8',
-            'newline'  => "\r\n"
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
         ]);
-    
-        // Set email parameters
+
         $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
         $emailService->setTo($email);
         $emailService->setSubject('Technician Bio');
-        echo '<pre>';
-        var_dump($emailService);
-        echo '</pre>';
-        // // Send email and handle response
+        $emailService->setMessage($message);
+
         if (!$emailService->send()) {
-            // Display error message for debugging
+            echo $emailService->printDebugger(['headers', 'subject', 'body']);
             echo $emailService->printDebugger(['headers']);
-        } else {
-            // Successful send
-            echo 'Bio sent successfully';
-            return redirect()->to('/operate/dispatch');
+        }else{
+            return redirect()->to('/operate/dispatch')->with('success', 'email sent successfully.');
         }
-        return view('dispatch');
     }
-    
 
 }
+?>

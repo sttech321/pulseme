@@ -17,12 +17,16 @@
 </div>
 <?php
 
+<<<<<<< HEAD
 foreach($fetchreview as $review){
   //print_r($review['campaignID']);
 //  print_r(($review['campaignName']));
 // if(!empty($campaignname)){
 //print_r($campaignname);
 }
+=======
+
+>>>>>>> remotes/origin/vikash
 ?>
 <!-- <div class="container-fluid"> -->
 <div class="sidebarRightContentWrap">
