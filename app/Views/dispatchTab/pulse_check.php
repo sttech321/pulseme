@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,16 +68,13 @@
             padding: 0px 0;
         }
     </style>
-
 </head>
-
 <body>
 <?php if (isset($validation)): ?>
     <div class="alert alert-danger">
         <?= $validation->listErrors(); ?>
     </div>
 <?php endif; ?>
-
 <?php if($technician): ?>
     <form id="multiStepForm" method="POST" action="<?= base_url('/application/pulsecheck/' . $technician['employeeId']) ?>">
         <!-- Step 1 -->
@@ -170,8 +166,8 @@
                                     <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg">
                                 </div>
                             </div>
-                            <input type="hidden" name="rating_name[]" value="How likely are you to recommend us to your friends and family?">
-                            <input type="hidden" name="rating_value[]" value="">
+                            <input type="hidden" name="rating1_text" id="rating1_text" value="How likely are you to recommend us to your friends and family?">
+                            <input type="hidden" name="rating1_value" id="rating1_value" value="8">
 
                             <h3 class="ratings-title">Professionalism</h3>
                             <div class="ratings-slider">
@@ -186,8 +182,8 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" name="rating_name[]" value="Professionalism">
-                            <input type="hidden" name="rating_value[]" value="">
+                            <input type="hidden" name="rating2_text" id="rating2_text" value="Professionalism">
+                            <input type="hidden" name="rating2_value" id="rating2_value" value="8">
 
                             <h3 class="ratings-title">Quality of Service</h3>
                             <div class="ratings-slider">
@@ -202,8 +198,8 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" name="rating_name[]" value="Quality of Service">
-                            <input type="hidden" name="rating_value[]" value="">
+                            <input type="hidden" name="rating3_text" id="rating3_text" value="Quality of Service">
+                            <input type="hidden" name="rating3_value" id="rating3_value" value="8">
                         </div>
                         <div class="text-center p-b-20">
                             <a class="btn btn-lg btn-primary waves-effect" data-submit-ratings="" data-next="63" onclick="nextStep()">Submit</a>
@@ -283,6 +279,7 @@
                                 <i class="sm-icon p-r-10"></i>Facebook
                             </a>
                         </div>
+                        <a type="btn" class="btn btn-lg btn-success" onclick="prevstep2()">BACk</a>
                     </div>
                 </div>
             </div>
@@ -291,12 +288,13 @@
     </form>
     <?php endif; ?>
     <script>
-        let currentStep = 0;
+       let currentStep = 0;
         const steps = document.querySelectorAll('.step');
 
         function showStep(step) {
             steps.forEach((stepElement, index) => {
                 stepElement.classList.toggle('active', index === step);
+                console.log((stepElement), 'aaa');
             });
         }
 
@@ -304,13 +302,23 @@
             if (currentStep < steps.length - 1) {
                 currentStep++;
                 showStep(currentStep);
+                console.log((currentStep), 'bbbb');
             }
         }
 
         function prevStep() {
-            if (currentStep > 0) {
+            if (currentStep > 0 && currentStep != 4) {
                 currentStep--;
                 showStep(currentStep);
+                console.log(currentStep, 'cccc');
+            }
+        }  
+
+        function prevstep2() {
+            if (currentStep >= 4) {
+                currentStep = 0;
+                showStep(currentStep);
+                console.log((currentStep), 'dddd');
             }
         }
 
@@ -318,12 +326,9 @@
             // Directly activate step 5
             currentStep = 4; // Index 4 corresponds to step 5
             showStep(currentStep);
-            console.log((currentStep));
+            console.log((currentStep), 'eeeee');
         }
 
-        document.getElementById('multiStepForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-        });
     </script>
 
     <script>
@@ -341,11 +346,12 @@
             10: '10'
         };
 
-        function createSlider(elementId) {
+        function createSlider(elementId,hiddenInputId) {
             const slider = document.querySelector(elementId);
+            const hiddenInput = document.querySelector(hiddenInputId);
 
             noUiSlider.create(slider, {
-                start: 1,
+                start: 8,
                 connect: [true, false],
                 tooltips: {
                     to: function(value) {
@@ -380,6 +386,7 @@
 
             slider.noUiSlider.on('update', function(values, handle) {
                 var value = parseInt(values[handle]);
+                console.log(value,'value');
                 var pipValues = slider.querySelectorAll('.noUi-value');
 
                 pipValues.forEach(function(pip) {
@@ -391,13 +398,15 @@
 
                 // Change the connect background color based on the slider value
                 var connect = slider.querySelector('.noUi-connect');
-                if (value <= 3) {
+                if (value <= 6) {
                     connect.style.background = '#f30'; // Color for 0% to 35%
-                } else if (value > 3 && value < 10) {
+                } else if (value > 6 && value <= 8) {
                     connect.style.background = '#2babc9'; // Color for 35% to 100%
                 } else {
                     connect.style.background = '#88e113'; // Color for 100%
                 }
+                hiddenInput.value = value;
+                console.log(hiddenInput,'val2222');
             });
 
             // Add click event to pips for setting the slider value
@@ -408,10 +417,10 @@
             });
         }
 
-        // Initialize sliders
-        createSlider('#employees1');
-        createSlider('#employees2');
-        createSlider('#employees3');
+        // Initialize sliders and pass the corresponding hidden input field IDs
+        createSlider('#employees1', '#rating1_value');
+        createSlider('#employees2', '#rating2_value');
+        createSlider('#employees3', '#rating3_value');
     </script>
 
 </body>

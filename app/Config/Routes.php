@@ -72,9 +72,6 @@ $routes->post('application/pulsecheck/(:segment)', 'ReviewController::submitRevi
 $routes->get('/operate', 'CustomerController::dispatch');
 $routes->post('/operate/dispatch/create/(:num)', 'CustomerController::create/$1');
 
-// $routes->get('/operate', 'CustomerController::sendbioEmail');
-// $routes->post('/operate', 'CustomerController::sendbioEmail');
-
 $routes->get('/leaderboard/reports/campaigns', 'ReportsController::report_campaign');
 $routes->get('leaderboard/reports/campaign-reviews', 'ReportsController::report_campaign_reviews');
 $routes->get('/leaderboard/reports/departments', 'ReportsController::departments');
