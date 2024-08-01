@@ -166,6 +166,7 @@
                                     <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg">
                                 </div>
                             </div>
+                            <input type="hidden" name="campaignId" value="<?= $technician['ID'] ?>">
                             <input type="hidden" name="rating1_text" id="rating1_text" value="How likely are you to recommend us to your friends and family?">
                             <input type="hidden" name="rating1_value" id="rating1_value" value="8">
 

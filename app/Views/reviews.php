@@ -15,10 +15,7 @@
       </div>
    </div>
 </div>
-<?php
 
-
-?>
 <!-- <div class="container-fluid"> -->
 <div class="sidebarRightContentWrap">
    <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
@@ -26,7 +23,7 @@
          <div class="p-20px bg-white">
             <h2 class="text-2xl">Reviews</h2>
          </div>
-         <div class="px-15px bg-white flex justify-start items-center"><a href="/analyze/reviews" class="border-b-2 border-blue-500 router-link-exact-active p-10px" aria-current="page">Reviews</a><a href="/analyze/reviews/social-reviews" class="p-10px">Social Reviews</a></div>
+         <div class="px-15px bg-white flex justify-start items-center tabs"><a href="/analyze/reviews" id="reviews-tab" class="tab p-10px" aria-current="page">Reviews</a><a href="/analyze/reviews/social-reviews" id="social-reviews-tab" class="tab p-10px">Social Reviews</a></div>
          <div class="flex-grow">
             <div data-v-428084ba="" class="p-25px">
                <div data-v-428084ba="" class="bg-white rounded-4px shadow p-10px">
@@ -336,65 +333,63 @@
                                     </svg>
                                     <?= $review['isArchive'] == '0' ? 'Archive' : 'Unarchive' ?>
                                  </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full" data-bs-toggle="modal" data-bs-target="#editreview">
+                                 
+                                    <button data-v-f15ab7a3="" class="btn btn-blue w-full" data-bs-toggle="modal" data-bs-target="#editreview-<?= esc($review['ID']) ?>">
                                     <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                        <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
                                     </svg>
                                     Edit
                                  </button>
+                                 
 
-                                 <div class="modal fade" id="editreview" tabindex="-1" aria-labelledby="editreview" aria-hidden="true">
+                                 <div class="modal fade" id="editreview-<?= esc($review['ID']) ?>" tabindex="-1" aria-labelledby="editreview-<?= esc($review['ID']) ?>" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
                                        <div class="modal-content">
-                                          <form method="post" action="<?= base_url('/analyze/reviews/create') ?>">
                                           <div class="modal-header">
-                                          <h2 class="text-23px">Edit Review</h2>
-                                             </h5>
-                                             <button class="text-gray-400 hover:text-black">
-                                                <svg class="svg-inline--fa fa-xmark text-30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                                                   <path class="" fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
-                                                </svg>
-                                          </button>
+                                             <h2 class="text-23px">Edit Review</h2>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><svg class="svg-inline--fa fa-xmark text-30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path class="" fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path></svg>
+                                             </button>
                                           </div>
                                           <div class="modal-body">
-                                          <?php $script = ''; ?>
-                                             <?php if (session()->getFlashdata('validation')): ?>
-                                             <div class="validation-errors">
-                                                <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
-                                                <p style="color: red;"><?php echo $error ?></p>
-                                                <?php endforeach ?>
-                                             </div>
-                                             <?php $script = '$("#campaignModal").addClass("show").css("display","block")'; ?>
-                                             <?php endif ?>
-                                             <div class="grid grid-cols-3 gap-20px text-left mb-20px">
-                                                <div class="flex flex-col items-stretch col-span-3">
-                                                      <select class="outline-none py-7px border-b focus:border-blue-500" name="campaign" aria-label=".form-select-lg example">
-                                                         <option disabled selected>Campaign</option>
-                                                         <?php  foreach($campaigns as $review) : ?>
-                                                            <option value="<?= esc($review['ID']) ?>"><?= esc($review['name']) ?></option>
+                                             <form method="post" action="<?= base_url('/analyze/reviews/update/' . $review['ID']) ?>">
+                                                <div class="grid grid-cols-3 gap-20px text-left mb-20px">
+                                                   <div class="flex flex-col items-stretch col-span-3">
+                                                         <select class="outline-none py-7px border-b focus:border-blue-500" name="campaign" aria-label=".form-select-lg example">
+                                                            <option disabled selected>Campaign</option>
+                                                            <?php  foreach($campaigns as $reviews) : ?>
+                                                               <option value="<?= esc($reviews['ID']) ?>"><?= esc($reviews['name']) ?></option>
+                                                            <?php endforeach; ?>
+                                                         </select>
+                                                   </div>
+                                                   <div class="flex flex-col items-stretch col-span-3">
+                                                         <p class="text-17px">Reviewer Information</p>
+                                                         <?php foreach ($fetchreview as $state) : 
+                                                             $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                         <input class="outline-none py-7px border-b focus:border-blue-500" name="city" value="<?php print_r($reviewerInfo['City']);?>" type="text" placeholder="<?php print_r($reviewerInfo['City']);?>" >
+                                                         <?php endforeach; ?>
+                                                   </div>
+                                                   <?php foreach ($fetchreview as $state) : 
+                                                         $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                         <input class="outline-none py-7px border-b focus:border-blue-500" name="customer_name" value="<?php print_r($reviewerInfo['Name']);?>" type="text" placeholder="<?php print_r($reviewerInfo['Name']);?>" >
+                                                   <?php endforeach; ?>
+                                                   <select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">
+                                                   <?php foreach ($fetchreview as $state) : 
+                                                      $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                         <option value="<?php print_r($reviewerInfo['State']); ?>"><?php print_r($reviewerInfo['State']);?></option>
                                                          <?php endforeach; ?>
                                                       </select>
-                                                </div>
-                                                <div class="flex flex-col items-stretch col-span-3">
-                                                      <p class="text-17px">Reviewer Information</p>
-                                                      <input class="outline-none py-7px border-b focus:border-blue-500" type="text" placeholder="Full name">
-                                                </div>
-                                                <input class="outline-none py-7px border-b focus:border-blue-500" type="text" placeholder="City">
-                                                <select class="border-b-1 outline-none focus:border-blue-500 text-black" name="statesDropdown" id="statesDropdown">
-                                                      <option hidden="" disabled="">State</option>
-                                                      <option value="AL">Alabama</option>
-                                                      <option value="AK">Alaska</option>
-                                                      <option value="AZ">Arizona</option>
 
-                                                </select>
-                                                <input class="outline-none py-7px border-b focus:border-blue-500" type="text" maxlength="9" placeholder="Zipcode">
+                                                      <?php foreach ($fetchreview as $state) : 
+                                                             $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                         <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="<?php print_r($reviewerInfo['Zipcode']);?>" type="text" placeholder="<?php print_r($reviewerInfo['Zipcode']);?>" >
+                                                         <?php endforeach; ?>
                                              </div>
                                              <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
                                                 <button type="Submit" class="btn btn-primary btn-md">Submit changes</button>
                                              </div>
+                                             </form>
                                           </div>
-                                          </form>
                                        </div>
                                     </div>
                                  </div>
@@ -819,7 +814,27 @@ $(document).ready(function() {
       });
 
 });
+
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all tab elements
+        var tabs = document.querySelectorAll('.tabs .tab');
 
+        // Get current URL
+        var currentUrl = window.location.pathname;
 
+        // Remove active class from all tabs
+        tabs.forEach(function(tab) {
+            tab.classList.remove('border-b-2', 'border-blue-500', 'router-link-exact-active');
+        });
+
+        // Add active class to the current tab
+        if (currentUrl === '/analyze/reviews') {
+            document.getElementById('reviews-tab').classList.add('border-b-2', 'border-blue-500', 'router-link-exact-active');
+        } else if (currentUrl === '/analyze/reviews/social-reviews') {
+            document.getElementById('social-reviews-tab').classList.add('border-b-2', 'border-blue-500', 'router-link-exact-active');
+        }
+    });
+</script>
 <?= $this->endSection() ?>

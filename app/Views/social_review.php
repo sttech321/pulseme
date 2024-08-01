@@ -16,9 +16,9 @@
    <div class="p-20px bg-white">
          <h2 class="text-2xl">Reviews</h2>
       </div>
-      <div class="px-15px bg-white flex justify-start items-center">
-         <a href="/analyze/reviews" class="border-b-2 border-blue-500 router-link-exact-active p-10px" aria-current="page">Reviews</a>
-         <a href="/analyze/reviews/social-reviews" class="p-10px">Social Reviews</a>
+      <div class="px-15px bg-white flex justify-start items-center tabs">
+	  	<a href="/analyze/reviews" id="reviews-tab" class="tab p-10px" aria-current="page">Reviews</a>
+		<a href="/analyze/reviews/social-reviews" id="social-reviews-tab" class="tab p-10px">Social Reviews</a>
       </div>
 </div>
 <!-- <div class="container-fluid"> -->
@@ -198,7 +198,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-</script> 
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all tab elements
+        var tabs = document.querySelectorAll('.tabs .tab');
+
+        // Get current URL
+        var currentUrl = window.location.pathname;
+
+        // Remove active class from all tabs
+        tabs.forEach(function(tab) {
+            tab.classList.remove('border-b-2', 'border-blue-500', 'router-link-exact-active');
+        });
+
+        // Add active class to the current tab
+        if (currentUrl === '/analyze/reviews') {
+            document.getElementById('reviews-tab').classList.add('border-b-2', 'border-blue-500', 'router-link-exact-active');
+        } else if (currentUrl === '/analyze/reviews/social-reviews') {
+            document.getElementById('social-reviews-tab').classList.add('border-b-2', 'border-blue-500', 'router-link-exact-active');
+        }
+    });
+</script>
 
 <?= $this->endsection('content') ?>
 

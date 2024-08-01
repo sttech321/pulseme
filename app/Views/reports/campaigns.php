@@ -130,17 +130,17 @@
                                             </th>
                                         </tr>
                                     </thead>
-									<tbody>
-										<?php foreach ($campaigns as $campaign): ?>
-											<tr class="!bg-opacity-50 odd:bg-sky-100">
-												<td class="px-20px py-15px">1B85A09AA6<?= $campaign['ID'] ?></td>
-												<td class="px-20px py-15px"><?= $campaign['name'] ?></td>
-												<td class="px-20px py-15px"><?= $campaign['employeeId'] ?></td>
-												<td class="px-20px py-15px"><?= $campaign['department'] ?></td>
-												<td class="px-20px py-15px"></td>
-												<td class="px-20px py-15px"></td>
-												<td class="px-20px py-15px">
-													<?php 
+                                    <tbody>
+                                        <?php foreach ($campaigns as $campaign): ?>
+                                        <tr class="!bg-opacity-50 odd:bg-sky-100">
+                                            <td class="px-20px py-15px">1B85A09AA6<?= $campaign['ID'] ?></td>
+                                            <td class="px-20px py-15px"><?= $campaign['name'] ?></td>
+                                            <td class="px-20px py-15px"><?= $campaign['employeeId'] ?></td>
+                                            <td class="px-20px py-15px"><?= $campaign['department'] ?></td>
+                                            <td class="px-20px py-15px"></td>
+                                            <td class="px-20px py-15px"></td>
+                                            <td class="px-20px py-15px">
+                                                <?php 
 													$matchCount = 0;
 													if (!empty($customersWithCampaigns)) {
 														foreach ($customersWithCampaigns as $customer) {
@@ -152,15 +152,43 @@
 													}
 													echo $matchCount;
 													?>
-												</td>
-												<td class="px-20px py-15px"></td>
-												<td class="px-20px py-15px"></td>
-												<td class="px-20px py-15px"></td>
-												<!-- <td class="px-20px py-15px">0</td> -->
-												<td class="px-20px py-15px"></td>
-											</tr>
-										<?php endforeach; ?>
-									</tbody>
+                                            </td>
+                                            <td class="px-20px py-15px"></td>
+                                            <td class="px-20px py-15px"></td>
+                                            <!-- Positive Sentiment -->
+                                            <td class="px-20px py-15px">
+                                                <?php
+                                                    $positiveCount = 0;
+                                                    foreach ($sentiments as $sentiment) {
+                                                        if ($sentiment['campaignID'] == $campaign['ID']) {
+                                                            if($sentiment['sentiment'] == 'Positive'){
+                                                                $positivecount = str_word_count($sentiment['sentiment']);
+                                                                $positiveCount++;
+                                                            }
+                                                        }
+                                                    }
+                                                    echo $positiveCount;
+                                                ?>
+                                            </td>
+
+                                            <!-- Negative Sentiment -->
+                                            <td class="px-20px py-15px">
+                                                <?php
+                                                    $negativecount = 0;
+                                                    foreach ($sentiments as $sentiment) {
+                                                        if ($sentiment['campaignID'] == $campaign['ID']) {
+                                                            if($sentiment['sentiment'] == 'Negative'){
+                                                                $negativecount = str_word_count($sentiment['sentiment']);
+                                                                $negativecount++;
+                                                            }
+                                                        }
+                                                    }
+                                                    echo $negativecount;
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
                                 </table>
                                 <!---->
                             </div>
