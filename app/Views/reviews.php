@@ -282,17 +282,17 @@
                               </div>
                               <div data-v-f15ab7a3="" class="info flex flex-wrap">
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> Michael Falk</p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> <?php $reviewerInfo = json_decode($review['reviewerInfo'], true); ?><?php print_r($reviewerInfo['Name']);?></p>
                                  </div>
                                  <!---->
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Email:</span> mikefalk@aol.com</p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> 3068 Braeloch Cir E</p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> <?php $reviewerInfo = json_decode($review['reviewerInfo'], true); ?>  <?php print_r($reviewerInfo['Zipcode']);?>  <?php print_r($reviewerInfo['State']);?> <?php print_r($reviewerInfo['City']);?></p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> 2024-07-11</p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> <?php echo str_replace('00:00:00','', $review['createdOn']);?></p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span><?= $review['campaignName']?></p>
