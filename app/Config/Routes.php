@@ -62,28 +62,11 @@ $routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');
 $routes->post('/analyze/reviews/create', 'ReviewController::insert');
 
 $routes->get('/settings/dispatch/campaigns', 'Campaign::index');
-<<<<<<< HEAD
-// $routes->get('/analyze/reviews', 'Campaign::reviews');
 $routes->get('/analyze/reviews', 'ReviewController::reviews');
-
-// $routes->post('/operate/dispatch/create', 'CustomerController::create');
-$routes->post('/operate/dispatch/create/:num', 'CustomerController::create/$1');
-
-=======
-$routes->get('/analyze/reviews', 'ReviewController::reviews');
->>>>>>> remotes/origin/vikash
 $routes->get('application/bio/(:num)', 'Campaign::technician_bio/$1');
 $routes->get('application/pulsecheck/(:segment)', 'Campaign::pulse_check/$1');
 $routes->post('application/pulsecheck/(:segment)', 'ReviewController::submitReview/$1');
 
-<<<<<<< HEAD
-
-$routes->post('/analyze/reviews/get', 'ReviewController::getReviewsByCampaign');
-$routes->post('/analyze/reviews/approve', 'ReviewController::approveReview');
-// $routes->post('/send-bio', 'CustomerController::sendbioEmail');
-// $routes->post('/dispatch', 'CustomerController::sendbioEmail');
-// $routes->post('submit-ratings', 'Campaign::submitRatings');
-=======
 $routes->get('/operate', 'CustomerController::dispatch');
 $routes->post('/operate/dispatch/create/(:num)', 'CustomerController::create/$1');
 
@@ -101,4 +84,3 @@ $routes->post('/analyze/reviews/approve', 'ReviewController::approveReview');
 
 $routes->post('analyze/reviews/social-reviews/(:num)', 'ReviewController::google_review_credit/$1');
 $routes->get('/thankyou', 'ReviewController::thankyou');
->>>>>>> remotes/origin/vikash

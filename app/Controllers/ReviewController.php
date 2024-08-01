@@ -156,15 +156,7 @@ class ReviewController extends BaseController
             'sentiment' => $this->request->getPost('sentiment'),
             'campaignID' => $this->request->getPost('campaign'),
             'reviewText' => $this->request->getPost('comment'),
-<<<<<<< HEAD
-            'reviewerInfo' => json_encode([
-            'city' => $this->request->getPost('City'),
-            'state' => $this->request->getPost('State'),
-            'zipcode' => $this->request->getPost('Zipcode'),
-            ])
-=======
             'reviewerInfo' => $reviewinfoJson,  // Store the JSON string
->>>>>>> remotes/origin/vikash
         ];
 
         // Insert data into database
@@ -206,10 +198,6 @@ class ReviewController extends BaseController
         } // Fetch 10 reviews per page
         $pager = $reviewModel->pager;
             
-<<<<<<< HEAD
-       
-=======
->>>>>>> remotes/origin/vikash
         foreach ($reviews as &$review) {
             $ID = $review['ID'];
             //print_r($ID);            
@@ -222,13 +210,7 @@ class ReviewController extends BaseController
                 $review['campaignName'] = 'not known';
             }
 
-<<<<<<< HEAD
-        
         }
-         
-=======
-        }
->>>>>>> remotes/origin/vikash
       
         // Prepare data for view
         $data['fetchreview'] = $reviews;
@@ -239,12 +221,6 @@ class ReviewController extends BaseController
         return view('reviews', $data);
     }
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> remotes/origin/vikash
     public function getReviewsByCampaign()
     {
         if ($this->request->isAJAX()) {
@@ -358,11 +334,6 @@ class ReviewController extends BaseController
         return $this->response->setStatusCode(400, 'Bad Request');
     }
     
-<<<<<<< HEAD
-
-
-=======
->>>>>>> remotes/origin/vikash
         public function approveReview()
         {
             // Retrieve the data sent from the front end
@@ -417,17 +388,5 @@ class ReviewController extends BaseController
         
             return $this->response->setJSON(['status' => 'error', 'message' => 'Review not found']);
         }
-<<<<<<< HEAD
-    
-    
-    
-    
-
-    
-
-    
-}
-=======
       
 }
->>>>>>> remotes/origin/vikash
