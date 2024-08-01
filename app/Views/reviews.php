@@ -70,12 +70,14 @@
                                     <div class="formWrap row">
                                        <div class="flex flex-col items-stretch col-span-3">
                                           <!-- <p class="text-17px">Source</p> -->
-                                          <select class="py-7px border-b outline-none bg-transparent" name="source" id="">
+                                          <?php if (isset($enumValues['enumValues']['reviewType']) && is_array($enumValues['enumValues']['reviewType'])): ?>
+                                          <select class="py-7px border-b outline-none bg-transparent" name="reviewType">
                                              <option value="" selected="" hidden="">Select Source</option>
-                                             
-                                             <option value="google">Google</option>
-                                            
+                                             <?php foreach ($enumValues['enumValues']['reviewType'] as $type): ?>
+                                                   <option value="<?= esc($type); ?>"><?= esc(ucfirst($type)); ?></option>
+                                             <?php endforeach; ?>
                                           </select>
+                                       <?php endif; ?>
                                           <!---->
                                        </div>
                                        <div class="col-12 col-md-12">
@@ -85,12 +87,14 @@
                                        </div>
                                        <div class="col-12 col-md-6">
                                           <div class="inputBox">
-                                             <select class="form-select form-select-md mb-3" name="sentiment" namearia-label=".form-select-lg example">
-                                                <option disabled selected>Sentiment</option>
-                                                <option value="1">Positive</option>
-                                                <option value="2">Neutral</option>
-                                                <option value="3">Negative</option>
-                                             </select>
+                                          <?php if (isset($enumValues['enumValues']['sentiment']) && is_array($enumValues['enumValues']['sentiment'])): ?>
+                                          <select class="form-select form-select-md mb-3" name="sentiment">
+                                             <option value="" selected="" hidden="">Sentiment</option>
+                                             <?php foreach ($enumValues['enumValues']['sentiment'] as $type): ?>
+                                                   <option value="<?= esc($type); ?>"><?= esc(ucfirst($type)); ?></option>
+                                             <?php endforeach; ?>
+                                          </select>
+                                       <?php endif; ?>
                                           </div>
                                        </div>
                                        <div class="col-12 col-md-6">
@@ -114,6 +118,11 @@
                                              <label class="form-check-label" for="disabledFieldsetCheck">
                                              Approve Comment
                                              </label>
+                                          </div>
+                                       </div>
+                                       <div class="col-12 col-md-4">
+                                          <div class="inputBox">
+                                             <input class="form-control" autocomplete="off" name="Name" type="text" placeholder="customer_name">
                                           </div>
                                        </div>
                                        <div class="col-12 col-md-4">
@@ -235,12 +244,6 @@
                            </svg>
                            Show Archived
                         </button>
-                        <!-- <button data-v-428084ba="" class="btn btn-blue mr-5px">
-                           <svg data-v-428084ba="" class="svg-inline--fa fa-music" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="music" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                              <path class="" fill="currentColor" d="M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v72V368c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V147L192 223.8V432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V200 128c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z"></path>
-                           </svg>
-                           Audio &amp; Text
-                        </button> -->
                         <button data-v-428084ba="" class="btn btn-green mr-5px"  id = "reset"> Reset Filters </button>
                      </div>
                   </div>
@@ -338,12 +341,68 @@
                                     </svg>
                                     <?= $review['isArchive'] == '0' ? 'Archive' : 'Unarchive' ?>
                                  </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full">
+                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full" data-bs-toggle="modal" data-bs-target="#editreview">
                                     <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                        <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
                                     </svg>
                                     Edit
                                  </button>
+
+                                 <div class="modal fade" id="editreview" tabindex="-1" aria-labelledby="editreview" aria-hidden="true">
+                                    <div class="modal-dialog modalContent mx-700">
+                                       <div class="modal-content">
+                                          <form method="post" action="<?= base_url('/analyze/reviews/create') ?>">
+                                          <div class="modal-header">
+                                          <h2 class="text-23px">Edit Review</h2>
+                                             </h5>
+                                             <button class="text-gray-400 hover:text-black">
+                                                <svg class="svg-inline--fa fa-xmark text-30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                                   <path class="" fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
+                                                </svg>
+                                          </button>
+                                          </div>
+                                          <div class="modal-body">
+                                          <?php $script = ''; ?>
+                                             <?php if (session()->getFlashdata('validation')): ?>
+                                             <div class="validation-errors">
+                                                <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
+                                                <p style="color: red;"><?php echo $error ?></p>
+                                                <?php endforeach ?>
+                                             </div>
+                                             <?php $script = '$("#campaignModal").addClass("show").css("display","block")'; ?>
+                                             <?php endif ?>
+                                             <div class="grid grid-cols-3 gap-20px text-left mb-20px">
+                                                <div class="flex flex-col items-stretch col-span-3">
+                                                      <select class="outline-none py-7px border-b focus:border-blue-500" name="campaign" aria-label=".form-select-lg example">
+                                                         <option disabled selected>Campaign</option>
+                                                         <?php  foreach($campaigns as $review) : ?>
+                                                            <option value="<?= esc($review['ID']) ?>"><?= esc($review['name']) ?></option>
+                                                         <?php endforeach; ?>
+                                                      </select>
+                                                </div>
+                                                <div class="flex flex-col items-stretch col-span-3">
+                                                      <p class="text-17px">Reviewer Information</p>
+                                                      <input class="outline-none py-7px border-b focus:border-blue-500" type="text" placeholder="Full name">
+                                                </div>
+                                                <input class="outline-none py-7px border-b focus:border-blue-500" type="text" placeholder="City">
+                                                <select class="border-b-1 outline-none focus:border-blue-500 text-black" name="statesDropdown" id="statesDropdown">
+                                                      <option hidden="" disabled="">State</option>
+                                                      <option value="AL">Alabama</option>
+                                                      <option value="AK">Alaska</option>
+                                                      <option value="AZ">Arizona</option>
+
+                                                </select>
+                                                <input class="outline-none py-7px border-b focus:border-blue-500" type="text" maxlength="9" placeholder="Zipcode">
+                                             </div>
+                                             <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="Submit" class="btn btn-primary btn-md">Submit changes</button>
+                                             </div>
+                                          </div>
+                                          </form>
+                                       </div>
+                                    </div>
+                                 </div>
                               </div>
                            </td>
                            <!----><!----><!---->
@@ -468,41 +527,37 @@ function handleApprovalClick(button) {
             // Handle success
             console.log('Response:', response);
             var review = response;
-           
-
+         
             // Construct new button HTML based on approval and archive statuses
             var buttonHTML = 
             '<td class="p-10px w-200px">' +
-                        '<div class="flex flex-col items-center justify-center h-full">' +
-                          '<button class="btn w-full mb-5px btn-approve">' +
+               '<div class="flex flex-col items-center justify-center h-full">' +
+                  '<button class="btn w-full mb-5px btn-approve">' +
 
-                                 '<svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">' +
-                                    '<path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>' +
-                                 '</svg>' +
-                                review.newApprovedStatus +
-                           '</button>' +
-                           '<button class="btn w-full mb-5px">' +
-                                 '<svg class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
-                                    '<path fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>' +
-                                 '</svg>' +
-                                review.newArchiveStatus +
-                           '</button>' +
-                           '<button class="btn btn-blue w-full">' +
-                                 '<svg class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
-                                    '<path fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>' +
-                                 '</svg>' +
-                                 'Edit' +
-                           '</button>' +
-                        '</div>' +
-                     '</td>' 
+                        '<svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">' +
+                           '<path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>' +
+                        '</svg>' +
+                        review.newApprovedStatus +
+                  '</button>' +
+                  '<button class="btn w-full mb-5px">' +
+                        '<svg class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+                           '<path fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>' +
+                        '</svg>' +
+                        review.newArchiveStatus +
+                  '</button>' +
+                  '<button class="btn btn-blue w-full">' +
+                        '<svg class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+                           '<path fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>' +
+                        '</svg>' +
+                        'Edit' +
+                  '</button>' +
+               '</div>' +
+            '</td>' 
           }
     });
 }
 </script>
-
-
 <script>
-
 $(document).ready(function() {
  
     var filters = {
@@ -519,8 +574,6 @@ $(document).ready(function() {
     
     
     $('#archive').removeClass('active');
-
-
 
     function handleButtonClick(sentiment) {
         // Update the sentiment in the filters object
@@ -608,9 +661,6 @@ $(document).ready(function() {
         console.log('Archive Status:', filters.archive);
         filterData();
     });
-    // Ensure fetchReviews is not called on initialization
-    // Initial log
-    //filterData(); // Comment out or remove this if it causes the issue
 
     var currentPage = 1;
     var fromDate, toDate;
@@ -624,19 +674,6 @@ $(document).ready(function() {
       fetchReviews(currentPage);
    });
     function fetchReviews(page) {
-   //    console.log('Sending AJAX request with data:', {
-   //    campaign_id: filters.campaignID,
-   //    page: page,
-   //    limit: filters.limit,
-   //    approved: filters.approved,
-   //    unapproved: filters.unapproved,
-   //    include_all_reviews: filters.includeAllReviews,
-   //    noText: filters.noText,
-   //    archive: filters.archive,
-   //    sentiment: filters.sentiment,
-   //    fromdate: fromDate,
-   //    todate: toDate
-   //  });
 
         $.ajax({
             url: '/analyze/reviews/get',

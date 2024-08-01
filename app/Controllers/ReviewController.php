@@ -149,7 +149,7 @@ class ReviewController extends BaseController
         
         // Convert the array to a JSON string
         $reviewinfoJson = json_encode($reviewinfo); // Corrected to encode to JSON
-        
+
         $data = [
             'reviewType' => $this->request->getPost('reviewType'),
             'createdOn' => $this->request->getPost('date'),
@@ -164,7 +164,6 @@ class ReviewController extends BaseController
             // Handle insertion errors
             return redirect()->to('/analyze/reviews')->with('error', 'Failed to save review.');
         }
-
         // Redirect to a success page or display success message
         return redirect()->to('/analyze/reviews')->with('success', 'Review saved successfully.');
     }
@@ -209,9 +208,9 @@ class ReviewController extends BaseController
                 $review['campaignDepartment'] = 'not known';
                 $review['campaignName'] = 'not known';
             }
-
         }
-      
+
+        $data['enumValues'] = $reviewModel->getEnumValues();
         // Prepare data for view
         $data['fetchreview'] = $reviews;
         $data['campaigns'] = $campaigns;
@@ -221,6 +220,7 @@ class ReviewController extends BaseController
         return view('reviews', $data);
     }
 
+    
     public function getReviewsByCampaign()
     {
         if ($this->request->isAJAX()) {
@@ -241,9 +241,6 @@ class ReviewController extends BaseController
             // Load models
             $campaignModel = new CampaignModel();
             $reviewModel = new ReviewModal();
-            // var_dump($reviewModel);
-            // die;
-            
             // Get all campaigns for mapping campaign IDs to names
             $campaigns = $campaignModel->findAll();
             $campaignNames = [];
@@ -310,7 +307,6 @@ class ReviewController extends BaseController
         
             // Calculate total reviews for pagination
             $totalReviewsQuery = clone $reviewsQuery; // Clone to avoid modifying the original query
-            
             $totalReviews = $totalReviewsQuery->countAllResults();
         
             // Prepare the JSON response
@@ -340,23 +336,11 @@ class ReviewController extends BaseController
             $id = $this->request->getPost('ID');
             $approved = $this->request->getPost('approved');
             $archive = $this->request->getPost('archive');
-            // Print the data for debugging
-            // echo "<pre>";
-            // print_r([
-            //     'ID' => $id,
-            //     'approved' => $approved,
-            //     'arhive' => $archive
-            // ]);
-            // echo "</pre>";
-        
-            // Optional: Stop further execution to see the output
-           // die();
+
             $reviewModel = new ReviewModal();
             // Fetch the current review
             $review = $reviewModel->find($id);
             
-            //print_r($review['isApproved']);
-            // die;
             if ($review) {
                 $id = $review['ID'];
                 // Get the current isApproved value
