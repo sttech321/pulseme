@@ -168,25 +168,24 @@ class ReviewController extends BaseController
         return redirect()->to('/analyze/reviews')->with('success', 'Review saved successfully.');
     }
 
-
     public function update($id)
     {
         helper(['form']);
         
         // Validation rules
-        $rules = [
-            'campaign' => 'required',
-            'city' => 'required',
-            'customer_name' => 'required',
-            'state' => 'required',
-            'zipcode' => 'required',
-        ];
+        // $rules = [
+            // 'campaign' => 'required',
+            // 'city' => 'required',
+            // 'customer_name' => 'required',
+            // 'state' => 'required',
+            // 'zipcode' => 'required',
+        // ];
 
         // Validate form input
-        if (!$this->validate($rules)) {
-            return redirect()->to('/analyze/reviews')->withInput()->with('validation', $this->validator);
-        }
-        $model = new CampaignModel();
+        // if (!$this->validate($rules)) {
+        //     return redirect()->to('/analyze/reviews')->withInput()->with('validation', $this->validator);
+        // }
+        $model = new ReviewModal();
 
         $reviewinfo = [
             'Name' => $this->request->getPost('customer_name'),
@@ -202,8 +201,8 @@ class ReviewController extends BaseController
         $data = [
             'reviewerInfo' => $reviewinfoJson,
         ];
-      
-        // Perform the update
+
+      // Perform the update
         $model->update($id,$data);
 
         // Redirect with success message
@@ -414,12 +413,6 @@ class ReviewController extends BaseController
         return $this->response->setJSON(['status' => 'error', 'message' => 'Review not found']);
     }
 
-
-    public function Edit_customer_detail($id){
-        $model = new ReviewModal();
-        $data['editreviews'] = $model->find($id);
-        return view('reviews', $data);
-    }
 
       
 }

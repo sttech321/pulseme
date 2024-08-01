@@ -340,9 +340,8 @@
                                     </svg>
                                     Edit
                                  </button>
-                                 
-
-                                 <div class="modal fade" id="editreview-<?= esc($review['ID']) ?>" tabindex="-1" aria-labelledby="editreview-<?= esc($review['ID']) ?>" aria-hidden="true">
+                                 <?php foreach ($fetchreview as $state) : ?>
+                                 <div class="modal fade" id="editreview-<?= esc($state['ID']) ?>" tabindex="-1" aria-labelledby="editreview-<?= esc($state['ID']) ?>" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
                                        <div class="modal-content">
                                           <div class="modal-header">
@@ -351,7 +350,7 @@
                                              </button>
                                           </div>
                                           <div class="modal-body">
-                                             <form method="post" action="<?= base_url('/analyze/reviews/update/' . $review['ID']) ?>">
+                                             <form method="post" action="<?= base_url('/analyze/reviews/update/' . $state['ID']) ?>">
                                                 <div class="grid grid-cols-3 gap-20px text-left mb-20px">
                                                    <div class="flex flex-col items-stretch col-span-3">
                                                          <select class="outline-none py-7px border-b focus:border-blue-500" name="campaign" aria-label=".form-select-lg example">
@@ -363,26 +362,20 @@
                                                    </div>
                                                    <div class="flex flex-col items-stretch col-span-3">
                                                          <p class="text-17px">Reviewer Information</p>
-                                                         <?php foreach ($fetchreview as $state) : 
-                                                             $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                         
+                                                          <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
                                                          <input class="outline-none py-7px border-b focus:border-blue-500" name="city" value="<?php print_r($reviewerInfo['City']);?>" type="text" placeholder="<?php print_r($reviewerInfo['City']);?>" >
-                                                         <?php endforeach; ?>
+                                                         
                                                    </div>
-                                                   <?php foreach ($fetchreview as $state) : 
-                                                         $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                   <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
                                                          <input class="outline-none py-7px border-b focus:border-blue-500" name="customer_name" value="<?php print_r($reviewerInfo['Name']);?>" type="text" placeholder="<?php print_r($reviewerInfo['Name']);?>" >
-                                                   <?php endforeach; ?>
                                                    <select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">
-                                                   <?php foreach ($fetchreview as $state) : 
-                                                      $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                   <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
                                                          <option value="<?php print_r($reviewerInfo['State']); ?>"><?php print_r($reviewerInfo['State']);?></option>
-                                                         <?php endforeach; ?>
                                                       </select>
 
-                                                      <?php foreach ($fetchreview as $state) : 
-                                                             $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                      <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
                                                          <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="<?php print_r($reviewerInfo['Zipcode']);?>" type="text" placeholder="<?php print_r($reviewerInfo['Zipcode']);?>" >
-                                                         <?php endforeach; ?>
                                              </div>
                                              <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
@@ -393,6 +386,7 @@
                                        </div>
                                     </div>
                                  </div>
+                                 <?php endforeach; ?>
                               </div>
                            </td>
                            <!----><!----><!---->
