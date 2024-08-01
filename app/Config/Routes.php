@@ -33,7 +33,7 @@ $routes->get('/settings/dispatch/review-widget', 'Home::dispatch_review_widget')
 $routes->get('/settings/dispatch/web_widget', 'Home::dispatch_web_widget');
 $routes->get('/settings/billing', 'Home::billing_subscription');
 $routes->get('/settings/dispatch/campaign', 'Home::campaigns');
-$routes->get('/analyse/overview', 'Home::overview');
+$routes->get('/analyze/overview', 'Home::overview');
 $routes->get('/leaderboard/summary', 'Home::summary');
 $routes->get('/send-referral', 'Home::referral');
 $routes->get('/two-way-messaging', 'Home::messaging');
@@ -85,3 +85,4 @@ $routes->post('analyze/reviews/social-reviews/(:num)', 'ReviewController::google
 $routes->get('/thankyou', 'ReviewController::thankyou');
 
 $routes->post('/analyze/reviews/update/(:num)', 'ReviewController::update/$1');
+$routes->get('/analyze/dispatching', 'ReportsController::dispatch');

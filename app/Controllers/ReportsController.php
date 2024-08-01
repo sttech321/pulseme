@@ -55,4 +55,15 @@ class ReportsController extends BaseController {
         return view('reports/fielsops_usage',$data);
     }
 
+    public function dispatch(){
+
+        return view('dispatch');
+    }
+
+    // public function overview(){
+
+    //     return view('overview');
+    // }
+
+
 }

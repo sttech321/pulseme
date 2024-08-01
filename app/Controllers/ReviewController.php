@@ -154,7 +154,7 @@ class ReviewController extends BaseController
             'reviewType' => $this->request->getPost('reviewType'),
             'createdOn' => $this->request->getPost('date'),
             'sentiment' => $this->request->getPost('sentiment'),
-            'companyID' => $this->request->getPost('campaign'),
+            'campaignID' => $this->request->getPost('campaign'),
             'reviewText' => $this->request->getPost('comment'),
             'reviewerInfo' => $reviewinfoJson,  // Store the JSON string
         ];
@@ -172,19 +172,6 @@ class ReviewController extends BaseController
     {
         helper(['form']);
         
-        // Validation rules
-        // $rules = [
-            // 'campaign' => 'required',
-            // 'city' => 'required',
-            // 'customer_name' => 'required',
-            // 'state' => 'required',
-            // 'zipcode' => 'required',
-        // ];
-
-        // Validate form input
-        // if (!$this->validate($rules)) {
-        //     return redirect()->to('/analyze/reviews')->withInput()->with('validation', $this->validator);
-        // }
         $model = new ReviewModal();
 
         $reviewinfo = [
