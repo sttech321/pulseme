@@ -26,14 +26,14 @@ class ReportsController extends BaseController {
     public function report_campaign()
     {
         $customerModel = new CustomerModel();
-        $customersWithCampaigns = $customerModel->getCustomersWithCampaigns();
+        // $customersWithCampaigns = $customerModel->getCustomersWithCampaigns();
         $model = new CampaignModel();
         $campaigns = $model->findAll();
         $sentiment = new ReviewModal();
         $sentimentcount= $sentiment->findAll();
     
         return view('reports/campaigns', [
-            'customersWithCampaigns' => $customersWithCampaigns,
+            // 'customersWithCampaigns' => $customersWithCampaigns,
             'campaigns' => $campaigns,
             'sentiments' => $sentimentcount,
         ]);

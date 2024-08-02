@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Models\CustomerModel;
+use App\Models\TestModal;
 use App\Models\TechnicianModal;
 use CodeIgniter\Controller;
 use Exception;
@@ -45,50 +45,65 @@ class CustomerController extends Controller
     
         return view('dispatching',$data);
     }
-    
 
-    public function create()
+
+    public function create_dispatch()
     {
-        helper(['form']);
-        $rules = [
-            'customer_phone' => 'required',
-            'customer_email' => 'required|valid_email',
-        ];
-    
-        if (!$this->validate($rules)) {
-            $buttonId = $this->request->getPost('button_id');
-            return redirect()->to('/operate/dispatch')
-                ->withInput()
-                ->with('validation', $this->validator)
-                ->with('button_id', $buttonId);
-        }
-    
-        $technicianId = $this->request->getPost('button_id');
-        $employeeId = $this->request->getPost('employee_id');
-        $customerModel = new CustomerModel();
+        $name = $this->request->getPost('customer_name');
+        $email = $this->request->getPost('customer_email');
+        $phone = $this->request->getPost('customer_phone');
+        $address = $this->request->getPost('customer_address');
+        $campaignid = $this->request->getPost('campaignid');
+        $employeeid = $this->request->getPost('employeeid');
+        $actionType = $this->request->getPost('actionType');
+
+        $testModel = new TestModal();
+
+        // Prepare data to insert
         $data = [
-            'campaign_id' => $technicianId,
-            'employeeId' => $employeeId,
-            'customer_phone' => $this->request->getPost('customer_phone'),
-            'customer_email' => $this->request->getPost('customer_email'),
-            'customer_name' => $this->request->getPost('customer_name'),
-            'customer_address' => $this->request->getPost('customer_address'),
+            'customer_name' => $name,
+            'customer_email ' => $email,
+            'customer_phone' => $phone,
+            'customer_address' => $address,
+            'campaignid' => $campaignid,
+            'employeeid' => $employeeid,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
-    
-        $customerModel->insert($data);
-        $this->sendbioEmail($technicianId, $data['customer_email']);
-        $this->sendPulseCheckEmail($employeeId, $data['customer_email']);
-        return redirect()->to('/operate/dispatch')->with('success', 'Customer info saved and email sent successfully.');
+
+        $testModel->insert($data);
+
+        if ($actionType === 'sendbio') {
+            // Call the sendbioEmail method
+            $this->sendbioEmail($campaignid, $email);
+
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Bio sent successfully!']);
+        } elseif ($actionType === 'sendpulsecheck') {
+            // Call the sendPulseCheckEmail method
+            $this->sendPulseCheckEmail($employeeid, $email);
+
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Pulsecheck sent successfully!']);
+        } else {
+            // Insert data into the database
+            $testModel->insert($data);
+
+            // Determine which button was clicked
+            if ($actionType === 'btn1') {
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Demo message']);
+            } elseif ($actionType === 'btn2') {
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Demo message 2']);
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Form submission failed.']);
+            }
+        }
     }
-    
-    private function sendbioEmail($technicianId, $email)
+
+    private function sendbioEmail($campaignid, $email)
     {
         $emailService = \Config\Services::email();
-        $link = base_url('/application/bio/' . $technicianId);
+        $link = base_url('/application/bio/' . $campaignid);
         $message = view('dispatchTab/bio-template', ['link' => $link]);
-    
+
         $emailService->initialize([
             'protocol' => 'smtp',
             'SMTPHost' => $_ENV['SMTP_HOST'],
@@ -99,24 +114,23 @@ class CustomerController extends Controller
             'charset' => 'utf-8',
             'newline' => "\r\n"
         ]);
-    
+
         $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
         $emailService->setTo($email);
         $emailService->setSubject('Technician Bio');
         $emailService->setMessage($message);
-    
+
         if (!$emailService->send()) {
-            echo $emailService->printDebugger(['headers', 'subject', 'body']);
+            log_message('error', $emailService->printDebugger(['headers', 'subject', 'body']));
         }
     }
-    
-    
-    private function sendPulseCheckEmail($employeeId,$email)
+
+    private function sendPulseCheckEmail($employeeId, $email)
     {
         $emailService = \Config\Services::email();
         $link = base_url('/application/pulsecheck/' . $employeeId);
         $message = view('dispatchTab/pulsecheck-review', ['link' => $link]);
-    
+
         $emailService->initialize([
             'protocol' => 'smtp',
             'SMTPHost' => $_ENV['SMTP_HOST'],
@@ -127,16 +141,16 @@ class CustomerController extends Controller
             'charset' => 'utf-8',
             'newline' => "\r\n"
         ]);
-    
+
         $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
         $emailService->setTo($email);
         $emailService->setSubject('Pulsecheck Review');
         $emailService->setMessage($message);
-    
+
         if (!$emailService->send()) {
             echo $emailService->printDebugger(['headers', 'subject', 'body']);
         }
-    }
+    } 
     
 }
 ?>

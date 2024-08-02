@@ -70,6 +70,7 @@ $routes->get('application/pulsecheck/(:segment)', 'Campaign::pulse_check/$1');
 $routes->post('application/pulsecheck/(:segment)', 'ReviewController::submitReview/$1');
 
 $routes->get('/operate', 'CustomerController::dispatch');
+
 $routes->post('/operate/dispatch/create/', 'CustomerController::create');
 
 $routes->get('/leaderboard/reports/campaigns', 'ReportsController::report_campaign');
@@ -86,3 +87,7 @@ $routes->get('/thankyou', 'ReviewController::thankyou');
 
 $routes->post('/analyze/reviews/update/(:num)', 'ReviewController::update/$1');
 $routes->get('/analyze/dispatching', 'ReportsController::dispatch');
+
+$routes->get('/example', 'TestController::data');
+$routes->post('example/submit', 'CustomerController::create_dispatch');
+

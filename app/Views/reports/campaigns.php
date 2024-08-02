@@ -141,16 +141,16 @@
                                             <td class="px-20px py-15px"></td>
                                             <td class="px-20px py-15px">
                                                 <?php 
-													$matchCount = 0;
-													if (!empty($customersWithCampaigns)) {
-														foreach ($customersWithCampaigns as $customer) {
-															if ($customer->campaign_id == $campaign['ID']) {
-																$matchCount = $customer->match_count;
-																break;
-															}
-														}
-													}
-													echo $matchCount;
+													// $matchCount = 0;
+													// if (!empty($customersWithCampaigns)) {
+													// 	foreach ($customersWithCampaigns as $customer) {
+													// 		if ($customer->campaign_id == $campaign['ID']) {
+													// 			$matchCount = $customer->match_count;
+													// 			break;
+													// 		}
+													// 	}
+													// }
+													// echo $matchCount;
 													?>
                                             </td>
                                             <td class="px-20px py-15px"></td>
@@ -158,32 +158,32 @@
                                             <!-- Positive Sentiment -->
                                             <td class="px-20px py-15px">
                                                 <?php
-                                                    $positiveCount = 0;
-                                                    foreach ($sentiments as $sentiment) {
-                                                        if ($sentiment['campaignID'] == $campaign['ID']) {
-                                                            if($sentiment['sentiment'] == 'Positive'){
-                                                                $positivecount = str_word_count($sentiment['sentiment']);
-                                                                $positiveCount++;
-                                                            }
-                                                        }
-                                                    }
-                                                    echo $positiveCount;
+                                                    // $positiveCount = 0;
+                                                    // foreach ($sentiments as $sentiment) {
+                                                    //     if ($sentiment['campaignID'] == $campaign['ID']) {
+                                                    //         if($sentiment['sentiment'] == 'Positive'){
+                                                    //             $positivecount = str_word_count($sentiment['sentiment']);
+                                                    //             $positiveCount++;
+                                                    //         }
+                                                    //     }
+                                                    // }
+                                                    // echo $positiveCount;
                                                 ?>
                                             </td>
 
                                             <!-- Negative Sentiment -->
                                             <td class="px-20px py-15px">
                                                 <?php
-                                                    $negativecount = 0;
-                                                    foreach ($sentiments as $sentiment) {
-                                                        if ($sentiment['campaignID'] == $campaign['ID']) {
-                                                            if($sentiment['sentiment'] == 'Negative'){
-                                                                $negativecount = str_word_count($sentiment['sentiment']);
-                                                                $negativecount++;
-                                                            }
-                                                        }
-                                                    }
-                                                    echo $negativecount;
+                                                    // $negativecount = 0;
+                                                    // foreach ($sentiments as $sentiment) {
+                                                    //     if ($sentiment['campaignID'] == $campaign['ID']) {
+                                                    //         if($sentiment['sentiment'] == 'Negative'){
+                                                    //             $negativecount = str_word_count($sentiment['sentiment']);
+                                                    //             $negativecount++;
+                                                    //         }
+                                                    //     }
+                                                    // }
+                                                    // echo $negativecount;
                                                 ?>
                                             </td>
                                         </tr>

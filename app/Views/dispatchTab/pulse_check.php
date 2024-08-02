@@ -95,10 +95,10 @@
                         </div>
                         <div class="row p-b-30">
                             <a class="col-xs-4" data-mood="negative">
-                                <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg" onclick="nextStep()" class="img-responsive">
+                                <img src="<?= base_url('/image/campaign/faces-negative-flat.svg') ?>" onclick="nextStep()" class="img-responsive">
                             </a>
                             <a class="col-xs-4" data-mood="positive" onclick="nextpart()">
-                                <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg" class="img-responsive">
+                                <img src="<?= base_url('/image/campaign/faces-positive-flat.svg') ?>" class="img-responsive">
                             </a>
                         </div>
                     </div>
@@ -157,13 +157,13 @@
                             </h3>
                             <div class="ratings-slider">
                                 <div class="mood negative text-left">
-                                    <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg">
+                                    <img src="<?= base_url('/image/campaign/faces-negative-flat.svg') ?>">
                                 </div>
                                 <div class="slider-wrapper slider">
                                     <div id="employees1"></div>
                                 </div>
                                 <div class="mood positive text-right">
-                                    <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg">
+                                    <img src="<?= base_url('/image/campaign/faces-positive-flat.svg') ?>">
                                 </div>
                             </div>
                             <input type="hidden" name="campaignId" value="<?= $technician['ID'] ?>">
@@ -173,13 +173,13 @@
                             <h3 class="ratings-title">Professionalism</h3>
                             <div class="ratings-slider">
                                 <div class="mood negative text-left">
-                                    <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg">
+                                    <img src="<?= base_url('/image/campaign/faces-negative-flat.svg') ?>">
                                 </div>
                                 <div class="slider-wrapper slider">
                                     <div id="employees2"></div>
                                 </div>
                                 <div class="mood positive text-right">
-                                    <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg">
+                                    <img src=" <?= base_url('/image/campaign/faces-positive-flat.svg') ?>">
                                 </div>
                             </div>
 
@@ -189,13 +189,13 @@
                             <h3 class="ratings-title">Quality of Service</h3>
                             <div class="ratings-slider">
                                 <div class="mood negative text-left">
-                                    <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg">
+                                    <img src="<?= base_url('/image/campaign/faces-negative-flat.svg') ?>">
                                 </div>
                                 <div class="slider-wrapper slider">
                                     <div id="employees3"></div>
                                 </div>
                                 <div class="mood positive text-right">
-                                    <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg">
+                                    <img src=" <?= base_url('/image/campaign/faces-positive-flat.svg') ?>">
                                 </div>
                             </div>
 
