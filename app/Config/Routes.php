@@ -1,5 +1,7 @@
 <?php
+
 namespace Config;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -81,3 +83,5 @@ $routes->post('/analyze/reviews/approve', 'ReviewController::approveReview');
 
 $routes->post('analyze/reviews/social-reviews/(:num)', 'ReviewController::google_review_credit/$1');
 $routes->get('/thankyou', 'ReviewController::thankyou');
+
+$routes->post('/analyze/reviews/update/(:num)', 'ReviewController::update/$1');

@@ -199,7 +199,9 @@
                             </div>
 
                             <input type="hidden" name="rating3_text" id="rating3_text" value="Quality of Service">
-                            <input type="hidden" name="rating3_value" id="rating3_value" value="8">
+                            <input type="hidden" name="rating3_value" id="" value="8">
+                            <!-- <input type="hidden" name="campaignId" value="<?php //echo $technician['ID']; ?>"> -->
+                            
                         </div>
                         <div class="text-center p-b-20">
                             <a class="btn btn-lg btn-primary waves-effect" data-submit-ratings="" data-next="63" onclick="nextStep()">Submit</a>
@@ -237,6 +239,7 @@
                                         <div class="fg-line">
 
                                             <textarea class="input form-control fg-input validate" name="feedback" rows="5" placeholder="Type your feedback..." data-empty-error="Feedback cannot be left blank" data-max-length="999" spellcheck="false"></textarea>
+                                           
                                         </div>
                                         <div class="help-block help-block-alt text-left brd-t-l-0 brd-t-r-0 m-t-0">
                                         </div>

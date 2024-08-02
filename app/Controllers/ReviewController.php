@@ -27,8 +27,7 @@ class ReviewController extends BaseController
         if ($data['technician']) {
             return view('dispatchTab/pulse_check', $data);
         } else {
-            // Handle case where technician is not found
-            // return redirect()->to(base_url('/some-error-page'))->with('error', 'Technician not found');
+
         }
     }
 
@@ -64,9 +63,10 @@ class ReviewController extends BaseController
         $rating2_text = $this->request->getPost('rating2_text');
         $rating3_value = $this->request->getPost('rating3_value');
         $rating3_text = $this->request->getPost('rating3_text');
-    
+        $campaignId = $this->request->getPost('campaignId');
         // Preparing data for insertion
         $data = [
+            'campaignID' => $campaignId,
             'reviewratings' => json_encode([
                 'feedback' => $feedback,
                 'rate1' => ['text' => $rating1_text, 'value' => $rating1_value],
@@ -168,6 +168,47 @@ class ReviewController extends BaseController
         return redirect()->to('/analyze/reviews')->with('success', 'Review saved successfully.');
     }
 
+    public function update($id)
+    {
+        helper(['form']);
+        
+        // Validation rules
+        // $rules = [
+            // 'campaign' => 'required',
+            // 'city' => 'required',
+            // 'customer_name' => 'required',
+            // 'state' => 'required',
+            // 'zipcode' => 'required',
+        // ];
+
+        // Validate form input
+        // if (!$this->validate($rules)) {
+        //     return redirect()->to('/analyze/reviews')->withInput()->with('validation', $this->validator);
+        // }
+        $model = new ReviewModal();
+
+        $reviewinfo = [
+            'Name' => $this->request->getPost('customer_name'),
+            'City' => $this->request->getPost('city'),
+            'State' => $this->request->getPost('state'),
+            'Zipcode' => $this->request->getPost('zipcode')
+        ];
+
+        // Convert the array to a JSON string
+        $reviewinfoJson = json_encode($reviewinfo); // Corrected to encode to JSON
+        // Update campaign data in database
+
+        $data = [
+            'reviewerInfo' => $reviewinfoJson,
+        ];
+
+      // Perform the update
+        $model->update($id,$data);
+
+        // Redirect with success message
+        return redirect()->to('/analyze/reviews')->with('success', 'Campaign updated successfully.');
+    }
+
     
     public function reviews()
     {
@@ -199,7 +240,6 @@ class ReviewController extends BaseController
             
         foreach ($reviews as &$review) {
             $ID = $review['ID'];
-            //print_r($ID);            
             $campaignID = $review['campaignID'];
             if (isset($campaignNames[$campaignID])) {
                 $review['campaignDepartment'] = $campaignNames[$campaignID]['department'];
@@ -215,7 +255,7 @@ class ReviewController extends BaseController
         $data['fetchreview'] = $reviews;
         $data['campaigns'] = $campaigns;
         $data['pager'] = $pager;
-        
+
         // Load the view with data
         return view('reviews', $data);
     }
@@ -330,47 +370,49 @@ class ReviewController extends BaseController
         return $this->response->setStatusCode(400, 'Bad Request');
     }
     
-        public function approveReview()
-        {
-            // Retrieve the data sent from the front end
-            $id = $this->request->getPost('ID');
-            $approved = $this->request->getPost('approved');
-            $archive = $this->request->getPost('archive');
+    public function approveReview()
+    {
+        // Retrieve the data sent from the front end
+        $id = $this->request->getPost('ID');
+        $approved = $this->request->getPost('approved');
+        $archive = $this->request->getPost('archive');
 
-            $reviewModel = new ReviewModal();
-            // Fetch the current review
-            $review = $reviewModel->find($id);
-            
-            if ($review) {
-                $id = $review['ID'];
-                // Get the current isApproved value
-                $currentApprovedStatus = $review['isApproved'];
-                $currentArchiveStatus = $review['isArchive'];
-                // Determine the new approved status
-                if ($approved !== null) {
-                    $newApprovedStatus = $approved === '1' ? '1' : '0'; // Only update if provided
-                } else {
-                    $newApprovedStatus = $currentApprovedStatus; // Keep the current value if not provided
-                }
+        $reviewModel = new ReviewModal();
+        // Fetch the current review
+        $review = $reviewModel->find($id);
         
-                // Determine the new archive status if provided
-                if ($archive !== null) {
-                    $newArchiveStatus = $archive === '1' ? '1' : '0'; // Only update if provided
-                } else {
-                    $newArchiveStatus = $currentArchiveStatus; // Keep the current value if not provided
-                }
-                // Update the review status
-                $reviewModel->update($id, ['isApproved' => $newApprovedStatus,'isArchive' => $newArchiveStatus]);
-        
-                return $this->response->setJSON([
-                    'id'=>$id,
-                    'status' => 'success',
-                    'newApprovedStatus' => $newApprovedStatus,
-                    'newArchiveStatus' => $newArchiveStatus
-                ]);
+        if ($review) {
+            $id = $review['ID'];
+            // Get the current isApproved value
+            $currentApprovedStatus = $review['isApproved'];
+            $currentArchiveStatus = $review['isArchive'];
+            // Determine the new approved status
+            if ($approved !== null) {
+                $newApprovedStatus = $approved === '1' ? '1' : '0'; // Only update if provided
+            } else {
+                $newApprovedStatus = $currentApprovedStatus; // Keep the current value if not provided
             }
-        
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Review not found']);
+    
+            // Determine the new archive status if provided
+            if ($archive !== null) {
+                $newArchiveStatus = $archive === '1' ? '1' : '0'; // Only update if provided
+            } else {
+                $newArchiveStatus = $currentArchiveStatus; // Keep the current value if not provided
+            }
+            // Update the review status
+            $reviewModel->update($id, ['isApproved' => $newApprovedStatus,'isArchive' => $newArchiveStatus]);
+    
+            return $this->response->setJSON([
+                'id'=>$id,
+                'status' => 'success',
+                'newApprovedStatus' => $newApprovedStatus,
+                'newArchiveStatus' => $newArchiveStatus
+            ]);
         }
+    
+        return $this->response->setJSON(['status' => 'error', 'message' => 'Review not found']);
+    }
+
+
       
 }

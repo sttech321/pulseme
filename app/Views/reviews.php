@@ -15,9 +15,7 @@
       </div>
    </div>
 </div>
-<?php
 
-?>
 <!-- <div class="container-fluid"> -->
 <div class="sidebarRightContentWrap">
    <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
@@ -25,7 +23,7 @@
          <div class="p-20px bg-white">
             <h2 class="text-2xl">Reviews</h2>
          </div>
-         <div class="px-15px bg-white flex justify-start items-center"><a href="/analyze/reviews" class="border-b-2 border-blue-500 router-link-exact-active p-10px" aria-current="page">Reviews</a><a href="/analyze/reviews/social-reviews" class="p-10px">Social Reviews</a></div>
+         <div class="px-15px bg-white flex justify-start items-center tabs"><a href="/analyze/reviews" id="reviews-tab" class="tab p-10px" aria-current="page">Reviews</a><a href="/analyze/reviews/social-reviews" id="social-reviews-tab" class="tab p-10px">Social Reviews</a></div>
          <div class="flex-grow">
             <div data-v-428084ba="" class="p-25px">
                <div data-v-428084ba="" class="bg-white rounded-4px shadow p-10px">
@@ -158,21 +156,21 @@
                      $defaultFromDate = $oneMonthAgo;
                      $defaultToDate = $currentDate;
                      ?>
-                   <div data-v-428084ba="" class="filter flex justify-end items-baseline">
-                     <svg class="svg-inline--fa fa-calendar-day" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                        <path class="" fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm80 64c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80z"></path>
-                     </svg>
-                     <p class="font-bold">From</p>
-                     <input class="p-1" type="date" name="from_date" id="from_date" value="<?php echo htmlspecialchars($defaultFromDate); ?>">
-                     <p class="font-bold">To</p>
-                     <input class="p-1" type="date" name="to_date" id="to_date" value="<?php echo htmlspecialchars($defaultToDate); ?>">
-                     <button class="btn btn-blue" id="update">
-                        <svg class="svg-inline--fa fa-rotate pr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rotate" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                              <path class="" fill="currentColor" d="M142.9 142.9c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5c0 0 0 0 0 0H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5c7.7-21.8 20.2-42.3 37.8-59.8zM16 312v7.6 .7V440c0 9.7 5.8 18.5 14.8 22.2s19.3 1.7 26.2-5.2l41.6-41.6c87.6 86.5 228.7 86.2 315.8-1c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.2 62.2-162.7 62.5-225.3 1L185 329c6.9-6.9 8.9-17.2 5.2-26.2s-12.5-14.8-22.2-14.8H48.4h-.7H40c-13.3 0-24 10.7-24 24z"></path>
+                     <div data-v-428084ba="" class="filter flex justify-end items-baseline">
+                        <svg class="svg-inline--fa fa-calendar-day" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                           <path class="" fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm80 64c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80z"></path>
                         </svg>
-                        Update 
-                     </button>
-                  </div>
+                        <p class="font-bold">From</p>
+                        <input class="p-1" type="date" name="from_date" id="from_date" value="<?php echo htmlspecialchars($defaultFromDate); ?>">
+                        <p class="font-bold">To</p>
+                        <input class="p-1" type="date" name="to_date" id="to_date" value="<?php echo htmlspecialchars($defaultToDate); ?>">
+                        <button class="btn btn-blue" id = "update">
+                           <svg class="svg-inline--fa fa-rotate pr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rotate" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                              <path class="" fill="currentColor" d="M142.9 142.9c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5c0 0 0 0 0 0H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5c7.7-21.8 20.2-42.3 37.8-59.8zM16 312v7.6 .7V440c0 9.7 5.8 18.5 14.8 22.2s19.3 1.7 26.2-5.2l41.6-41.6c87.6 86.5 228.7 86.2 315.8-1c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.2 62.2-162.7 62.5-225.3 1L185 329c6.9-6.9 8.9-17.2 5.2-26.2s-12.5-14.8-22.2-14.8H48.4h-.7H40c-13.3 0-24 10.7-24 24z"></path>
+                           </svg>
+                           Update 
+                        </button>
+                     </div>
                   </div>
                   <div data-v-428084ba="" class="row p-10px flex <xl:flex-col <xl:items-start justify-start items-center">
                      <div data-v-428084ba="" class="flex items-center <xl:mb-10px">
@@ -251,6 +249,14 @@
                   <div data-v-428084ba="" class="row table p-10px w-full">
                      <table data-v-428084ba="" class="w-full">
                         <?php foreach($fetchreview as $review): ?>
+                           <?php  print_r($review); ?>
+                           <?php
+
+                           $reviewerInfo = json_decode($review['reviewerInfo'], true);
+
+                           $reviewerName = $reviewerInfo['Name'] ?? 'Unknown';
+                           
+                           ?>
                         <tr data-v-428084ba="" class="flex w-full">
                            <th data-v-428084ba="" class="p-10px w-auto">
                               <div data-v-428084ba="" class="flex justify-start items-center col-span-3 cursor-pointer">
@@ -290,7 +296,7 @@
                               </div>
                               <div data-v-f15ab7a3="" class="info flex flex-wrap">
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> Michael Falk</p>
+                                 <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> <?= esc($reviewerName) ?></p>
                                  </div>
                                  <!---->
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
@@ -341,68 +347,60 @@
                                     </svg>
                                     <?= $review['isArchive'] == '0' ? 'Archive' : 'Unarchive' ?>
                                  </button>
-                                 <button data-v-f15ab7a3="" class="btn btn-blue w-full" data-bs-toggle="modal" data-bs-target="#editreview">
+                                 
+                                    <button data-v-f15ab7a3="" class="btn btn-blue w-full" data-bs-toggle="modal" data-bs-target="#editreview-<?= esc($review['ID']) ?>">
                                     <svg data-v-f15ab7a3="" class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                        <path class="" fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>
                                     </svg>
                                     Edit
                                  </button>
-
-                                 <div class="modal fade" id="editreview" tabindex="-1" aria-labelledby="editreview" aria-hidden="true">
+                                 <?php foreach ($fetchreview as $state) : ?>
+                                 <div class="modal fade" id="editreview-<?= esc($state['ID']) ?>" tabindex="-1" aria-labelledby="editreview-<?= esc($state['ID']) ?>" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
                                        <div class="modal-content">
-                                          <form method="post" action="<?= base_url('/analyze/reviews/create') ?>">
                                           <div class="modal-header">
-                                          <h2 class="text-23px">Edit Review</h2>
-                                             </h5>
-                                             <button class="text-gray-400 hover:text-black">
-                                                <svg class="svg-inline--fa fa-xmark text-30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                                                   <path class="" fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
-                                                </svg>
-                                          </button>
+                                             <h2 class="text-23px">Edit Review</h2>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><svg class="svg-inline--fa fa-xmark text-30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path class="" fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path></svg>
+                                             </button>
                                           </div>
                                           <div class="modal-body">
-                                          <?php $script = ''; ?>
-                                             <?php if (session()->getFlashdata('validation')): ?>
-                                             <div class="validation-errors">
-                                                <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
-                                                <p style="color: red;"><?php echo $error ?></p>
-                                                <?php endforeach ?>
-                                             </div>
-                                             <?php $script = '$("#campaignModal").addClass("show").css("display","block")'; ?>
-                                             <?php endif ?>
-                                             <div class="grid grid-cols-3 gap-20px text-left mb-20px">
-                                                <div class="flex flex-col items-stretch col-span-3">
-                                                      <select class="outline-none py-7px border-b focus:border-blue-500" name="campaign" aria-label=".form-select-lg example">
-                                                         <option disabled selected>Campaign</option>
-                                                         <?php  foreach($campaigns as $review) : ?>
-                                                            <option value="<?= esc($review['ID']) ?>"><?= esc($review['name']) ?></option>
-                                                         <?php endforeach; ?>
+                                             <form method="post" action="<?= base_url('/analyze/reviews/update/' . $state['ID']) ?>">
+                                                <div class="grid grid-cols-3 gap-20px text-left mb-20px">
+                                                   <div class="flex flex-col items-stretch col-span-3">
+                                                         <select class="outline-none py-7px border-b focus:border-blue-500" name="campaign" aria-label=".form-select-lg example">
+                                                            <option disabled selected>Campaign</option>
+                                                            <?php  foreach($campaigns as $reviews) : ?>
+                                                               <option value="<?= esc($reviews['ID']) ?>"><?= esc($reviews['name']) ?></option>
+                                                            <?php endforeach; ?>
+                                                         </select>
+                                                   </div>
+                                                   <div class="flex flex-col items-stretch col-span-3">
+                                                         <p class="text-17px">Reviewer Information</p>
+                                                         
+                                                          <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                         <input class="outline-none py-7px border-b focus:border-blue-500" name="city" value="<?php print_r($reviewerInfo['City']);?>" type="text" placeholder="<?php print_r($reviewerInfo['City']);?>" >
+                                                         
+                                                   </div>
+                                                   <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                         <input class="outline-none py-7px border-b focus:border-blue-500" name="customer_name" value="<?php print_r($reviewerInfo['Name']);?>" type="text" placeholder="<?php print_r($reviewerInfo['Name']);?>" >
+                                                   <select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">
+                                                   <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                         <option value="<?php print_r($reviewerInfo['State']); ?>"><?php print_r($reviewerInfo['State']);?></option>
                                                       </select>
-                                                </div>
-                                                <div class="flex flex-col items-stretch col-span-3">
-                                                      <p class="text-17px">Reviewer Information</p>
-                                                      <input class="outline-none py-7px border-b focus:border-blue-500" type="text" placeholder="Full name">
-                                                </div>
-                                                <input class="outline-none py-7px border-b focus:border-blue-500" type="text" placeholder="City">
-                                                <select class="border-b-1 outline-none focus:border-blue-500 text-black" name="statesDropdown" id="statesDropdown">
-                                                      <option hidden="" disabled="">State</option>
-                                                      <option value="AL">Alabama</option>
-                                                      <option value="AK">Alaska</option>
-                                                      <option value="AZ">Arizona</option>
 
-                                                </select>
-                                                <input class="outline-none py-7px border-b focus:border-blue-500" type="text" maxlength="9" placeholder="Zipcode">
+                                                      <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                         <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="<?php print_r($reviewerInfo['Zipcode']);?>" type="text" placeholder="<?php print_r($reviewerInfo['Zipcode']);?>" >
                                              </div>
                                              <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
                                                 <button type="Submit" class="btn btn-primary btn-md">Submit changes</button>
                                              </div>
+                                             </form>
                                           </div>
-                                          </form>
                                        </div>
                                     </div>
                                  </div>
+                                 <?php endforeach; ?>
                               </div>
                            </td>
                            <!----><!----><!---->
@@ -468,6 +466,20 @@
                      .pagination a[aria-label="Last"] {
                         font-weight: bold; /* Makes Next and Last links bold */
                      }
+
+                     #modal {
+            display: none; /* Hide the modal by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
                      </style>
 
                   </div>
@@ -545,7 +557,7 @@ function handleApprovalClick(button) {
                         '</svg>' +
                         review.newArchiveStatus +
                   '</button>' +
-                  '<button class="btn btn-blue w-full">' +
+                  '<button class="btn btn-blue w-full" onclick="openModal(this)">' +
                         '<svg class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
                            '<path fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>' +
                         '</svg>' +
@@ -710,6 +722,7 @@ $(document).ready(function() {
                 var buttonClass_archive = review.isArchive == '1' ? 'btn-gray' : 'btn-blue';
                 var buttonText_archive = review.isArchive == '1' ? 'Unarchive' : 'Archive';
                 var svgDisplay_archive = review.isArchive == '1' ? 'none' : 'inline';
+                let reviewerInfo = JSON.parse(review.reviewerInfo);
                 var newRow = '<tr class="flex w-full">' +
                      '<td class="p-10px w-auto">' +
                         '<div class="flex justify-start items-center col-span-3 cursor-pointer">' +
@@ -733,7 +746,7 @@ $(document).ready(function() {
                         '</div>' +
                         '<div class="info flex flex-wrap">' +
                            '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
-                                 '<p><span class="font-bold">Customer:</span> Michael Falk</p>' +
+                                 '<p><span class="font-bold">Customer:</span>'   + reviewerInfo.Name +  '</p>' +
                            '</div>' +
                            '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
                                  '<p><span class="font-bold">Customer Email:</span> mikefalk@aol.com</p>' +
@@ -780,15 +793,20 @@ $(document).ready(function() {
                                  '</svg>' +
                                  buttonText_archive +
                            '</button>' +
-                           '<button class="btn btn-blue w-full">' +
+                           '<button class="btn btn-blue w-full" onclick="test()">' +
                                  '<svg class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
                                     '<path fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>' +
                                  '</svg>' +
                                  'Edit' +
                            '</button>' +
+                          
                         '</div>' +
                      '</td>' +
-               '</tr>';
+               '</tr>'+
+               '<div id="modal">'+
+               '<p>This is the modal test</p>'+
+               '<button onclick="closeModal()">Close</button>'+
+            '</div>'
                tableBody.append(newRow);
             });
             if (data.pagination) {
@@ -816,15 +834,39 @@ $(document).ready(function() {
             }
         });
     }
-    //fetchReviews(currentPage);
-    $(document).on('click', '.page-link', function(e) {
-         e.preventDefault();
-         currentPage = $(this).data('page');
-         fetchReviews(currentPage);
-      });
 
 });
+
 </script>
+<script>
 
+function test() {
+            document.getElementById('modal').style.display = 'block';
+        }
 
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all tab elements
+        var tabs = document.querySelectorAll('.tabs .tab');
+
+        // Get current URL
+        var currentUrl = window.location.pathname;
+
+        // Remove active class from all tabs
+        tabs.forEach(function(tab) {
+            tab.classList.remove('border-b-2', 'border-blue-500', 'router-link-exact-active');
+        });
+
+        // Add active class to the current tab
+        if (currentUrl === '/analyze/reviews') {
+            document.getElementById('reviews-tab').classList.add('border-b-2', 'border-blue-500', 'router-link-exact-active');
+        } else if (currentUrl === '/analyze/reviews/social-reviews') {
+            document.getElementById('social-reviews-tab').classList.add('border-b-2', 'border-blue-500', 'router-link-exact-active');
+        }
+    });
+</script>
 <?= $this->endSection() ?>
