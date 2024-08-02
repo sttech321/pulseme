@@ -23,22 +23,6 @@ class Campaign extends BaseController {
         return view('dispatchTab/dispatchCampaigns',$data);
     }
 
-    public function reviews()
-    {
-        // Ensure the session is started (if not started elsewhere)
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/');
-        }
-        // Load CampaignModel and fetch reviews
-        $model = new CampaignModel();
-        $model1 = new ReviewModal();
-        $data['reviews'] = $model->findAll(); // Fetch all reviews from the database
- 
-        $data['enumValues'] = $model1->getEnumValues();
-        // Load the view with data
-        return view('reviews', $data);
-    }
-    
 
     public function create() {
         // Load necessary helpers and libraries

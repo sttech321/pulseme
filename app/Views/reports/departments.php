@@ -126,10 +126,10 @@
 												Happy Count
 												<!---->
 											</th>
-											<th class="text-left px-20px py-10px cursor-pointer">
-												Neutral Count
+											<!-- <th class="text-left px-20px py-10px cursor-pointer"> -->
+												<!-- Neutral Count -->
 												<!---->
-											</th>
+											<!-- </th> -->
 											<th class="text-left px-20px py-10px cursor-pointer">
 												Unhappy Count
 												<!---->
@@ -145,9 +145,35 @@
 													<td class="px-20px py-15px"></td>
 													<td class="px-20px py-15px"></td>
 													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
+													<td class="px-20px py-15px">
+														<?php
+															$positiveCount = 0;
+															foreach ($sentiments as $sentiment) {
+																if ($sentiment['campaignID'] == $campaign['ID']) {
+																	if($sentiment['sentiment'] == 'Positive'){
+																		$positivecount = str_word_count($sentiment['sentiment']);
+																		$positiveCount++;
+																	}
+																}
+															}
+															echo $positiveCount;
+														?>
+													</td>
+													<!-- <td class="px-20px py-15px"></td> -->
+													<td class="px-20px py-15px">
+														<?php
+															$negativecount = 0;
+															foreach ($sentiments as $sentiment) {
+																if ($sentiment['campaignID'] == $campaign['ID']) {
+																	if($sentiment['sentiment'] == 'Negative'){
+																		$negativecount = str_word_count($sentiment['sentiment']);
+																		$negativecount++;
+																	}
+																}
+															}
+															echo $negativecount;
+														?>
+													</td>
 												</tr>
 												<?php endforeach; ?>
 									</tbody>

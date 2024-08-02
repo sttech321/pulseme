@@ -16,9 +16,9 @@
    <div class="p-20px bg-white">
          <h2 class="text-2xl">Reviews</h2>
       </div>
-      <div class="px-15px bg-white flex justify-start items-center">
-         <a href="/analyze/reviews" class="border-b-2 border-blue-500 router-link-exact-active p-10px" aria-current="page">Reviews</a>
-         <a href="/analyze/reviews/social-reviews" class="p-10px">Social Reviews</a>
+      <div class="px-15px bg-white flex justify-start items-center tabs">
+	  	<a href="/analyze/reviews" id="reviews-tab" class="tab p-10px" aria-current="page">Reviews</a>
+		<a href="/analyze/reviews/social-reviews" id="social-reviews-tab" class="tab p-10px">Social Reviews</a>
       </div>
 </div>
 <!-- <div class="container-fluid"> -->
@@ -113,7 +113,6 @@
 					}
 				?>
 				<p class="text-gray-400"><?php echo esc($relativeTime); ?></p>
-
 			</div>
 			<div class="content my-10px">
 				<p><?= esc($review['reviewText']); ?></p>
@@ -128,8 +127,8 @@
 						></path>
 					</svg>
 					<!----><!---->
+					<span id="name-span-<?= $review['ID']; ?>"><?= esc($review['creditTo']) ?: 'Eugene Lewis'; ?></span>
 
-					<span id="name-span-<?php echo $index; ?>">Eugene Lewis</span>
 				</button>
 				<div class="give-credit relative">
 					<!---->
@@ -142,12 +141,12 @@
 							></path>
 						</svg>
 						
-						<select class="form-select form-select-md mb-3" name="campaign-<?php echo $index; ?>" aria-label=".form-select-lg example" style="margin-top:12px;">
-                                <option disabled selected>Give Additional Credit</option>
-                                <?php foreach ($reviewss as $reviewOption): ?>
-                                    <option value="<?= esc($reviewOption['name']) ?>"><?= esc($reviewOption['name']) ?></option>
-                                <?php endforeach; ?>
-                        </select>
+						<select class="form-select form-select-md mb-3" name="campaign" data-id="<?= esc($review['ID']) ?>" aria-label=".form-select-lg example" style="margin-top:12px;">
+							<option disabled selected>Give Additional Credit</option>
+							<?php foreach ($reviewss as $reviewOption): ?>
+								<option value="<?= esc($reviewOption['name']) ?>"><?= esc($reviewOption['name']) ?></option>
+							<?php endforeach; ?>
+						</select>
 					</button>
 					<!---->
 				</div>
@@ -162,24 +161,65 @@
 	<!---->
 </div>
 <script>
-    // Load selected options from localStorage
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.form-select').forEach(function(select, index) {
-            const savedValue = localStorage.getItem('selectedOption-' + index);
-            if (savedValue) {
-                select.value = savedValue;
-                document.getElementById('name-span-' + index).textContent = savedValue;
-            }
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.form-select').forEach(function(select) {
+        select.addEventListener('change', function() {
+            const selectedOption = this.value;
+			console.log(selectedOption,'dtaa');
+			const id = this.getAttribute('data-id');
+            const span = document.getElementById('name-span-' + id);
 
-            select.addEventListener('change', function() {
-                const selectedOption = this.value;
-                document.getElementById('name-span-' + index).textContent = selectedOption;
+			// Update span content
+			span.textContent = selectedOption;
 
-                // Save the selected option in localStorage
-                localStorage.setItem('selectedOption-' + index, selectedOption);
-            });
+			// Save the selected option in localStorage
+			localStorage.setItem('selectedOption-' + id, selectedOption);
+
+            // Send AJAX request to update the database
+            fetch('/analyze/reviews/social-reviews/' + id, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>' // If using CSRF protection
+                },
+                body: JSON.stringify({ campaign: selectedOption })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+					console.log(data);
+                    console.log('Database updated successfully.');
+                } else {
+                    console.log('Error updating database:', data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
         });
+    });
+});
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all tab elements
+        var tabs = document.querySelectorAll('.tabs .tab');
+
+        // Get current URL
+        var currentUrl = window.location.pathname;
+
+        // Remove active class from all tabs
+        tabs.forEach(function(tab) {
+            tab.classList.remove('border-b-2', 'border-blue-500', 'router-link-exact-active');
+        });
+
+        // Add active class to the current tab
+        if (currentUrl === '/analyze/reviews') {
+            document.getElementById('reviews-tab').classList.add('border-b-2', 'border-blue-500', 'router-link-exact-active');
+        } else if (currentUrl === '/analyze/reviews/social-reviews') {
+            document.getElementById('social-reviews-tab').classList.add('border-b-2', 'border-blue-500', 'router-link-exact-active');
+        }
     });
 </script>
 
 <?= $this->endsection('content') ?>
+

@@ -33,7 +33,7 @@ $routes->get('/settings/dispatch/review-widget', 'Home::dispatch_review_widget')
 $routes->get('/settings/dispatch/web_widget', 'Home::dispatch_web_widget');
 $routes->get('/settings/billing', 'Home::billing_subscription');
 $routes->get('/settings/dispatch/campaign', 'Home::campaigns');
-$routes->get('/analyse/overview', 'Home::overview');
+$routes->get('/analyze/overview', 'Home::overview');
 $routes->get('/leaderboard/summary', 'Home::summary');
 $routes->get('/send-referral', 'Home::referral');
 $routes->get('/two-way-messaging', 'Home::messaging');
@@ -64,15 +64,13 @@ $routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');
 $routes->post('/analyze/reviews/create', 'ReviewController::insert');
 
 $routes->get('/settings/dispatch/campaigns', 'Campaign::index');
-$routes->get('/analyze/reviews', 'Campaign::reviews');
+$routes->get('/analyze/reviews', 'ReviewController::reviews');
 $routes->get('application/bio/(:num)', 'Campaign::technician_bio/$1');
 $routes->get('application/pulsecheck/(:segment)', 'Campaign::pulse_check/$1');
+$routes->post('application/pulsecheck/(:segment)', 'ReviewController::submitReview/$1');
 
 $routes->get('/operate', 'CustomerController::dispatch');
 $routes->post('/operate/dispatch/create/(:num)', 'CustomerController::create/$1');
-
-// $routes->get('/operate', 'CustomerController::sendbioEmail');
-// $routes->post('/operate', 'CustomerController::sendbioEmail');
 
 $routes->get('/leaderboard/reports/campaigns', 'ReportsController::report_campaign');
 $routes->get('leaderboard/reports/campaign-reviews', 'ReportsController::report_campaign_reviews');
@@ -80,3 +78,11 @@ $routes->get('/leaderboard/reports/departments', 'ReportsController::departments
 $routes->get('/leaderboard/reports/fieldops-usage', 'ReportsController::report_campaign_fieldsops');
 
 // $routes->get('/rewards', 'ReviewController::rewards');
+$routes->post('/analyze/reviews/get', 'ReviewController::getReviewsByCampaign');
+$routes->post('/analyze/reviews/approve', 'ReviewController::approveReview');
+
+$routes->post('analyze/reviews/social-reviews/(:num)', 'ReviewController::google_review_credit/$1');
+$routes->get('/thankyou', 'ReviewController::thankyou');
+
+$routes->post('/analyze/reviews/update/(:num)', 'ReviewController::update/$1');
+$routes->get('/analyze/dispatching', 'ReportsController::dispatch');

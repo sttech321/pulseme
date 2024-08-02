@@ -399,70 +399,76 @@
                            </div>
                         </div>
                      </div>
-                  </div>
-                  <div data-v-24df4780="" class="list">
-                     <table data-v-24df4780="" class="campaigns w-full">
+                     <div data-v-24df4780="" class="list">
+                        <table data-v-24df4780="" class="campaigns w-full">
 
-                        <tr class="flex odd:bg-sky-100 odd:bg-opacity-50 py-15px px-10px">
-                           <td class="employee flex items-center px-10px py-20px flex-shrink-0 w-1/12">
-                              <div class="profile-img w-full h-auto mr-10px flex justify-center items-center">
-                                 <img w-full="" src="<?= base_url($campaign['image']) ?>" alt="">
-                              </div>
-                           </td>
-                           <td class="employee flex items-center px-10px flex-shrink-0 w-1/6">
-                              <div class="">
-                                 <p class="name font-17px font-bold"><?= esc($campaign['name']) ?></p>
-                                 <p class="department font-14px text-gray-500"><?= esc($campaign['department']) ?></p>
-                              </div>
-                           </td>
-                           <td class="recipient-info col-span-6 flex flex-col w-1/2 justify-center items-start px-10px">
-                              <p class="description"><?= esc($campaign['description']) ?></p>
-                           </td>
-                           <td class="flex flex-col justify-center items-end col-span-3 flex-shrink-0 px-10px w-1/4">
-                              <div class="grid grid-rows-2 grid-flow-col gap-10px">
-                                 <!-- <a href="<?= base_url('/settings/dispatch/campaigns/' . $campaign['ID']) ?>" class="btn btn-blue w-full rounded-2px"> -->
-                                 <button data-bs-toggle="modal" data-bs-target="#EDITcampaignModal-<?= $campaign['ID'] ?>" class="btn btn-blue w-full rounded-2px" id="editCampaign-<?= esc($campaign['ID']) ?>">
-                                    <svg class="svg-inline--fa fa-face-grin" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                       <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z">
-                                       </path>
-                                    </svg>
-                                    Edit Campaign
-                                 </button>
-                                 <!-- </a> -->
-                                 <button data-bs-toggle="modal" data-bs-target="#EDITDefault" class="btn btn-blue w-full rounded-2px" id="showFieldOps-<?= esc($campaign['employeeId']) ?>">
-                                    <svg class="svg-inline--fa fa-mobile-screen-button" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="mobile-screen-button" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                                       <path class="" fill="currentColor" d="M16 64C16 28.7 44.7 0 80 0H304c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H80c-35.3 0-64-28.7-64-64V64zM224 448a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM304 64H80V384H304V64z">
-                                       </path>
-                                    </svg>
-                                    FieldOps App
-                                 </button>
-                                 <a href="<?= base_url('/settings/dispatch/campaigns/delete/' . $campaign['ID']) ?>" class="btn btn-red w-full rounded-2px">
-                                    <button class="btn btn-red rounded-2px" id="showFieldOps-<?= esc($campaign['ID']) ?>">
-                                       <svg class="svg-inline--fa fa-trash" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                          <path class="" fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                           <tr class="flex odd:bg-sky-100 odd:bg-opacity-50 py-15px px-10px">
+                              <td class="employee flex items-center px-10px py-20px flex-shrink-0 w-1/12">
+                                 <div class="profile-img w-full h-auto mr-10px flex justify-center items-center">
+                                    <img w-full="" src="<?= base_url($campaign['image']) ?>" alt="">
+                                 </div>
+                              </td>
+                              <td class="employee flex items-center px-10px flex-shrink-0 w-1/6">
+                                 <div class="">
+                                    <p class="name font-17px font-bold"><?= esc($campaign['name']) ?></p>
+                                    <p class="department font-14px text-gray-500"><?= esc($campaign['department']) ?></p>
+                                 </div>
+                              </td>
+                              <td class="recipient-info col-span-6 flex flex-col w-1/2 justify-center items-start px-10px">
+                                 <p class="description"><?= esc($campaign['description']) ?></p>
+                              </td>
+                              <td class="flex flex-col justify-center items-end col-span-3 flex-shrink-0 px-10px w-1/4">
+                                 <div class="grid grid-rows-2 grid-flow-col gap-10px">
+                                    <!-- <a href="<?= base_url('/settings/dispatch/campaigns/' . $campaign['ID']) ?>" class="btn btn-blue w-full rounded-2px"> -->
+                                    <button data-bs-toggle="modal" data-bs-target="#EDITcampaignModal-<?= $campaign['ID'] ?>" class="btn btn-blue w-full rounded-2px" id="editCampaign-<?= esc($campaign['ID']) ?>">
+                                       <svg class="svg-inline--fa fa-face-grin" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                          <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z">
+                                          </path>
+                                       </svg>
+                                       Edit Campaign
+                                    </button>
+                                    <!-- </a> -->
+                                    <button data-bs-toggle="modal" data-bs-target="#EDITDefault" class="btn btn-blue w-full rounded-2px" id="showFieldOps-<?= esc($campaign['employeeId']) ?>">
+                                       <svg class="svg-inline--fa fa-mobile-screen-button" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="mobile-screen-button" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                          <path class="" fill="currentColor" d="M16 64C16 28.7 44.7 0 80 0H304c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H80c-35.3 0-64-28.7-64-64V64zM224 448a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM304 64H80V384H304V64z">
+                                          </path>
+                                       </svg>
+                                       FieldOps App
+                                    </button>
+                                    <a href="<?= base_url('/settings/dispatch/campaigns/delete/' . $campaign['ID']) ?>" class="btn btn-red w-full rounded-2px">
+                                       <button class="btn btn-red rounded-2px" id="showFieldOps-<?= esc($campaign['ID']) ?>">
+                                          <svg class="svg-inline--fa fa-trash" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                             <path class="" fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                                             </path>
+                                          </svg>
+                                       </button>
+                                    </a>
+                                    <button data-bs-toggle="modal" data-bs-target="#EDITscampaignModal-<?php echo $campaign['employeeId']; ?>" class="btn btn-blue rounded-2px" id="showSample-<?= esc($campaign['employeeId']) ?>">
+                                       <svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                          <path class="" fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z">
                                           </path>
                                        </svg>
                                     </button>
-                                 </a>
-                                 <button data-bs-toggle="modal" data-bs-target="#EDITscampaignModal-<?= esc($campaign['employeeId']) ?>" class="btn btn-blue rounded-2px sss" id="showSample-<?= esc($campaign['employeeId']) ?>">
-                                    <svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                       <path class="" fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z">
-                                       </path>
-                                    </svg>
-                                 </button>
-                              </div>
-                           </td>
-                        </tr>
-                        <!----><!----><!----><!---->
-                     <?php endforeach; ?>
-                     </table>
+                                    </a>
+                                    <button data-bs-toggle="modal" data-bs-target="#EDITscampaignModal-<?= esc($campaign['employeeId']) ?>" class="btn btn-blue rounded-2px sss" id="showSample-<?= esc($campaign['employeeId']) ?>">
+                                       <svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                          <path class="" fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z">
+                                          </path>
+                                       </svg>
+                                    </button>
+                                 </div>
+                              </td>
+                           </tr>
+                           <!----><!----><!----><!---->
+                        <?php endforeach; ?>
+                        </table>
+                     </div>
                   </div>
                </div>
             </div>
          </div>
       </div>
    </div>
-</div>
 </div>
 </div>
 </div>
