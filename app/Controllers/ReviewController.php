@@ -186,6 +186,7 @@ class ReviewController extends BaseController
         // Update campaign data in database
 
         $data = [
+            'campaignID' => $this->request->getPost('campaign'),
             'reviewerInfo' => $reviewinfoJson,
         ];
 
@@ -195,7 +196,6 @@ class ReviewController extends BaseController
         // Redirect with success message
         return redirect()->to('/analyze/reviews')->with('success', 'Campaign updated successfully.');
     }
-
     
     public function reviews()
     {
@@ -246,7 +246,6 @@ class ReviewController extends BaseController
         // Load the view with data
         return view('reviews', $data);
     }
-
     
     public function getReviewsByCampaign()
     {
@@ -399,7 +398,5 @@ class ReviewController extends BaseController
     
         return $this->response->setJSON(['status' => 'error', 'message' => 'Review not found']);
     }
-
-
-      
+     
 }

@@ -70,7 +70,7 @@ $routes->get('application/pulsecheck/(:segment)', 'Campaign::pulse_check/$1');
 $routes->post('application/pulsecheck/(:segment)', 'ReviewController::submitReview/$1');
 
 $routes->get('/operate', 'CustomerController::dispatch');
-$routes->post('/operate/dispatch/create/(:num)', 'CustomerController::create/$1');
+$routes->post('/operate/dispatch/create/', 'CustomerController::create');
 
 $routes->get('/leaderboard/reports/campaigns', 'ReportsController::report_campaign');
 $routes->get('leaderboard/reports/campaign-reviews', 'ReportsController::report_campaign_reviews');

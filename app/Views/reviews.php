@@ -353,12 +353,26 @@
                                              <form method="post" action="<?= base_url('/analyze/reviews/update/' . $state['ID']) ?>">
                                                 <div class="grid grid-cols-3 gap-20px text-left mb-20px">
                                                    <div class="flex flex-col items-stretch col-span-3">
-                                                         <select class="outline-none py-7px border-b focus:border-blue-500" name="campaign" aria-label=".form-select-lg example">
-                                                            <option disabled selected>Campaign</option>
-                                                            <?php  foreach($campaigns as $reviews) : ?>
-                                                               <option value="<?= esc($reviews['ID']) ?>"><?= esc($reviews['name']) ?></option>
+
+                                                   <select class="outline-none py-7px border-b focus:border-blue-500" name="campaign" aria-label=".form-select-lg example">
+                                                         <option disabled selected>Campaign</option>
+                                                         <?php foreach($fetchreview as $campaignids) : ?>
+                                                            <?php foreach($campaigns as $review) : ?>
+                                                                  <?php 
+                                                                     // Check if the campaign ID matches the review ID
+                                                                     if ($campaignids['campaignID'] === $review['ID']) : 
+                                                                  ?>
+                                                                     <option value="<?= esc($review['ID']) ?>" selected>
+                                                                        <?= esc($review['name']) ?>
+                                                                     </option>
+                                                                  <?php else : ?>
+                                                                     <option value="<?= esc($review['ID']) ?>">
+                                                                        <?= esc($review['name']) ?>
+                                                                     </option>
+                                                                  <?php endif; ?>
                                                             <?php endforeach; ?>
-                                                         </select>
+                                                         <?php endforeach; ?>
+                                                      </select>
                                                    </div>
                                                    <div class="flex flex-col items-stretch col-span-3">
                                                          <p class="text-17px">Reviewer Information</p>
@@ -369,13 +383,19 @@
                                                    </div>
                                                    <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
                                                          <input class="outline-none py-7px border-b focus:border-blue-500" name="customer_name" value="<?php print_r($reviewerInfo['Name']);?>" type="text" placeholder="<?php print_r($reviewerInfo['Name']);?>" >
-                                                   <select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">
-                                                   <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
-                                                         <option value="<?php print_r($reviewerInfo['State']); ?>"><?php print_r($reviewerInfo['State']);?></option>
-                                                      </select>
 
-                                                      <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
-                                                         <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="<?php print_r($reviewerInfo['Zipcode']);?>" type="text" placeholder="<?php print_r($reviewerInfo['Zipcode']);?>" >
+                                                         <select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">
+                                                            <option disabled selected>State</option>
+                                                            <?php foreach ($fetchreview as $state) : ?>
+                                                            <?php $reviewerStateInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                            <option value="<?= esc($reviewerStateInfo['State']) ?>" <?= $reviewerStateInfo['State'] === $reviewerInfo['State'] ? 'selected' : '' ?>>
+                                                               <?= esc($reviewerStateInfo['State']) ?>
+                                                            </option>
+                                                            <?php endforeach;?>
+                                                         </select>
+                                                   
+
+                                                      <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="<?= esc($reviewerInfo['Zipcode']) ?>" type="text" placeholder="Zipcode">
                                              </div>
                                              <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
@@ -391,7 +411,7 @@
                            </td>
                            <!----><!----><!---->
                         </tr>
-                           <?php endforeach; ?>
+                     <?php endforeach; ?>
                
                      </table>
                      <div class="pagination-container">
@@ -832,3 +852,7 @@ $(document).ready(function() {
     });
 </script>
 <?= $this->endSection() ?>
+
+
+
+

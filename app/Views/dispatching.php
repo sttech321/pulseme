@@ -83,8 +83,9 @@
                               <?php endif ?>
                                  <?php foreach ($technicians as $technician): ?>
                                     <tr class="flex p-20px odd:bg-sky-50" id="<?= $technician['ID'] ?>">
-                                       <form method="post" action="<?= base_url('/operate/dispatch/create/'.$technician['ID'])?>">
-                                 
+                                       <form method="post" action="<?= base_url('/operate/dispatch/create/')?>">
+                                       <input type="hidden" name="technician_id" value="<?= $technician['ID'] ?>">
+                                       <input type="hidden" name="employee_id" value="<?= $technician['employeeId'] ?>">
                                     <td class="employee flex items-center w-1/4">
                                        <div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0"
                                        id="<?= $technician['ID'] ?>" style="position: relative; background-image: url('<?= $technician['image'] ?>');">
@@ -125,8 +126,7 @@
                                 
                                  <input
                                     class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px"
-                                    type="email" name="customer_email" id="email-1B85A09AA6CF1" placeholder="Email">
-                                    
+                                    type="email" name="customer_email" id="email-1B85A09AA6CF1" placeholder="Email"> 
                               </div>
                               <div class="input-group col-span-3 lg:col-span-2 flex items-center">
                                  <div class="mr-10px flex justify-center items-center">
@@ -180,7 +180,7 @@
                               </button>
                               <button
                                  class="btn btn-green max-w-200px w-full rounded-2px"
-                                 id="sendPulseCheck">
+                                 id="<?= $technician['employeeId'] ?>">
                                  <svg
                                     class="svg-inline--fa fa-face-grin text-15px" aria-hidden="true"
                                     focusable="false" data-prefix="fas" data-icon="face-grin" role="img"
