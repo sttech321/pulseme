@@ -383,18 +383,15 @@
                                                    </div>
                                                    <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
                                                          <input class="outline-none py-7px border-b focus:border-blue-500" name="customer_name" value="<?php print_r($reviewerInfo['Name']);?>" type="text" placeholder="<?php print_r($reviewerInfo['Name']);?>" >
-
                                                          <select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">
                                                             <option disabled selected>State</option>
                                                             <?php foreach ($fetchreview as $state) : ?>
                                                             <?php $reviewerStateInfo = json_decode($state['reviewerInfo'], true); ?>
-                                                            <option value="<?= esc($reviewerStateInfo['State']) ?>" <?= $reviewerStateInfo['State'] === $reviewerInfo['State'] ? 'selected' : '' ?>>
+                                                            <option value="<?= esc($reviewerStateInfo['State']) ?>">
                                                                <?= esc($reviewerStateInfo['State']) ?>
                                                             </option>
                                                             <?php endforeach;?>
                                                          </select>
-                                                   
-
                                                       <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="<?= esc($reviewerInfo['Zipcode']) ?>" type="text" placeholder="Zipcode">
                                              </div>
                                              <div class="modal-footer">
