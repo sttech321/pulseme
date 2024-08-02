@@ -235,8 +235,12 @@
                                         Send
                                     </button>
                                     <div class="form-group p-0">
+                                        <input type="text" class="input form-control fg-input validate" value="" name="customer_name" placeholder="customer_name">
+                                        <input type="text" class="input form-control fg-input validate" value="" name="customer_email" placeholder="customer_email">
+                                        <input type="text" class="input form-control fg-input validate" value="" name="state" placeholder="state">
+                                        <input type="text" class="input form-control fg-input validate" value="" name="city" placeholder="city">
+                                        <input type="number" class="input form-control fg-input validate" value="" name="zipcode" placeholder="zipcode">
                                         <div class="fg-line">
-
                                             <textarea class="input form-control fg-input validate" name="feedback" rows="5" placeholder="Type your feedback..." data-empty-error="Feedback cannot be left blank" data-max-length="999" spellcheck="false"></textarea>
                                         </div>
                                         <div class="help-block help-block-alt text-left brd-t-l-0 brd-t-r-0 m-t-0">

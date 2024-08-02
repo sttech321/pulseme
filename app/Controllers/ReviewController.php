@@ -64,11 +64,22 @@ class ReviewController extends BaseController
         $rating3_value = $this->request->getPost('rating3_value');
         $rating3_text = $this->request->getPost('rating3_text');
         $campaignId = $this->request->getPost('campaignId');
+        $customer_name = $this->request->getPost('customer_name');
+        $customer_email = $this->request->getPost('customer_email');
+        $city = $this->request->getPost('state');
+        $state = $this->request->getPost('city');
+        $zipcode = $this->request->getPost('zipcode');
+
         // Preparing data for insertion
         $data = [
             'campaignID' => $campaignId,
             'reviewratings' => json_encode([
                 'feedback' => $feedback,
+                'customer_name' => $customer_name,
+                'customer_email' => $customer_name,
+                'state' => $customer_name,
+                'city' => $customer_name,
+                'zipcode' => $customer_name,
                 'rate1' => ['text' => $rating1_text, 'value' => $rating1_value],
                 'rate2' => ['text' => $rating2_text, 'value' => $rating2_value],
                 'rate3' => ['text' => $rating3_text, 'value' => $rating3_value],

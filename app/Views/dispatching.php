@@ -84,7 +84,7 @@
                                  <?php foreach ($technicians as $technician): ?>
                                     <tr class="flex p-20px odd:bg-sky-50" id="<?= $technician['ID'] ?>">
                                        <form method="post" action="<?= base_url('/operate/dispatch/create/')?>">
-                                       <input type="hidden" name="technician_id" value="<?= $technician['ID'] ?>">
+                                       <input type="hidden" name="button_id" value="<?= $technician['ID'] ?>">
                                        <input type="hidden" name="employee_id" value="<?= $technician['employeeId'] ?>">
                                     <td class="employee flex items-center w-1/4">
                                        <div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0"
@@ -178,9 +178,9 @@
                                  </svg>
                                   Send Bio
                               </button>
-                              <button
-                                 class="btn btn-green max-w-200px w-full rounded-2px"
-                                 id="<?= $technician['employeeId'] ?>">
+                              <input type="hidden" name="employeeId" value="<?= $technician['employeeId'] ?>">
+                              <button class="btn btn-green max-w-200px w-full rounded-2px"
+                                 id="<?= $technician['employeeId'] ?>" type="submit">
                                  <svg
                                     class="svg-inline--fa fa-face-grin text-15px" aria-hidden="true"
                                     focusable="false" data-prefix="fas" data-icon="face-grin" role="img"
@@ -192,7 +192,7 @@
                                  Send pulseCheck
                               </button>
                            </td>
-                           </form>
+                        </form>
                         </tr>
                         <?php endforeach; ?>
                      </table>
