@@ -145,6 +145,8 @@ class Campaign extends BaseController {
     {
         $model = new CampaignModel();
         $data['technician'] = $model->where('employeeId', $empid)->first();
+       // print_r($data['technician']);
+       // die;
 
         if ($data['technician']) {
             return view('dispatchTab/pulse_check', $data);
