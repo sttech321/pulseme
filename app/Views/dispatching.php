@@ -100,7 +100,7 @@
                            <td class="recipient-info grid grid-cols-6 gap-5px flex-grow">
                               <div class="input-group col-span-3 flex items-center">
                                  <div class="mr-10px flex justify-center items-center">
-                         
+
                                  </div>
                                  <input
                                     class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px"
@@ -197,6 +197,10 @@ $(document).ready(function() {
    });
 });
 </script>
+
+
+
+
 
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script>
