@@ -75,8 +75,13 @@
         <?= $validation->listErrors(); ?>
     </div>
 <?php endif; ?>
+<?php
+$url = '/application/pulsecheck/'. $technician['employeeId'];
+print_r($url);
+?>
+
 <?php if($technician): ?>
-    <form id="multiStepForm" method="POST" action="<?= base_url('/application/pulsecheck/' . $technician['employeeId']) ?>">
+    <form id="multiStepForm" method="POST" action="<?= base_url('/application/pulsecheck/' . $technician['employeeId']) ?>" >
         <!-- Step 1 -->
         <div class="step active selected container" id="step1">
             <div class="wrapper test-transaction has-bottom-logo">
@@ -95,10 +100,10 @@
                         </div>
                         <div class="row p-b-30">
                             <a class="col-xs-4" data-mood="negative">
-                                <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg" onclick="nextStep()" class="img-responsive">
+                                <img src="<?= base_url('/image/campaign/faces-negative-flat.svg') ?>" onclick="nextStep()" class="img-responsive">
                             </a>
                             <a class="col-xs-4" data-mood="positive" onclick="nextpart()">
-                                <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg" class="img-responsive">
+                                <img src="<?= base_url('/image/campaign/faces-positive-flat.svg') ?>" class="img-responsive">
                             </a>
                         </div>
                     </div>
@@ -153,53 +158,57 @@
                     <div class="flow-card rating active" data-flow-id="62" data-flow-back="60" data-type="rating">
                         <div class="flow-card-header clearfix"></div>
                         <div class="m-t-15">
+
+
+
                             <h3 class="ratings-title">How likely are you to recommend us to your friends and family?
                             </h3>
                             <div class="ratings-slider">
                                 <div class="mood negative text-left">
-                                    <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg">
+                                    <img src="<?= base_url('/image/campaign/faces-negative-flat.svg') ?>">
                                 </div>
                                 <div class="slider-wrapper slider">
                                     <div id="employees1"></div>
                                 </div>
                                 <div class="mood positive text-right">
-                                    <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg">
+                                    <img src="<?= base_url('/image/campaign/faces-positive-flat.svg') ?>">
                                 </div>
                             </div>
+                            <input type="hidden" name = "ID" value = "<?= $technician['ID'] ?>">
                             <input type="hidden" name="rating1_text" id="rating1_text" value="How likely are you to recommend us to your friends and family?">
-                            <input type="hidden" name="rating1_value" id="rating1_value" value="8">
+                            <input type="hidden" name="rating1_value" id="rating1_value" value="10">
+
 
                             <h3 class="ratings-title">Professionalism</h3>
                             <div class="ratings-slider">
                                 <div class="mood negative text-left">
-                                    <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg">
+                                    <img src="<?= base_url('/image/campaign/faces-negative-flat.svg') ?>">
                                 </div>
                                 <div class="slider-wrapper slider">
                                     <div id="employees2"></div>
                                 </div>
                                 <div class="mood positive text-right">
-                                    <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg">
+                                    <img src=" <?= base_url('/image/campaign/faces-positive-flat.svg') ?>">
                                 </div>
                             </div>
-
                             <input type="hidden" name="rating2_text" id="rating2_text" value="Professionalism">
-                            <input type="hidden" name="rating2_value" id="rating2_value" value="8">
+                            <input type="hidden" name="rating2_value" id="rating2_value" value="10">
 
                             <h3 class="ratings-title">Quality of Service</h3>
                             <div class="ratings-slider">
                                 <div class="mood negative text-left">
-                                    <img src="http://localhost:8080/image/campaign/faces-negative-flat.svg">
+                                    <img src="<?= base_url('/image/campaign/faces-negative-flat.svg') ?>">
                                 </div>
                                 <div class="slider-wrapper slider">
                                     <div id="employees3"></div>
                                 </div>
                                 <div class="mood positive text-right">
-                                    <img src="http://localhost:8080/image/campaign/faces-positive-flat.svg">
+                                    <img src=" <?= base_url('/image/campaign/faces-positive-flat.svg') ?>">
                                 </div>
                             </div>
 
                             <input type="hidden" name="rating3_text" id="rating3_text" value="Quality of Service">
-                            <input type="hidden" name="rating3_value" id="" value="8">
+                            <input type="hidden" name="rating3_value" id="rating3_value" value="10">
                             <!-- <input type="hidden" name="campaignId" value="<?php //echo $technician['ID']; ?>"> -->
                             
                         </div>
@@ -236,8 +245,14 @@
                                         Send
                                     </button>
                                     <div class="form-group p-0">
+                                        <input type = "hidden" name="reviewType" value= "custom">
+                                        <input type="hidden" id="result_value" name="result_value">
+                                        <input type="text" class="input form-control fg-input validate" value="" name="customer_name" placeholder="customer_name">
+                                        <input type="text" class="input form-control fg-input validate" value="" name="customer_email" placeholder="customer_email">
+                                        <input type="text" class="input form-control fg-input validate" value="" name="state" placeholder="state">
+                                        <input type="text" class="input form-control fg-input validate" value="" name="city" placeholder="city">
+                                        <input type="number" class="input form-control fg-input validate" value="" name="zipcode" placeholder="zipcode">
                                         <div class="fg-line">
-
                                             <textarea class="input form-control fg-input validate" name="feedback" rows="5" placeholder="Type your feedback..." data-empty-error="Feedback cannot be left blank" data-max-length="999" spellcheck="false"></textarea>
                                            
                                         </div>
@@ -424,6 +439,44 @@
         createSlider('#employees1', '#rating1_value');
         createSlider('#employees2', '#rating2_value');
         createSlider('#employees3', '#rating3_value');
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+    // Get the form element
+    const form = document.querySelector('#multiStepForm');
+    
+    // Attach event listener to the submit button
+    document.querySelector('#step4 .btn-primary').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent default form submission
+
+        // Get all hidden input values in Step 4
+        const hiddenValues = [
+            document.querySelector('#rating1_value').value,
+            document.querySelector('#rating2_value').value,
+            document.querySelector('#rating3_value').value
+        ].map(value => parseFloat(value) || 0); 
+
+      
+        const average = hiddenValues.reduce((acc, val) => acc + val, 0) / hiddenValues.length;
+
+      
+        const result = average < 5 ? 'negative' : 'positive';
+    
+        const resultHiddenInput = document.querySelector('#result_value');
+        if (resultHiddenInput) {
+            resultHiddenInput.value = result;
+        }
+
+        setTimeout(() => {
+      
+            const formData = new FormData(form);
+      
+            form.submit();
+        }, 100);
+    });
+});
+
+
     </script>
 
 </body>

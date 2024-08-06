@@ -1,53 +1,19 @@
 <?php
+
 namespace App\Controllers;
 
-use App\Models\CustomerModel;
 use App\Models\TestModal;
-use App\Models\TechnicianModal;
 use CodeIgniter\Controller;
 use Exception;
 
-class CustomerController extends Controller
+class TestController extends Controller
 {
-    
-    public function __construct()
+    public function data()
     {
-        $this->session = \Config\Services::session();
+        return view('example_view');
     }
 
-    public function getAllTechnicians()
-    {
-        $technicianModel = new TechnicianModal();
-        $technicians = $technicianModel->findAll();
-        return $this->response->setJSON($technicians);
-    }
-
-    public function search()
-    {
-        $search = $this->request->getVar('query');
-    
-        $technicianModel = new TechnicianModal();
-        
-        if ($search) {
-            $results = $technicianModel->getTechniciansBySearch($search);
-        } else {
-            $results = $technicianModel->findAll(); // Return all technicians if no search query
-        }
-    
-        return $this->response->setJSON($results);
-    } 
-
-
-    public function dispatch()
-    {
-        $technicianModel = new TechnicianModal();    
-        $data['technicians'] = $technicianModel->findAll();
-    
-        return view('dispatching',$data);
-    }
-
-
-    public function create_dispatch()
+    public function submit()
     {
         $name = $this->request->getPost('customer_name');
         $email = $this->request->getPost('customer_email');
@@ -56,46 +22,33 @@ class CustomerController extends Controller
         $campaignid = $this->request->getPost('campaignid');
         $employeeid = $this->request->getPost('employeeid');
         $actionType = $this->request->getPost('actionType');
-// print_r($actionType);
+
         $testModel = new TestModal();
 
-        // Prepare data to insert
         $data = [
             'customer_name' => $name,
             'customer_email' => $email,
             'customer_phone' => $phone,
             'customer_address' => $address,
             'campaignid' => $campaignid,
-            'employeeid' => $employeeid,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
+            'employeeid' => $employeeid
         ];
-// print_r($data);
-// die;
-        $testModel->insert($data);
 
-        if ($actionType === 'sendbio') {
-            // Call the sendbioEmail method
-            $this->sendbioEmail($campaignid, $email);
-
-            return $this->response->setJSON(['status' => 'success', 'message' => 'Bio sent successfully!']);
-        } elseif ($actionType === 'sendpulsecheck') {
-            // Call the sendPulseCheckEmail method
-            $this->sendPulseCheckEmail($employeeid, $email);
-
-            return $this->response->setJSON(['status' => 'success', 'message' => 'Pulsecheck sent successfully!']);
-        } else {
-            // Insert data into the database
+        try {
             $testModel->insert($data);
 
-            // Determine which button was clicked
-            if ($actionType === 'btn1') {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Demo message']);
-            } elseif ($actionType === 'btn2') {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Demo message 2']);
+            if ($actionType === 'sendbio') {
+                $this->sendbioEmail($campaignid, $email);
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Bio sent successfully!']);
+            } elseif ($actionType === 'sendpulsecheck') {
+                $this->sendPulseCheckEmail($employeeid, $email);
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Pulsecheck sent successfully!']);
             } else {
-                return $this->response->setJSON(['status' => 'error', 'message' => 'Form submission failed.']);
+                return $this->response->setJSON(['status' => 'success', 'message' => 'Data inserted successfully!']);
             }
+        } catch (Exception $e) {
+            log_message('error', 'Error inserting data: ' . $e->getMessage());
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Error inserting data.']);
         }
     }
 
@@ -130,7 +83,10 @@ class CustomerController extends Controller
     {
         $emailService = \Config\Services::email();
         $link = base_url('/application/pulsecheck/' . $employeeId);
-        $message = view('dispatchTab/pulsecheck-review', ['link' => $link]);
+        $message = view('dispatchTab/pulsecheck-review', [
+            'link' => $link,
+            'employeeid' => $employeeId 
+        ]);
 
         $emailService->initialize([
             'protocol' => 'smtp',
@@ -151,7 +107,5 @@ class CustomerController extends Controller
         if (!$emailService->send()) {
             echo $emailService->printDebugger(['headers', 'subject', 'body']);
         }
-    } 
-    
+    }
 }
-?>

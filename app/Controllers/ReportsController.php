@@ -25,13 +25,16 @@ class ReportsController extends BaseController {
     public function report_campaign()
     {
         $customerModel = new CustomerModel();
-        $customersWithCampaigns = $customerModel->getCustomersWithCampaigns();
+        // $customersWithCampaigns = $customerModel->getCustomersWithCampaigns();
         $model = new CampaignModel();
         $campaigns = $model->findAll();
     
         return view('reports/campaigns', [
             'customersWithCampaigns' => $customersWithCampaigns,
             'campaigns' => $campaigns
+            // 'customersWithCampaigns' => $customersWithCampaigns,
+            //'campaigns' => $campaigns,
+            'sentiments' => $sentimentcount,
         ]);
     }
     
@@ -48,5 +51,16 @@ class ReportsController extends BaseController {
         $data['campaigns'] = $model->findAll();
         return view('reports/fielsops_usage',$data);
     }
+
+    public function dispatch(){
+
+        return view('dispatch');
+    }
+
+    // public function overview(){
+
+    //     return view('overview');
+    // }
+
 
 }

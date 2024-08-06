@@ -23,7 +23,6 @@ class Campaign extends BaseController {
         return view('dispatchTab/dispatchCampaigns',$data);
     }
 
-
     public function create() {
         // Load necessary helpers and libraries
         helper(['form']);
@@ -132,7 +131,6 @@ class Campaign extends BaseController {
         // Redirect with success message
         return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign updated successfully.');
     }
-
 
     public function technician_bio($id) {
         $model = new CampaignModel();

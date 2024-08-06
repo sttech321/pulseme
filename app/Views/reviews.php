@@ -252,7 +252,7 @@
                            <?php  print_r($review); ?>
                            <?php
 
-                           $reviewerInfo = json_decode($review['reviewerInfo'], true);
+                           $reviewerInfo = json_decode($review['reviewratings'], true);
 
                            $reviewerName = $reviewerInfo['Name'] ?? 'Unknown';
                            
@@ -296,17 +296,17 @@
                               </div>
                               <div data-v-f15ab7a3="" class="info flex flex-wrap">
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                 <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> <?= esc($reviewerName) ?></p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> <?php $reviewerInfo = json_decode($review['reviewratings'], true); ?><?php print_r($reviewerInfo['Name']);?></p>
                                  </div>
                                  <!---->
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Email:</span> mikefalk@aol.com</p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> 3068 Braeloch Cir E</p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> <?php $reviewerInfo = json_decode($review['reviewratings'], true); ?>  <?php print_r($reviewerInfo['Zipcode']);?>  <?php print_r($reviewerInfo['State']);?> <?php print_r($reviewerInfo['City']);?></p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> 2024-07-11</p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> <?php echo str_replace('00:00:00','', $review['createdOn']);?></p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span><?= $review['campaignName']?></p>
@@ -367,29 +367,46 @@
                                              <form method="post" action="<?= base_url('/analyze/reviews/update/' . $state['ID']) ?>">
                                                 <div class="grid grid-cols-3 gap-20px text-left mb-20px">
                                                    <div class="flex flex-col items-stretch col-span-3">
-                                                         <select class="outline-none py-7px border-b focus:border-blue-500" name="campaign" aria-label=".form-select-lg example">
-                                                            <option disabled selected>Campaign</option>
-                                                            <?php  foreach($campaigns as $reviews) : ?>
-                                                               <option value="<?= esc($reviews['ID']) ?>"><?= esc($reviews['name']) ?></option>
+
+                                                   <select class="outline-none py-7px border-b focus:border-blue-500" name="campaign" aria-label=".form-select-lg example">
+                                                         <option disabled selected>Campaign</option>
+                                                         <?php foreach($fetchreview as $campaignids) : ?>
+                                                            <?php foreach($campaigns as $review) : ?>
+                                                                  <?php 
+                                                                     // Check if the campaign ID matches the review ID
+                                                                     if ($campaignids['campaignID'] === $review['ID']) : 
+                                                                  ?>
+                                                                     <option value="<?= esc($review['ID']) ?>" selected>
+                                                                        <?= esc($review['name']) ?>
+                                                                     </option>
+                                                                  <?php else : ?>
+                                                                     <option value="<?= esc($review['ID']) ?>">
+                                                                        <?= esc($review['name']) ?>
+                                                                     </option>
+                                                                  <?php endif; ?>
                                                             <?php endforeach; ?>
-                                                         </select>
+                                                         <?php endforeach; ?>
+                                                      </select>
                                                    </div>
                                                    <div class="flex flex-col items-stretch col-span-3">
                                                          <p class="text-17px">Reviewer Information</p>
                                                          
-                                                          <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                          <?php $reviewerInfo = json_decode($state['reviewratings'], true); ?>
                                                          <input class="outline-none py-7px border-b focus:border-blue-500" name="city" value="<?php print_r($reviewerInfo['City']);?>" type="text" placeholder="<?php print_r($reviewerInfo['City']);?>" >
                                                          
                                                    </div>
-                                                   <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
+                                                   <?php $reviewerInfo = json_decode($state['reviewratings'], true); ?>
                                                          <input class="outline-none py-7px border-b focus:border-blue-500" name="customer_name" value="<?php print_r($reviewerInfo['Name']);?>" type="text" placeholder="<?php print_r($reviewerInfo['Name']);?>" >
-                                                   <select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">
-                                                   <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
-                                                         <option value="<?php print_r($reviewerInfo['State']); ?>"><?php print_r($reviewerInfo['State']);?></option>
-                                                      </select>
-
-                                                      <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
-                                                         <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="<?php print_r($reviewerInfo['Zipcode']);?>" type="text" placeholder="<?php print_r($reviewerInfo['Zipcode']);?>" >
+                                                         <select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">
+                                                            <option disabled selected>State</option>
+                                                            <?php foreach ($fetchreview as $state) : ?>
+                                                            <?php $reviewerStateInfo = json_decode($state['reviewratings'], true); ?>
+                                                            <option value="<?= esc($reviewerStateInfo['State']) ?>">
+                                                               <?= esc($reviewerStateInfo['State']) ?>
+                                                            </option>
+                                                            <?php endforeach;?>
+                                                         </select>
+                                                      <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="<?= esc($reviewerInfo['Zipcode']) ?>" type="text" placeholder="Zipcode">
                                              </div>
                                              <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
@@ -405,7 +422,7 @@
                            </td>
                            <!----><!----><!---->
                         </tr>
-                           <?php endforeach; ?>
+                     <?php endforeach; ?>
                
                      </table>
                      <div class="pagination-container">
@@ -722,7 +739,7 @@ $(document).ready(function() {
                 var buttonClass_archive = review.isArchive == '1' ? 'btn-gray' : 'btn-blue';
                 var buttonText_archive = review.isArchive == '1' ? 'Unarchive' : 'Archive';
                 var svgDisplay_archive = review.isArchive == '1' ? 'none' : 'inline';
-                let reviewerInfo = JSON.parse(review.reviewerInfo);
+                let reviewerInfo = JSON.parse(review.reviewratings);
                 var newRow = '<tr class="flex w-full">' +
                      '<td class="p-10px w-auto">' +
                         '<div class="flex justify-start items-center col-span-3 cursor-pointer">' +
@@ -870,3 +887,7 @@ function test() {
     });
 </script>
 <?= $this->endSection() ?>
+
+
+
+

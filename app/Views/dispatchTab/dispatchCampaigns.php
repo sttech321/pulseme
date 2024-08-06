@@ -376,7 +376,7 @@
                                        </div>
                                     </div>
                                  </div>
-                                    //modal for pulse check
+                                    
                                 <div class="modal fade" id="EDITscampaignModal-<?= $campaign['employeeId'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
                                         <div class="modal-content">
