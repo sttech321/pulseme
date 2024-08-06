@@ -56,8 +56,7 @@ class CustomerController extends Controller
         $campaignid = $this->request->getPost('campaignid');
         $employeeid = $this->request->getPost('employeeid');
         $actionType = $this->request->getPost('actionType');
-
-        $testModel = new CustomerModel();
+        $testModel = new TestModal();
 
         // Prepare data to insert
         $data = [

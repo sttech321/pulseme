@@ -2,7 +2,6 @@
 namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\CampaignModel;
-use App\Models\ReviewModal;
 use App\Models\CustomerModel;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Email\Email;
@@ -29,12 +28,12 @@ class ReportsController extends BaseController {
         // $customersWithCampaigns = $customerModel->getCustomersWithCampaigns();
         $model = new CampaignModel();
         $campaigns = $model->findAll();
-        $sentiment = new ReviewModal();
-        $sentimentcount= $sentiment->findAll();
     
         return view('reports/campaigns', [
+            'customersWithCampaigns' => $customersWithCampaigns,
+            'campaigns' => $campaigns
             // 'customersWithCampaigns' => $customersWithCampaigns,
-            'campaigns' => $campaigns,
+            //'campaigns' => $campaigns,
             'sentiments' => $sentimentcount,
         ]);
     }
@@ -44,8 +43,6 @@ class ReportsController extends BaseController {
     {
         $model = new CampaignModel();
         $data['campaigns'] = $model->findAll();
-        $sentiment = new ReviewModal();
-        $data['sentiments']= $sentiment->findAll();
         return view('reports/departments',$data);
     }
 
