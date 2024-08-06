@@ -7,9 +7,7 @@ use App\Models\CustomerModel;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Email\Email;
 
-
 class ReportsController extends BaseController {
-
     public function __construct() {
         // Load session service
         $this->session = \Config\Services::session();
