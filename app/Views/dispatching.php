@@ -171,7 +171,6 @@
 $(document).ready(function() {
    $('#ajaxForm').on('submit', function(e) {
          e.preventDefault(); // Prevent default form submission
-
          var formData = $(this).serialize(); // Serialize form data
          var actionType = $('#actionType').val(); // Get the action type (button clicked)
 
@@ -197,7 +196,6 @@ $(document).ready(function() {
    });
 });
 </script>
-
 
 
 

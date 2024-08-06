@@ -89,5 +89,5 @@ $routes->post('/analyze/reviews/update/(:num)', 'ReviewController::update/$1');
 $routes->get('/analyze/dispatching', 'ReportsController::dispatch');
 
 $routes->get('/example', 'TestController::data');
-$routes->post('example/submit', 'TestController::create_dispatch');
+$routes->post('example/submit', 'CustomerController::create_dispatch');
 

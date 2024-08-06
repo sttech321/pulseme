@@ -60,10 +60,5 @@ class ReportsController extends BaseController {
         return view('dispatch');
     }
 
-    // public function overview(){
-
-    //     return view('overview');
-    // }
-
 
 }

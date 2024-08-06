@@ -429,16 +429,16 @@
                                           Edit Campaign 
                                        </button>
                                     <!-- </a> -->
-                                    <button data-bs-toggle="modal" data-bs-target="#EDITDefault" class="btn btn-blue w-full rounded-2px" id="showFieldOps-<?= esc($campaign['employeeId']) ?>">
+                                    <!-- <button data-bs-toggle="modal" data-bs-target="#EDITDefault" class="btn btn-blue w-full rounded-2px" id="showFieldOps-<?= esc($campaign['employeeId']) ?>">
                                        <svg class="svg-inline--fa fa-mobile-screen-button" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="mobile-screen-button" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                           <path class="" fill="currentColor" d="M16 64C16 28.7 44.7 0 80 0H304c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H80c-35.3 0-64-28.7-64-64V64zM224 448a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM304 64H80V384H304V64z">
                                           </path>
                                        </svg>
                                        FieldOps App 
-                                    </button>
-                                    <a href="<?= base_url('/settings/dispatch/campaigns/delete/'.$campaign['ID']) ?>" class="btn btn-red w-full rounded-2px" >
+                                    </button> -->
+                                    <a href="<?= base_url('/settings/dispatch/campaigns/delete/'.$campaign['ID']) ?>" class="btn btn-red w-full rounded-2px showFieldOps" >
                                        <button class="btn btn-red rounded-2px" id="showFieldOps-<?= esc($campaign['ID']) ?>">
-                                          <svg class="svg-inline--fa fa-trash" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                          <svg class="showFieldOps svg-inline--fa fa-trash" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                              <path class="" fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
                                              </path>
                                           </svg>

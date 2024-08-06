@@ -55,5 +55,4 @@ class ReviewModal extends Model
         return $this->where('reviewType', $type)->findAll();
     }
 
-
 }

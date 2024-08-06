@@ -20,13 +20,13 @@ class CustomerModel extends Model
         $this->allowedFields = explode(',', getenv('MODEL_ALLOWED_FIELDS'));
     }
 
-    // public function getCustomersWithCampaigns()
-    // {
-    //     $builder = $this->db->table('customers_bio');
-    //     $builder->select('customers_bio.campaign_id, COUNT(customers_bio.campaign_id) AS match_count');
-    //     $builder->join('campaign', 'customers_bio.campaign_id = campaign.ID');
-    //     $builder->groupBy('customers_bio.campaignid');
-    //     $query = $builder->get();
-    //     return $query->getResult(); // Ensure this method returns the result
-    // } 
+    public function getCustomersWithCampaigns()
+    {
+        $builder = $this->db->table('customers_bio');
+        $builder->select('customers_bio.campaign_id, COUNT(customers_bio.campaign_id) AS match_count');
+        $builder->join('campaign', 'customers_bio.campaign_id = campaign.ID');
+        $builder->groupBy('customers_bio.campaignid');
+        $query = $builder->get();
+        return $query->getResult(); // Ensure this method returns the result
+    } 
 }

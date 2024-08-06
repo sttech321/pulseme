@@ -158,32 +158,35 @@
                                             <!-- Positive Sentiment -->
                                             <td class="px-20px py-15px">
                                                 <?php
-                                                    // $positiveCount = 0;
-                                                    // foreach ($sentiments as $sentiment) {
-                                                    //     if ($sentiment['campaignID'] == $campaign['ID']) {
-                                                    //         if($sentiment['sentiment'] == 'Positive'){
-                                                    //             $positivecount = str_word_count($sentiment['sentiment']);
-                                                    //             $positiveCount++;
-                                                    //         }
-                                                    //     }
-                                                    // }
-                                                    // echo $positiveCount;
+                                                    $positiveCount = 0;
+                                                    $hasData = false; // Flag to check if data exists
+                                                    foreach ($sentiments as $sentiment) {
+                                                        if ($sentiment['campaignID'] == $campaign['ID']) {
+                                                            $hasData = true;
+                                                            if($sentiment['sentiment'] == 'Positive'){
+                                                                $positivecount = str_word_count($sentiment['sentiment']);
+                                                                $positiveCount++;
+                                                            }
+                                                        }
+                                                    }
+                                                    echo $hasData ? ($positiveCount > 0 ? $positiveCount : '') : '';
                                                 ?>
                                             </td>
 
                                             <!-- Negative Sentiment -->
                                             <td class="px-20px py-15px">
                                                 <?php
-                                                    // $negativecount = 0;
-                                                    // foreach ($sentiments as $sentiment) {
-                                                    //     if ($sentiment['campaignID'] == $campaign['ID']) {
-                                                    //         if($sentiment['sentiment'] == 'Negative'){
-                                                    //             $negativecount = str_word_count($sentiment['sentiment']);
-                                                    //             $negativecount++;
-                                                    //         }
-                                                    //     }
-                                                    // }
-                                                    // echo $negativecount;
+                                                $negativecount = 0;
+                                                $hasData = false;
+                                                foreach ($sentiments as $sentiment) {
+                                                    if ($sentiment['campaignID'] == $campaign['ID']) {
+                                                        $hasData = true;
+                                                        if ($sentiment['sentiment'] == 'Negative') {
+                                                            $negativecount++;
+                                                        }
+                                                    }
+                                                }
+                                                echo $hasData ? ($negativecount > 0 ? $negativecount : '') : '';
                                                 ?>
                                             </td>
                                         </tr>
@@ -197,7 +200,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <?= $this->endsection('content') ?>

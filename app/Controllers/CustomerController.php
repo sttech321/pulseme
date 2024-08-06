@@ -57,12 +57,12 @@ class CustomerController extends Controller
         $employeeid = $this->request->getPost('employeeid');
         $actionType = $this->request->getPost('actionType');
 
-        $testModel = new TestModal();
+        $testModel = new CustomerModel();
 
         // Prepare data to insert
         $data = [
             'customer_name' => $name,
-            'customer_email ' => $email,
+            'customer_email' => $email,
             'customer_phone' => $phone,
             'customer_address' => $address,
             'campaignid' => $campaignid,
