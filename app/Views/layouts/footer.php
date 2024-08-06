@@ -67,7 +67,7 @@
             }, 3000);
         })
     </script>
- <script>
+ <!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
     const fileInputs = document.querySelectorAll('input[type="file"]');
 
@@ -95,8 +95,7 @@
         });
     });
 });
-
-</script>
+</script> -->
 </body>
 
 </html>
