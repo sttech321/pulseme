@@ -2,8 +2,8 @@
 namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\CampaignModel;
-use App\Models\ReviewModal;
 use App\Models\CustomerModel;
+use App\Models\ReviewModal;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Email\Email;
 
@@ -37,7 +37,7 @@ class ReportsController extends BaseController {
         ]);
     }
     
-    public function departments(): string
+    public function departments()
     {
         $model = new CampaignModel();
         $data['campaigns'] = $model->findAll();
@@ -56,19 +56,5 @@ class ReportsController extends BaseController {
         return view('dispatch');
     }
 
-    // public function search()
-    // {
-    //     $search = $this->request->getVar('query');
-    
-    //     $technicianModel = new TechnicianModal();
-        
-    //     if ($search) {
-    //         $results = $technicianModel->getTechniciansBySearch($search);
-    //     } else {
-    //         $results = $technicianModel->findAll(); // Return all technicians if no search query
-    //     }
-    
-    //     return $this->response->setJSON($results);
-    // } 
 
 }

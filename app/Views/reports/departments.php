@@ -126,10 +126,10 @@
 												Happy Count
 												<!---->
 											</th>
-											<!-- <th class="text-left px-20px py-10px cursor-pointer"> -->
-												<!-- Neutral Count -->
+											<th class="text-left px-20px py-10px cursor-pointer">
+												Neutral Count
 												<!---->
-											<!-- </th> -->
+											</th>
 											<th class="text-left px-20px py-10px cursor-pointer">
 												Unhappy Count
 												<!---->

@@ -150,14 +150,20 @@
                         </div>
 
                      </div>
+                     <?php
+                     $currentDate = date('Y-m-d');
+                     $oneMonthAgo = date('Y-m-d', strtotime('-1 month', strtotime($currentDate)));
+                     $defaultFromDate = $oneMonthAgo;
+                     $defaultToDate = $currentDate;
+                     ?>
                      <div data-v-428084ba="" class="filter flex justify-end items-baseline">
                         <svg class="svg-inline--fa fa-calendar-day" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                            <path class="" fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm80 64c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80z"></path>
                         </svg>
                         <p class="font-bold">From</p>
-                        <input class="p-1" type="date" name="" id="">
+                        <input class="p-1" type="date" name="from_date" id="from_date" value="<?php echo htmlspecialchars($defaultFromDate); ?>">
                         <p class="font-bold">To</p>
-                        <input class="p-1" type="date" name="" id="">
+                        <input class="p-1" type="date" name="to_date" id="to_date" value="<?php echo htmlspecialchars($defaultToDate); ?>">
                         <button class="btn btn-blue" id = "update">
                            <svg class="svg-inline--fa fa-rotate pr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rotate" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                               <path class="" fill="currentColor" d="M142.9 142.9c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5c0 0 0 0 0 0H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5c7.7-21.8 20.2-42.3 37.8-59.8zM16 312v7.6 .7V440c0 9.7 5.8 18.5 14.8 22.2s19.3 1.7 26.2-5.2l41.6-41.6c87.6 86.5 228.7 86.2 315.8-1c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.2 62.2-162.7 62.5-225.3 1L185 329c6.9-6.9 8.9-17.2 5.2-26.2s-12.5-14.8-22.2-14.8H48.4h-.7H40c-13.3 0-24 10.7-24 24z"></path>
@@ -243,6 +249,10 @@
                   <div data-v-428084ba="" class="row table p-10px w-full">
                      <table data-v-428084ba="" class="w-full">
                         <?php foreach($fetchreview as $review): ?>
+                           <?php
+                           $reviewerInfo = json_decode($review['reviewratings'], true);
+                           $reviewerName = $reviewerInfo['Name'] ?? 'Unknown';
+                           ?>
                         <tr data-v-428084ba="" class="flex w-full">
                            <th data-v-428084ba="" class="p-10px w-auto">
                               <div data-v-428084ba="" class="flex justify-start items-center col-span-3 cursor-pointer">
@@ -266,13 +276,9 @@
                                  <p></p>
                               </div>
                            </td>
-                           <?php
-                               $jsonString = $review['reviewratings'];
-                               $reviewratings = json_decode($jsonString, true);
-                           ?>
                            <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
                               <svg data-v-f15ab7a3="" class="svg-inline--fa fa-face-grin text-lime-500 text-40px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                 <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 z0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
+                                 <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
                               </svg>
                               <div data-v-f15ab7a3="" class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">
                                  <p data-v-f15ab7a3=""><?php echo $review['sentiment']?></p>
@@ -282,21 +288,21 @@
                            <td data-v-f15ab7a3="" class="p-10px w-full">
                               <!---->
                               <div data-v-f15ab7a3="" class="comment border-l-5 border-blue-500 py-9px px-18px mb-5px">
-                                 <p data-v-f15ab7a3=""><?= $reviewratings['feedback'] ?></p>
+                                 <p data-v-f15ab7a3=""><?= $review['reviewText'] ?></p>
                               </div>
                               <div data-v-f15ab7a3="" class="info flex flex-wrap">
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> <?= $reviewratings['customer_name']; ?>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> <?php $reviewerInfo = json_decode($review['reviewratings'], true); ?><?php print_r($reviewerInfo['Name']);?></p>
                                  </div>
                                  <!---->
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Email:</span> <?= $reviewratings['customer_email']; ?> </p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Email:</span> mikefalk@aol.com</p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address: State : <?= $reviewratings['state']; ?> City :</span><?= $reviewratings['city']; ?></p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> <?php $reviewerInfo = json_decode($review['reviewratings'], true); ?>  <?php print_r($reviewerInfo['Zipcode']);?>  <?php print_r($reviewerInfo['State']);?> <?php print_r($reviewerInfo['City']);?></p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> <?= $review['updatedOn']; ?></p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> <?php echo str_replace('00:00:00','', $review['createdOn']);?></p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span><?= $review['campaignName']?></p>
@@ -323,14 +329,12 @@
                            <td data-v-f15ab7a3="" class="p-10px w-200px">                              
                               <div id="<?= $review['ID'] ?>" class="flex flex-col items-center justify-center h-full" data-id="<?= $review['ID'] ?>"  data-approved="<?= $review['isApproved'] ?>" 
                               data-archive="<?= $review['isArchive'] ?>">
-                              <?php// echo $review['ID'] . ', ' . $review['isApproved']?>
                            <button class="btn btn-approve w-full mb-5px <?= $review['isApproved'] == '1' ? 'btn-gray' : 'btn-green' ?>" approved="<?= $review['isApproved'] ?>" onclick="handleApprovalClick(this,'approved')">
                                  <svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
                                  </svg>
                                  <?= $review['isApproved'] == '1' ? 'Approved' : 'Approve' ?>
                            </button>
-                           <?php// echo $review['ID'] . ', ' . $review['isArchive']?>
                                  <button data-v-f15ab7a3="" class="btn w-full mb-5px <?= $review['isArchive'] == '1' ? 'btn-gray' : 'btn-blue' ?>" archive="<?= $review['isArchive'] ?>" onclick="handleApprovalClick(this,'archive')">
                                     <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                        <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
@@ -381,22 +385,22 @@
                                                    <div class="flex flex-col items-stretch col-span-3">
                                                          <p class="text-17px">Reviewer Information</p>
                                                          
-                                                          <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
-                                                         <input class="outline-none py-7px border-b focus:border-blue-500" name="city" value="" type="text" placeholder="" >
+                                                          <?php $reviewerInfo = json_decode($state['reviewratings'], true); ?>
+                                                         <input class="outline-none py-7px border-b focus:border-blue-500" name="city" value="<?php print_r($reviewerInfo['City']);?>" type="text" placeholder="<?php print_r($reviewerInfo['City']);?>" >
                                                          
                                                    </div>
-                                                   <?php $reviewerInfo = json_decode($state['reviewerInfo'], true); ?>
-                                                         <input class="outline-none py-7px border-b focus:border-blue-500" name="customer_name" value="" type="text" placeholder="" >
+                                                   <?php $reviewerInfo = json_decode($state['reviewratings'], true); ?>
+                                                         <input class="outline-none py-7px border-b focus:border-blue-500" name="customer_name" value="<?php print_r($reviewerInfo['Name']);?>" type="text" placeholder="<?php print_r($reviewerInfo['Name']);?>" >
                                                          <select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">
                                                             <option disabled selected>State</option>
                                                             <?php foreach ($fetchreview as $state) : ?>
-                                                            <?php $reviewerStateInfo = json_decode($state['reviewerInfo'], true); ?>
-                                                            <option value="">
-                                                               
+                                                            <?php $reviewerStateInfo = json_decode($state['reviewratings'], true); ?>
+                                                            <option value="<?= esc($reviewerStateInfo['State']) ?>">
+                                                               <?= esc($reviewerStateInfo['State']) ?>
                                                             </option>
                                                             <?php endforeach;?>
                                                          </select>
-                                                      <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="" type="text" placeholder="Zipcode">
+                                                      <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="<?= esc($reviewerInfo['Zipcode']) ?>" type="text" placeholder="Zipcode">
                                              </div>
                                              <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
@@ -473,6 +477,20 @@
                      .pagination a[aria-label="Last"] {
                         font-weight: bold; /* Makes Next and Last links bold */
                      }
+
+                     #modal {
+            display: none; /* Hide the modal by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
                      </style>
 
                   </div>
@@ -550,7 +568,7 @@ function handleApprovalClick(button) {
                         '</svg>' +
                         review.newArchiveStatus +
                   '</button>' +
-                  '<button class="btn btn-blue w-full">' +
+                  '<button class="btn btn-blue w-full" onclick="openModal(this)">' +
                         '<svg class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
                            '<path fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>' +
                         '</svg>' +
@@ -715,6 +733,7 @@ $(document).ready(function() {
                 var buttonClass_archive = review.isArchive == '1' ? 'btn-gray' : 'btn-blue';
                 var buttonText_archive = review.isArchive == '1' ? 'Unarchive' : 'Archive';
                 var svgDisplay_archive = review.isArchive == '1' ? 'none' : 'inline';
+                let reviewerInfo = JSON.parse(review.reviewratings);
                 var newRow = '<tr class="flex w-full">' +
                      '<td class="p-10px w-auto">' +
                         '<div class="flex justify-start items-center col-span-3 cursor-pointer">' +
@@ -738,7 +757,7 @@ $(document).ready(function() {
                         '</div>' +
                         '<div class="info flex flex-wrap">' +
                            '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
-                                 '<p><span class="font-bold">Customer:</span> Michael Falk</p>' +
+                                 '<p><span class="font-bold">Customer:</span>'   + reviewerInfo.Name +  '</p>' +
                            '</div>' +
                            '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
                                  '<p><span class="font-bold">Customer Email:</span> mikefalk@aol.com</p>' +
@@ -785,15 +804,20 @@ $(document).ready(function() {
                                  '</svg>' +
                                  buttonText_archive +
                            '</button>' +
-                           '<button class="btn btn-blue w-full">' +
+                           '<button class="btn btn-blue w-full" onclick="test()">' +
                                  '<svg class="svg-inline--fa fa-pen" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
                                     '<path fill="currentColor" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"></path>' +
                                  '</svg>' +
                                  'Edit' +
                            '</button>' +
+                          
                         '</div>' +
                      '</td>' +
-               '</tr>';
+               '</tr>'+
+               '<div id="modal">'+
+               '<p>This is the modal test</p>'+
+               '<button onclick="closeModal()">Close</button>'+
+            '</div>'
                tableBody.append(newRow);
             });
             if (data.pagination) {
@@ -821,15 +845,19 @@ $(document).ready(function() {
             }
         });
     }
-    //fetchReviews(currentPage);
-    $(document).on('click', '.page-link', function(e) {
-         e.preventDefault();
-         currentPage = $(this).data('page');
-         fetchReviews(currentPage);
-      });
 
 });
 
+</script>
+<script>
+
+function test() {
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -853,7 +881,6 @@ $(document).ready(function() {
     });
 </script>
 <?= $this->endSection() ?>
-
 
 
 
