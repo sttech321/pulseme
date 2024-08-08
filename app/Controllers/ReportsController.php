@@ -56,5 +56,9 @@ class ReportsController extends BaseController {
         return view('dispatch');
     }
 
+    public function summary()
+    {
+        return view('summary');
+    }
 
 }

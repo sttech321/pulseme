@@ -34,7 +34,7 @@ $routes->get('/settings/dispatch/web_widget', 'Home::dispatch_web_widget');
 $routes->get('/settings/billing', 'Home::billing_subscription');
 $routes->get('/settings/dispatch/campaign', 'Home::campaigns');
 $routes->get('/analyze/overview', 'Home::overview');
-$routes->get('/leaderboard/summary', 'Home::summary');
+$routes->get('/leaderboard/summary', 'ReportsController::summary');
 $routes->get('/send-referral', 'Home::referral');
 $routes->get('/two-way-messaging', 'Home::messaging');
 $routes->get('/operate/dispatch', 'CustomerController::dispatch');
