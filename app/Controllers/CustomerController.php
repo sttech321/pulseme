@@ -71,7 +71,6 @@ class CustomerController extends Controller
         $employeeid = $this->request->getPost('employeeid');
         $actionType = $this->request->getPost('actionType');
         $formstatus = $this->request->getPost('formstatus');
-        // print_r($formstatus);
 
         // Prepare data to insert
         $data = [
@@ -83,7 +82,6 @@ class CustomerController extends Controller
             'employeeid' => $employeeid,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-            // 'formstatus' => $actionType,
         ];
 
         if ($actionType === 'sendbio') {
