@@ -144,7 +144,7 @@
 							<div class="sidebar-submenu">
 								<ul>
 									<li>
-										<a href="/leaderboard/summary"><img width="15" src="/image/summary.svg" alt="sidebar icon">Summary</a>
+										<a href="#"><img width="15" src="/image/summary.svg" alt="sidebar icon">Summary</a>
 									</li>
 									<li>
 										<a href="/leaderboard/reports/campaigns"><img width="15" src="/image/reports.svg" alt="sidebar icon">Reports</a>

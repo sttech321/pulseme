@@ -14,6 +14,7 @@ class ReviewModal extends Model
         $this->primaryKey = getenv('REVIEWS_TABLE_PRIMARY_KEY');
         $fields = getenv('REVIEWS_FIELD');
         $this->allowedFields = explode(',', $fields);
+        
     }
 
     public function getEnumValues()

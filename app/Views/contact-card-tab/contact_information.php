@@ -172,10 +172,10 @@
                </div>
                <div class="bg-orange-100 rounded-4px p-20px mb-30px">
                   <div class="grid grid-cols-2 grid-rows-2 gap-10px mb-20px">
-                     <div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="30" id="30" value="1800"><label for="30">30 minutes</label></div>
-                     <div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="60" id="60" value="3600"><label for="60">60 minutes</label></div>
-                     <div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="90" id="90" value="5400"><label for="90">90 minutes</label></div>
-                     <div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="120" id="120" value="7200"><label for="120">120 minutes</label></div>
+                     <div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="30" value="1800"><label for="30">30 minutes</label></div>
+                     <div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="60" value="3600"><label for="60">60 minutes</label></div>
+                     <div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="90" value="5400"><label for="90">90 minutes</label></div>
+                     <div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="120" value="7200"><label for="120">120 minutes</label></div>
                   </div>
                   <p class=""> *Contact Card will be sent 30 minutes after pulseCheck </p>
                </div>

@@ -132,6 +132,7 @@
                               </div>
                            </td>
                            <td class="buttons flex flex-col justify-center items-end px-4 w-1/4">
+                           <!-- <input type="hidden" name="formstatus" value=""/> -->
                            <!-- Other form fields -->
                            <input type="hidden" id="actionType_<?= $technician['ID'] ?>" name="actionType" value=""/>
                            <button
@@ -241,36 +242,51 @@ $(document).ready(function() {
 });
 
 function submitForm(formId, actionType) {
-    var form = $('#' + formId); // Get the form by its ID
-    var actionField = form.find('input[name="actionType"]');
-    actionField.val(actionType); // Set the action type in the hidden field
+    // Get the form element
+    var form = $('#' + formId);
+    
+    // Set the value of the actionType field
+    var actionTypeField = form.find('input[name="actionType"]');
+    actionTypeField.val(actionType);
 
-    var formData = form.serialize(); // Serialize the form data
-    console.log(formData); // Log the form data to verify it's being fetched
+    // Set the value of the formstatus field based on the actionType
+    var formstatusField = form.find('input[name="formstatus"]');
+    if (actionType === 'sendbio') {
+        formstatusField.val('0');
+    } else if (actionType === 'sendpulsecheck') {
+        formstatusField.val('1');
+    }
 
-    // Now you can submit the form using AJAX
+    // Log form data and actionType for debugging
+    console.log('Form Data:', form.serialize());
+    console.log('Action Type:', actionTypeField.val());
+    console.log('Form Status:', formstatusField.val());
+
+    // Submit the form via AJAX
     $.ajax({
-        url: form.attr('action'),
-        type: 'post',
-        data: formData,
+        url: form.attr('action'), // Get URL from the form action attribute
+        type: 'POST',
+        data: form.serialize(), // Serialize form data
+        dataType: 'json', // Expect JSON response
         success: function(response) {
-             if (response.status === 'error') {
+            console.log('Response:', response); // Debugging statement
+            if (response.status === 'error') {
                 let errorMessage = '';
                 $.each(response.errors, function(field, error) {
                     errorMessage += error + '<br>';
                 });
                 $('.error').html(errorMessage);
             } else {
-                console.log('Response:', response);
+                console.log('Response:', response); // Debugging statement
             }
         },
         error: function(xhr, status, error) {
-            // Handle the error
-            console.error(xhr.responseText);
+            console.log('Error:', error); // Debugging statement
+            $('.error').text('An error occurred while submitting the form.');
         }
     });
 }
 
-</script>
 
+</script>
 <?= $this->endsection('content') ?>
