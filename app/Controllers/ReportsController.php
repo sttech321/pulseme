@@ -37,7 +37,6 @@ class ReportsController extends BaseController {
         ]);
     }
     
-    
     public function departments(): string
     {
         $model = new CampaignModel();
@@ -54,9 +53,22 @@ class ReportsController extends BaseController {
     }
 
     public function dispatch(){
-
         return view('dispatch');
     }
 
+    // public function search()
+    // {
+    //     $search = $this->request->getVar('query');
+    
+    //     $technicianModel = new TechnicianModal();
+        
+    //     if ($search) {
+    //         $results = $technicianModel->getTechniciansBySearch($search);
+    //     } else {
+    //         $results = $technicianModel->findAll(); // Return all technicians if no search query
+    //     }
+    
+    //     return $this->response->setJSON($results);
+    // } 
 
 }

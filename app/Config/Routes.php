@@ -38,8 +38,8 @@ $routes->get('/leaderboard/summary', 'Home::summary');
 $routes->get('/send-referral', 'Home::referral');
 $routes->get('/two-way-messaging', 'Home::messaging');
 $routes->get('/operate/dispatch', 'CustomerController::dispatch');
-$routes->get('getAllTechnicians', 'CustomerController::getAllTechnicians');
-$routes->get('search', 'CustomerController::search');
+$routes->post('getAllTechnicians', 'CustomerController::getAllTechnicians');
+$routes->post('search', 'CustomerController::search');
 $routes->get('/chat-widget', 'Home::widget');
 $routes->get('/employee-rewards', 'Home::rewards');
 $routes->get('/analyze/competitor-analysisg', 'Home::analysisg');
@@ -55,11 +55,8 @@ $routes->get('/settings/general/reporting', 'Home::general_reporting');
 
 $routes->get('/settings/contact-card/contact-information', 'Home::contact_information');
 $routes->get('/settings/contact-card/templates', 'Home::contact_templates');
-
 $routes->get('/settings/billing/billing_subscription', 'Home::billing_subscription');
-
 $routes->get('settings/general/connect-social-media', 'Home::connect_social_media'); 
-
 $routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');
 $routes->post('/analyze/reviews/create', 'ReviewController::insert');
 
@@ -68,9 +65,7 @@ $routes->get('/analyze/reviews', 'ReviewController::reviews');
 $routes->get('application/bio/(:num)', 'Campaign::technician_bio/$1');
 $routes->get('application/pulsecheck/(:segment)', 'Campaign::pulse_check/$1');
 $routes->post('application/pulsecheck/(:segment)', 'ReviewController::submitReview/$1');
-
 $routes->get('/operate', 'CustomerController::dispatch');
-
 $routes->post('/operate/dispatch/create/', 'CustomerController::create');
 
 $routes->get('/leaderboard/reports/campaigns', 'ReportsController::report_campaign');
