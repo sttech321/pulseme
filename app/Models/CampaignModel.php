@@ -21,4 +21,9 @@ class CampaignModel extends Model
         $allowedFields = getenv('campaign.allowedFields');
         $this->allowedFields = $allowedFields ? explode(',', $allowedFields) : [];
     }
+
+    public function getUniqueDepartments()
+    {
+        return $this->distinct()->select('department')->findAll();
+    }
 }

@@ -137,9 +137,10 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php //foreach ($campaigns as $campaign) : ?>
+										<?php // print_r($campaigns);?>
+										<?php foreach ($campaigns as $campaign) : ?>
 												 <tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px"><?= esc($campaign['name']) ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign['department']) ?></td>
 													<td class="px-20px py-15px"></td>
 													<td class="px-20px py-15px"></td>
 													<td class="px-20px py-15px"></td>
@@ -159,7 +160,7 @@
 															// echo $positiveCount;
 														?>
 													</td>
-													<<td class="px-20px py-15px"></td> 
+													<td class="px-20px py-15px"></td> 
 													<td class="px-20px py-15px">
 														<?php
 															// $negativecount = 0;
@@ -175,7 +176,7 @@
 														?>
 													</td>
 												</tr> 
-												<?php// endforeach; ?>
+												<?php endforeach; ?>
 									</tbody>
 								</table>
 								<!---->

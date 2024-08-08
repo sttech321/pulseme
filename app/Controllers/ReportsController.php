@@ -3,6 +3,8 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\CampaignModel;
 use App\Models\CustomerModel;
+use App\Models\TechnicianModal;
+use App\Models\ReviewModal;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Email\Email;
 
@@ -28,12 +30,12 @@ class ReportsController extends BaseController {
         // $customersWithCampaigns = $customerModel->getCustomersWithCampaigns();
         $model = new CampaignModel();
         $campaigns = $model->findAll();
-    
+        $sentiment = new ReviewModal();
+        $sentimentcount= $sentiment->findAll();
+   
         return view('reports/campaigns', [
-            'customersWithCampaigns' => $customersWithCampaigns,
-            'campaigns' => $campaigns
             // 'customersWithCampaigns' => $customersWithCampaigns,
-            //'campaigns' => $campaigns,
+            'campaigns' => $campaigns,
             'sentiments' => $sentimentcount,
         ]);
     }
@@ -42,8 +44,11 @@ class ReportsController extends BaseController {
     public function departments(): string
     {
         $model = new CampaignModel();
-        $data['campaigns'] = $model->findAll();
-        return view('reports/departments',$data);
+        
+        // Get unique departments from the model
+        $data['campaigns'] = $model->getUniqueDepartments();
+        
+        return view('reports/departments', $data);
     }
 
     public function report_campaign_fieldsops(){
@@ -62,5 +67,19 @@ class ReportsController extends BaseController {
     //     return view('overview');
     // }
 
-
+    public function search()
+    {
+        $search = $this->request->getVar('search');
+        //print_r($search);
+        //die;
+        $technicianModel = new TechnicianModal();
+        
+        if ($search) {
+            $results = $technicianModel->getTechniciansBySearch($search);
+        } else {
+            $results = $technicianModel->findAll(); 
+        }
+    
+        return $this->response->setJSON($results);
+    } 
 }

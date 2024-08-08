@@ -1,6 +1,7 @@
 <!-- app/Views/reviews.php -->
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <div class="headerTop">
    <div class="dropMenuWrap flexBetween">
       <div class="pageNameWrap">
@@ -24,6 +25,27 @@
             <div class="bg-white rounded m-auto p-6 w-full col-span-2">
                 <div class="top flex justify-between items-center mb-2">
                     <div class="title flex items-center">
+                        <div id="chart">
+                    <script>
+      
+        var options = {
+            chart: {
+                type: 'line',
+                height: 350
+            },
+            series: [{
+                name: 'Sales',
+                data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+            }],
+            xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
+    </div>
                         <svg class="svg-inline--fa fa-compass w-36px h-auto" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="compass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path
                                 class=""
