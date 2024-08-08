@@ -21,10 +21,6 @@ class Home extends BaseController
         return view('overview');
     }
 
-    public function summary(): string
-    {
-        return view('summary');
-    }
 
     public function referral(): string
     {

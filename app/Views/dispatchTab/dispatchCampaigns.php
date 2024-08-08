@@ -102,7 +102,7 @@
                                           </ul>
                                           <div class="tab-content" id="pills-tabContent">
                                              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                                <form method="post" action="<?= base_url('/settings/dispatch/campaigns/create') ?>" enctype="multipart/form-data">
+                                                <form id="campaignForm" enctype="multipart/form-data">
                                                    <div class="modal-header">
                                                       <h5 class="modal-title" id="exampleModalLabel">Create campaign</h5>
                                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -286,7 +286,7 @@
                                  <div class="modal fade" id="EDITcampaignModal-<?= $campaign['ID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
                                         <div class="modal-content">
-                                           <form method="post" action="<?= base_url('/settings/dispatch/campaigns/update/' . $campaign['ID']) ?>" enctype="multipart/form-data">
+                                           <form method="post" action="<?= base_url('/settings/dispatch/campaigns/update/' . $campaign['ID']) ?>" enctype="multipart/form-data" data-ajax="true">
                                            <input type="hidden" name="id" value="<?= $campaign['ID'] ?>">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Edit campaign</h5>
@@ -437,7 +437,7 @@
                                        </svg>
                                        FieldOps App 
                                     </button> -->
-                                    <a href="<?= base_url('/settings/dispatch/campaigns/delete/'.$campaign['ID']) ?>" class="btn btn-red w-full rounded-2px showFieldOps" >
+                                    <a href="<?= base_url('/settings/dispatch/campaigns/delete/'.$campaign['ID']) ?>" class="delete-campaign-btn btn btn-red w-full rounded-2px showFieldOps" >
                                        <button class="btn btn-red rounded-2px" id="showFieldOps-<?= esc($campaign['ID']) ?>">
                                           <svg class="showFieldOps svg-inline--fa fa-trash" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                              <path class="" fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
@@ -492,6 +492,107 @@
        }
        reader.readAsDataURL(event.target.files[0]);
    }
+</script>
+<script>
+    $('#campaignForm').on('submit', function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: "<?= base_url('/settings/dispatch/campaigns/create') ?>",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    // Close the modal
+                    $('#campaignModal').modal('hide');
+                    // Show success message or redirect
+                    alert('Campaign saved successfully!');
+                } else {
+                    // Display validation errors
+                    $('#validation-errors').html('');
+                    $.each(response.validation, function (key, value) {
+                        $('#validation-errors').append('<p style="color: red;">' + value + '</p>');
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+                alert('An error occurred. Please try again.');
+            }
+        });
+    });
+
+
+
+    $(document).ready(function() {
+    // Bind the form submit event
+    $(document).on('submit', 'form[data-ajax="true"]', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        var form = $(this);
+        var formData = new FormData(form[0]); // Get form data
+
+        $.ajax({
+            url: form.attr('action'),
+            type: 'POST',
+            data: formData,
+            processData: false, // Important: prevent jQuery from automatically transforming the data into a query string
+            contentType: false, // Important: prevent jQuery from setting the content-type header
+            success: function(response) {
+                // Handle success response here
+                if (response.success) {
+                    alert('Campaign updated successfully.');
+                    // Optionally, refresh the page or update the UI
+                    location.reload(); // Reload page to see changes
+                } else {
+                    // Handle validation errors or other response data
+                    alert('Failed to update campaign: ' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle AJAX errors here
+                alert('An error occurred: ' + error);
+            }
+        });
+    });
+});
+
+
+$(document).ready(function() {
+    // Bind the click event for delete buttons
+    $(document).on('click', '.delete-campaign-btn', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        if (confirm('Are you sure you want to delete this campaign?')) {
+            var button = $(this);
+            var url = button.attr('href'); // Get URL from the button's href attribute
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function(response) {
+                    // Handle success response here
+                    if (response.success) {
+                        alert('Campaign deleted successfully.');
+                        location.reload();
+                        // Optionally, remove the campaign from the UI
+                        button.closest('.campaign-item').remove();
+                    } else {
+                        alert('Failed to delete campaign: ' + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle AJAX errors here
+                    alert('An error occurred: ' + error);
+                }
+            });
+        }
+    });
+});
+
 </script>
 
 <?= $this->endsection('content') ?>

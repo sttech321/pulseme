@@ -70,8 +70,6 @@ class CustomerController extends Controller
         $campaignid = $this->request->getPost('campaignid');
         $employeeid = $this->request->getPost('employeeid');
         $actionType = $this->request->getPost('actionType');
-        $formstatus = $this->request->getPost('formstatus');
-        // print_r($formstatus);
 
         // Prepare data to insert
         $data = [
@@ -83,20 +81,22 @@ class CustomerController extends Controller
             'employeeid' => $employeeid,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-            // 'formstatus' => $actionType,
+            'formstatus' => $actionType,
         ];
 
-        if ($actionType === 'sendbio') {
+        // return $this->response->setJSON(['status' => 'debug', 'data' => $data]);
+
+        if ($actionType === 'bio') {
             // Call the sendbioEmail method
             $testModel = new CustomerModel();
             $testModel->insert($data);
             $this->sendbioEmail($campaignid, $email);
 
-            return $this->response->setJSON(['status' => 'success', 'message' => 'Bio sent successfully!']);
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Bio sent successfully!', 'data' => $data]);
 
-        } elseif ($actionType === 'sendpulsecheck') {
+        } elseif ($actionType === 'pulsecheck') {
             // Insert into pulsecheck table
-            $pulsecheckModel = new PulsecheckModal(); // Replace with the actual model for pulsecheck table
+            $pulsecheckModel = new CustomerModel(); // Replace with the actual model for pulsecheck table
             $pulsecheckModel->insert($data);
             $this->sendPulseCheckEmail($employeeid, $email);
 

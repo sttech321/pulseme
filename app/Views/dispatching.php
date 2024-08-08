@@ -132,17 +132,16 @@
                               </div>
                            </td>
                            <td class="buttons flex flex-col justify-center items-end px-4 w-1/4">
-                           <!-- <input type="hidden" name="formstatus" value=""/> -->
                            <!-- Other form fields -->
                            <input type="hidden" id="actionType_<?= $technician['ID'] ?>" name="actionType" value=""/>
                            <button
                               class="btn btn-blue max-w-200px w-full rounded-2px mb-2"
-                              id="btn1" type="button" onclick="submitForm('form_<?= $technician['ID'] ?>', 'sendbio')">
+                              id="btn1" type="button" onclick="submitForm('form_<?= $technician['ID'] ?>', 'bio')">
                               Send Bio
                            </button>
                            <button
                               class="btn btn-green max-w-200px w-full rounded-2px"
-                              id="btn2" type="button" onclick="submitForm('form_<?= $technician['ID'] ?>', 'sendpulsecheck')">
+                              id="btn2" type="button" onclick="submitForm('form_<?= $technician['ID'] ?>', 'pulsecheck')">
                               Send Pulse Check
                            </button>
                         </form>
@@ -161,7 +160,6 @@
 </div>
 
 <script>
-
 $(document).ready(function() {
     var technicianid =  $(this).val('#button_id');
     console.log(technicianid,'ddddddd');
@@ -225,8 +223,8 @@ $(document).ready(function() {
                                 </td>
                                 <td class="buttons flex flex-col justify-center items-end px-4 w-1/4">
                                  <input type="hidden" id="actionType_${technician.ID}" name="actionType" value=""/>
-                                    <button class="btn btn-blue max-w-200px w-full rounded-2px mb-2" type="button" onclick="submitForm('form_${technician.ID}', 'sendbio')">Send Bio</button>
-                                    <button class="btn btn-green max-w-200px w-full rounded-2px" type="button" onclick="submitForm('form_${technician.ID}', 'sendpulsecheck')">Send Pulse Check</button>
+                                    <button class="btn btn-blue max-w-200px w-full rounded-2px mb-2" type="button" onclick="submitForm('form_${technician.ID}', 'bio')">Send Bio</button>
+                                    <button class="btn btn-green max-w-200px w-full rounded-2px" type="button" onclick="submitForm('form_${technician.ID}', 'pulsecheck')">Send Pulse Check</button>
                                 </td>
                             </form>
                         </div>`;
@@ -242,51 +240,39 @@ $(document).ready(function() {
 });
 
 function submitForm(formId, actionType) {
-    // Get the form element
     var form = $('#' + formId);
-    
-    // Set the value of the actionType field
-    var actionTypeField = form.find('input[name="actionType"]');
+    var actionTypeField = $('#actionType_' + formId.split('_')[1]);
     actionTypeField.val(actionType);
+    var phone = $('.customer_phone').val();
+    var email = $('.customer_email').val();
 
-    // Set the value of the formstatus field based on the actionType
-    var formstatusField = form.find('input[name="formstatus"]');
-    if (actionType === 'sendbio') {
-        formstatusField.val('0');
-    } else if (actionType === 'sendpulsecheck') {
-        formstatusField.val('1');
-    }
-
-    // Log form data and actionType for debugging
-    console.log('Form Data:', form.serialize());
+    console.log('Form Data:', form.serialize()); // Debugging statement
     console.log('Action Type:', actionTypeField.val());
-    console.log('Form Status:', formstatusField.val());
 
-    // Submit the form via AJAX
     $.ajax({
-        url: form.attr('action'), // Get URL from the form action attribute
+        url: $('#' + formId).attr('action'), // Get URL from the form action attribute
         type: 'POST',
-        data: form.serialize(), // Serialize form data
+        data: $('#' + formId).serialize(), // Serialize form data
         dataType: 'json', // Expect JSON response
         success: function(response) {
             console.log('Response:', response); // Debugging statement
-            if (response.status === 'error') {
-                let errorMessage = '';
-                $.each(response.errors, function(field, error) {
-                    errorMessage += error + '<br>';
-                });
-                $('.error').html(errorMessage);
-            } else {
-                console.log('Response:', response); // Debugging statement
-            }
+         if(response.status === 'success'){ 
+            location.reload();
+         } else if(response.status === 'error') {
+            let errorMessage = '';
+            $.each(response.errors, function(field, error) {
+                errorMessage += error + '<br>';
+            });
+            $('.error').html(errorMessage);
+         } else {
+                  console.log('Response:', response); // Debugging statement
+         }
         },
         error: function(xhr, status, error) {
             console.log('Error:', error); // Debugging statement
-            $('.error').text('An error occurred while submitting the form.');
+            $('.error').text('An error occurred while submitting the form.'); 
         }
     });
 }
-
-
 </script>
 <?= $this->endsection('content') ?>
