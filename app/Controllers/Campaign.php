@@ -91,8 +91,7 @@ class Campaign extends BaseController {
             'success' => true,
             'message' => 'Campaign saved successfully.',
         ]);
-    }
-    
+    } 
 
     public function delete($id)
     {
@@ -112,7 +111,6 @@ class Campaign extends BaseController {
         }
     }
     
-
     public function update($id)
     {
         helper(['form']);

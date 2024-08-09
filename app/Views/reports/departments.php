@@ -126,10 +126,7 @@
 												Happy Count
 												<!---->
 											</th>
-											<th class="text-left px-20px py-10px cursor-pointer">
-												Neutral Count
-												<!---->
-											</th>
+											
 											<th class="text-left px-20px py-10px cursor-pointer">
 												Unhappy Count
 												<!---->
@@ -137,49 +134,19 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php foreach ($campaigns as $campaign) : ?>
-												 <tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px"><?= esc($campaign['name']) ?></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px">
-														<?php
-															$positiveCount = 0;
-															$hasData = false; // Flag to check if data exists
-															foreach ($sentiments as $sentiment) {
-																if ($sentiment['campaignID'] == $campaign['ID']) {
-																	$hasData = true;
-																	if($sentiment['sentiment'] == 'Positive'){
-																		$positivecount = str_word_count($sentiment['sentiment']);
-																		$positiveCount++;
-																	}
-																}
-															}
-															echo $hasData ? ($positiveCount > 0 ? $positiveCount : '') : '';
-														?>
-													</td>
-													<td class="px-20px py-15px"></td> 
-													<td class="px-20px py-15px">
-														<?php
-															$negativecount = 0;
-															$hasData = false;
-															foreach ($sentiments as $sentiment) {
-																if ($sentiment['campaignID'] == $campaign['ID']) {
-																	$hasData = true;
-																	if ($sentiment['sentiment'] == 'Negative') {
-																		$negativecount++;
-																	}
-																}
-															}
-
-															echo $hasData ? ($negativecount > 0 ? $negativecount : '') : '';
-														?>
-													</td>
-												</tr> 
-												<?php endforeach; ?>
+										<?php // print_r($campaigns);?>
+										<?php foreach ($departments as $campaign) : ?>
+												<tr class="!bg-opacity-50 odd:bg-sky-100">
+												<td class="px-20px py-15px"><?=  $campaign->department; ?></td>
+												<td class="px-20px py-15px"></td>
+												<td class="px-20px py-15px"></td>
+												<td class="px-20px py-15px"></td>
+												<td class="px-20px py-15px"></td>
+												<td class="px-20px py-15px"></td>
+												<td class="px-20px py-15px"><?=  $campaign->positive_count; ?></td> 
+												<td class="px-20px py-15px"><?=  $campaign->negative_count; ?></td>
+											</tr> 
+											<?php endforeach; ?>
 									</tbody>
 								</table>
 								<!---->

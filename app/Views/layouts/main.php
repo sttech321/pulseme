@@ -13,8 +13,10 @@
 	<link rel="stylesheet" type="text/css" href="/css/reviews.css">
 	<link rel="stylesheet" type="text/css" href="/css/variables.css">
 	<link rel="stylesheet" type="text/css" href="/css/analysis.css">
-	<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="/css/all.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="/css/custom-modal.css"> -->
+
 	<script src="/js/jquery.js"></script>
 	<style>
     * {
@@ -277,6 +279,8 @@
 			}, 3000);
 		})
 	</script>
+
+
 </body>
 
 </html>

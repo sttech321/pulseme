@@ -87,4 +87,6 @@ $routes->get('/example', 'TestController::data');
 $routes->post('example/submit', 'CustomerController::create_dispatch');
 $routes->post('searchbar', 'Campaign::search');
 
+$routes->post('/contact-card', 'ContactcardController::create_contactcard');
+$routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 

@@ -161,7 +161,7 @@
 
 <script>
 $(document).ready(function() {
-    var technicianid =  $(this).val('#button_id');
+    var technicianid =  $(this).val('#campaignid');
     console.log(technicianid,'ddddddd');
       // Handle input changes in search bar
       $('#search').on('input', function() {
@@ -186,20 +186,21 @@ $(document).ready(function() {
 
                  if (data.length > 0) {
                   // var error = $('.error');
-                     var table = $('<table class="w-full"></table>');
+                     var table = $('<div class="w-full"></div>');
                      $.each(data, function(index, technician) {
                          var row = `<div class="flex p-20px odd:bg-sky-50">
-                            <form id="form_${technician.ID}" class="ajaxForm" action="<?= base_url('example/submit') ?>" method="post">
+                            <form id="form_${technician.ID}" style="width:100%;" class="ajaxForm" action="<?= base_url('example/submit') ?>" method="post">
                                 <input type="hidden" id="campaignid" name="campaignid" value="${technician.ID}" required>
                                 <input type="hidden" id="employeeid" name="employeeid" value="${technician.employeeId}" required>
-                                <td class="employee flex items-center w-1/4">
+                                <div style="display: flex;justify-content: space-between;align-items: center;">
+                                <div class="employee flex items-center w-1/4">
                                     <div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0" style="background-image: url('${technician.image}');"></div>
                                     <div class="flex-grow">
                                         <p class="name">${technician.name}</p>
                                         <p class="department text-gray-400">${technician.department}</p>       
                                     </div>
-                                </td>
-                                <td class="recipient-info grid grid-cols-6 gap-5px flex-grow">
+                                </div>
+                                <div class="recipient-info grid grid-cols-6 gap-5px flex-grow">
                                     <div class="input-group col-span-3 flex items-center">
                                         <input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px"
                                     type="tel" name="customer_phone" class="customer_phone" id="phone_${technician.ID}" placeholder="Phone Number" required>
@@ -220,12 +221,12 @@ $(document).ready(function() {
                                             <p style="margin-left:10px;">Mark as test</p>
                                         </div>
                                     </div>
-                                </td>
-                                <td class="buttons flex flex-col justify-center items-end px-4 w-1/4">
+                                </div>
+                                <div class="buttons flex flex-col justify-center items-end px-4 w-1/4">
                                  <input type="hidden" id="actionType_${technician.ID}" name="actionType" value=""/>
                                     <button class="btn btn-blue max-w-200px w-full rounded-2px mb-2" type="button" onclick="submitForm('form_${technician.ID}', 'bio')">Send Bio</button>
                                     <button class="btn btn-green max-w-200px w-full rounded-2px" type="button" onclick="submitForm('form_${technician.ID}', 'pulsecheck')">Send Pulse Check</button>
-                                </td>
+                                </div></div>
                             </form>
                         </div>`;
                          table.append(row);
