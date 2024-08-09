@@ -306,7 +306,7 @@
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> <?php $reviewerInfo = json_decode($review['reviewratings'], true); ?>  <?php print_r($reviewerInfo['Zipcode']);?>  <?php print_r($reviewerInfo['State']);?> <?php print_r($reviewerInfo['City']);?></p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> </p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span><?= $review['createdOn']?> </p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span><?= $review['campaignName']?></p>
@@ -317,16 +317,16 @@
                               </div>
                               <div data-v-f15ab7a3="" class="ratings flex flex-wrap">
                                  <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">How likely are you to recommend us to your friends and family?</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
+                                    <p data-v-f15ab7a3=""><?= $reviewerInfo['rate1']['text']; ?></p>
+                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewerInfo['rate1']['value']; ?></div>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">Professionalism</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
+                                    <p data-v-f15ab7a3=""><?= $reviewerInfo['rate2']['text']; ?></p>
+                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewerInfo['rate2']['value']; ?></div>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">Quality of Service</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500">10</div>
+                                    <p data-v-f15ab7a3=""><?= $reviewerInfo['rate3']['text']; ?></p>
+                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewerInfo['rate3']['value']; ?></div>
                                  </div>
                               </div>
                            </td>

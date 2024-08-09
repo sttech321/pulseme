@@ -39,7 +39,7 @@ $routes->get('/send-referral', 'Home::referral');
 $routes->get('/two-way-messaging', 'Home::messaging');
 $routes->get('/operate/dispatch', 'CustomerController::dispatch');
 $routes->get('getAllTechnicians', 'CustomerController::getAllTechnicians');
-$routes->get('search', 'CustomerController::search');
+$routes->post('search', 'CustomerController::search');
 $routes->get('/chat-widget', 'Home::widget');
 $routes->get('/employee-rewards', 'Home::rewards');
 $routes->get('/analyze/competitor-analysisg', 'Home::analysisg');

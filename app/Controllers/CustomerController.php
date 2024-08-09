@@ -49,6 +49,21 @@ class CustomerController extends Controller
 
     public function create_dispatch()
     {
+        // Validation rules
+        $rules = [
+            'customer_email' => 'required|valid_email',
+            'customer_phone' => 'required',
+        ];
+
+        // Validate form input
+        if (!$this->validate($rules)) {
+            return $this->response->setJSON(
+                ['status' => 'error',
+                 'message' => 'Validation failed',
+                  'errors' => $this->validator->getErrors()
+                ]);
+        }
+        
         $name = $this->request->getPost('customer_name');
         $email = $this->request->getPost('customer_email');
         $phone = $this->request->getPost('customer_phone');
