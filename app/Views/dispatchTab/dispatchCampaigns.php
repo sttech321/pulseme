@@ -494,38 +494,40 @@
    }
 </script>
 <script>
-$('#campaignForm').on('submit', function (e) {
-   e.preventDefault();
-   var formData = new FormData(this);
+    $('#campaignForm').on('submit', function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
 
-   $.ajax({
-      url: "<?= base_url('/settings/dispatch/campaigns/create') ?>",
-      type: "POST",
-      data: formData,
-      contentType: false,
-      processData: false,
-      success: function (response) {
-            if (response.success) {
-               // Close the modal
-               $('#campaignModal').modal('hide');
-               // Show success message or redirect
-               alert('Campaign saved successfully!');
-            } else {
-               // Display validation errors
-               $('#validation-errors').html('');
-               $.each(response.validation, function (key, value) {
-                  $('#validation-errors').append('<p style="color: red;">' + value + '</p>');
-               });
+        $.ajax({
+            url: "<?= base_url('/settings/dispatch/campaigns/create') ?>",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    // Close the modal
+                    $('#campaignModal').modal('hide');
+                    // Show success message or redirect
+                    alert('Campaign saved successfully!');
+                } else {
+                    // Display validation errors
+                    $('#validation-errors').html('');
+                    $.each(response.validation, function (key, value) {
+                        $('#validation-errors').append('<p style="color: red;">' + value + '</p>');
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+                alert('An error occurred. Please try again.');
             }
-      },
-      error: function (xhr, status, error) {
-            console.log(xhr.responseText);
-            alert('An error occurred. Please try again.');
-      }
-   });
-});
+        });
+    });
 
-$(document).ready(function() {
+
+
+    $(document).ready(function() {
     // Bind the form submit event
     $(document).on('submit', 'form[data-ajax="true"]', function(event) {
         event.preventDefault(); // Prevent default form submission
@@ -589,34 +591,6 @@ $(document).ready(function() {
             });
         }
     });
-});
-
-
-$(document).ready(function() {
-    var technicianid =  $(this).val('#button_id');
-    console.log(technicianid,'ddddddd');
-      // Handle input changes in search bar
-      $('#search').on('input', function() {
-         var query = $(this).val();
-         if (query) {
-          loadTechnicians(query);
-         } else {
-          loadTechnicians();
-         }
-     });
-
-     function loadTechnicians(query = '') {
-      var url = query ? '<?= base_url('/searchbar') ?>' : '<?= base_url('/getAllTechnicians') ?>';
-      
-         $.ajax({
-             url: url,
-             type: 'post',
-             data: { query: query },
-             success: function(data) {
-
-             }
-         });
-     }
 });
 
 </script>
