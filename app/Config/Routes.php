@@ -85,4 +85,6 @@ $routes->get('/analyze/dispatching', 'ReportsController::dispatch');
 
 $routes->get('/example', 'TestController::data');
 $routes->post('example/submit', 'CustomerController::create_dispatch');
+$routes->post('searchbar', 'Campaign::search');
+
 

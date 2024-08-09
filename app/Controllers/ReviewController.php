@@ -92,9 +92,7 @@ class ReviewController extends BaseController
                 'review_type' => $review_type
             ]),
         ];
-    // print_r($data);
-    // die;
-        // Insert data into the database
+
         $reviewModel->insert($data); 
         // Display a thank you message or redirect as needed
         return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
