@@ -134,58 +134,26 @@
                                     <tbody>
                                         <?php foreach ($campaigns as $campaign): ?>
                                         <tr class="!bg-opacity-50 odd:bg-sky-100">
-                                            <td class="px-20px py-15px">1B85A09AA6<?= $campaign['ID'] ?></td>
-                                            <td class="px-20px py-15px"><?= $campaign['name'] ?></td>
-                                            <td class="px-20px py-15px"><?= $campaign['employeeId'] ?></td>
-                                            <td class="px-20px py-15px"><?= $campaign['department'] ?></td>
+                                            <td class="px-20px py-15px">1B85A09AA6<?=  $campaign->ID; ?></td>
+                                            <td class="px-20px py-15px"><?= $campaign->name; ?></td>
+                                            <td class="px-20px py-15px"><?= $campaign->employeeId; ?></td>
+                                            <td class="px-20px py-15px"><?= $campaign->department; ?></td>
                                             <td class="px-20px py-15px"></td>
                                             <td class="px-20px py-15px"></td>
                                             <td class="px-20px py-15px">
-                                                <?php 
-													// $matchCount = 0;
-													// if (!empty($customersWithCampaigns)) {
-													// 	foreach ($customersWithCampaigns as $customer) {
-													// 		if ($customer->campaign_id == $campaign['ID']) {
-													// 			$matchCount = $customer->match_count;
-													// 			break;
-													// 		}
-													// 	}
-													// }
-													// echo $matchCount;
-													?>
+                                            <?= $campaign->bio_count; ?>
                                             </td>
-                                            <td class="px-20px py-15px"></td>
-                                            <td class="px-20px py-15px"></td>
-                                            <!-- Positive Sentiment -->
                                             <td class="px-20px py-15px">
-                                                <?php
-                                                    // $positiveCount = 0;
-                                                    // foreach ($sentiments as $sentiment) {
-                                                    //     if ($sentiment['campaignID'] == $campaign['ID']) {
-                                                    //         if($sentiment['sentiment'] == 'Positive'){
-                                                    //             $positivecount = str_word_count($sentiment['sentiment']);
-                                                    //             $positiveCount++;
-                                                    //         }
-                                                    //     }
-                                                    // }
-                                                    // echo $positiveCount;
-                                                ?>
+                                            <?= $campaign->pulsecheck_count; ?>
                                             </td>
-
+                                            <td class="px-20px py-15px"></td>
+                                            <!-- Positive Sentiment -->                                             
+                                            <td class="px-20px py-15px">
+                                            <?= isset($campaign->positive_count) ? $campaign->positive_count : 'N/A'; ?>
+                                            </td>
                                             <!-- Negative Sentiment -->
                                             <td class="px-20px py-15px">
-                                                <?php
-                                                    // $negativecount = 0;
-                                                    // foreach ($sentiments as $sentiment) {
-                                                    //     if ($sentiment['campaignID'] == $campaign['ID']) {
-                                                    //         if($sentiment['sentiment'] == 'Negative'){
-                                                    //             $negativecount = str_word_count($sentiment['sentiment']);
-                                                    //             $negativecount++;
-                                                    //         }
-                                                    //     }
-                                                    // }
-                                                    // echo $negativecount;
-                                                ?>
+                                            <?= isset($campaign->negative_count) ? $campaign->negative_count : 'N/A'; ?>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -203,7 +171,7 @@
 <script>
     document.getElementById('search').addEventListener('input', function() {
         const query = this.value;
-
+        console.log(query);
         $.ajax({
             url: '/leaderboard/reports/campaigns/search',
             type: 'POST',
@@ -237,11 +205,11 @@
                                 `<td class="px-20px py-15px">${campaign.department}</td>` +
                                 '<td class="px-20px py-15px"></td>' +
                                 '<td class="px-20px py-15px"></td>' +
+                                `<td class="px-20px py-15px">${campaign.bio_count}</td>` +
+                                `<td class="px-20px py-15px">${campaign.pulsecheck_count}</td>` +
                                 '<td class="px-20px py-15px"></td>' +
-                                '<td class="px-20px py-15px"></td>' +
-                                '<td class="px-20px py-15px"></td>' +
-                                '<td class="px-20px py-15px"></td>' +
-                                '<td class="px-20px py-15px"></td>' +
+                                `<td class="px-20px py-15px">${campaign.positive_count}</td>` +
+                                `<td class="px-20px py-15px">${campaign.negative_count}</td></td>` +
                             '</tr>';
                 });
 

@@ -26,17 +26,17 @@ class ReportsController extends BaseController {
 
     public function report_campaign()
     {
-        $customerModel = new CustomerModel();
-        // $customersWithCampaigns = $customerModel->getCustomersWithCampaigns();
+        
         $model = new CampaignModel();
-        $campaigns = $model->findAll();
-        $sentiment = new ReviewModal();
-        $sentimentcount= $sentiment->findAll();
-   
+        $campaignsWithSentiment = $model->getCampaignsWithSentiment();
+//         echo '<pre>';
+//         print_r($campaignsWithSentiment);
+//         echo '</pre>';
+//   die;
         return view('reports/campaigns', [
-            // 'customersWithCampaigns' => $customersWithCampaigns,
-            'campaigns' => $campaigns,
-            'sentiments' => $sentimentcount,
+           
+            'campaigns' =>  $campaignsWithSentiment,
+           
         ]);
     }
     
@@ -46,8 +46,11 @@ class ReportsController extends BaseController {
         $model = new CampaignModel();
         
         // Get unique departments from the model
-        $data['campaigns'] = $model->getUniqueDepartments();
-        
+        $data['departments'] = $model->getUniqueDepartments();
+        // echo '<pre>'; // Optional: formats the output to be more readable
+        // print_r($data['departments']);
+        // echo '</pre>';
+        // die;
         return view('reports/departments', $data);
     }
 
@@ -70,16 +73,13 @@ class ReportsController extends BaseController {
     public function search()
     {
         $search = $this->request->getVar('search');
-        //print_r($search);
-        //die;
+        // print_r($search);
+        // die;
         $technicianModel = new TechnicianModal();
         
-        if ($search) {
+      
             $results = $technicianModel->getTechniciansBySearch($search);
-        } else {
-            $results = $technicianModel->findAll(); 
-        }
-    
+         
         return $this->response->setJSON($results);
     } 
 }

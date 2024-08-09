@@ -126,10 +126,7 @@
 												Happy Count
 												<!---->
 											</th>
-											<th class="text-left px-20px py-10px cursor-pointer">
-												Neutral Count
-												<!---->
-											</th>
+											
 											<th class="text-left px-20px py-10px cursor-pointer">
 												Unhappy Count
 												<!---->
@@ -138,43 +135,17 @@
 									</thead>
 									<tbody>
 										<?php // print_r($campaigns);?>
-										<?php foreach ($campaigns as $campaign) : ?>
+										<?php foreach ($departments as $campaign) : ?>
 												 <tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px"><?= esc($campaign['department']) ?></td>
+													<td class="px-20px py-15px"><?=  $campaign->department; ?></td>
 													<td class="px-20px py-15px"></td>
 													<td class="px-20px py-15px"></td>
 													<td class="px-20px py-15px"></td>
 													<td class="px-20px py-15px"></td>
 													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px">
-														<?php
-															// $positiveCount = 0;
-															// foreach ($sentiments as $sentiment) {
-															// 	if ($sentiment['campaignID'] == $campaign['ID']) {
-															// 		if($sentiment['sentiment'] == 'Positive'){
-															// 			$positivecount = str_word_count($sentiment['sentiment']);
-															// 			$positiveCount++;
-															// 		}
-															// 	}
-															// }
-															// echo $positiveCount;
-														?>
-													</td>
-													<td class="px-20px py-15px"></td> 
-													<td class="px-20px py-15px">
-														<?php
-															// $negativecount = 0;
-															// foreach ($sentiments as $sentiment) {
-															// 	if ($sentiment['campaignID'] == $campaign['ID']) {
-															// 		if($sentiment['sentiment'] == 'Negative'){
-															// 			$negativecount = str_word_count($sentiment['sentiment']);
-															// 			$negativecount++;
-															// 		}
-															// 	}
-															// }
-															// echo $negativecount;
-														?>
-													</td>
+													
+													<td class="px-20px py-15px"><?=  $campaign->positive_count; ?></td> 
+													<td class="px-20px py-15px"><?=  $campaign->negative_count; ?></td>
 												</tr> 
 												<?php endforeach; ?>
 									</tbody>
