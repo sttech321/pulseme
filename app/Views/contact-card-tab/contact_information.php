@@ -24,7 +24,7 @@
 			<h2 class="text-xl p-15px pt-30px">Company Settings</h2>
 			<div class="p-15px">
 				<div class="links flex flex-col border-l border-gray-400">
-					<a href="/settings/general/connect-social-media" class="border-blue-500 text-blue-500 border-l-2 p-15px">
+					<!-- <a href="/settings/general/connect-social-media" class="border-blue-500 text-blue-500 border-l-2 p-15px">
 						<svg class="svg-inline--fa fa-chart-line mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-line" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 							<path
 								class=""
@@ -33,8 +33,8 @@
 							></path>
 						</svg>
 						General
-					</a>
-					<a href="/settings/dispatch/campaigns" class="p-15px" tabindex="0">
+					</a> -->
+					<a href="<?= base_url('/settings/dispatch/campaigns') ?>" class="p-15px" tabindex="0">
 						<svg
 							class="svg-inline--fa fa-arrow-right-arrow-left mr-5px"
 							aria-hidden="true"
@@ -54,7 +54,7 @@
 						Dispatch
 					</a>
 					<!---->
-					<a href="/settings/contact-card/contact-information" class="p-15px">
+					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="p-15px">
 						<svg class="svg-inline--fa fa-address-card mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="address-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
 							<path
 								class=""
@@ -65,7 +65,7 @@
 						Contact Card
 					</a>
 					<!---->
-					<a href="/settings/billing/billing_subscription" class="p-15px">
+					<!-- <a href="/settings/billing/billing_subscription" class="p-15px">
 						<svg class="svg-inline--fa fa-credit-card mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="credit-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
 							<path
 								class=""
@@ -74,15 +74,15 @@
 							></path>
 						</svg>
 						Billing
-					</a>
+					</a> -->
 				</div>
 			</div>
 		</div>
 		<div class="flex flex-col">
 			<div class="sub-menu-bar pl-25px">
 				<div class="flex justify-start items-center border-b border-gray-300">
-					<a href="/settings/contact-card/contact-information" class="p-15px">Contact Information</a>
-					<a aria-current="page" href="/settings/contact-card/templates" class="border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px">Templates</a>
+					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="p-15px">Contact Information</a>
+					<a aria-current="page" href="<?= base_url('/settings/contact-card/templates') ?>" class="border-b-2  router-link-exact-active p-15px">Templates</a>
 				</div>
 			</div>
 			<div class="p-25px flex flex-col justify-start items-stretch contact-information">

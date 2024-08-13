@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\CampaignModel;
+use App\Models\ContactcardModal;
 use App\Models\ReviewModal;
 use CodeIgniter\Controller;
 use CodeIgniter\Pagination\Pager;
@@ -71,9 +72,11 @@ class ReviewController extends BaseController
         $zipcode = $this->request->getPost('zipcode');
         $sentiment = $this->request->getPost('result_value');
         $review_type = $this->request->getPost('reviewType');
+        // $contactcard = $this->request->getPost('contactcard');
 
         // Preparing data for insertion
         $data = [
+            // 'contactcard' => $contactcard,
             'campaignID' => $campaignId,
             'reviewText'=> $feedback,
             'reviewType'=> $review_type,
@@ -81,21 +84,56 @@ class ReviewController extends BaseController
             'reviewratings' => json_encode([
                 'feedback' => $feedback,
                 'Name' => $customer_name,
-                'customer_email' => $customer_name,
-                'State' => $customer_name,
-                'City' => $customer_name,
-                'Zipcode' => $customer_name,
+                'customer_email' => $customer_email,
+                'State' => $state,
+                'City' => $city,
+                'Zipcode' => $zipcode,
                 'rate1' => ['text' => $rating1_text, 'value' => $rating1_value],
                 'rate2' => ['text' => $rating2_text, 'value' => $rating2_value],
                 'rate3' => ['text' => $rating3_text, 'value' => $rating3_value],
-                'setiment' => $sentiment,
+                'sentiment' => $sentiment,
                 'review_type' => $review_type
             ]),
         ];
 
         $reviewModel->insert($data); 
+
+        // Send contact card email
+        $this->sendContactCard($customer_email);
         // Display a thank you message or redirect as needed
-        return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
+        return redirect()->to('/')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
+
+    }
+
+    private function sendContactCard($customer_email)
+    {
+        $contactCardModel = new ContactcardModal();
+        $data['contactcard'] = $contactCardModel->first();
+
+        $emailService = \Config\Services::email();
+
+        // Building the email message
+        $message = view('contact-card-tab/contact_templates', ['contactcard' => $data['contactcard']]);
+
+        $emailService->initialize([
+            'protocol' => 'smtp',
+            'SMTPHost' => $_ENV['SMTP_HOST'],
+            'SMTPPort' => intval($_ENV['SMTP_PORT']),
+            'SMTPUser' => $_ENV['SMTP_USER'],
+            'SMTPPass' => $_ENV['SMTP_PASS'],
+            'mailType' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ]);
+
+        $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
+        $emailService->setTo($customer_email);
+        $emailService->setSubject('Contact-card');
+        $emailService->setMessage($message);
+
+        if (!$emailService->send()) {
+            log_message('error', $emailService->printDebugger(['headers', 'subject', 'body']));
+        }
     }
 
     public function social_review()
@@ -414,6 +452,13 @@ class ReviewController extends BaseController
         }
     
         return $this->response->setJSON(['status' => 'error', 'message' => 'Review not found']);
+    }
+
+    public function contact_templates()
+    {
+        $contactCardModel = new ContactcardModal();
+        $data['contactcard'] = $contactCardModel->first();
+        return view('contact-card-tab/contact_templates',$data);
     }
      
 }

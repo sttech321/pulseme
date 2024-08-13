@@ -130,10 +130,5 @@ class Home extends BaseController
         return view('contact-card-tab/contact_information');
     }
 
-    public function contact_templates(): string
-    {
-        return view('contact-card-tab/contact_templates');
-    }
-
     
 }
