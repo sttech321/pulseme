@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/reviews.css">
 	<link rel="stylesheet" type="text/css" href="/css/analysis.css">
 	<link rel="stylesheet" type="text/css" href="/css/variables.css">
+
 	<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="/css/all.min.css">
 </head>
@@ -69,10 +70,10 @@
 								<li><a class="menuListItem" href="#"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
 								<li><a class="menuListItem" href="#"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
 								<li><a class="menuListItem" href="/logs/outbound"><i class="fa fa-envelope" aria-hidden="true"></i>Logs</a></li>
-								<li> 
-                             
-                                    <a class="menuListItem" href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
-                                </li>
+								<li>
+
+									<a class="menuListItem" href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+								</li>
 
 							</ul>
 						</div>
@@ -95,7 +96,7 @@
 							</a>
 						</li>
 						<li class="sidebar-dropdown">
-							<a href="#" >
+							<a href="#">
 								<div class="imgIconWrap">
 									<img width="20" height="20" src="/image/analyze.png" alt="sidebar icon">
 								</div>
@@ -209,5 +210,4 @@
 					</div>
 				</div>
 			</div> <!-- <div class="container-fluid"> -->
-				<?= $this->rendersection('content'); ?>
-
+			<?= $this->rendersection('content'); ?>

@@ -13,26 +13,28 @@
 	<link rel="stylesheet" type="text/css" href="/css/reviews.css">
 	<link rel="stylesheet" type="text/css" href="/css/variables.css">
 	<link rel="stylesheet" type="text/css" href="/css/analysis.css">
+	<link rel="stylesheet" type="text/css" href="/css/apexcharts.css">
 	<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="/css/all.min.css">
 	<script src="/js/jquery.js"></script>
 	<style>
-    * {
-      font-size: 14px;
-    }
+		* {
+			font-size: 14px;
+		}
 
-    html {
-      height: 100%;
-      margin: 0;
-    }
+		html {
+			height: 100%;
+			margin: 0;
+		}
 
-    body,
-    #app {
-      height: 100%;
-      margin: 0;
-    }
-  </style>
+		body,
+		#app {
+			height: 100%;
+			margin: 0;
+		}
+	</style>
 </head>
+
 <body>
 	<!-- loading -->
 	<!-- <div class="loading">
@@ -86,9 +88,9 @@
 								<li><a class="menuListItem" href="#"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
 								<li><a class="menuListItem" href="/settings/general/connect-social-media"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
 								<!-- <li><a class="menuListItem" href="/logs/outbound"><i class="fa fa-envelope" aria-hidden="true"></i>Logs</a></li> -->
-								<li> 
-                                    <a class="menuListItem" href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
-                                </li>
+								<li>
+									<a class="menuListItem" href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+								</li>
 
 							</ul>
 						</div>
@@ -162,11 +164,11 @@
 							<div class="sidebar-submenu">
 								<ul>
 									<!-- <li> -->
-										<!-- <a href="#">
+									<!-- <a href="#">
 											<img width="15" src="/image/lead-generation.svg" alt="sidebar icon">
 											Lead Generation
 										</a> -->
-										<!-- <div class="sidebar-submenu-inner">
+									<!-- <div class="sidebar-submenu-inner">
                                             <ul>
                                                 <li>
                                                     <a href="#">
@@ -208,15 +210,16 @@
 			</div>
 			<!-- sidebar-content  -->
 		</nav>
-    <main class="page-content">
-        <?= $this->renderSection('content') ?>
-    </main>
+		<main class="page-content">
+			<?= $this->renderSection('content') ?>
+		</main>
 
-  		<!-- page-content" -->
+		<!-- page-content" -->
 	</div>
 	<!-- page-wrapper -->
 
 	<script src="/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/apexcharts.min.js"></script>
 
 	<script>
 		$(document).ready(function() {

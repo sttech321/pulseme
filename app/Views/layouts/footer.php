@@ -1,73 +1,74 @@
 </div>
-            </div>
-        </main>
-        <!-- page-content" -->
-    </div>
-    <!-- page-wrapper -->
-    <script src="/js/jquery.js"></script>
-    <!-- <script src="/js/main.js"></script> -->
-    <script src="/js/bootstrap.bundle.min.js"></script>
+</div>
+</main>
+<!-- page-content" -->
+</div>
+<!-- page-wrapper -->
+<script src="/js/jquery.js"></script>
+<!-- <script src="/js/main.js"></script> -->
+<script src="/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $(".sidebar-dropdown > a").click(function() {
-                $(".sidebar-submenu").slideUp(200);
-                if ($(this).parent().hasClass("active")) {
-                    $(".sidebar-dropdown").removeClass("active");
-                    $(this).parent().removeClass("active");
-                } else {
-                    $(".sidebar-dropdown").removeClass("active");
-                    $(this).next(".sidebar-submenu").slideDown(200);
-                    $(this).parent().addClass("active");
-                }
-            });
-            $(".sidebar-dropdown-inner > a").click(function() {
-                $(".sidebar-submenu-inner").slideUp(200);
-                if ($(this).parent().hasClass("active")) {
-                    $(".sidebar-dropdown-inner").removeClass("active");
-                    $(this).parent().removeClass("active");
-                } else {
-                    $(".sidebar-dropdown-inner").removeClass("active");
-                    $(this).next(".sidebar-submenu-inner").slideDown(200);
-                    $(this).parent().addClass("active");
-                }
-            });
 
-            $("#close-sidebar").click(function() {
-                $(".page-wrapper").removeClass("toggled");
-            });
-
-            $("#show-sidebar").click(function() {
-                $(".page-wrapper").addClass("toggled");
-            });
-        });
-    </script>
-     <script>
-        $(document).click(function(event) {
-            if (
-                $('.toggle > input').is(':checked') &&
-                !$(event.target).parents('.toggle').is('.toggle')
-            ) {
-                $('.toggle > input').prop('checked', false);
+<script>
+    $(document).ready(function() {
+        $(".sidebar-dropdown > a").click(function() {
+            $(".sidebar-submenu").slideUp(200);
+            if ($(this).parent().hasClass("active")) {
+                $(".sidebar-dropdown").removeClass("active");
+                $(this).parent().removeClass("active");
+            } else {
+                $(".sidebar-dropdown").removeClass("active");
+                $(this).next(".sidebar-submenu").slideDown(200);
+                $(this).parent().addClass("active");
             }
-        })
-    </script>
- <script>
-        // Initialize tooltips
-        $(document).ready(function() {
-            $('[data-bs-toggle="tooltip"]').tooltip();
         });
-    </script>
-     <script>
-        $(document).click(function(event) {
-            setTimeout(function() {
-                $('body')
-                    .removeClass('loading')
-                    .addClass('loaded');
-            }, 3000);
-        })
-    </script>
- <!-- <script>
+        $(".sidebar-dropdown-inner > a").click(function() {
+            $(".sidebar-submenu-inner").slideUp(200);
+            if ($(this).parent().hasClass("active")) {
+                $(".sidebar-dropdown-inner").removeClass("active");
+                $(this).parent().removeClass("active");
+            } else {
+                $(".sidebar-dropdown-inner").removeClass("active");
+                $(this).next(".sidebar-submenu-inner").slideDown(200);
+                $(this).parent().addClass("active");
+            }
+        });
+
+        $("#close-sidebar").click(function() {
+            $(".page-wrapper").removeClass("toggled");
+        });
+
+        $("#show-sidebar").click(function() {
+            $(".page-wrapper").addClass("toggled");
+        });
+    });
+</script>
+<script>
+    $(document).click(function(event) {
+        if (
+            $('.toggle > input').is(':checked') &&
+            !$(event.target).parents('.toggle').is('.toggle')
+        ) {
+            $('.toggle > input').prop('checked', false);
+        }
+    })
+</script>
+<script>
+    // Initialize tooltips
+    $(document).ready(function() {
+        $('[data-bs-toggle="tooltip"]').tooltip();
+    });
+</script>
+<script>
+    $(document).click(function(event) {
+        setTimeout(function() {
+            $('body')
+                .removeClass('loading')
+                .addClass('loaded');
+        }, 3000);
+    })
+</script>
+<!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
     const fileInputs = document.querySelectorAll('input[type="file"]');
 
