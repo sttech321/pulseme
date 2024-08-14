@@ -124,11 +124,5 @@ class Home extends BaseController
     {
         return view('general-tab/general_users');
     }
-    
-    public function contact_information(): string
-    {
-        return view('contact-card-tab/contact_information');
-    }
-
-    
+        
 }

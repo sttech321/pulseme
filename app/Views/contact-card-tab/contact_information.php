@@ -125,7 +125,7 @@
 						</div>
 					</div>
 					<div class="flex flex-col justify-start items-stretch">
-               <form id="contact-card-form" method="post" enctype="multipart/form-data">
+              		 <form id="contact-card-form" method="post" enctype="multipart/form-data">
 							<div class="row p-10px mb-1rem">
 								<h2 class="text-30px font-light">Configure</h2>
 							</div>
@@ -177,7 +177,7 @@
 										<div class="w-auto flex flex-col items-stretch">
 											<div class="number-list flex justify-between items-center hover px-20px border hover:border-gray-500 p-10px my-10px rounded-4px">
 												<div class="number text-left mr-20px">
-													<p></p>
+													<p><?= esc($contactcard['primary_number']) ?></p>
 												</div>
 											</div>
 										</div>
@@ -240,10 +240,10 @@
 									</div>
 									<div class="bg-orange-100 rounded-4px p-20px mb-30px">
 										<div class="grid grid-cols-2 grid-rows-2 gap-10px mb-20px">
-											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="30" value="60" /><label for="1">1 minutes</label></div>
-											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="60" value="120" /><label for="2">2 minutes</label></div>
-											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="90" value="180" /><label for="3">3 minutes</label></div>
-											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="120" value="240" /><label for="4">4 minutes</label></div>
+											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="30" value="60" /><label for="1">30 minutes</label></div>
+											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="60" value="120" /><label for="2">1 hour</label></div>
+											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="90" value="180" /><label for="3">1:30 hour</label></div>
+											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="120" value="240" /><label for="4">2 hour</label></div>
 										</div>
 										<p class="">*Contact Card will be sent 30 minutes after pulseCheck</p>
 									</div>

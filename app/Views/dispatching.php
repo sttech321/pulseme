@@ -99,7 +99,7 @@
                                  </div>
                                  <input
                                     class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px"
-                                    type="tel" name="customer_phone" class="customer_phone" id="phone_<?= $technician['ID'] ?>" placeholder="Phone Number" required>
+                                    type="number" name="customer_phone" class="customer_phone" id="phone_<?= $technician['ID'] ?>" placeholder="Phone Number" required>
                               </div>
                               <div class="input-group col-span-3 flex items-center">
                                  <div class="mr-10px flex justify-center items-center">

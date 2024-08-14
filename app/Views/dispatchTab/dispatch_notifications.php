@@ -101,7 +101,7 @@
             <div class="labels flex w-full justify-between items-center mb-15px">
                <h3 class="text-17px font-bold" for="neutral-sms">SMS</h3>
             </div>
-            <div class="flex justify-between"><input class="w-full mr-10px outline-none border-b focus:border-gray-400" type="tel" name="neutral-sms" id="neutral-sms" placeholder="(555) 555-5555"><button id="update-sms-button" class="btn btn-blue w-1/3"> Update SMS </button></div>
+            <div class="flex justify-between"><input class="w-full mr-10px outline-none border-b focus:border-gray-400" type="number" name="neutral-sms" id="neutral-sms" placeholder="(555) 555-5555"><button id="update-sms-button" class="btn btn-blue w-1/3"> Update SMS </button></div>
          </div>
          <div class="mb-20px input-group">
             <div class="labels flex w-full justify-between items-center mb-15px">
@@ -135,7 +135,7 @@
             <div class="labels flex w-full justify-between items-center mb-15px">
                <h3 class="text-17px font-bold" for="negative-sms">SMS</h3>
             </div>
-            <div class="flex justify-between"><input class="w-full mr-10px outline-none border-b focus:border-gray-400" type="tel" name="negative-sms" id="negative-sms" placeholder="(555) 555-5555"><button id="update-sms-button" class="btn btn-blue w-1/3"> Update SMS </button></div>
+            <div class="flex justify-between"><input class="w-full mr-10px outline-none border-b focus:border-gray-400" type="number" name="negative-sms" id="negative-sms" placeholder="(555) 555-5555"><button id="update-sms-button" class="btn btn-blue w-1/3"> Update SMS </button></div>
          </div>
          <div class="mb-20px input-group">
             <div class="labels flex w-full justify-between items-center mb-15px">

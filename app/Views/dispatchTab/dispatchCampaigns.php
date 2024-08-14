@@ -141,7 +141,7 @@
                                                          </div>
                                                          <div class="input-group">
                                                             <label class="font-bold text-sm" for="email">Email <span class="text-xs">(descriptor)</span></label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email" value="">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="email" name="email" id="email" value="">
                                                          </div>
                                                          <div class="input-group">
                                                             <label class="font-bold text-sm" for="device">Device ID <span class="text-xs">(deviceId)</span></label>
@@ -312,7 +312,7 @@
                                                         </div>
                                                         <div class="input-group">
                                                             <label class="font-bold text-sm" for="email">Email <span class="text-xs">(descriptor)</span></label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email" value="<?= esc($campaign['email']) ?>">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="email" name="email" id="email" value="<?= esc($campaign['email']) ?>">
                                                         </div>
                                                         <div class="input-group">
                                                             <label class="font-bold text-sm" for="device">Device ID <span class="text-xs">(deviceId)</span></label>
@@ -340,7 +340,7 @@
                                                    <!---->
                                                 </div>
                                                 <div class="mb-20px text-left">
-                                                   <input class="w-full mb-5px border border-gray-400 focus:border-black p-10px outline-none rounded-3px" type="tel" name="phone" id="phone" placeholder="Phone Number" />
+                                                   <input class="w-full mb-5px border border-gray-400 focus:border-black p-10px outline-none rounded-3px" type="number" name="phone" id="phone" placeholder="Phone Number" />
                                                    <!---->
                                                 </div>
                                                 <div class="flex justify-center">

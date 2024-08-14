@@ -243,6 +243,7 @@ class ReviewController extends BaseController
         $data = [
             'campaignID' => $this->request->getPost('campaign'),
             'reviewerInfo' => $reviewinfoJson,
+            'updatedOn'   => date('Y-m-d H:i:s'),
         ];
 
       // Perform the update

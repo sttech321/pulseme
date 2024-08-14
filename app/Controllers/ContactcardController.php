@@ -50,4 +50,12 @@ class ContactcardController extends BaseController
         ]);
     }
 
+    public function contact_information(): string
+    {
+        $contactCardModel = new ContactcardModal();
+        $data['contactcard'] = $contactCardModel->first();
+
+        return view('contact-card-tab/contact_information',$data);
+    }
+
 }
