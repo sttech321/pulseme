@@ -14,7 +14,6 @@
       </div>
    </div>
 </div>
-<!-- <div class="container-fluid"> -->
 <div class="sidebarRightContent">
    <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
       <div class="headline bg-white p-20px border-b border-gray-200">
@@ -25,14 +24,14 @@
             <h2 class="text-xl p-15px pt-30px">Company Settings</h2>
             <div class="p-15px">
                <div class="links flex flex-col border-l border-gray-400">
-                  <a href="/settings/general/connect-social-media" class="p-15px">
+                  <!-- <a href="/settings/general/connect-social-media" class="p-15px">
                      <svg class="svg-inline--fa fa-chart-line mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-line" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path class="" fill="currentColor" d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z">
                         </path>
                      </svg>
                      General 
-                  </a>
-                  <a href="/settings/dispatch/campaigns" class="border-blue-500 text-blue-500 border-l-2 p-15px">
+                  </a> -->
+                  <a href="<?= base_url('/settings/dispatch/campaigns') ?>" class="border-blue-500 text-blue-500 border-l-2 p-15px">
                      <svg class="svg-inline--fa fa-arrow-right-arrow-left mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right-arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                         <path class="" fill="currentColor" d="M438.6 150.6c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 96 32 96C14.3 96 0 110.3 0 128s14.3 32 32 32l306.7 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96zm-333.3 352c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 416 416 416c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96z">
                         </path>
@@ -40,7 +39,7 @@
                      Dispatch 
                   </a>
                   <!---->
-                  <a href="/settings/contact-card/contact-information" class="p-15px">
+                  <a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="p-15px">
                      <svg class="svg-inline--fa fa-address-card mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="address-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                         <path class="" fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 256h64c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16z">
                         </path>
@@ -48,25 +47,28 @@
                      Contact Card 
                   </a>
                   <!---->
-                  <a href="/settings/billing/billing_subscription" class="p-15px">
+                  <!-- <a href="/settings/billing/billing_subscription" class="p-15px">
                      <svg class="svg-inline--fa fa-credit-card mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="credit-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                         <path class="" fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96v32H576V96c0-35.3-28.7-64-64-64H64zM576 224H0V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V224zM112 352h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm112 16c0-8.8 7.2-16 16-16H368c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-8.8 0-16-7.2-16-16z">
                         </path>
                      </svg>
                      Billing 
-                  </a>
+                  </a> -->
                </div>
             </div>
          </div>
          <div class="flex-grow pt-20px">
             <div class="flex flex-col">
                <div class="sub-menu-bar pl-25px">
-                  <div class="flex justify-start items-center border-b border-gray-300"><a href="/settings/dispatch/campaigns" class="border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px" aria-current="page">Campaigns</a><a href="/settings/dispatch/notifications" class="p-15px">Notifications</a><a href="/settings/dispatch/web-widget" class="p-15px">Web
-                     Widget</a><a href="/settings/dispatch/review-widget" class="p-15px">Review Widget</a>
+                  <div class="flex justify-start items-center border-b border-gray-300">
+                  <a href="<?= base_url('/settings/dispatch/campaigns')?>" class="border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px" aria-current="page">Campaigns</a>
+                  <!-- <a href="<?= base_url('/settings/dispatch/notifications')?>" class="p-15px">Notifications</a>
+                  <a href="<?= base_url('/settings/dispatch/web-widget')?>" class="p-15px">WebWidget</a>
+                  <a href="<?= base_url('/settings/dispatch/review-widget')?>" class="p-15px">Review Widget</a> -->
                   </div>
                </div>
                <div class="p-25px campaigns">
-                  <div data-v-24df4780="" class="flex flex-col items-stretch">
+                  <div data-v-24df4780="" class="flex flex-col items-stretch" class="lists">
                      <!---->
                      <div data-v-24df4780="" class="main p-20px bg-white rounded">
                         <!----><!---->
@@ -101,26 +103,12 @@
                                           </ul>
                                           <div class="tab-content" id="pills-tabContent">
                                              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                                <form method="post" action="<?= base_url('/settings/dispatch/campaigns/create') ?>" enctype="multipart/form-data">
+                                                <form id="campaignForm" enctype="multipart/form-data">
                                                    <div class="modal-header">
                                                       <h5 class="modal-title" id="exampleModalLabel">Create campaign</h5>
                                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                    </div>
                                                    <div class="modal-body">
-                                                      <!-- Display validation errors -->
-                                                      <?php $script = ''; ?>
-                                                      <?php if (session()->getFlashdata('validation')): ?>
-                                                         <div class="validation-errors">
-                                                            <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
-                                                                  <p style="color: red;"><?php echo $error; ?></p>
-                                                            <?php endforeach; ?>
-                                                         </div>
-                                                         <?php $script = '$(document).ready(function() { $("#campaignModal").addClass("show").css("display", "block"); });'; ?>
-                                                      <?php endif; ?>
-                                                      <script>
-                                                         <?php echo $script; ?>
-                                                      </script>
-
                                                       <div class="grid grid-cols-2 gap-20px auto-rows-auto">
                                                          <div class="flex w-full flex-col row-span-3">
                                                             <img id="preview" class="preview-image w-200px h-auto" src="/image/campaignProfile.jpg" alt="Image Preview">
@@ -153,7 +141,7 @@
                                                          </div>
                                                          <div class="input-group">
                                                             <label class="font-bold text-sm" for="email">Email <span class="text-xs">(descriptor)</span></label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email" value="">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="email" name="email" id="email" value="">
                                                          </div>
                                                          <div class="input-group">
                                                             <label class="font-bold text-sm" for="device">Device ID <span class="text-xs">(deviceId)</span></label>
@@ -281,31 +269,18 @@
                                     </div>
                                  </div>
                                  <?php foreach($campaigns as $campaign) : ?>
+                                 <input type="hidden" name="id" id="campaignid" value="<?= $campaign['ID'] ?>">
                                  <!-- Modal for editing a campaign -->
                                  <div class="modal fade" id="EDITcampaignModal-<?= $campaign['ID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
                                         <div class="modal-content">
-                                           <form method="post" action="<?= base_url('/settings/dispatch/campaigns/update/' . $campaign['ID']) ?>" enctype="multipart/form-data">
+                                           <form method="post" action="<?= base_url('/settings/dispatch/campaigns/update/' . $campaign['ID']) ?>" enctype="multipart/form-data" data-ajax="true">
                                            <input type="hidden" name="id" value="<?= $campaign['ID'] ?>">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Edit campaign</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                <?php $script = ''; ?>
-                                                <?php if (session()->getFlashdata('validation')): ?>
-                                                   <div class="validation-errors">
-                                                      <?php foreach (session()->getFlashdata('validation')->getErrors() as $error): ?>
-                                                            <p style="color: red;"><?php echo $error; ?></p>
-                                                      <?php endforeach; ?>
-                                                   </div>
-                                                   <?php $script = '$(document).ready(function() { $("#campaignModal").addClass("show").css("display", "block"); });'; ?>
-                                                <?php endif; ?>
-
-                                                <script>
-                                                   <?php echo $script; ?>
-                                                </script>
-
                                                     <div class="grid grid-cols-2 gap-20px auto-rows-auto">
                                                         <div class="flex w-full flex-col row-span-3">
                                                             <img id="preview" class="preview-image w-200px h-auto" src="<?= esc($campaign['image']) ?>" alt="Image Preview">
@@ -337,7 +312,7 @@
                                                         </div>
                                                         <div class="input-group">
                                                             <label class="font-bold text-sm" for="email">Email <span class="text-xs">(descriptor)</span></label>
-                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="email" id="email" value="<?= esc($campaign['email']) ?>">
+                                                            <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="email" name="email" id="email" value="<?= esc($campaign['email']) ?>">
                                                         </div>
                                                         <div class="input-group">
                                                             <label class="font-bold text-sm" for="device">Device ID <span class="text-xs">(deviceId)</span></label>
@@ -365,7 +340,7 @@
                                                    <!---->
                                                 </div>
                                                 <div class="mb-20px text-left">
-                                                   <input class="w-full mb-5px border border-gray-400 focus:border-black p-10px outline-none rounded-3px" type="tel" name="phone" id="phone" placeholder="Phone Number" />
+                                                   <input class="w-full mb-5px border border-gray-400 focus:border-black p-10px outline-none rounded-3px" type="number" name="phone" id="phone" placeholder="Phone Number" />
                                                    <!---->
                                                 </div>
                                                 <div class="flex justify-center">
@@ -376,7 +351,7 @@
                                        </div>
                                     </div>
                                  </div>
-
+                                    
                                 <div class="modal fade" id="EDITscampaignModal-<?= $campaign['employeeId'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modalContent mx-700">
                                         <div class="modal-content">
@@ -401,7 +376,7 @@
                         </div>
                      </div>
                      <div data-v-24df4780="" class="list">
-                        <table data-v-24df4780="" class="campaigns w-full">
+                        <table data-v-24df4780="" class="campaigns w-full" id="technician-list">
                            
                            <tr class="flex odd:bg-sky-100 odd:bg-opacity-50 py-15px px-10px">
                               <td class="employee flex items-center px-10px py-20px flex-shrink-0 w-1/12">
@@ -429,16 +404,16 @@
                                           Edit Campaign 
                                        </button>
                                     <!-- </a> -->
-                                    <button data-bs-toggle="modal" data-bs-target="#EDITDefault" class="btn btn-blue w-full rounded-2px" id="showFieldOps-<?= esc($campaign['employeeId']) ?>">
+                                    <!-- <button data-bs-toggle="modal" data-bs-target="#EDITDefault" class="btn btn-blue w-full rounded-2px" id="showFieldOps-<?= esc($campaign['employeeId']) ?>">
                                        <svg class="svg-inline--fa fa-mobile-screen-button" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="mobile-screen-button" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                           <path class="" fill="currentColor" d="M16 64C16 28.7 44.7 0 80 0H304c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H80c-35.3 0-64-28.7-64-64V64zM224 448a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM304 64H80V384H304V64z">
                                           </path>
                                        </svg>
                                        FieldOps App 
-                                    </button>
-                                    <a href="<?= base_url('/settings/dispatch/campaigns/delete/'.$campaign['ID']) ?>" class="btn btn-red w-full rounded-2px" >
+                                    </button> -->
+                                    <a href="<?= base_url('/settings/dispatch/campaigns/delete/'.$campaign['ID']) ?>" class="delete-campaign-btn btn btn-red w-full rounded-2px showFieldOps" >
                                        <button class="btn btn-red rounded-2px" id="showFieldOps-<?= esc($campaign['ID']) ?>">
-                                          <svg class="svg-inline--fa fa-trash" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                          <svg class="showFieldOps svg-inline--fa fa-trash" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                              <path class="" fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
                                              </path>
                                           </svg>
@@ -464,11 +439,6 @@
       </div>
    </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <style>
    img#preview {
    height: 300px;
@@ -477,11 +447,7 @@
    margin: auto;
    }
 </style>
-<script>
-   $(document).ready(function() {
-       <?php echo $script;?>
-   });
-</script>
+
 <script>
    function previewImage(event) {
        var reader = new FileReader();
@@ -492,5 +458,223 @@
        reader.readAsDataURL(event.target.files[0]);
    }
 </script>
+<script>
+$('#campaignForm').on('submit', function (e) {
+   e.preventDefault();
+   var formData = new FormData(this);
 
+   $.ajax({
+      url: "<?= base_url('/settings/dispatch/campaigns/create') ?>",
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+            if (response.success) {
+               // Close the modal
+               $('#campaignModal').modal('hide');
+               // Show success message or redirect
+               alert('Campaign saved successfully!');
+            } else {
+               // Display validation errors
+               $('#validation-errors').html('');
+               $.each(response.validation, function (key, value) {
+                  $('#validation-errors').append('<p style="color: red;">' + value + '</p>');
+               });
+            }
+      },
+      error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+            alert('An error occurred. Please try again.');
+      }
+   });
+});
+
+$(document).ready(function() {
+    // Bind the form submit event
+    $(document).on('submit', 'form[data-ajax="true"]', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        var form = $(this);
+        var formData = new FormData(form[0]); // Get form data
+
+        $.ajax({
+            url: form.attr('action'),
+            type: 'POST',
+            data: formData,
+            processData: false, // Important: prevent jQuery from automatically transforming the data into a query string
+            contentType: false, // Important: prevent jQuery from setting the content-type header
+            success: function(response) {
+                // Handle success response here
+                if (response.success) {
+                    alert('Campaign updated successfully.');
+                    // Optionally, refresh the page or update the UI
+                    location.reload(); // Reload page to see changes
+                } else {
+                    // Handle validation errors or other response data
+                    alert('Failed to update campaign: ' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle AJAX errors here
+                alert('An error occurred: ' + error);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    // Bind the click event for delete buttons
+    $(document).on('click', '.delete-campaign-btn', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        if (confirm('Are you sure you want to delete this campaign?')) {
+            var button = $(this);
+            var url = button.attr('href'); // Get URL from the button's href attribute
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function(response) {
+                    // Handle success response here
+                    if (response.success) {
+                        alert('Campaign deleted successfully.');
+                        location.reload();
+                        // Optionally, remove the campaign from the UI
+                        button.closest('.campaign-item').remove();
+                    } else {
+                        alert('Failed to delete campaign: ' + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle AJAX errors here
+                    alert('An error occurred: ' + error);
+                }
+            });
+        }
+    });
+});
+
+$(document).ready(function() {
+   // Handle input changes in the search bar
+   $('#search').on('input', function() {
+      var query = $(this).val();
+      if (query) {
+         loadTechnicians(query);
+      } else {
+         loadTechnicians();
+      }
+   });
+
+   function loadTechnicians(query = '') {
+      var url = query ? '<?= base_url('/searchbar') ?>' : '<?= base_url('/getAllTechnicians') ?>';
+
+      $.ajax({
+         url: url,
+         type: 'post',
+         data: { query: query },
+         success: function(data) {
+            var resultsContainer = $('.list');
+            resultsContainer.empty(); // Clear previous results
+
+            if (data.length > 0) {
+               var table = $('<table class="w-full"></table>');
+               $.each(data, function(index, technician) {
+                  var row = 
+                  `<tr class="flex odd:bg-sky-100 odd:bg-opacity-50 py-15px px-10px"><td class="employee flex items-center px-10px py-20px flex-shrink-0 w-1/12"><div class="profile-img w-full h-auto mr-10px flex justify-center items-center"> <img w-full="" src="http://localhost:8080${technician.image}" alt=""> </div> </td><td class="employee flex items-center px-10px flex-shrink-0 w-1/6"><div class=""><p class="name font-17px font-bold">${technician.name}</p> <p class="department font-14px text-gray-500">${technician.department}</p> </div></td><td class="recipient-info col-span-6 flex flex-col w-1/2 justify-center items-start px-10px"><p class="description">${technician.description}</p></td><td class="flex flex-col justify-center items-end col-span-3 flex-shrink-0 px-10px w-1/4"><div class="grid grid-rows-2 grid-flow-col gap-10px"><button data-bs-toggle="modal" data-bs-target="#EDITcampaignModal-${technician.ID}" class="btn btn-blue w-full rounded-2px" id="editCampaign-${technician.employeeId}" ><svg class="svg-inline--fa fa-face-grin" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"> </path> </svg> Edit Campaign  </button><a href="http://localhost:8080/settings/dispatch/campaigns/delete/${technician.ID}" class="delete-campaign-btn btn btn-red w-full rounded-2px showFieldOps" > <button class="btn btn-red rounded-2px" id="showFieldOps-${technician.ID}"><svg class="showFieldOps svg-inline--fa fa-trash" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"> <path class="" fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg> </button></a><button data-bs-toggle="modal" data-bs-target="#EDITscampaignModal-${technician.employeeId}" class="btn btn-blue rounded-2px" id="showSample-${technician.employeeId}"> <svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path class="" fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg></button></div></td></tr>`;
+                  table.append(row);
+
+                  var modal = `
+                  <div class="modal fade" id="EDITcampaignModal-${technician.ID}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modalContent mx-700">
+                        <div class="modal-content">
+                           <form method="post" action="<?= base_url('/settings/dispatch/campaigns/update/') ?>${technician.ID}" enctype="multipart/form-data" data-ajax="true">
+                              <input type="hidden" name="id" value="${technician.ID}">
+                              <div class="modal-header">
+                                 <h5 class="modal-title" id="exampleModalLabel">Edit campaign</h5>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                 <div class="grid grid-cols-2 gap-20px auto-rows-auto">
+                                    <div class="flex w-full flex-col row-span-3">
+                                       <img id="preview-${technician.ID}" class="preview-image w-200px h-auto" src="${technician.image}" alt="Image Preview">
+                                       <p class="text-md">Upload your image</p>
+                                       <p class="text-sm mb-3">The preferred size is 200x200</p>
+                                       <button class="btn btn-blue w-full mb-2" type="button">
+                                          <input type="file" id="profile-image-upload-${technician.ID}" name="campaignImage" style="display: block;" accept="image/*" onchange="previewImage(event, ${technician.ID})">
+                                       </button>
+                                    </div>
+                                    <div class="input-group">
+                                       <label class="font-bold text-sm" for="campaignName">Campaign Name</label>
+                                       <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="CampaignName" id="campaignName-${technician.ID}" value="${technician.name}">
+                                    </div>
+                                    <div class="input-group row-span-2">
+                                       <label class="font-bold text-sm" for="description">Campaign Description</label>
+                                       <textarea class="w-full p-5px outline-none border-b focus:border-blue-500" name="campaignDescription" id="description-${technician.ID}">${technician.description}</textarea>
+                                    </div>
+                                    <div class="input-group">
+                                       <label class="font-bold text-sm" for="department">Department</label>
+                                       <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="campaignDepartment" id="department-${technician.ID}" value="${technician.department}">
+                                    </div>
+                                    <div class="input-group">
+                                       <label class="font-bold text-sm" for="license">License</label>
+                                       <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="license" id="license-${technician.ID}" value="${technician.license}">
+                                    </div>
+                                    <div class="input-group">
+                                       <label class="font-bold text-sm" for="employeeID">Employee ID <span class="text-xs">(Useful for API Integrations)</span></label>
+                                       <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employeeId" id="employeeId-${technician.ID}" value="${technician.employeeId}">
+                                    </div>
+                                    <div class="flex flex-col justify-start items-center mt-4">
+                                       <button class="btn btn-green w-full mb-2" type="submit">Update Campaign</button>
+                                       <button class="btn btn-red w-full" type="button" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>`;
+
+                  resultsContainer.append(modal);
+
+                  var biomodal = `
+                  <div class="modal fade" id="EDITscampaignModal-${technician.employeeId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modalContent mx-700">
+                           <div class="modal-content">
+                           <div class="modal-body bg-white relative  my-30px rounded-4px shadow p-30px text-center flex flex-col items-center">
+                                    <div class="img"><img src="${technician.image}" alt=""></div>
+                                    <h1 class="text-30px font-bold mb-15px">What would you like to see?</h1>
+                                    <button type="button" class="btn-close text-gray-400 hover:text-black absolute top-10px right-10px" data-bs-dismiss="modal" aria-label="Close">  
+                                       <svg class="svg-inline--fa fa-xmark text-30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                          <path class="" fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
+                                       </svg>
+                                    </button>
+                                    <div class="flex">
+                                    <a href="<?= base_url('application/bio/') ?>${technician.ID}" target="_blank" id="bio-button" class="btn btn-blue mr-10px">Bio</a>
+                                    <a href="<?= base_url('application/pulsecheck/') ?>${technician.employeeId}" target="_blank" id="pulse-check-button" class="btn btn-green">Pulse Check</a>
+                                    </div>
+                                 </div>
+                           </div>
+                     </div>
+                  </div>`;
+
+                  resultsContainer.append(biomodal);
+              
+               });
+               resultsContainer.append(table);
+            } else {
+               resultsContainer.append('<p>No results found.</p>');
+            }
+         },
+         error: function(xhr, status, error) {
+            console.error('Error fetching technicians:', status, error);
+         }
+      });
+   }
+
+   // Initial load of technicians
+   loadTechnicians();
+});
+
+</script>
 <?= $this->endsection('content') ?>

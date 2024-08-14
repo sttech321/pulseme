@@ -48,7 +48,7 @@
           <div data-v-139b8be6="" class="buttons">
             <button class="btn btnPrimary" name="login" type="submit">Log In</button>
           </div>
-          <p class="bottomLineContent"><a data-v-139b8be6="" href="/forgot-password" class="">Forgot password? </a>Reset it securely</p> 
+          <p class="bottomLineContent"><a data-v-139b8be6="" href="<?= base_url('/forgot-password') ?>" class="">Forgot password? </a>Reset it securely</p> 
         </div>
       </div>
     </form>

@@ -8,14 +8,17 @@
 	<meta name="description" content="summitRA: The small framework with powerful features">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
-	<link rel="stylesheet" type="text/css" href="/css/header.css">
-	<link rel="stylesheet" type="text/css" href="/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="/css/reviews.css">
-	<link rel="stylesheet" type="text/css" href="/css/variables.css">
-	<link rel="stylesheet" type="text/css" href="/css/analysis.css">
-	<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> -->
-	<link rel="stylesheet" type="text/css" href="/css/all.min.css">
-	<script src="/js/jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/header.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reset.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reviews.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/variables.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/analysis.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/all.min.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/apexcharts.css')?>">
+	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('/css/bootstrap.min.css')?>"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('/css/custom-modal.css')?>"> -->
+
+	<script src="<?= base_url('/js/jquery.js')?>"></script>
 	<style>
     * {
       font-size: 14px;
@@ -46,7 +49,7 @@
 		<nav id="sidebar" class="sidebar-wrapper">
 			<div class="sidebar-content">
 				<div class="sidebar-brand">
-					<a href="#"> <img data-v-139b8be6="" width="120" src="/image/login-img.png"></a>
+					<a href="#"> <img data-v-139b8be6="" width="120" src="<?= base_url('/image/login-img.png')?>"></a>
 					<div id="close-sidebar">
 						<i class="fas fa-times"></i>
 					</div>
@@ -54,7 +57,7 @@
 				<div class="sidebar-header flexBetween">
 					<div class="leftSec">
 						<div class="user-pic">
-							<img data-v-139b8be6="" width="230" src="/image/person.jpg" alt="user picture">
+							<img data-v-139b8be6="" width="230" src="<?= base_url('/image/person.jpg')?>" alt="user picture">
 						</div>
 						<div class="user-info">
 							<span class="user-name">Jhon
@@ -72,7 +75,7 @@
 									<div class="dropdown-top flexBetween">
 										<div class="leftSec">
 											<div class="user-pic">
-												<img data-v-139b8be6="" width="230" src="/image/person.jpg" alt="user picture">
+												<img data-v-139b8be6="" width="230" src="<?= base_url('/image/person.jpg')?>" alt="user picture">
 											</div>
 											<div class="user-info">
 												<span class="user-name">Jhon
@@ -84,10 +87,10 @@
 									</div>
 								</li>
 								<li><a class="menuListItem" href="#"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
-								<li><a class="menuListItem" href="/settings/general/connect-social-media"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
+								<li><a class="menuListItem" href="<?= base_url('/settings/dispatch/campaigns')?>"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
 								<!-- <li><a class="menuListItem" href="/logs/outbound"><i class="fa fa-envelope" aria-hidden="true"></i>Logs</a></li> -->
 								<li> 
-                                    <a class="menuListItem" href="/logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+                                    <a class="menuListItem" href="<?= base_url('/logout')?>"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                                 </li>
 
 							</ul>
@@ -103,9 +106,9 @@
 							<span>General</span>
 						</li>
 						<li>
-							<a href="/operate/dispatch">
+							<a href="<?= base_url('/operate/dispatch')?>">
 								<div class="imgIconWrap">
-									<img width="20" height="20" src="/image/operate.png" alt="sidebar icon">
+									<img width="20" height="20" src="<?= base_url('/image/operate.png')?>" alt="sidebar icon">
 								</div>
 								<span> Operate </span>
 							</a>
@@ -113,23 +116,23 @@
 						<li class="sidebar-dropdown">
 							<a href="#">
 								<div class="imgIconWrap">
-									<img width="20" height="20" src="/image/analyze.png" alt="sidebar icon">
+									<img width="20" height="20" src="<?= base_url('/image/analyze.png')?>" alt="sidebar icon">
 								</div>
 								<span>Analyze</span>
 							</a>
 							<div class="sidebar-submenu">
 								<ul>
 									<li>
-										<a href="/analyze/overview"><img width="15" src="/image/overview.svg" alt="sidebar icon">Overview </a>
+										<a href="<?= base_url('/analyze/overview')?>"><img width="15" src="<?= base_url('/image/overview.svg')?>" alt="sidebar icon">Overview </a>
 									</li>
 									<li>
-										<a href="/analyze/reviews"><img width="15" src="/image/reviews.svg" alt="sidebar icon">Reviews</a>
+										<a href="<?= base_url('/analyze/reviews')?>"><img width="15" src="<?= base_url('/image/reviews.svg')?>" alt="sidebar icon">Reviews</a>
 									</li>
 									<!-- <li>
 										<a href="#"><img width="15" src="/image/competitor.svg" alt="sidebar icon">Competitor Analysis</a>
 									</li> -->
 									<li>
-										<a href="/analyze/dispatching"><img width="15" src="/image/dispatching.svg" alt="sidebar icon">Dispatching</a>
+										<a href="<?= base_url('/analyze/dispatching')?>"><img width="15" src="<?= base_url('/image/dispatching.svg')?>" alt="sidebar icon">Dispatching</a>
 									</li>
 								</ul>
 							</div>
@@ -137,17 +140,17 @@
 						<li class=" sidebar-dropdown">
 							<a href="#">
 								<div class="imgIconWrap">
-									<img width="20" height="20" src="/image/leaderboard.png" alt="sidebar icon">
+									<img width="20" height="20" src="<?= base_url('/image/leaderboard.png') ?>" alt="sidebar icon">
 								</div>
 								<span>Leaderboard</span>
 							</a>
 							<div class="sidebar-submenu">
 								<ul>
 									<li>
-										<a href="/leaderboard/summary"><img width="15" src="/image/summary.svg" alt="sidebar icon">Summary</a>
+										<a href="<?= base_url('/leaderboard/summary')?>"><img width="15" src="<?= base_url('/image/summary.svg')?>" alt="sidebar icon">Summary</a>
 									</li>
 									<li>
-										<a href="/leaderboard/reports/campaigns"><img width="15" src="/image/reports.svg" alt="sidebar icon">Reports</a>
+										<a href="<?= base_url('/leaderboard/reports/campaigns')?>"><img width="15" src="<?= base_url('/image/reports.svg')?>" alt="sidebar icon">Reports</a>
 									</li>
 								</ul>
 							</div>
@@ -197,7 +200,7 @@
 						<li>
 							<a href="#">
 								<div class="imgIconWrap">
-									<img width="20" height="20" src="/image/referrals.png" alt="sidebar icon">
+									<img width="20" height="20" src="<?= base_url('/image/referrals.png')?>" alt="sidebar icon">
 								</div>
 								<span>Referrals</span>
 							</a>
@@ -216,7 +219,8 @@
 	</div>
 	<!-- page-wrapper -->
 
-	<script src="/js/bootstrap.bundle.min.js"></script>
+	<script src="<?= base_url('/js/bootstrap.bundle.min.js')?>"></script>
+	<script src="<?= base_url('/js/apexcharts.min.js')?>"></script>
 
 	<script>
 		$(document).ready(function() {
@@ -277,6 +281,8 @@
 			}, 3000);
 		})
 	</script>
+
+
 </body>
 
 </html>

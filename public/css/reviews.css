@@ -134,3 +134,22 @@
     background: #ededed;
 }
 
+/* contact-templateBox */
+
+.contact-templateBox{
+    background: #fff;
+    padding: 27px;
+    margin-top: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+}
+.contact-templateBox ul.cards {border: none !important;}
+.contact-templateBox ul.cards li {display: flex;}
+.contact-templateBox .details div {
+    font-size: 16px;
+    color: #5c5858;
+}
+.contact-templateBox .details {
+    margin: 0 !important;
+    padding: 0px 26px;
+}

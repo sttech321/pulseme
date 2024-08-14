@@ -7265,3 +7265,8 @@ ul {
 .modal-body.bg-white.w-600px.my-30px.rounded-4px.shadow.p-30px.text-center.flex.flex-col.items-stretch {
     margin: 25px 20px 25px 45px;
 }
+
+/* dispatch campaign button */
+.showFieldOps .showFieldOps {
+    margin-left: 30px;
+}
