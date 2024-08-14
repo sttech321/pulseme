@@ -1,6 +1,12 @@
 <!-- app/Views/reviews.php -->
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
+<style>
+i.fa.fa-star {
+    font-size: 24px;
+    color: #f09737;
+}
+</style>
 <div class="headerTop">
     <div class="dropMenuWrap flexBetween">
         <div class="pageNameWrap">
@@ -119,11 +125,12 @@
                                         <tr data-v-4065c71e="" class="alternate-row">
                                             <td data-v-4065c71e="" class="flex items-center justify-between p-1 h-20">
                                                 <div data-v-4065c71e="">
-                                                    <div data-v-4065c71e="" class="text-xl ml-2 font-bold">4.7</div>
-                                                    <div data-v-4065c71e="" class="ml-2 text-sm">Professionalism</div>
+                                                    <div data-v-4065c71e="" class="text-xl ml-2 font-bold"><?= $ratepoint2 ?></div>
+                                                    <div data-v-4065c71e="" class="ml-2 text-sm"><?= $ratetext2 ?></div>
                                                 </div>
                                                 <div data-v-4065c71e="" class="flex justify-evenly items-center">
-                                                    <div class="flex text-xl relative">
+                                                <?= $starRating2 ?>
+                                                    <!-- <div class="flex text-xl relative">
                                                         <svg class="svg-inline--fa fa-star icon-style text-lg text-gray-300" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                                             <path class="" fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
                                                         </svg>
@@ -156,18 +163,19 @@
                                                                 <path class="" fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
                                                             </svg>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr data-v-4065c71e="" class="">
                                             <td data-v-4065c71e="" class="flex items-center justify-between p-1 h-20">
                                                 <div data-v-4065c71e="">
-                                                    <div data-v-4065c71e="" class="text-xl ml-2 font-bold">4.6</div>
-                                                    <div data-v-4065c71e="" class="ml-2 text-sm">How likely are you to recommend us?</div>
+                                                    <div data-v-4065c71e="" class="text-xl ml-2 font-bold"><?= $ratepoint1 ?></div>
+                                                    <div data-v-4065c71e="" class="ml-2 text-sm"><?= $ratetext1 ?></div>
                                                 </div>
                                                 <div data-v-4065c71e="" class="flex justify-evenly items-center">
-                                                    <div class="flex text-xl relative">
+                                                <?= $starRating1 ?>
+                                                    <!-- <div class="flex text-xl relative">
                                                         <svg class="svg-inline--fa fa-star icon-style text-lg text-gray-300" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                                             <path class="" fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
                                                         </svg>
@@ -200,18 +208,19 @@
                                                                 <path class="" fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
                                                             </svg>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr data-v-4065c71e="" class="alternate-row">
                                             <td data-v-4065c71e="" class="flex items-center justify-between p-1 h-20">
                                                 <div data-v-4065c71e="">
-                                                    <div data-v-4065c71e="" class="text-xl ml-2 font-bold">4.6</div>
-                                                    <div data-v-4065c71e="" class="ml-2 text-sm">Quality of Service</div>
+                                                    <div data-v-4065c71e="" class="text-xl ml-2 font-bold"><?= $ratepoint3 ?></div>
+                                                    <div data-v-4065c71e="" class="ml-2 text-sm"><?= $ratetext3 ?></div>
                                                 </div>
                                                 <div data-v-4065c71e="" class="flex justify-evenly items-center">
-                                                    <div class="flex text-xl relative">
+                                                <?= $starRating3 ?>
+                                                    <!-- <div class="flex text-xl relative">
                                                         <svg class="svg-inline--fa fa-star icon-style text-lg text-gray-300" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                                             <path class="" fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
                                                         </svg>
@@ -244,7 +253,7 @@
                                                                 <path class="" fill="currentColor" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
                                                             </svg>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </td>
                                         </tr>
@@ -263,7 +272,7 @@
                                         <tr data-v-b59c33b2="" class="alternate-row">
                                             <td data-v-b59c33b2="" class="flex items-center justify-between p-1 h-20">
                                                 <div data-v-b59c33b2="">
-                                                    <div data-v-b59c33b2="" class="text-xl ml-2 font-bold">95.7%</div>
+                                                    <div data-v-b59c33b2="" class="text-xl ml-2 font-bold"><?= $happyPercentage ?>%</div>
                                                     <div data-v-b59c33b2="" class="ml-2 text-sm">Happy Customer Count</div>
                                                 </div>
                                                 <div data-v-b59c33b2="" class="flex justify-evenly items-center">
@@ -304,14 +313,14 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr data-v-b59c33b2="" class="">
+                                        <!-- <tr data-v-b59c33b2="" class="">
                                             <td data-v-b59c33b2="" class="flex items-center justify-between p-1 h-20">
                                                 <div data-v-b59c33b2="">
                                                     <div data-v-b59c33b2="" class="text-xl ml-2 font-bold">0.9%</div>
                                                     <div data-v-b59c33b2="" class="ml-2 text-sm">Neutral Customer Count</div>
-                                                </div>
-                                                <div data-v-b59c33b2="" class="flex justify-evenly items-center">
-                                                    <div class="flex text-xl relative">
+                                                </div> -->
+                                                <!-- <div data-v-b59c33b2="" class="flex justify-evenly items-center"> -->
+                                                    <!-- <div class="flex text-xl relative">
                                                         <svg class="svg-inline--fa fa-face-meh icon-style text-lg text-gray-300" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-meh" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                             <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM176.4 176a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm128 32a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM160 336H352c8.8 0 16 7.2 16 16s-7.2 16-16 16H160c-8.8 0-16-7.2-16-16s7.2-16 16-16z"></path>
                                                         </svg>
@@ -344,14 +353,14 @@
                                                                 <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM176.4 176a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm128 32a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM160 336H352c8.8 0 16 7.2 16 16s-7.2 16-16 16H160c-8.8 0-16-7.2-16-16s7.2-16 16-16z"></path>
                                                             </svg>
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                    </div> -->
+                                                <!-- </div>
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                         <tr data-v-b59c33b2="" class="alternate-row">
                                             <td data-v-b59c33b2="" class="flex items-center justify-between p-1 h-20">
                                                 <div data-v-b59c33b2="">
-                                                    <div data-v-b59c33b2="" class="text-xl ml-2 font-bold">3.3%</div>
+                                                    <div data-v-b59c33b2="" class="text-xl ml-2 font-bold"><?= $unhappyPercentage ?>%</div>
                                                     <div data-v-b59c33b2="" class="ml-2 text-sm">Unhappy Customer Count</div>
                                                 </div>
                                                 <div data-v-b59c33b2="" class="flex justify-evenly items-center">
@@ -448,6 +457,5 @@
             </div>
         </div>
     </div>
-
 </div>
 <?= $this->endSection() ?>

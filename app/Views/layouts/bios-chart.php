@@ -1,6 +1,14 @@
 <div id="chart"></div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // Fetch and parse data from PHP variables
+        var bioDates = <?= $bioDates ?>;
+        var bioCounts = <?= $bioCounts ?>;
+
+        console.log('Dates:', bioDates);
+        console.log('Counts:', bioCounts);
+
+        // Initialize the chart options
         var options = {
             chart: {
                 type: 'area',
@@ -28,10 +36,10 @@
             colors: ['#007bff'], // Blue for Email
             series: [{
                 name: 'Email',
-                data: [34, 44, 54, 21, 12, 43, 33, 23, 66, 66, 58]
+                data: bioCounts // Use the counts data for the series
             }],
             xaxis: {
-                categories: ['2024-01-01', '2024-02-01', '2024-03-01', '2024-04-01', '2024-05-01', '2024-06-01', '2024-07-01', '2024-08-01', '2024-09-01', '2024-10-01', '2024-11-01'], // Date-wise categories
+                categories: bioDates, // Use the dates for x-axis categories
                 type: 'datetime',
                 labels: {
                     format: 'd/M/yyyy' // Date format as day/month/year
@@ -49,6 +57,7 @@
             }
         };
 
+        // Create and render the chart
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
     });

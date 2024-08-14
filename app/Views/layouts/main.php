@@ -81,7 +81,7 @@
 												<span class="user-name">Jhon
 													<strong>Smith</strong>
 												</span>
-												<span class="user-role">Administrator</span>social_review
+												<span class="user-role">Administrator</span>
 											</div>
 										</div>
 									</div>

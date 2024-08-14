@@ -77,6 +77,8 @@ class ReviewController extends BaseController
         // Preparing data for insertion
         $data = [
             // 'contactcard' => $contactcard,
+            'createdOn' => date('Y-m-d H:i:s'),
+            'updatedOn' => date('Y-m-d H:i:s'),
             'campaignID' => $campaignId,
             'reviewText'=> $feedback,
             'reviewType'=> $review_type,
@@ -212,6 +214,8 @@ class ReviewController extends BaseController
             'campaignID' => $this->request->getPost('campaign'),
             'reviewText' => $this->request->getPost('comment'),
             'reviewratings' => $reviewinfoJson,  // Store the JSON string
+            'createdOn' => date('Y-m-d H:i:s'),
+            'updatedOn' => date('Y-m-d H:i:s'),
         ];
 
         // Insert data into database
@@ -243,7 +247,8 @@ class ReviewController extends BaseController
         $data = [
             'campaignID' => $this->request->getPost('campaign'),
             'reviewerInfo' => $reviewinfoJson,
-            'updatedOn'   => date('Y-m-d H:i:s'),
+            'createdOn' => date('Y-m-d H:i:s'),
+            'updatedOn' => date('Y-m-d H:i:s'),
         ];
 
       // Perform the update
