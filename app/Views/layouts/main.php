@@ -8,16 +8,17 @@
 	<meta name="description" content="summitRA: The small framework with powerful features">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
-	<link rel="stylesheet" type="text/css" href="/css/header.css">
-	<link rel="stylesheet" type="text/css" href="/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="/css/reviews.css">
-	<link rel="stylesheet" type="text/css" href="/css/variables.css">
-	<link rel="stylesheet" type="text/css" href="/css/analysis.css">
-	<link rel="stylesheet" type="text/css" href="/css/all.min.css">
-	<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> -->
-	<!-- <link rel="stylesheet" type="text/css" href="/css/custom-modal.css"> -->
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/header.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reset.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reviews.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/variables.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/analysis.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/all.min.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/apexcharts.css')?>">
+	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('/css/bootstrap.min.css')?>"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('/css/custom-modal.css')?>"> -->
 
-	<script src="/js/jquery.js"></script>
+	<script src="<?= base_url('/js/jquery.js')?>"></script>
 	<style>
     * {
       font-size: 14px;
@@ -218,7 +219,8 @@
 	</div>
 	<!-- page-wrapper -->
 
-	<script src="/js/bootstrap.bundle.min.js"></script>
+	<script src="<?= base_url('/js/bootstrap.bundle.min.js')?>"></script>
+	<script src="<?= base_url('/js/apexcharts.min.js')?>"></script>
 
 	<script>
 		$(document).ready(function() {

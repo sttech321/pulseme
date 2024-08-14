@@ -19,6 +19,11 @@ class Campaign extends BaseController {
 
     public function index()
     {
+        // Ensure the session is started (if not started elsewhere)
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/');
+        }
+        
         $model = new CampaignModel();
         $data['campaigns'] = $model->findAll();
         // print_r($data['campaigns'][0]);
