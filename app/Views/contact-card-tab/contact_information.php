@@ -164,12 +164,12 @@
 									<div class="info-field mb-20px">
 										<h5 class="text-lg font-bold">Primary Phone Number</h5>
 										<p class="text-sm text-gray-500 my-2">This is the phone number you want your customers to call, this can be a tracked phone number.</p>
-										<input class="rounded-4px px-15px py-8px border" type="tel" name="primary" id="primary" />
+										<input class="rounded-4px px-15px py-8px border" type="number" name="primary" id="primary" />
 									</div>
 									<div class="info-field mb-20px">
 										<h5 class="text-lg font-bold">SMS Phone Number</h5>
 										<p class="text-sm text-gray-500 my-2">This is the phone number you want your customers to text.</p>
-										<input class="rounded-4px px-15px py-8px border" type="tel" name="sms" id="sms" />
+										<input class="rounded-4px px-15px py-8px border" type="number" name="sms" id="sms" />
 									</div>
 									<div class="info-field flex flex-col justify-start items-start mb-20px">
 										<h5 class="text-lg font-bold">Outbound Phone Numbers</h5>
@@ -177,7 +177,7 @@
 										<div class="w-auto flex flex-col items-stretch">
 											<div class="number-list flex justify-between items-center hover px-20px border hover:border-gray-500 p-10px my-10px rounded-4px">
 												<div class="number text-left mr-20px">
-													<p>+17273985515</p>
+													<p></p>
 												</div>
 											</div>
 										</div>

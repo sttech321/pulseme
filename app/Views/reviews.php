@@ -20,12 +20,15 @@
 <div class="sidebarRightContentWrap">
    <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
       <div class="sub-menu-bar flex flex-col items-stretch h-full">
-         <div class="p-20px bg-white">
-            <h2 class="text-2xl">Reviews</h2>
-         </div>
-         <div class="px-15px bg-white flex justify-start items-center tabs"><a href="/analyze/reviews" id="reviews-tab" class="tab p-10px" aria-current="page">Reviews</a><a href="/analyze/reviews/social-reviews" id="social-reviews-tab" class="tab p-10px">Social Reviews</a></div>
-         <div class="flex-grow">
-            <div data-v-428084ba="" class="p-25px">
+            <div class="flex-grow">
+               <div data-v-428084ba="" class="p-25px">
+               <div class="p-20px bg-white">
+               <h2 class="text-2xl">Reviews</h2>
+            </div>
+            <div class="px-15px bg-white flex justify-start items-center tabs">
+               <a href="<?= base_url('/analyze/reviews')?>" id="reviews-tab" class="tab p-10px" aria-current="page">Reviews</a>
+               <a href="<?= base_url('/analyze/reviews/social-reviews')?>" id="social-reviews-tab" class="tab p-10px">Social Reviews</a>
+            </div>
                <div data-v-428084ba="" class="bg-white rounded-4px shadow p-10px">
                   <div data-v-428084ba="" class="row flex justify-end p-10px">
                      <div data-v-428084ba="" class="relative w-full flex justify-end items-center">

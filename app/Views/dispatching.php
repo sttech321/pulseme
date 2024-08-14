@@ -18,17 +18,18 @@
 <div class="sidebarRightContent">
    <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
       <div class="sub-menu-bar flex flex-col items-stretch h-full">
-         <div class="bg-white p-20px">
-            <h2 class="text-2xl">Dispatch</h2>
-         </div>
-         <div class="bg-white px-15px flex justify-start items-center"><a aria-current="page" href="<?= base_url('/operate/dispatch')?>"
-            class="border-b-2 border-blue-500 router-link-exact-active p-10px" id="dispatch-link">Dispatch</a>
+         <!-- <div class="bg-white p-20px"> -->
+            <!-- <h2 class="text-2xl">Dispatch</h2> -->
+         <!-- </div> -->
+         <!-- <div class="bg-white px-15px flex justify-start items-center"><a aria-current="page" href="<?= base_url('/operate/dispatch')?>"
+            class="border-b-2 border-blue-500 router-link-exact-active p-10px" id="dispatch-link">Dispatch</a> -->
             <!-- <a href="/operate/contact-card" class="p-10px" id="contact-card-link">Contact Card</a> -->
             <!-- <a href="/operate/quick-actions" class="p-10px" id="quick-actions-link">Quick Actions</a> -->
          </div>
          <div class="flex-grow">
             <div class="p-25px">
                <div class="main p-2rem bg-white rounded">
+                  <h2 class="text-2xl">Dispatch</h2>
                   <div class="menu flex w-full justify-end mb-2rem">
                      <div class="dropdown relative">
                         <button>

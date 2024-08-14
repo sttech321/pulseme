@@ -135,12 +135,10 @@ class ReviewModal extends Model
             }       
 
         }
-
         
         // echo "Total bio count: " . $bioCount . "\n";
         // echo "Total pulsecheck count: " . $pulsecheckCount . "\n";
         
-
         $averagerating1 = ($rate1Count > 0) ? ($rate1Sum / $rate1Count) : 0;
         $averagerating2 = ($rate2Count > 0) ? ($rate2Sum / $rate2Count) : 0;
         $averagerating3 = ($rate3Count > 0) ? ($rate3Sum / $rate3Count) : 0;
