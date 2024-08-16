@@ -166,7 +166,7 @@ class ReviewModal extends Model
          
         // Get pulse check data by month
         $pulseCheckData = $this->getPulseCheckDataByMonth();
-        print_r($pulseCheckData);
+        // print_r($pulseCheckData);
     
         // Prepare arrays for the result
         $bioDates = [];
@@ -187,12 +187,6 @@ class ReviewModal extends Model
                 $pulsecheckCounts[] = $row['pulsecheckCount'];
             }
         }
-        echo'<br>';
-
-        print_r($pulsecheckDates);
-        echo'<br>';
-
-        print_r($bioDates);
 
         // Prepare the data to return
         return [

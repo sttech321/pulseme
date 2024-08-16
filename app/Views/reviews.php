@@ -2,15 +2,9 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 <style>
-.tab-link {
-    border-bottom: 2px solid transparent;
-    color: black;
-    text-decoration: none;
-}
-
 .tab-link.active {
-    border-bottom: 2px solid blue;
-    color: blue;
+    font-weight: bold;
+    color: #1a73e8; /* Example color */
 }
 </style>
 <div class="headerTop">
@@ -38,11 +32,11 @@
                <h2 class="text-2xl">Reviews</h2>
             </div>
             <div class="px-15px bg-white flex justify-start items-center">
-               <a href="/analyze/reviews" class="tab-link active" aria-current="page">Reviews</a>
-               <a href="/analyze/reviews/social-reviews" class="tab-link p-10px ">Social Reviews</a>
+               <a href="/analyze/reviews" class="tab-link active border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px" aria-current="page">Reviews</a>
+               <a href="/analyze/reviews/social-reviews" class="tab-link">Social Reviews</a>
             </div>
 
-               <div data-v-428084ba="" class="bg-white rounded-4px shadow p-10px">
+            <div data-v-428084ba="" class="bg-white rounded-4px shadow p-10px">
                   <div data-v-428084ba="" class="row flex justify-end p-10px">
                      <div data-v-428084ba="" class="relative w-full flex justify-end items-center">
                         <button>
@@ -877,43 +871,19 @@ function test() {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const tabLinks = document.querySelectorAll('.tab-link');
+    // Get the current URL path
+    const currentPath = window.location.pathname;
 
-    function setActiveTab() {
-        // Get the current URL path
-        const currentPath = window.location.pathname;
+    // Get all tab links
+    const tabs = document.querySelectorAll('.tab-link');
 
-        // Remove active class from all tabs
-        tabLinks.forEach(link => link.classList.remove('active'));
-
-        // Add active class to the matching tab
-        tabLinks.forEach(link => {
-            if (link.getAttribute('href') === currentPath) {
-                link.classList.add('active');
-            }
-        });
-    }
-
-    // Set the active tab on page load
-    setActiveTab();
-
-    // Optionally, if the tabs change without reloading (e.g., with a router):
-    tabLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            // Prevent default anchor behavior if using client-side routing
-            event.preventDefault();
-
-            // Update the URL without reloading (optional)
-            history.pushState(null, "", link.getAttribute('href'));
-
-            // Set the active tab
-            setActiveTab();
-        });
+    // Loop through the tabs and check if their href matches the current path
+    tabs.forEach(function(tab) {
+        if (tab.getAttribute('href') === currentPath) {
+            tab.classList.add('active'); // Add 'active' class to the matching tab
+        }
     });
 });
-
 </script>
 <?= $this->endSection() ?>
-
-
-
+ 

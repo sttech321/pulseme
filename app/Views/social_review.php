@@ -1,5 +1,11 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
+<style>
+.tab-link.active {
+    font-weight: bold;
+    color: #1a73e8; /* Example color */
+}
+</style>
 <div class="headerTop">
    <div class="dropMenuWrap flexBetween">
       <div class="pageNameWrap">
@@ -16,17 +22,16 @@
    <div class="p-20px bg-white">
          <h2 class="text-2xl">Reviews</h2>
       </div>
-      <div class="px-15px bg-white flex justify-start items-center">
-         <a href="/analyze/reviews" class="border-b-2 border-blue-500 router-link-exact-active p-10px" aria-current="page">Reviews</a>
-         <a href="/analyze/reviews/social-reviews" class="p-10px">Social Reviews</a>
-      </div>
+	  <div class="px-15px bg-white flex justify-start items-center">
+		<a href="/analyze/reviews" class="tab-link" aria-current="page">Reviews</a>
+		<a href="/analyze/reviews/social-reviews" class="tab-link border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px">Social Reviews</a>
+	</div>
+
 </div>
 <!-- <div class="container-fluid"> -->
 <div class="sidebarRightContent">
 <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
 <!--  -->
-
-
 </div>
 <div class="grid grid-cols-1 gap-y-5">
 	<div class="bg-white p-25px rounded hover:shadow transition-shadow duration-150">
@@ -160,6 +165,22 @@
 	</div>
 	<!---->
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the current URL path
+    const currentPath = window.location.pathname;
+
+    // Get all tab links
+    const tabs = document.querySelectorAll('.tab-link');
+
+    // Loop through the tabs and check if their href matches the current path
+    tabs.forEach(function(tab) {
+        if (tab.getAttribute('href') === currentPath) {
+            tab.classList.add('active'); // Add 'active' class to the matching tab
+        }
+    });
+});
+</script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.form-select').forEach(function(select) {
