@@ -17,10 +17,10 @@ class Campaign extends BaseController {
 
     public function index()
     {
-        $model = new CampaignModel();
-        $data['campaigns'] = $model->findAll();
-        // print_r($data['campaigns'][0]);
-        return view('dispatchTab/dispatchCampaigns',$data);
+    //     $model = new CampaignModel();
+    //     $data['campaigns'] = $model->findAll();
+    //     // print_r($data['campaigns'][0]);
+    //     return view('dispatchTab/dispatchCampaigns',$data);
     }
 
     public function create() {

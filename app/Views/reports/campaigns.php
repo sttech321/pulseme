@@ -178,7 +178,7 @@
             data: { search: query }, 
             dataType: 'json', 
             success: function(response) {
-                // Assuming response is an array of campaign objects
+               
                 let html = '<table class="mb-15px">' +
                             '<thead>' +
                                 '<tr>' +

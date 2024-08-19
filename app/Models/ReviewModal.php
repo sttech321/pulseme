@@ -50,11 +50,73 @@ class ReviewModal extends Model
         ];
     }
 
-
+    public function get_reviews_with_campaign($limit, $offset) {
+        $sql = "
+            SELECT reviews.*, campaign.name, campaign.department, campaign.employeeId
+            FROM campaign
+            RIGHT JOIN reviews ON reviews.campaignID = campaign.ID
+            LIMIT $limit OFFSET $offset;
+        ";
+    
+        $query = $this->db->query($sql);
+        return $query->getResultArray();
+    }
+    public function get_total_reviews_count() {
+        $sql = "
+            SELECT COUNT(*) as count
+            FROM campaign
+            RIGHT JOIN reviews ON reviews.campaignID = campaign.ID
+        ";
+    
+        $query = $this->db->query($sql);
+        $result = $query->getRow();
+        return $result->count;
+    }
+    public function get_reviews($id) {
+        $sql = "
+            SELECT reviews.*, campaign.name, campaign.department, campaign.employeeId
+            FROM reviews
+            LEFT JOIN campaign ON reviews.campaignID = campaign.ID
+            WHERE reviews.ID = ?
+        ";
+    
+        $query = $this->db->query($sql, [$id]);
+        return $query->getRowArray(); 
+    }
+    
+    public function get_reviews_campaignId($campaignID){
+        $sql = "
+        SELECT reviews.*, campaign.name, campaign.department, campaign.employeeId
+        FROM reviews
+        LEFT JOIN campaign ON reviews.campaignID = campaign.ID
+        WHERE campaignID  = ?
+    ";
+    $query = $this->db->query($sql, [$campaignID]);
+        return $query->getRowArray(); 
+    }
+    
     public function getReviewsByType($type)
     {
         return $this->where('reviewType', $type)->findAll();
     }
 
+    public function get_campaign_name() {
+        $sql = "
+SELECT DISTINCT campaign.name, campaign.department, campaign.employeeId, campaign.ID
+FROM campaign
+LEFT JOIN reviews ON reviews.campaignID = campaign.ID;
 
+        ";
+    
+        $query = $this->db->query($sql);
+        return $query->getResultArray();
+    }
+    // public function get_total_reviews_count() {
+    //     $sql = "SELECT COUNT(*) as total FROM reviews";
+    //     $query = $this->db->query($sql);
+    //     $result = $query->getRow();
+    //     return $result->total;
+    // }
+     
 }
+
