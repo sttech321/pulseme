@@ -344,11 +344,25 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                               </div>
                            </td>                           
                            <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
+                           <?php if ($review['sentiment'] == 'Positive') : ?>
                               <svg data-v-f15ab7a3="" class="svg-inline--fa fa-face-grin text-lime-500 text-40px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                  <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
                               </svg>
+                           <?php else : ?>
+                              <svg data-v-428084ba="" class="svg-inline--fa fa-face-frown text-4xl text-red-500 opacity-50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-frown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                 <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM159.3 388.7c-2.6 8.4-11.6 13.2-20 10.5s-13.2-11.6-10.5-20C145.2 326.1 196.3 288 256 288s110.8 38.1 127.3 91.3c2.6 8.4-2.1 17.4-10.5 20s-17.4-2.1-20-10.5C340.5 349.4 302.1 320 256 320s-84.5 29.4-96.7 68.7zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
+                              </svg>
+                           <?php endif; ?>
+                              <?php
+                               $reviewratings = json_decode($review['reviewratings']);
+                               $reviewrate1 = isset($reviewratings->rate1) ? (int)$reviewratings->rate1->value : 0;    
+                               $reviewrate2 = isset($reviewratings->rate2) ? (int)$reviewratings->rate2->value : 0;
+                               $reviewrate3 = isset($reviewratings->rate3) ? (int)$reviewratings->rate3->value : 0;
+                               $sum = $reviewrate1 + $reviewrate2 + $reviewrate3;
+                               $average = $sum / 3;
+                              ?>
                               <div data-v-f15ab7a3="" class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">
-                                 <p data-v-f15ab7a3=""><?= $review['sentiment'];?></p>
+                                 <p data-v-f15ab7a3=""><?= $average;?></p>
                               </div>
                            </td>                          
                            <td data-v-f15ab7a3="" class="p-10px w-full">
@@ -507,25 +521,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get the state of the flexCheckDefault checkbox
     var isChecked = $(this).is(':checked');
 
-    // Set the checked state for all checkboxes with the class 'checkbox-item'
+  
     $('.form-check-input').prop('checked', isChecked);
 
-    // Create or update the button
     var button = $('#dynamicButton');
     if (isChecked) {
-        // If the button doesn't exist, create it
+       
         if (button.length === 0) {
             button = $('<button>', {
                 id: 'dynamicButton',
                 text: 'My Button',
-                class: 'btn btn-primary', // You can style the button as needed
+                class: 'btn btn-primary', 
                 click: function() {
                     alert('Button clicked!');
                 }
-            }).appendTo('.amit'); // Append the button to the body or any other container
+            }).appendTo('.amit'); 
         }
-    } else {
-        // Remove the button if checkbox is unchecked
+    } else {        
         button.remove();
     }
 });
@@ -748,11 +760,19 @@ $(document).ready(function() {
                 var buttonClass_archive = review.isArchive == '1' ? 'btn-gray' : 'btn-blue';
                 var buttonText_archive = review.isArchive == '1' ? 'Unarchive' : 'Archive';
                 var svgDisplay_archive = review.isArchive == '1' ? 'none' : 'inline';
+                let sentimentSvg = review.sentiment === 'Positive' 
+                  ? '<svg class="svg-inline--fa fa-face-grin text-lime-500 text-40px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+                     '<path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>' +
+                     '</svg>'
+                  : '<svg class="svg-inline--fa fa-face-frown text-4xl text-red-500 opacity-50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-frown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+                     '<path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM159.3 388.7c-2.6 8.4-11.6 13.2-20 10.5s-13.2-11.6-10.5-20C145.2 326.1 196.3 288 256 288s110.8 38.1 127.3 91.3c2.6 8.4-2.1 17.4-10.5 20s-17.4-2.1-20-10.5C340.5 349.4 302.1 320 256 320s-84.5 29.4-96.7 68.7zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>' +
+                     '</svg>';
                 let reviewerInfo = JSON.parse(review.reviewratings);
-                let rate1 = reviewerInfo?.rate1?.value || '';
-                let rate2 = reviewerInfo?.rate2?.value || '';
-                let rate3 = reviewerInfo?.rate3?.value || '';
-
+                let rate1 = parseFloat(reviewerInfo?.rate1?.value || '');
+                let rate2 = parseFloat(reviewerInfo?.rate2?.value || '');
+                let rate3 = parseFloat(reviewerInfo?.rate3?.value || '');
+                let sum = rate1 + rate2 + rate3;
+                let average = sum / 3;  
                 var newRow =        
                  '<tr class="flex w-full">' +
                  '<td data-v-f15ab7a3="" class="p-10px w-auto">'+
@@ -765,12 +785,9 @@ $(document).ready(function() {
                         '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">' +
                         '</div>' +
                      '</td>' +
-                     '<td class="p-10px flex flex-col items-center justify-start w-60px">' +
-                        '<svg class="svg-inline--fa fa-face-grin text-lime-500 text-40px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
-                           '<path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>' +
-                        '</svg>' +
+                     '<td class="p-10px flex flex-col items-center justify-start w-60px">' + sentimentSvg +
                         '<div class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">' +
-                           '<p>' + review.sentiment + '</p>' +
+                           '<p>' + average + '</p>' +
                         '</div>' +
                      '</td>' +
                      '<td class="p-10px w-full">' +
