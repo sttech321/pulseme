@@ -48,7 +48,7 @@ class CustomerController extends Controller
     }
 
     public function create_dispatch()
-    {
+    { 
         // Validation rules
         $rules = [
             'customer_email' => 'required|valid_email',

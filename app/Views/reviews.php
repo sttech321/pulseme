@@ -1,6 +1,18 @@
 <!-- app/Views/reviews.php -->
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
+<style>
+   .tab-link {
+      border-bottom: 2px solid transparent;
+      color: black;
+      text-decoration: none;
+   }
+
+   .tab-link.active {
+      border-bottom: 2px solid blue;
+      color: blue;
+   }
+</style>
 <div class="headerTop">
    <div class="dropMenuWrap flexBetween">
       <div class="pageNameWrap">
@@ -25,10 +37,11 @@
                <div class="p-20px bg-white">
                   <h2 class="text-2xl">Reviews</h2>
                </div>
-               <div class="px-15px bg-white flex justify-start items-center tabs">
-                  <a href="<?= base_url('/analyze/reviews') ?>" id="reviews-tab" class="tab p-10px" aria-current="page">Reviews</a>
-                  <a href="<?= base_url('/analyze/reviews/social-reviews') ?>" id="social-reviews-tab" class="tab p-10px">Social Reviews</a>
+               <div class="px-15px bg-white flex justify-start items-center">
+                  <a href="/analyze/reviews" class="tab-link active" aria-current="page">Reviews</a>
+                  <a href="/analyze/reviews/social-reviews" class="tab-link p-10px ">Social Reviews</a>
                </div>
+
                <div data-v-428084ba="" class="bg-white rounded-4px shadow p-10px">
                   <div data-v-428084ba="" class="row flex justify-end p-10px">
                      <div data-v-428084ba="" class="relative w-full flex justify-end items-center">
@@ -885,29 +898,49 @@
       document.getElementById('modal').style.display = 'block';
    }
 
+   function test() {
+      document.getElementById('modal').style.display = 'block';
+   }
+
    function closeModal() {
       document.getElementById('modal').style.display = 'none';
    }
 </script>
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
-      // Get all tab elements
-      var tabs = document.querySelectorAll('.tabs .tab');
+   document.addEventListener("DOMContentLoaded", function() {
+      const tabLinks = document.querySelectorAll('.tab-link');
 
-      // Get current URL
-      var currentUrl = window.location.pathname;
+      function setActiveTab() {
+         // Get the current URL path
+         const currentPath = window.location.pathname;
 
-      // Remove active class from all tabs
-      tabs.forEach(function(tab) {
-         tab.classList.remove('border-b-2', 'border-blue-500', 'router-link-exact-active');
-      });
+         // Remove active class from all tabs
+         tabLinks.forEach(link => link.classList.remove('active'));
 
-      // Add active class to the current tab
-      if (currentUrl === '/analyze/reviews') {
-         document.getElementById('reviews-tab').classList.add('border-b-2', 'border-blue-500', 'router-link-exact-active');
-      } else if (currentUrl === '/analyze/reviews/social-reviews') {
-         document.getElementById('social-reviews-tab').classList.add('border-b-2', 'border-blue-500', 'router-link-exact-active');
+         // Add active class to the matching tab
+         tabLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+               link.classList.add('active');
+            }
+         });
       }
+
+      // Set the active tab on page load
+      setActiveTab();
+
+      // Optionally, if the tabs change without reloading (e.g., with a router):
+      tabLinks.forEach(link => {
+         link.addEventListener('click', function(event) {
+            // Prevent default anchor behavior if using client-side routing
+            event.preventDefault();
+
+            // Update the URL without reloading (optional)
+            history.pushState(null, "", link.getAttribute('href'));
+
+            // Set the active tab
+            setActiveTab();
+         });
+      });
    });
 </script>
 <?= $this->endSection() ?>
