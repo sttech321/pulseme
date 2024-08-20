@@ -1,6 +1,7 @@
 <!-- app/Views/reviews.php -->
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <div class="headerTop">
     <div class="dropMenuWrap flexBetween">
         <div class="pageNameWrap">

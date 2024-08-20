@@ -25,18 +25,20 @@ class CustomerController extends Controller
 
     public function search()
     {
-        $search = $this->request->getVar('query');
+       
+        $search = $this->request->getVar('search'); 
     
-        $technicianModel = new TechnicianModal();
-        
+        $technicianModel = new TechnicianModal(); 
+    
         if ($search) {
             $results = $technicianModel->getTechniciansBySearch($search);
         } else {
-            $results = $technicianModel->findAll(); // Return all technicians if no search query
+            $results = $technicianModel->findAll();
         }
     
         return $this->response->setJSON($results);
-    } 
+    }
+    
 
     public function dispatch()
     {
