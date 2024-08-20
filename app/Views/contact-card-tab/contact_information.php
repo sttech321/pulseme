@@ -192,7 +192,7 @@
 									<div class="info-field flex flex-col justify-start items-start mb-20px">
 										<h5 class="text-lg font-bold">Emails</h5>
 										<p class="text-sm text-gray-500 my-2">Emails where a customer can reach you for support or service.</p>
-										<div class="w-auto flex flex-col items-stretch">
+										<div class="7``w-auto flex flex-col items-stretch">
 											<div class="number-list flex justify-between items-center hover px-20px border hover:border-gray-500 p-10px my-10px rounded-4px">
 												<div class="number text-left mr-20px">
 													<!-- <p>customer.support@halesac.com</p> -->
@@ -285,7 +285,7 @@ $(document).ready(function () {
     $('#save-changes-button').on('click', function (e) {
         e.preventDefault(); // Prevent the form from submitting normally
 
-        var formData = new FormData($('#contact-card-form')[0]);
+        var formData = new FormData($('#contat-card-form')[0]);
         console.log(formData,'formdata');
 
         $.ajax({
@@ -309,10 +309,9 @@ $(document).ready(function () {
     });
 });
 
-
-   document.getElementById('logo-upload-button').addEventListener('click', function() {
-      document.getElementById('logo-upload').click();
-   });
+document.getElementById('logo-upload-button').addEventListener('click', function() {
+	document.getElementById('logo-upload').click();
+});
 
 </script>
 <?= $this->endsection('content') ?>			
