@@ -72,6 +72,8 @@
                             </div>
                             
                             <div class="flex flex-col w-full overflow-x-auto items-stretch" id ="table-container">
+                            
+                            <div class="flex flex-col w-full overflow-x-auto items-stretch" id ="table-container">
                                 <table class="mb-15px">
                                     <thead>
                                         <tr>
@@ -147,6 +149,7 @@
                                             <?= $campaign->pulsecheck_count; ?>
                                             </td>
                                             <td class="px-20px py-15px"></td>
+                                            <!-- Positive Sentiment -->                                             
                                             <!-- Positive Sentiment -->                                             
                                             <td class="px-20px py-15px">
                                             <?= isset($campaign->positive_count) ? $campaign->positive_count : 'N/A'; ?>

@@ -1,5 +1,11 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
+<style>
+.tab-link.active {
+    font-weight: bold;
+    color: #1a73e8; /* Example color */
+}
+</style>
 <div class="headerTop">
 	<div class="dropMenuWrap flexBetween">
 		<div class="pageNameWrap">
@@ -54,7 +60,7 @@
 						Dispatch
 					</a>
 					<!---->
-					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="p-15px">
+					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="tab-link border-blue-500 text-blue-500 border-l-2 p-15px">
 						<svg class="svg-inline--fa fa-address-card mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="address-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
 							<path
 								class=""
@@ -81,8 +87,8 @@
 		<div class="flex flex-col">
 			<div class="sub-menu-bar pl-25px">
 				<div class="flex justify-start items-center border-b border-gray-300">
-					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="p-15px">Contact Information</a>
-					<a aria-current="page" href="<?= base_url('/settings/contact-card/templates') ?>" class="border-b-2  router-link-exact-active p-15px">Templates</a>
+					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="tab-link active border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px">Contact Information</a>
+					<a aria-current="page" href="<?= base_url('/settings/contact-card/templates') ?>" class="tab-link p-15px">Templates</a>
 				</div>
 			</div>
 			<div class="p-25px flex flex-col justify-start items-stretch contact-information">
@@ -186,7 +192,7 @@
 									<div class="info-field flex flex-col justify-start items-start mb-20px">
 										<h5 class="text-lg font-bold">Emails</h5>
 										<p class="text-sm text-gray-500 my-2">Emails where a customer can reach you for support or service.</p>
-										<div class="w-auto flex flex-col items-stretch">
+										<div class="7``w-auto flex flex-col items-stretch">
 											<div class="number-list flex justify-between items-center hover px-20px border hover:border-gray-500 p-10px my-10px rounded-4px">
 												<div class="number text-left mr-20px">
 													<!-- <p>customer.support@halesac.com</p> -->
@@ -259,11 +265,27 @@
 	</div>
 </div>
 <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the current URL path
+    const currentPath = window.location.pathname;
+
+    // Get all tab links
+    const tabs = document.querySelectorAll('.tab-link');
+
+    // Loop through the tabs and check if their href matches the current path
+    tabs.forEach(function(tab) {
+        if (tab.getAttribute('href') === currentPath) {
+            tab.classList.add('active'); // Add 'active' class to the matching tab
+        }
+    });
+});
+</script>
+<script>
 $(document).ready(function () {
     $('#save-changes-button').on('click', function (e) {
         e.preventDefault(); // Prevent the form from submitting normally
 
-        var formData = new FormData($('#contact-card-form')[0]);
+        var formData = new FormData($('#contat-card-form')[0]);
         console.log(formData,'formdata');
 
         $.ajax({
@@ -287,10 +309,9 @@ $(document).ready(function () {
     });
 });
 
-
-   document.getElementById('logo-upload-button').addEventListener('click', function() {
-      document.getElementById('logo-upload').click();
-   });
+document.getElementById('logo-upload-button').addEventListener('click', function() {
+	document.getElementById('logo-upload').click();
+});
 
 </script>
 <?= $this->endsection('content') ?>			

@@ -1,5 +1,11 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
+<style>
+.tab-link.active {
+    font-weight: bold;
+    color: #1a73e8; /* Example color */
+}
+</style>
 <div class="headerTop">
    <div class="dropMenuWrap flexBetween">
       <div class="pageNameWrap">
@@ -31,7 +37,7 @@
                      </svg>
                      General 
                   </a> -->
-                  <a href="<?= base_url('/settings/dispatch/campaigns') ?>" class="border-blue-500 text-blue-500 border-l-2 p-15px">
+                  <a href="<?= base_url('/settings/dispatch/campaigns') ?>" class="tab-link border-blue-500 text-blue-500 border-l-2 p-15px">
                      <svg class="svg-inline--fa fa-arrow-right-arrow-left mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right-arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                         <path class="" fill="currentColor" d="M438.6 150.6c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 96 32 96C14.3 96 0 110.3 0 128s14.3 32 32 32l306.7 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96zm-333.3 352c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 416 416 416c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96z">
                         </path>
@@ -61,7 +67,7 @@
             <div class="flex flex-col">
                <div class="sub-menu-bar pl-25px">
                   <div class="flex justify-start items-center border-b border-gray-300">
-                  <a href="<?= base_url('/settings/dispatch/campaigns')?>" class="border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px" aria-current="page">Campaigns</a>
+                  <a href="<?= base_url('/settings/dispatch/campaigns')?>" class="tab-link active border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px" aria-current="page">Campaigns</a>
                   <!-- <a href="<?= base_url('/settings/dispatch/notifications')?>" class="p-15px">Notifications</a>
                   <a href="<?= base_url('/settings/dispatch/web-widget')?>" class="p-15px">WebWidget</a>
                   <a href="<?= base_url('/settings/dispatch/review-widget')?>" class="p-15px">Review Widget</a> -->
@@ -447,7 +453,6 @@
    margin: auto;
    }
 </style>
-
 <script>
    function previewImage(event) {
        var reader = new FileReader();
@@ -675,6 +680,21 @@ $(document).ready(function() {
    // Initial load of technicians
    loadTechnicians();
 });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the current URL path
+    const currentPath = window.location.pathname;
 
+    // Get all tab links
+    const tabs = document.querySelectorAll('.tab-link');
+
+    // Loop through the tabs and check if their href matches the current path
+    tabs.forEach(function(tab) {
+        if (tab.getAttribute('href') === currentPath) {
+            tab.classList.add('active'); // Add 'active' class to the matching tab
+        }
+    });
+});
 </script>
 <?= $this->endsection('content') ?>

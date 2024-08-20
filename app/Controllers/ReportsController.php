@@ -25,6 +25,7 @@ class ReportsController extends BaseController {
     public function report_campaign()
     {
         
+        
         $model = new CampaignModel();
         $campaignsWithSentiment = $model->getCampaignsWithSentiment();
         return view('reports/campaigns', [

@@ -52,6 +52,11 @@ class ContactcardController extends BaseController
 
     public function contact_information(): string
     {
+        // Ensure the session is started (if not started elsewhere)
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/');
+        }
+        
         $contactCardModel = new ContactcardModal();
         $data['contactcard'] = $contactCardModel->first();
 
