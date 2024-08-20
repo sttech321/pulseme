@@ -89,4 +89,7 @@ $routes->post('searchbar', 'Campaign::search');
 
 $routes->post('/contact-card', 'ContactcardController::create_contactcard');
 $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
-$routes->get('/run-cron-job', 'SendContactCards::run');
+
+$route['chart'] = 'ChartController/index';
+
+$routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
