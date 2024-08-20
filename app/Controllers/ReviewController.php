@@ -242,6 +242,8 @@ class ReviewController extends BaseController
         if ($this->request->isAJAX()) {
             $campaignID = $this->request->getPost('campaign_id');
             $approve = $this->request->getPost('approved');
+            $unapprove = $this->request->getPost('unapproved');
+            $includeAllReviews = $this->request->getPost('include_all_reviews');
             $limit = intval($this->request->getPost('limit'))?: 10; 
             $page = intval($this->request->getPost('page')) ?: 1;        
             $noText = $this->request->getPost('noText');
@@ -262,8 +264,15 @@ class ReviewController extends BaseController
             if (!empty($archive)) {
                 $builder->where('reviews.isArchive', $archive);
             }
-            if (!empty($approve)) {
-                $builder->where('reviews.isApproved', $approve);
+            if (!$includeAllReviews) {
+                $approved = $this->request->getPost('approved');
+                $unapproved = $this->request->getPost('unapproved');
+                if ($approved) {
+                    $builder->where('isApproved', '1');
+                }
+                if ($unapproved) {
+                   $builder->where('isApproved', '0');
+                }
             }
             if (!empty($fromdate) && !empty($todate)) {
                 $builder->where('reviews.createdOn >=', $fromdate);

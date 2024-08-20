@@ -338,11 +338,12 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                         </tr>
                         <?php foreach($reviews as $review): ?> 
                         <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
-                           <td data-v-f15ab7a3="" class="p-10px w-auto">
-                              <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">
+                        <td data-v-f15ab7a3="" class="p-10px w-auto">
+                           <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer" >
                               <input class="form-check-input" type="checkbox" value="">
-                              </div>
-                           </td>                           
+                           </div>
+                        </td>
+                          
                            <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
                            <?php if ($review['sentiment'] == 'Positive') : ?>
                               <svg data-v-f15ab7a3="" class="svg-inline--fa fa-face-grin text-lime-500 text-40px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -359,7 +360,7 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                                $reviewrate2 = isset($reviewratings->rate2) ? (int)$reviewratings->rate2->value : 0;
                                $reviewrate3 = isset($reviewratings->rate3) ? (int)$reviewratings->rate3->value : 0;
                                $sum = $reviewrate1 + $reviewrate2 + $reviewrate3;
-                               $average = $sum / 3;
+                               $average = round($sum/3);
                               ?>
                               <div data-v-f15ab7a3="" class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">
                                  <p data-v-f15ab7a3=""><?= $average;?></p>
@@ -372,8 +373,9 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                               </div>
                               <?php
                               $reviewratings = json_decode($review['reviewratings']);
-                              $name = isset($reviewratings->Name) ? $reviewratings->Name : 'No Name Available';
-                              $city = isset($reviewratings->City) ? $reviewratings->City : 'No City Available';
+                              $email = isset($reviewratings->customer_email) ? $reviewratings->customer_email : 'No Email Available';
+                              $name =  isset($reviewratings->Name) ? $reviewratings->Name : 'No Name Available';
+                              $city =  isset($reviewratings->City) ? $reviewratings->City : 'No City Available';
                               $state = isset($reviewratings->State) ? $reviewratings->State : 'No State Available';
                               $zipcode = isset($reviewratings->Zipcode) ? $reviewratings->Zipcode : 'No Zipcode Available';  
                               $reviewrate1 = isset($reviewratings->rate1)? $reviewratings->rate1->value : '';    
@@ -386,13 +388,14 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                                  </div>
                                  <!---->
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Email:</span> mikefalk@aol.com</p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Email:</span> <?= $email; ?></p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> <?= $city,$state,$zipcode; ?></p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> <?= $review['createdOn']; ?></p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span><?= explode(' ', $review['createdOn'])[0]; ?>
+                                    </p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span><?= $review['name']; ?></p>
@@ -509,53 +512,49 @@ document.getElementById('filter-button').addEventListener('click', function() {
     var dropdown = document.getElementById('filter-dropdown');
     dropdown.classList.toggle('hidden');
 });
-document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.selectable-icon').forEach(function(svg) {
-            svg.addEventListener('click', function() {
-                this.classList.toggle('selected');
-            });
-        });
-    });
 
-    $('#flexCheckDefault').on('change', function() {
-    // Get the state of the flexCheckDefault checkbox
-    var isChecked = $(this).is(':checked');
+$('#flexCheckDefault').on('change', function() {
+                var isChecked = $(this).is(':checked');
+                $('.form-check-input').prop('checked', isChecked);
 
-  
-    $('.form-check-input').prop('checked', isChecked);
-
-    var button = $('#dynamicButton');
-    if (isChecked) {
-       
-        if (button.length === 0) {
-            button = $('<button>', {
-                id: 'dynamicButton',
-                text: 'My Button',
-                class: 'btn btn-primary', 
-                click: function() {
-                    alert('Button clicked!');
+                var button = $('#dynamicButton');
+                if (isChecked) {
+                    if (button.length === 0) {
+                        button = $('<button>', {
+                            id: 'dynamicButton',
+                            text: 'Approve Pending Reviews',
+                            class: 'btn btn-primary',
+                            click: function() {
+                                approvePendingReviews();
+                            }
+                        }).appendTo('.amit');
+                    }
+                } else {
+                    button.remove();
                 }
-            }).appendTo('.amit'); 
-        }
-    } else {        
-        button.remove();
-    }
-});
+            });
+
+            function approvePendingReviews() {
+                // Iterate over each review and call handleApprovalClick
+                $('div[data-approved="0"]').each(function() {
+                    handleApprovalClick($(this).find('.btn-approve')[0]);
+                });
+            }
 
 </script>
-
 
 <script>
 function handleApprovalClick(button) {
     var parentDiv = button.parentElement;
-    var ID = parentDiv.getAttribute('data-id');  
+    var ID = parentDiv.getAttribute('data-id'); 
+    console.log(ID) 
     var isApproved = parentDiv.getAttribute('data-approved');
     var isArchive = parentDiv.getAttribute('data-archive');
-    console.table('Before click handling - ID:', ID, 'isApproved:', isApproved, 'isArchive:', isArchive);
+    //console.table('Before click handling - ID:', ID, 'isApproved:', isApproved, 'isArchive:', isArchive);
     // Determine which button was clicked and update values accordingly
     if (button.hasAttribute('approved')) {
         isApproved = (isApproved === '1') ? '0' : '1';
-        console.table('Updated approve status:', isApproved);
+        //console.table('Updated approve status:', isApproved);
         // Update button text and class
         button.textContent = isApproved === '1' ? 'Approved' : 'Approve';
         button.classList.toggle('btn-gray', isApproved === '1');
@@ -657,16 +656,12 @@ $(document).ready(function() {
     });
     // Event handler for change events
     $('#filter-campaings, #limit, #approved, #unapproved, #no-text').on('change', function() {
-        // Update the filters object with current values
         filters.campaignID = $('#filter-campaings').val();
         filters.limit = $('#limit').val();
         filters.approved = $('#approved').is(':checked') ? 1 : 0;
         filters.unapproved = $('#unapproved').is(':checked') ? 1 : 0;
         filters.noText = $('#no-text').is(':checked') ? 1 : 0;
-        // Check if both approved and unapproved checkboxes are checked
         filters.includeAllReviews = filters.approved && filters.unapproved;
-      
-        // Log the updated filters object and fetch reviews
         filterData();
     });
     // Event handler for button clicks
@@ -768,11 +763,15 @@ $(document).ready(function() {
                      '<path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM159.3 388.7c-2.6 8.4-11.6 13.2-20 10.5s-13.2-11.6-10.5-20C145.2 326.1 196.3 288 256 288s110.8 38.1 127.3 91.3c2.6 8.4-2.1 17.4-10.5 20s-17.4-2.1-20-10.5C340.5 349.4 302.1 320 256 320s-84.5 29.4-96.7 68.7zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>' +
                      '</svg>';
                 let reviewerInfo = JSON.parse(review.reviewratings);
+                let email = reviewerInfo?.customer_email || 'No Email Available';
+                //console.log (email);
                 let rate1 = parseFloat(reviewerInfo?.rate1?.value || '');
                 let rate2 = parseFloat(reviewerInfo?.rate2?.value || '');
                 let rate3 = parseFloat(reviewerInfo?.rate3?.value || '');
                 let sum = rate1 + rate2 + rate3;
                 let average = sum / 3;  
+                let createdOn = review.createdOn;
+                let datePart = createdOn.substring(0, 10);
                 var newRow =        
                  '<tr class="flex w-full">' +
                  '<td data-v-f15ab7a3="" class="p-10px w-auto">'+
@@ -799,13 +798,13 @@ $(document).ready(function() {
                                  '<p><span class="font-bold">Customer:</span>'   + reviewerInfo.Name +  '</p>' +
                            '</div>' +
                            '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
-                                 '<p><span class="font-bold">Customer Email:</span> mikefalk@aol.com</p>' +
+                                 '<p><span class="font-bold">Customer Email:</span> '+email+'</p>' +
                            '</div>' +
                            '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
                                  '<p><span class="font-bold">Customer Address:</span>'+review.state+'</p>' +
                            '</div>' +
                            '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
-                                 '<p><span class="font-bold">Date:</span>'+review.createdOn+'</p>' +
+                                 '<p><span class="font-bold">Date:</span>'+datePart+'</p>' +
                            '</div>' +
                            '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
                                  '<p><span class="font-bold">Campaign:</span>' + review.name + '</p>' +
@@ -926,11 +925,4 @@ $(document).ready(function() {
     }
 });
 </script>
-
-
-
 <?= $this->endSection() ?>
-
-
-
-
