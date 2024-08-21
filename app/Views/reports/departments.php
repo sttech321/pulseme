@@ -62,7 +62,7 @@
 							<input class="!outline-none !border-none w-full !ring-transparent p-0" type="search" name="search" id="search" placeholder="Search" />
 						</div>
 					<div class="filter flex justify-end items-baseline">
-						<svg class="svg-inline--fa fa-calendar-day" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+						<svg class="svg-inline--fa fa-calendar-day mr-3" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
 							<path
 								class=""
 								fill="currentColor"
@@ -70,9 +70,9 @@
 							></path>
 						</svg>
 						<p class="font-bold">From</p>
-						<input min="2021-06-30" class="p-1" type="date" name="from_date" id="from_date" value="<?php echo htmlspecialchars($defaultFromDate); ?>"/>
+						<input min="2021-06-30" class="p-1 shadow-date mx-10" type="date" name="from_date" id="from_date" value="<?php echo htmlspecialchars($defaultFromDate); ?>"/>
 						<p class="font-bold">To</p>
-						<input class="p-1" type="date" name="to_date" id="to_date" value="<?php echo htmlspecialchars($defaultToDate); ?>"/>
+						<input class="p-1 shadow-date mx-10" type="date" name="to_date" id="to_date" value="<?php echo htmlspecialchars($defaultToDate); ?>"/>
 						<button class="btn btn-blue" id="updateButton">
 						<svg class="svg-inline--fa fa-rotate pr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rotate" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 							<path

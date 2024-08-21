@@ -26595,3 +26595,10 @@ div.table {
 .zmdi-directions:before {
     content: "\F1E7"
 }
+
+
+/* reviews */
+
+div#reviews .review {
+    padding: 10px;
+}

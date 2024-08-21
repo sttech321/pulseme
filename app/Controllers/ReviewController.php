@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\CampaignModel;
 use App\Models\ContactcardModal;
 use App\Models\ReviewModal;
@@ -16,7 +17,8 @@ class ReviewController extends BaseController
         $this->session = \Config\Services::session();
     }
 
-    public function thankyou(){
+    public function thankyou()
+    {
         return view('thankyou');
     }
 
@@ -28,7 +30,6 @@ class ReviewController extends BaseController
         if ($data['technician']) {
             return view('dispatchTab/pulse_check', $data);
         } else {
-
         }
     }
 
@@ -36,7 +37,7 @@ class ReviewController extends BaseController
     {
         // Load necessary helpers and libraries
         helper(['form', 'url']);
-    
+
         // Validation rules
         $rules = [
             'feedback' => 'required',
@@ -47,15 +48,15 @@ class ReviewController extends BaseController
             'rating3_value' => 'required',
             'rating3_text' => 'required',
         ];
-    
+
         // Validate form input
         if (!$this->validate($rules)) {
             // Redirect back with validation errors and input data
             return redirect()->back()->withInput()->with('validation', $this->validator);
         }
-    
+
         $reviewModel = new ReviewModal();
-    
+
         // Collecting data from the request
         $feedback = $this->request->getPost('feedback');
         $rating1_value = $this->request->getPost('rating1_value');
@@ -64,7 +65,7 @@ class ReviewController extends BaseController
         $rating2_text = $this->request->getPost('rating2_text');
         $rating3_value = $this->request->getPost('rating3_value');
         $rating3_text = $this->request->getPost('rating3_text');
-        $campaignId = $this->request->getPost('ID');      
+        $campaignId = $this->request->getPost('ID');
         $customer_name = $this->request->getPost('customer_name');
         $customer_email = $this->request->getPost('customer_email');
         $city = $this->request->getPost('state');
@@ -79,8 +80,8 @@ class ReviewController extends BaseController
             'createdOn' => date('Y-m-d H:i:s'),
             'updatedOn' => date('Y-m-d H:i:s'),
             'campaignID' => $campaignId,
-            'reviewText'=> $feedback,
-            'reviewType'=> $review_type,
+            'reviewText' => $feedback,
+            'reviewType' => $review_type,
             'sentiment' => $sentiment,
             'reviewratings' => json_encode([
                 'feedback' => $feedback,
@@ -103,7 +104,6 @@ class ReviewController extends BaseController
         $this->sendContactCard($customer_email);
         // Display a thank you message or redirect as needed
         return redirect()->to('/')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
-
     }
 
     private function sendContactCard($customer_email)
@@ -141,7 +141,7 @@ class ReviewController extends BaseController
     {
         $model = new ReviewModal();
         $model1 = new CampaignModel();
-        $data['reviews'] = $model->getReviewsByType('google'); 
+        $data['reviews'] = $model->getReviewsByType('google');
         $data['reviewss'] = $model1->findAll();
         // Load the view with data
         return view('social_review', $data);
@@ -151,15 +151,15 @@ class ReviewController extends BaseController
     {
         if ($this->request->isAJAX()) {
             $model = new ReviewModal();
-    
+
             // Retrieve the campaign name from the request
             $request = $this->request->getJSON();
             $campaignName = $request->campaign;
-    
+
             $data = [
                 'creditTo' => $campaignName,
             ];
-    
+
             // Update the database with the new value
             if ($model->update($id, $data)) {
                 return $this->response->setJSON(['successs' => true]);
@@ -167,7 +167,7 @@ class ReviewController extends BaseController
                 return $this->response->setJSON(['success' => false, 'message' => 'Failed to update campaign.']);
             }
         }
-    
+
         // If not an AJAX request, redirect to another page or show an error
         return redirect()->to('/analyze/reviews/social-reviews')->with('error', 'Invalid request.');
     }
@@ -202,7 +202,7 @@ class ReviewController extends BaseController
             'State' => $this->request->getPost('State'),
             'Zipcode' => $this->request->getPost('Zipcode')
         ];
-        
+
         // Convert the array to a JSON string
         $reviewinfoJson = json_encode($reviewinfo); // Corrected to encode to JSON
 
@@ -227,19 +227,19 @@ class ReviewController extends BaseController
     }
 
     public function reviews()
-    {  
+    {
         $reviewModel = new ReviewModal();
         $perPage = 10;
         $page = $this->request->getVar('page') ?: 1;
-        $offset = ($page - 1) * $perPage;         
-        $data['reviews'] = $reviewModel->get_reviews_with_campaign($perPage, $offset);      
+        $offset = ($page - 1) * $perPage;
+        $data['reviews'] = $reviewModel->get_reviews_with_campaign($perPage, $offset);
         $totalReviews = $reviewModel->get_total_reviews_count();
         $pager = \Config\Services::pager();
         $data['pager'] = $pager->makeLinks($page, $perPage, $totalReviews);
-        $data['campaigns'] = $reviewModel->get_campaign_name();   
+        $data['campaigns'] = $reviewModel->get_campaign_name();
         $data['enumValues'] = $reviewModel->getEnumValues();
 
-         return view('reviews', $data);
+        return view('reviews', $data);
     }
 
     public function getReviewsByCampaign()
@@ -247,8 +247,8 @@ class ReviewController extends BaseController
         if ($this->request->isAJAX()) {
             $campaignID = $this->request->getPost('campaign_id');
             $approve = $this->request->getPost('approved');
-            $limit = intval($this->request->getPost('limit'))?: 10; 
-            $page = intval($this->request->getPost('page')) ?: 1;        
+            $limit = intval($this->request->getPost('limit')) ?: 10;
+            $page = intval($this->request->getPost('page')) ?: 1;
             $noText = $this->request->getPost('noText');
             $archive = $this->request->getPost('archive');
             $sentiment = $this->request->getPost('sentiment');
@@ -278,11 +278,11 @@ class ReviewController extends BaseController
                 $builder->where('TRIM(reviews.reviewText) =', '');
             } elseif ($noText == 0) {
                 $builder->where('TRIM(reviews.reviewText) !=', '');
-            }           
+            }
             $offset = ($page - 1) * $limit;
             $builder->limit($limit, $offset);
             $totalRecordsBuilder = clone $builder;
-            $totalRecords = $totalRecordsBuilder->countAllResults(false);  
+            $totalRecords = $totalRecordsBuilder->countAllResults(false);
             $reviews = $builder->get()->getResultArray();
             $campaigns = $reviewModel->get_campaign_name();
             $response = [
@@ -297,7 +297,7 @@ class ReviewController extends BaseController
             ];
             $this->response->setHeader('Content-Type', 'application/json');
             return $this->response->setJSON($response);
-        }  
+        }
     }
     
     public function approveReview() {
@@ -345,42 +345,41 @@ class ReviewController extends BaseController
         $state = $this->request->getPost('state');
         $city = $this->request->getPost('city');
         $zipcode = $this->request->getPost('zipcode');
-    
+
         // Load the ReviewModel
         $reviewModel = new ReviewModal();
-          
+
         $existingRecord = $reviewModel->find($id);
-    
+
         if ($existingRecord) {
-           
+
             $reviewratings = json_decode($existingRecord['reviewratings'], true);
-    
+
             // Update the fields within the JSON data
             $reviewratings['Name'] = $customer_name;
             $reviewratings['State'] = $state;
             $reviewratings['City'] = $city;
             $reviewratings['Zipcode'] = $zipcode;
-    
+
             // Encode the updated JSON data
             $updatedReviewRatings = json_encode($reviewratings);
-    
+
             // Prepare the data for update
             $data = [
-                'campaignID' => $campaignid,  
-                'reviewratings' => $updatedReviewRatings 
+                'campaignID' => $campaignid,
+                'reviewratings' => $updatedReviewRatings
             ];
             $reviewModel->update($id, $data);
-            return redirect()->to('/analyze/reviews/'); 
-        } else {           
-            return redirect()->to('/error'); 
+            return redirect()->to('/analyze/reviews/');
+        } else {
+            return redirect()->to('/error');
         }
     }
-    
+
     public function contact_templates()
     {
         $contactCardModel = new ContactcardModal();
         $data['contactcard'] = $contactCardModel->first();
-        return view('contact-card-tab/contact_templates',$data);
+        return view('contact-card-tab/contact_templates', $data);
     }
-    
 }

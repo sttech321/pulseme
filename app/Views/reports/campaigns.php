@@ -48,11 +48,11 @@
                                             d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z">
                                         </path>
                                     </svg>
-                                    <input class="!outline-none !border-none w-full !ring-transparent p-0" type="search"
+                                    <input class="!outline-none !border-none w-full !ring-transparent p-0 " type="search"
                                         name="search" id="search" placeholder="Search by campaign or department" />
                                 </div>
                                 <div class="filter flex justify-end items-baseline">
-                                    <svg class="svg-inline--fa fa-calendar-day" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <svg class="svg-inline--fa fa-calendar-day mr-3" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                             <path
                                                 class=""
                                                 fill="currentColor"
@@ -60,9 +60,9 @@
                                             ></path>
                                         </svg>
                                     <p class="font-bold">From</p>
-                                    <input min="2021-06-30" class="p-1" type="date" name="from_date" id="from_date" value="<?php echo htmlspecialchars($defaultFromDate); ?>"/>
+                                    <input min="2021-06-30" class="p-1 shadow-date mx-10" type="date" name="from_date" id="from_date" value="<?php echo htmlspecialchars($defaultFromDate); ?>"/>
                                     <p class="font-bold">To</p>
-                                    <input class="p-1" type="date" name="to_date" id="to_date" value="<?php echo htmlspecialchars($defaultToDate); ?>"/>
+                                    <input class="p-1 shadow-date mx-10" type="date" name="to_date" id="to_date" value="<?php echo htmlspecialchars($defaultToDate); ?>"/>
                                     <button class="btn btn-blue" id="updateButton">
                                         Update
                                     </button>

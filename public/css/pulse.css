@@ -28968,3 +28968,5 @@ margin-right: 150px;
     gap: 10px;
 }
 
+#multiStepForm input{height: 40px;}
+#multiStepForm .logo{margin-top: 40px; border-radius: 100px; width: 100px; height: 100px;}

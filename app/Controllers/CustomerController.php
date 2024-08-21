@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\CustomerModel;
@@ -10,7 +11,7 @@ use Exception;
 
 class CustomerController extends Controller
 {
-    
+
     public function __construct()
     {
         $this->session = \Config\Services::session();
@@ -25,31 +26,31 @@ class CustomerController extends Controller
 
     public function search()
     {
-       
-        $search = $this->request->getVar('search'); 
-    
-        $technicianModel = new TechnicianModal(); 
-    
+
+        $search = $this->request->getVar('search');
+
+        $technicianModel = new TechnicianModal();
+
         if ($search) {
             $results = $technicianModel->getTechniciansBySearch($search);
         } else {
             $results = $technicianModel->findAll();
         }
-    
+
         return $this->response->setJSON($results);
     }
-    
+
 
     public function dispatch()
     {
-        $technicianModel = new TechnicianModal();    
+        $technicianModel = new TechnicianModal();
         $data['technicians'] = $technicianModel->findAll();
-    
-        return view('dispatching',$data);
+
+        return view('dispatching', $data);
     }
 
     public function create_dispatch()
-    { 
+    {
         // Validation rules
         $rules = [
             'customer_email' => 'required|valid_email',
@@ -59,10 +60,12 @@ class CustomerController extends Controller
         // Validate form input
         if (!$this->validate($rules)) {
             return $this->response->setJSON(
-                ['status' => 'error',
-                 'message' => 'Validation failed',
-                  'errors' => $this->validator->getErrors()
-                ]);
+                [
+                    'status' => 'error',
+                    'message' => 'Validation failed',
+                    'errors' => $this->validator->getErrors()
+                ]
+            );
         }
 
         $name = $this->request->getPost('customer_name');
@@ -95,7 +98,6 @@ class CustomerController extends Controller
             $this->sendbioEmail($campaignid, $email);
 
             return $this->response->setJSON(['status' => 'success', 'message' => 'Bio sent successfully!', 'data' => $data]);
-
         } elseif ($actionType === 'pulsecheck') {
             // Insert into pulsecheck table
             $pulsecheckModel = new CustomerModel(); // Replace with the actual model for pulsecheck table
@@ -160,7 +162,5 @@ class CustomerController extends Controller
         if (!$emailService->send()) {
             echo $emailService->printDebugger(['headers', 'subject', 'body']);
         }
-    } 
-    
+    }
 }
-?>
