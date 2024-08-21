@@ -21,10 +21,6 @@ class Home extends BaseController
         return view('overview');
     }
 
-    public function summary(): string
-    {
-        return view('summary');
-    }
 
     public function referral(): string
     {
@@ -129,15 +125,7 @@ class Home extends BaseController
         return view('general-tab/general_users');
     }
     
-    public function contact_information(): string
-    {
-        return view('contact-card-tab/contact_information');
-    }
 
-    public function contact_templates(): string
-    {
-        return view('contact-card-tab/contact_templates');
-    }
 
     
 }

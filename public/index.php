@@ -1,5 +1,4 @@
 <?php
-
 /*
  *---------------------------------------------------------------
  * CHECK PHP VERSION
@@ -73,4 +72,5 @@ if (!defined('ROOTPATH')) {
 $app = require_once realpath(__DIR__ . '/../') . '/bootstrap/app.php';
 
 $app->run();
+
 

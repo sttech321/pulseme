@@ -3,6 +3,8 @@ namespace App\Controllers;
 use App\Models\CampaignModel;
 use App\Models\ReviewModal;
 use CodeIgniter\Controller;
+use App\Models\CustomerModel;
+use App\Models\TechnicianModal;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Email\Email;
 
@@ -23,8 +25,22 @@ class Campaign extends BaseController {
         return view('dispatchTab/dispatchCampaigns',$data);
     }
 
+    public function search()
+    {
+        $search = $this->request->getVar('query');
+    
+        $technicianModel = new TechnicianModal();
+        
+        if ($search) {
+            $results = $technicianModel->getTechniciansBySearch($search);
+        } else {
+            $results = $technicianModel->findAll(); // Return all technicians if no search query
+        }
+    
+        return $this->response->setJSON($results);
+    } 
+
     public function create() {
-        // Load necessary helpers and libraries
         helper(['form']);
         $rules = [
             'campaignImage' => 'uploaded[campaignImage]|max_size[campaignImage,1024]|is_image[campaignImage]',
@@ -32,26 +48,31 @@ class Campaign extends BaseController {
             'campaignDescription' => 'required',
             'campaignDepartment' => 'required',
         ];
-
+    
         if (!$this->validate($rules)) {
-            return redirect()->to('/settings/dispatch/campaigns')->withInput()->with('validation', $this->validator);
+            // Return validation errors if the request is AJAX
+            return $this->response->setJSON([
+                'success' => false,
+                'validation' => $this->validator->getErrors(),
+            ]);
         }
+    
         // Handle image upload
         $campaignImage = $this->request->getFile('campaignImage');
         $newName = $campaignImage->getRandomName();
         $uploadPath = '/image/campaign/';
-
-        // // Move uploaded file to designated directory
+    
         if ($campaignImage->isValid() && !$campaignImage->hasMoved()) {
-           // $campaignImage->move($uploadPath, $newName);
-            $campaignImage->move(ROOTPATH . 'public/image/campaign', $newName);
+            $campaignImage->move(ROOTPATH . 'public' . $uploadPath, $newName);
         } else {
-            // Handle upload failure here
-            return redirect()->back()->with('error', 'Failed to upload image.');
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to upload image.',
+            ]);
         }
-        // Save campaign data to database
-        $campaignModel = new CampaignModel(); 
-        // var_dump($model);
+    
+        // Save campaign data to the database
+        $campaignModel = new CampaignModel();
         $data = [
             'name' => $this->request->getPost('CampaignName'),
             'description' => $this->request->getPost('campaignDescription'),
@@ -59,22 +80,37 @@ class Campaign extends BaseController {
             'license' => $this->request->getPost('license'),
             'employeeId' => $this->request->getPost('employeeId'),
             'email' => $this->request->getPost('email'),
-            'image' => $uploadPath . $newName ,// Store image path in database
+            'image' => $uploadPath . $newName, // Store image path in database
             'deviceId' => $this->request->getPost('deviceId'),
         ];
-        // // Insert data into database
+    
         $campaignModel->insert($data);
-        // // Redirect to a success page or display success message
-        return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign saved successfully.');
-    }
+    
+        // Return success response if the request is AJAX
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Campaign saved successfully.',
+        ]);
+    } 
 
     public function delete($id)
     {
         $model = new CampaignModel();
-        $model->delete($id);
-        return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign deleted successfully.');
+        if ($model->delete($id)) {
+            // Return JSON response for AJAX
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Campaign deleted successfully.'
+            ]);
+        } else {
+            // Return JSON response for AJAX
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to delete campaign.'
+            ]);
+        }
     }
-
+    
     public function update($id)
     {
         helper(['form']);
@@ -85,18 +121,23 @@ class Campaign extends BaseController {
             'campaignDescription' => 'required',
             'campaignDepartment' => 'required',
         ];
-
+    
         // Handle file upload
         $campaignImage = $this->request->getFile('campaignImage');
         if ($campaignImage && $campaignImage->isValid()) {
             $rules['campaignImage'] = 'uploaded[campaignImage]|max_size[campaignImage,1024]|is_image[campaignImage]';
         }
-
+    
         // Validate form input
         if (!$this->validate($rules)) {
-            return redirect()->to('/settings/dispatch/campaigns')->withInput()->with('validation', $this->validator);
+            // Return JSON response for AJAX
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Validation failed.',
+                'errors' => $this->validator->getErrors()
+            ]);
         }
-
+    
         // Move uploaded file to designated directory
         if ($campaignImage && $campaignImage->isValid() && !$campaignImage->hasMoved()) {
             $newName = $campaignImage->getRandomName();
@@ -106,10 +147,10 @@ class Campaign extends BaseController {
         } else {
             $imagePath = ''; // Handle case where no new image is uploaded
         }
-
+    
         // Update campaign data in database
         $model = new CampaignModel();
-
+    
         $data = [
             'name' => $this->request->getPost('CampaignName'),
             'description' => $this->request->getPost('campaignDescription'),
@@ -119,18 +160,27 @@ class Campaign extends BaseController {
             'email' => $this->request->getPost('email'),
             'deviceId' => $this->request->getPost('deviceId'),
         ];
-
+    
         // Include image path in data if uploaded
         if (!empty($imagePath)) {
             $data['image'] = $imagePath;
         }
       
         // Perform the update
-        $model->update($id,$data);
-
-        // Redirect with success message
-        return redirect()->to('/settings/dispatch/campaigns')->with('success', 'Campaign updated successfully.');
-    }
+        if ($model->update($id, $data)) {
+            // Return JSON response for AJAX
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Campaign updated successfully.'
+            ]);
+        } else {
+            // Return JSON response for AJAX
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to update campaign.'
+            ]);
+        }
+    }    
 
     public function technician_bio($id) {
         $model = new CampaignModel();

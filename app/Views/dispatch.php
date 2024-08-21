@@ -1,10 +1,16 @@
 <!-- app/Views/reviews.php -->
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
+<style>
+i.fa.fa-star {
+font-size: 24px;
+color: #f09737;
+}
+</style>
 <div class="headerTop">
    <div class="dropMenuWrap flexBetween">
       <div class="pageNameWrap">
-         <h3 class="secTitle">Reviews</h3>
+         <h3 class="secTitle">Dispatching</h3>
       </div>
       <div class="rightWrap">
          <div class="location-info flex flex-col justify-center items-end mr-10px">
@@ -20,13 +26,15 @@
 <div class="sidebarRightContentWrap">
 <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
     <div data-v-1ee66579="" class="dispatch">
-        <header data-v-1ee66579="" class="w-full h-[100px] bg-white flex items-center pl-4"><h1 data-v-1ee66579="" class="text-2xl">Dispatching</h1></header>
+        <header data-v-1ee66579="" class="w-full h-[100px] bg-white flex items-center pl-4">
+            <!-- <h1 data-v-1ee66579="" class="text-2xl">Dispatching</h1> -->
+        </header>
         <div data-v-1ee66579="" class="wrap p-20px text-sm">
             <div data-v-04366469="" data-v-1ee66579="" id="panel-contain" class="grid grid-cols-3 <lg:grid-cols-1 grid-flow-row auto-rows-auto gap-x-5 gap-y-8 h-full relative">
                 <div data-v-04366469="" class="flex justify-between items-center col-span-3 <lg:col-span-1">
                     <p data-v-04366469="" class="">Overview</p>
                     <div data-v-04366469="" class="filter flex justify-end items-baseline">
-                        <svg class="svg-inline--fa fa-calendar-day" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <!-- <svg class="svg-inline--fa fa-calendar-day" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                             <path
                                 class=""
                                 fill="currentColor"
@@ -46,9 +54,9 @@
                                 ></path>
                             </svg>
                             Update
-                        </button>
+                        </button> -->
                     </div>
-                </div>
+                </div> 
                 <div data-v-ecf6f3dc="" data-v-04366469="">
                     <div data-v-4c587d70="" data-v-ecf6f3dc="" class="panel bg-white w-full h-full flex flex-col items-stretch col-span-1">
                         <div data-v-4c587d70="" class="panel-header">Customer Engagement</div>
@@ -131,172 +139,12 @@
                                     <tr data-v-4065c71e="" class="alternate-row">
                                         <td data-v-4065c71e="" class="flex items-center justify-between p-1 h-20">
                                             <div data-v-4065c71e="">
-                                                <div data-v-4065c71e="" class="text-xl ml-2 font-bold">4.7</div>
-                                                <div data-v-4065c71e="" class="ml-2 text-sm">Professionalism</div>
+                                                <div data-v-4065c71e="" class="text-xl ml-2 font-bold"><?= $ratepoint2 ?></div>
+                                                <div data-v-4065c71e="" class="ml-2 text-sm"><?= $ratetext2 ?></div>
                                             </div>
                                             <div data-v-4065c71e="" class="flex justify-evenly items-center">
                                                 <div class="flex text-xl relative">
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <div class="flex absolute overflow-hidden text-xl top-0 left-0" style="width: 94%; color: rgb(240, 151, 55);">
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
+                                                        <?= $starRating2 ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -305,173 +153,12 @@
                                     <tr data-v-4065c71e="" class="">
                                         <td data-v-4065c71e="" class="flex items-center justify-between p-1 h-20">
                                             <div data-v-4065c71e="">
-                                                <div data-v-4065c71e="" class="text-xl ml-2 font-bold">4.6</div>
-                                                <div data-v-4065c71e="" class="ml-2 text-sm">How likely are you to recommend us?</div>
+                                                <div data-v-4065c71e="" class="text-xl ml-2 font-bold"><?= $ratepoint1 ?></div>
+                                                <div data-v-4065c71e="" class="ml-2 text-sm"><?= $ratetext1 ?></div>
                                             </div>
                                             <div data-v-4065c71e="" class="flex justify-evenly items-center">
                                                 <div class="flex text-xl relative">
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <div class="flex absolute overflow-hidden text-xl top-0 left-0" style="width: 92%; color: rgb(240, 151, 55);">
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                    </div>
+                                                    <?= $starRating1 ?>
                                                 </div>
                                             </div>
                                         </td>
@@ -479,173 +166,12 @@
                                     <tr data-v-4065c71e="" class="alternate-row">
                                         <td data-v-4065c71e="" class="flex items-center justify-between p-1 h-20">
                                             <div data-v-4065c71e="">
-                                                <div data-v-4065c71e="" class="text-xl ml-2 font-bold">4.6</div>
-                                                <div data-v-4065c71e="" class="ml-2 text-sm">Quality of Service</div>
+                                                <div data-v-4065c71e="" class="text-xl ml-2 font-bold"><?= $ratepoint3 ?></div>
+                                                <div data-v-4065c71e="" class="ml-2 text-sm"><?= $ratetext3 ?></div>
                                             </div>
                                             <div data-v-4065c71e="" class="flex justify-evenly items-center">
                                                 <div class="flex text-xl relative">
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <svg
-                                                        class="svg-inline--fa fa-star icon-style text-lg text-gray-300"
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="star"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            class=""
-                                                            fill="currentColor"
-                                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                        ></path>
-                                                    </svg>
-                                                    <div class="flex absolute overflow-hidden text-xl top-0 left-0" style="width: 92%; color: rgb(240, 151, 55);">
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                        <svg
-                                                            class="svg-inline--fa fa-star icon-style text-xl"
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="star"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                class=""
-                                                                fill="currentColor"
-                                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                                                            ></path>
-                                                        </svg>
-                                                    </div>
+                                                 <?= $starRating3 ?>
                                                 </div>
                                             </div>
                                         </td>
@@ -665,10 +191,11 @@
                                     <tr data-v-b59c33b2="" class="alternate-row">
                                         <td data-v-b59c33b2="" class="flex items-center justify-between p-1 h-20">
                                             <div data-v-b59c33b2="">
-                                                <div data-v-b59c33b2="" class="text-xl ml-2 font-bold">95.7%</div>
+                                                <div data-v-b59c33b2="" class="text-xl ml-2 font-bold"><?= $happyPercentage ?>%</div>
                                                 <div data-v-b59c33b2="" class="ml-2 text-sm">Happy Customer Count</div>
                                             </div>
-                                            <div data-v-b59c33b2="" class="flex justify-evenly items-center">
+
+                                             <div data-v-b59c33b2="" class="flex justify-evenly items-center">
                                                 <div class="flex text-xl relative">
                                                     <svg
                                                         class="svg-inline--fa fa-face-smile icon-style text-lg text-gray-300"
@@ -836,7 +363,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr data-v-b59c33b2="" class="">
+                                    <!-- <tr data-v-b59c33b2="" class="">
                                         <td data-v-b59c33b2="" class="flex items-center justify-between p-1 h-20">
                                             <div data-v-b59c33b2="">
                                                 <div data-v-b59c33b2="" class="text-xl ml-2 font-bold">0.9%</div>
@@ -1009,13 +536,13 @@
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                     <tr data-v-b59c33b2="" class="alternate-row">
                                         <td data-v-b59c33b2="" class="flex items-center justify-between p-1 h-20">
-                                            <div data-v-b59c33b2="">
-                                                <div data-v-b59c33b2="" class="text-xl ml-2 font-bold">3.3%</div>
-                                                <div data-v-b59c33b2="" class="ml-2 text-sm">Unhappy Customer Count</div>
-                                            </div>
+                                        <div data-v-b59c33b2="">
+                                            <div data-v-b59c33b2="" class="text-xl ml-2 font-bold"><?= $unhappyPercentage ?>%</div>
+                                            <div data-v-b59c33b2="" class="ml-2 text-sm">UNhappy Customer Count</div>
+                                        </div>
                                             <div data-v-b59c33b2="" class="flex justify-evenly items-center">
                                                 <div class="flex text-xl relative">
                                                     <svg

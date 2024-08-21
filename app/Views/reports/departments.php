@@ -87,7 +87,7 @@
 												Name
 												<!---->
 											</th>
-											<th class="text-left px-20px py-10px cursor-pointer">
+											<!-- <th class="text-left px-20px py-10px cursor-pointer">
 												Leaderboard Points
 												<svg
 													class="svg-inline--fa fa-angle-down"
@@ -105,31 +105,28 @@
 														d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
 													></path>
 												</svg>
-											</th>
-											<th class="text-left px-20px py-10px cursor-pointer">
-												pulseM Index
+											</th> -->
+											<!-- <th class="text-left px-20px py-10px cursor-pointer"> -->
+												<!-- pulseM Index -->
 												<!---->
-											</th>
-											<th class="text-left px-20px py-10px cursor-pointer">
-												Pulse Check Points
+											<!-- </th> -->
+											<!-- <th class="text-left px-20px py-10px cursor-pointer"> -->
+												<!-- Pulse Check Points -->
 												<!---->
-											</th>
+											<!-- </th> -->
 											<th class="text-left px-20px py-10px cursor-pointer">
 												Review Leads
 												<!---->
 											</th>
-											<th class="text-left px-20px py-10px cursor-pointer">
-												Social Points
+											<!-- <th class="text-left px-20px py-10px cursor-pointer"> -->
+												<!-- Social Points -->
 												<!---->
-											</th>
+											<!-- </th> -->
 											<th class="text-left px-20px py-10px cursor-pointer">
 												Happy Count
 												<!---->
 											</th>
-											<th class="text-left px-20px py-10px cursor-pointer">
-												Neutral Count
-												<!---->
-											</th>
+											
 											<th class="text-left px-20px py-10px cursor-pointer">
 												Unhappy Count
 												<!---->
@@ -137,49 +134,19 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php foreach ($campaigns as $campaign) : ?>
-												 <tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px"><?= esc($campaign['name']) ?></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px">
-														<?php
-															$positiveCount = 0;
-															$hasData = false; // Flag to check if data exists
-															foreach ($sentiments as $sentiment) {
-																if ($sentiment['campaignID'] == $campaign['ID']) {
-																	$hasData = true;
-																	if($sentiment['sentiment'] == 'Positive'){
-																		$positivecount = str_word_count($sentiment['sentiment']);
-																		$positiveCount++;
-																	}
-																}
-															}
-															echo $hasData ? ($positiveCount > 0 ? $positiveCount : '') : '';
-														?>
-													</td>
-													<td class="px-20px py-15px"></td> 
-													<td class="px-20px py-15px">
-														<?php
-															$negativecount = 0;
-															$hasData = false;
-															foreach ($sentiments as $sentiment) {
-																if ($sentiment['campaignID'] == $campaign['ID']) {
-																	$hasData = true;
-																	if ($sentiment['sentiment'] == 'Negative') {
-																		$negativecount++;
-																	}
-																}
-															}
-
-															echo $hasData ? ($negativecount > 0 ? $negativecount : '') : '';
-														?>
-													</td>
-												</tr> 
-												<?php endforeach; ?>
+										<?php // print_r($campaigns);?>
+										<?php foreach ($departments as $campaign) : ?>
+												<tr class="!bg-opacity-50 odd:bg-sky-100">
+												<td class="px-20px py-15px"><?=  $campaign->department; ?></td>
+												<!-- <td class="px-20px py-15px"></td> -->
+												<!-- <td class="px-20px py-15px"></td> -->
+												<td class="px-20px py-15px"></td>
+												<!-- <td class="px-20px py-15px"></td> -->
+												<!-- <td class="px-20px py-15px"></td> -->
+												<td class="px-20px py-15px"><?=  $campaign->positive_count; ?></td> 
+												<td class="px-20px py-15px"><?=  $campaign->negative_count; ?></td>
+											</tr> 
+											<?php endforeach; ?>
 									</tbody>
 								</table>
 								<!---->

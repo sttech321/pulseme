@@ -70,7 +70,8 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="flex flex-col w-full overflow-x-auto items-stretch">
+                            
+                            <div class="flex flex-col w-full overflow-x-auto items-stretch" id ="table-container">
                                 <table class="mb-15px">
                                     <thead>
                                         <tr>
@@ -90,7 +91,7 @@
                                                 Department
                                                 <!---->
                                             </th>
-                                            <th class="text-left px-20px py-10px cursor-pointer">
+                                            <!-- <th class="text-left px-20px py-10px cursor-pointer">
                                                 Leaderboard Points
                                                 <svg class="svg-inline--fa fa-angle-down" aria-hidden="true"
                                                     focusable="false" data-prefix="fas" data-icon="angle-down"
@@ -99,11 +100,11 @@
                                                         d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z">
                                                     </path>
                                                 </svg>
-                                            </th>
-                                            <th class="text-left px-20px py-10px cursor-pointer">
-                                                pulseM Index
+                                            </th> -->
+                                            <!-- <th class="text-left px-20px py-10px cursor-pointer"> -->
+                                                <!-- pulseM Index -->
                                                 <!---->
-                                            </th>
+                                            <!-- </th> -->
                                             <th class="text-left px-20px py-10px cursor-pointer">
                                                 Bios
                                                 <!---->
@@ -133,61 +134,26 @@
                                     <tbody>
                                         <?php foreach ($campaigns as $campaign): ?>
                                         <tr class="!bg-opacity-50 odd:bg-sky-100">
-                                            <td class="px-20px py-15px">1B85A09AA6<?= $campaign['ID'] ?></td>
-                                            <td class="px-20px py-15px"><?= $campaign['name'] ?></td>
-                                            <td class="px-20px py-15px"><?= $campaign['employeeId'] ?></td>
-                                            <td class="px-20px py-15px"><?= $campaign['department'] ?></td>
-                                            <td class="px-20px py-15px"></td>
-                                            <td class="px-20px py-15px"></td>
+                                            <td class="px-20px py-15px">1B85A09AA6<?=  $campaign->ID; ?></td>
+                                            <td class="px-20px py-15px"><?= $campaign->name; ?></td>
+                                            <td class="px-20px py-15px"><?= $campaign->employeeId; ?></td>
+                                            <td class="px-20px py-15px"><?= $campaign->department; ?></td>
+                                            <!-- <td class="px-20px py-15px"></td> -->
+                                            <!-- <td class="px-20px py-15px"></td> -->
                                             <td class="px-20px py-15px">
-                                                <?php 
-													// $matchCount = 0;
-													// if (!empty($customersWithCampaigns)) {
-													// 	foreach ($customersWithCampaigns as $customer) {
-													// 		if ($customer->campaign_id == $campaign['ID']) {
-													// 			$matchCount = $customer->match_count;
-													// 			break;
-													// 		}
-													// 	}
-													// }
-													// echo $matchCount;
-													?>
+                                            <?= $campaign->bio_count; ?>
+                                            </td>
+                                            <td class="px-20px py-15px">
+                                            <?= $campaign->pulsecheck_count; ?>
                                             </td>
                                             <td class="px-20px py-15px"></td>
-                                            <td class="px-20px py-15px"></td>
-                                            <!-- Positive Sentiment -->
+                                            <!-- Positive Sentiment -->                                             
                                             <td class="px-20px py-15px">
-                                                <?php
-                                                    $positiveCount = 0;
-                                                    $hasData = false; // Flag to check if data exists
-                                                    foreach ($sentiments as $sentiment) {
-                                                        if ($sentiment['campaignID'] == $campaign['ID']) {
-                                                            $hasData = true;
-                                                            if($sentiment['sentiment'] == 'Positive'){
-                                                                $positivecount = str_word_count($sentiment['sentiment']);
-                                                                $positiveCount++;
-                                                            }
-                                                        }
-                                                    }
-                                                    echo $hasData ? ($positiveCount > 0 ? $positiveCount : '') : '';
-                                                ?>
+                                            <?= isset($campaign->positive_count) ? $campaign->positive_count : 'N/A'; ?>
                                             </td>
-
                                             <!-- Negative Sentiment -->
                                             <td class="px-20px py-15px">
-                                                <?php
-                                                $negativecount = 0;
-                                                $hasData = false;
-                                                foreach ($sentiments as $sentiment) {
-                                                    if ($sentiment['campaignID'] == $campaign['ID']) {
-                                                        $hasData = true;
-                                                        if ($sentiment['sentiment'] == 'Negative') {
-                                                            $negativecount++;
-                                                        }
-                                                    }
-                                                }
-                                                echo $hasData ? ($negativecount > 0 ? $negativecount : '') : '';
-                                                ?>
+                                            <?= isset($campaign->negative_count) ? $campaign->negative_count : 'N/A'; ?>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -202,4 +168,62 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('search').addEventListener('input', function() {
+        const query = this.value;
+        console.log(query);
+        $.ajax({
+            url: '/leaderboard/reports/campaigns/search',
+            type: 'POST',
+            data: { search: query }, 
+            dataType: 'json', 
+            success: function(response) {
+                // Assuming response is an array of campaign objects
+                let html = '<table class="mb-15px">' +
+                            '<thead>' +
+                                '<tr>' +
+                                    '<th class="text-left px-20px py-10px cursor-pointer">Campaign_UID</th>' +
+                                    '<th class="text-left px-20px py-10px cursor-pointer">Name</th>' +
+                                    '<th class="text-left px-20px py-10px cursor-pointer">Emp ID</th>' +
+                                    '<th class="text-left px-20px py-10px cursor-pointer">Department</th>' +
+                                    '<th class="text-left px-20px py-10px cursor-pointer">Leaderboard Points</th>' +
+                                    '<th class="text-left px-20px py-10px cursor-pointer">pulseM Index</th>' +
+                                    '<th class="text-left px-20px py-10px cursor-pointer">Bios</th>' +
+                                    '<th class="text-left px-20px py-10px cursor-pointer">Pulse Checks</th>' +
+                                    '<th class="text-left px-20px py-10px cursor-pointer">Review Leads</th>' +
+                                    '<th class="text-left px-20px py-10px cursor-pointer">Happy Count</th>' +
+                                    '<th class="text-left px-20px py-10px cursor-pointer">Unhappy Count</th>' +
+                                '</tr>' +
+                            '</thead>' +
+                            '<tbody>';
+
+                response.forEach(campaign => {
+                    html += '<tr class="!bg-opacity-50 odd:bg-sky-100">' +
+                                `<td class="px-20px py-15px">1B85A09AA6${campaign.ID}</td>` +
+                                `<td class="px-20px py-15px">${campaign.name}</td>` +
+                                `<td class="px-20px py-15px">${campaign.employeeId}</td>` +
+                                `<td class="px-20px py-15px">${campaign.department}</td>` +
+                                '<td class="px-20px py-15px"></td>' +
+                                '<td class="px-20px py-15px"></td>' +
+                                `<td class="px-20px py-15px">${campaign.bio_count}</td>` +
+                                `<td class="px-20px py-15px">${campaign.pulsecheck_count}</td>` +
+                                '<td class="px-20px py-15px"></td>' +
+                                `<td class="px-20px py-15px">${campaign.positive_count}</td>` +
+                                `<td class="px-20px py-15px">${campaign.negative_count}</td></td>` +
+                            '</tr>';
+                });
+
+                html += '</tbody></table>';
+
+                // Append the constructed HTML to the target container
+                document.getElementById('table-container').innerHTML = html;
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error:', status, error);
+                console.error('Response Text:', xhr.responseText); 
+            }
+        });
+    });
+</script>
+
 <?= $this->endsection('content') ?>

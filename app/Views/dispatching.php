@@ -18,16 +18,18 @@
 <div class="sidebarRightContent">
    <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
       <div class="sub-menu-bar flex flex-col items-stretch h-full">
-         <div class="bg-white p-20px">
-            <h2 class="text-2xl">Dispatch</h2>
+         <!-- <div class="bg-white p-20px"> -->
+            <!-- <h2 class="text-2xl">Dispatch</h2> -->
+         <!-- </div> -->
+         <!-- <div class="bg-white px-15px flex justify-start items-center"><a aria-current="page" href="<?= base_url('/operate/dispatch')?>"
+            class="border-b-2 border-blue-500 router-link-exact-active p-10px" id="dispatch-link">Dispatch</a> -->
+            <!-- <a href="/operate/contact-card" class="p-10px" id="contact-card-link">Contact Card</a> -->
+            <!-- <a href="/operate/quick-actions" class="p-10px" id="quick-actions-link">Quick Actions</a> -->
          </div>
-         <div class="bg-white px-15px flex justify-start items-center"><a aria-current="page" href="/operate/dispatch"
-            class="border-b-2 border-blue-500 router-link-exact-active p-10px" id="dispatch-link">Dispatch</a><a
-            href="/operate/contact-card" class="p-10px" id="contact-card-link">Contact Card</a><a
-            href="/operate/quick-actions" class="p-10px" id="quick-actions-link">Quick Actions</a></div>
          <div class="flex-grow">
             <div class="p-25px">
                <div class="main p-2rem bg-white rounded">
+                  <h2 class="text-2xl">Dispatch</h2>
                   <div class="menu flex w-full justify-end mb-2rem">
                      <div class="dropdown relative">
                         <button>
@@ -56,16 +58,16 @@
                         <input type="text" id="search" name="search" placeholder="Search by name or code...">
                      </div>
                      <div class="batch-send">
-                        <button class="btn btn-blue">
-                           <svg class="svg-inline--fa fa-reply-all"
+                        <!-- <button class="btn btn-blue"> -->
+                           <!-- <svg class="svg-inline--fa fa-reply-all"
                               aria-hidden="true" focusable="false" data-prefix="fas" data-icon="reply-all"
                               role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                               <path class="" fill="currentColor"
                                  d="M209.4 39.5c-9.1-9.6-24.3-10-33.9-.9L33.8 173.2c-19.9 18.9-19.9 50.7 0 69.6L175.5 377.4c9.6 9.1 24.8 8.7 33.9-.9s8.7-24.8-.9-33.9L66.8 208 208.5 73.4c9.6-9.1 10-24.3 .9-33.9zM352 64c0-12.6-7.4-24.1-19-29.2s-25-3-34.4 5.4l-160 144c-6.7 6.1-10.6 14.7-10.6 23.8s3.9 17.7 10.6 23.8l160 144c9.4 8.5 22.9 10.6 34.4 5.4s19-16.6 19-29.2V288h32c53 0 96 43 96 96c0 30.4-12.8 47.9-22.2 56.7c-5.5 5.1-9.8 12-9.8 19.5c0 10.9 8.8 19.7 19.7 19.7c2.8 0 5.6-.6 8.1-1.9C494.5 467.9 576 417.3 576 304c0-97.2-78.8-176-176-176H352V64z">
                               </path>
-                           </svg>
-                           Send to Multiple Customers
-                        </button>
+                           </svg> -->
+                           <!-- Send to Multiple Customers -->
+                        <!-- </button> -->
                      </div>
                   </div>
                   <?php if (!empty($technicians)): ?>
@@ -136,12 +138,12 @@
                            <input type="hidden" id="actionType_<?= $technician['ID'] ?>" name="actionType" value=""/>
                            <button
                               class="btn btn-blue max-w-200px w-full rounded-2px mb-2"
-                              id="btn1" type="button" onclick="submitForm('form_<?= $technician['ID'] ?>', 'sendbio')">
+                              id="btn1" type="button" onclick="submitForm('form_<?= $technician['ID'] ?>', 'bio')">
                               Send Bio
                            </button>
                            <button
                               class="btn btn-green max-w-200px w-full rounded-2px"
-                              id="btn2" type="button" onclick="submitForm('form_<?= $technician['ID'] ?>', 'sendpulsecheck')">
+                              id="btn2" type="button" onclick="submitForm('form_<?= $technician['ID'] ?>', 'pulsecheck')">
                               Send Pulse Check
                            </button>
                         </form>
@@ -162,7 +164,7 @@
 <script>
 
 $(document).ready(function() {
-    var technicianid =  $(this).val('#button_id');
+    var technicianid =  $(this).val('#campaignid');
     console.log(technicianid,'ddddddd');
       // Handle input changes in search bar
       $('#search').on('input', function() {
@@ -187,20 +189,21 @@ $(document).ready(function() {
 
                  if (data.length > 0) {
                   // var error = $('.error');
-                     var table = $('<table class="w-full"></table>');
+                     var table = $('<div class="w-full"></div>');
                      $.each(data, function(index, technician) {
                          var row = `<div class="flex p-20px odd:bg-sky-50">
-                            <form id="form_${technician.ID}" class="ajaxForm" action="<?= base_url('example/submit') ?>" method="post">
+                            <form id="form_${technician.ID}" style="width:100%;" class="ajaxForm" action="<?= base_url('example/submit') ?>" method="post">
                                 <input type="hidden" id="campaignid" name="campaignid" value="${technician.ID}" required>
                                 <input type="hidden" id="employeeid" name="employeeid" value="${technician.employeeId}" required>
-                                <td class="employee flex items-center w-1/4">
+                                <div style="display: flex;justify-content: space-between;align-items: center;">
+                                <div class="employee flex items-center w-1/4">
                                     <div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0" style="background-image: url('${technician.image}');"></div>
                                     <div class="flex-grow">
                                         <p class="name">${technician.name}</p>
                                         <p class="department text-gray-400">${technician.department}</p>       
                                     </div>
-                                </td>
-                                <td class="recipient-info grid grid-cols-6 gap-5px flex-grow">
+                                </div>
+                                <div class="recipient-info grid grid-cols-6 gap-5px flex-grow">
                                     <div class="input-group col-span-3 flex items-center">
                                         <input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px"
                                     type="tel" name="customer_phone" class="customer_phone" id="phone_${technician.ID}" placeholder="Phone Number" required>
@@ -221,12 +224,12 @@ $(document).ready(function() {
                                             <p style="margin-left:10px;">Mark as test</p>
                                         </div>
                                     </div>
-                                </td>
-                                <td class="buttons flex flex-col justify-center items-end px-4 w-1/4">
+                                </div>
+                                <div class="buttons flex flex-col justify-center items-end px-4 w-1/4">
                                  <input type="hidden" id="actionType_${technician.ID}" name="actionType" value=""/>
-                                    <button class="btn btn-blue max-w-200px w-full rounded-2px mb-2" type="button" onclick="submitForm('form_${technician.ID}', 'sendbio')">Send Bio</button>
-                                    <button class="btn btn-green max-w-200px w-full rounded-2px" type="button" onclick="submitForm('form_${technician.ID}', 'sendpulsecheck')">Send Pulse Check</button>
-                                </td>
+                                    <button class="btn btn-blue max-w-200px w-full rounded-2px mb-2" type="button" onclick="submitForm('form_${technician.ID}', 'bio')">Send Bio</button>
+                                    <button class="btn btn-green max-w-200px w-full rounded-2px" type="button" onclick="submitForm('form_${technician.ID}', 'pulsecheck')">Send Pulse Check</button>
+                                </div></div>
                             </form>
                         </div>`;
                          table.append(row);
@@ -241,36 +244,39 @@ $(document).ready(function() {
 });
 
 function submitForm(formId, actionType) {
-    var form = $('#' + formId); // Get the form by its ID
-    var actionField = form.find('input[name="actionType"]');
-    actionField.val(actionType); // Set the action type in the hidden field
+    var form = $('#' + formId);
+    var actionTypeField = $('#actionType_' + formId.split('_')[1]);
+    actionTypeField.val(actionType);
+    var phone = $('.customer_phone').val();
+    var email = $('.customer_email').val();
 
-    var formData = form.serialize(); // Serialize the form data
-    console.log(formData); // Log the form data to verify it's being fetched
+    console.log('Form Data:', form.serialize()); // Debugging statement
+    console.log('Action Type:', actionTypeField.val());
 
-    // Now you can submit the form using AJAX
     $.ajax({
-        url: form.attr('action'),
-        type: 'post',
-        data: formData,
+        url: $('#' + formId).attr('action'), // Get URL from the form action attribute
+        type: 'POST',
+        data: $('#' + formId).serialize(), // Serialize form data
+        dataType: 'json', // Expect JSON response
         success: function(response) {
-         if (response.status === 'error') {
-                let errorMessage = '';
-                $.each(response.errors, function(field, error) {
-                    errorMessage += error + '<br>';
-                });
-                $('.error').html(errorMessage);
-            } else {
-                console.log('Response:', response);
-            }
+            console.log('Response:', response); // Debugging statement
+         if(response.status === 'success'){ 
+            location.reload();
+         } else if(response.status === 'error') {
+            let errorMessage = '';
+            $.each(response.errors, function(field, error) {
+                errorMessage += error + '<br>';
+            });
+            $('.error').html(errorMessage);
+         } else {
+                  console.log('Response:', response); // Debugging statement
+         }
         },
         error: function(xhr, status, error) {
-            // Handle the error
-            console.error(xhr.responseText);
+            console.log('Error:', error); // Debugging statement
+            $('.error').text('An error occurred while submitting the form.'); 
         }
     });
 }
-
 </script>
-
 <?= $this->endsection('content') ?>

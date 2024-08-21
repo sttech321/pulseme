@@ -20,12 +20,15 @@
 <div class="sidebarRightContentWrap">
    <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
       <div class="sub-menu-bar flex flex-col items-stretch h-full">
-         <div class="p-20px bg-white">
-            <h2 class="text-2xl">Reviews</h2>
-         </div>
-         <div class="px-15px bg-white flex justify-start items-center tabs"><a href="/analyze/reviews" id="reviews-tab" class="tab p-10px" aria-current="page">Reviews</a><a href="/analyze/reviews/social-reviews" id="social-reviews-tab" class="tab p-10px">Social Reviews</a></div>
-         <div class="flex-grow">
-            <div data-v-428084ba="" class="p-25px">
+            <div class="flex-grow">
+               <div data-v-428084ba="" class="p-25px">
+               <div class="p-20px bg-white">
+               <h2 class="text-2xl">Reviews</h2>
+            </div>
+            <div class="px-15px bg-white flex justify-start items-center tabs">
+               <a href="<?= base_url('/analyze/reviews')?>" id="reviews-tab" class="tab p-10px" aria-current="page">Reviews</a>
+               <a href="<?= base_url('/analyze/reviews/social-reviews')?>" id="social-reviews-tab" class="tab p-10px">Social Reviews</a>
+            </div>
                <div data-v-428084ba="" class="bg-white rounded-4px shadow p-10px">
                   <div data-v-428084ba="" class="row flex justify-end p-10px">
                      <div data-v-428084ba="" class="relative w-full flex justify-end items-center">
@@ -249,13 +252,9 @@
                   <div data-v-428084ba="" class="row table p-10px w-full">
                      <table data-v-428084ba="" class="w-full">
                         <?php foreach($fetchreview as $review): ?>
-                           <?php  print_r($review); ?>
                            <?php
-
                            $reviewerInfo = json_decode($review['reviewratings'], true);
-
                            $reviewerName = $reviewerInfo['Name'] ?? 'Unknown';
-                           
                            ?>
                         <tr data-v-428084ba="" class="flex w-full">
                            <th data-v-428084ba="" class="p-10px w-auto">
@@ -306,7 +305,7 @@
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> <?php $reviewerInfo = json_decode($review['reviewratings'], true); ?>  <?php print_r($reviewerInfo['Zipcode']);?>  <?php print_r($reviewerInfo['State']);?> <?php print_r($reviewerInfo['City']);?></p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span><?= $review['createdOn']?> </p>
+                                    <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span> <?php echo str_replace('00:00:00','', $review['createdOn']);?></p>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Campaign:</span><?= $review['campaignName']?></p>
@@ -317,30 +316,28 @@
                               </div>
                               <div data-v-f15ab7a3="" class="ratings flex flex-wrap">
                                  <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3=""><?= $reviewerInfo['rate1']['text']; ?></p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewerInfo['rate1']['value']; ?></div>
+                                    <p data-v-f15ab7a3=""><?//= //$reviewerInfo['rate1']['text']; ?></p>
+                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?//= //$reviewerInfo['rate1']['value']; ?></div>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3=""><?= $reviewerInfo['rate2']['text']; ?></p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewerInfo['rate2']['value']; ?></div>
+                                    <p data-v-f15ab7a3=""><?//= //$reviewerInfo['rate2']['text']; ?></p>
+                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?//= //$reviewerInfo['rate2']['value']; ?></div>
                                  </div>
                                  <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3=""><?= $reviewerInfo['rate3']['text']; ?></p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewerInfo['rate3']['value']; ?></div>
+                                    <p data-v-f15ab7a3=""><?//= //$reviewerInfo['rate3']['text']; ?></p>
+                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?//= $reviewerInfo['rate3']['value']; ?></div>
                                  </div>
                               </div>
                            </td>
                            <td data-v-f15ab7a3="" class="p-10px w-200px">                              
                               <div id="<?= $review['ID'] ?>" class="flex flex-col items-center justify-center h-full" data-id="<?= $review['ID'] ?>"  data-approved="<?= $review['isApproved'] ?>" 
                               data-archive="<?= $review['isArchive'] ?>">
-                              <?php echo $review['ID'] . ', ' . $review['isApproved']?>
                            <button class="btn btn-approve w-full mb-5px <?= $review['isApproved'] == '1' ? 'btn-gray' : 'btn-green' ?>" approved="<?= $review['isApproved'] ?>" onclick="handleApprovalClick(this,'approved')">
                                  <svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
                                  </svg>
                                  <?= $review['isApproved'] == '1' ? 'Approved' : 'Approve' ?>
                            </button>
-                           <?php echo $review['ID'] . ', ' . $review['isArchive']?>
                                  <button data-v-f15ab7a3="" class="btn w-full mb-5px <?= $review['isArchive'] == '1' ? 'btn-gray' : 'btn-blue' ?>" archive="<?= $review['isArchive'] ?>" onclick="handleApprovalClick(this,'archive')">
                                     <svg data-v-f15ab7a3="" class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                        <path class="" fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>
@@ -406,7 +403,7 @@
                                                             </option>
                                                             <?php endforeach;?>
                                                          </select>
-                                                      <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="" type="text" placeholder="Zipcode">
+                                                      <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="<?= esc($reviewerInfo['Zipcode']) ?>" type="text" placeholder="Zipcode">
                                              </div>
                                              <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Cancel</button>
@@ -887,3 +884,6 @@ function test() {
     });
 </script>
 <?= $this->endSection() ?>
+
+
+
