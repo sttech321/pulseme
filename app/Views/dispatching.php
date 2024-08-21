@@ -48,7 +48,7 @@
                <div class="search flex w-full mb-10px flex justify-between items-center">
                   <div class="search-input border border-gray-300 rounded-4px px-10px py-5px flex items-center">
                      <!-- <input class="border-0 ml-10px w-300px outline-none" type="search" name="search" id="search" placeholder="Search by name or department"> -->
-                     <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false"
+                     <svg class="svg-inline--fa fa-magnifying-glass mr-3" aria-hidden="true" focusable="false"
                         data-prefix="fas" data-icon="magnifying-glass" role="img"
                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path class="" fill="currentColor"

@@ -55,11 +55,13 @@
 						Sync
 					</button> -->
 				</div>
-				<div class="grid grid-cols-3 grid-rows-auto <xl:grid-cols-2 <lg:grid-cols-1 gap-20px w-full">
+				<div class="grid grid-cols-3 grid-rows-auto <xl:grid-cols-2 <lg:grid-cols-1 gap-20px w-full summaryContentWrap">
 					<div class="row-span-2">
 						<div class="card rounded-4px shadow overflow-hidden bg-white w-full">
 							<div class="header w-full text-center bg-blue-500">
-								<div class="p-10px"><h2 class="text-white text-3xl font-light">Company Overall</h2></div>
+								<div class="p-10px">
+									<h2 class="text-white text-3xl font-light">Company Overall</h2>
+								</div>
 								<div class="stats flex justify-between">
 									<div class="stat w-full odd:bg-white odd:bg-opacity-15 p-10px text-center text-white">
 										<h4 class="text-1.5rem">8.6</h4>
@@ -139,13 +141,11 @@
 										data-icon="arrow-right"
 										role="img"
 										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 448 512"
-									>
+										viewBox="0 0 448 512">
 										<path
 											class=""
 											fill="currentColor"
-											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
-										></path>
+											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
 									</svg>
 									View All
 								</a>
@@ -155,7 +155,9 @@
 					<div class="">
 						<div class="card rounded-4px shadow overflow-hidden bg-white w-full">
 							<div class="header w-full text-center bg-green-500">
-								<div class="p-10px"><h2 class="text-white text-3xl font-light">Service Technician is ranked #1</h2></div>
+								<div class="p-10px">
+									<h2 class="text-white text-3xl font-light">Service Technician is ranked #1</h2>
+								</div>
 								<div class="stats flex justify-between">
 									<div class="stat w-full odd:bg-white odd:bg-opacity-15 p-10px text-center text-white">
 										<h4 class="text-1.5rem">8.9</h4>
@@ -235,13 +237,11 @@
 										data-icon="arrow-right"
 										role="img"
 										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 448 512"
-									>
+										viewBox="0 0 448 512">
 										<path
 											class=""
 											fill="currentColor"
-											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
-										></path>
+											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
 									</svg>
 									View All
 								</a>
@@ -251,7 +251,9 @@
 					<div class="">
 						<div class="card rounded-4px shadow overflow-hidden bg-white w-full">
 							<div class="header w-full text-center bg-yellow-500">
-								<div class="p-10px"><h2 class="text-white text-3xl font-light">Service Technician is ranked #2</h2></div>
+								<div class="p-10px">
+									<h2 class="text-white text-3xl font-light">Service Technician is ranked #2</h2>
+								</div>
 								<div class="stats flex justify-between">
 									<div class="stat w-full odd:bg-white odd:bg-opacity-15 p-10px text-center text-white">
 										<h4 class="text-1.5rem">7.7</h4>
@@ -313,13 +315,11 @@
 										data-icon="arrow-right"
 										role="img"
 										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 448 512"
-									>
+										viewBox="0 0 448 512">
 										<path
 											class=""
 											fill="currentColor"
-											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
-										></path>
+											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
 									</svg>
 									View All
 								</a>
@@ -329,7 +329,9 @@
 					<div class="">
 						<div class="card rounded-4px shadow overflow-hidden bg-white w-full">
 							<div class="header w-full text-center bg-blue-500">
-								<div class="p-10px"><h2 class="text-white text-3xl font-light">Install Team is ranked #3</h2></div>
+								<div class="p-10px">
+									<h2 class="text-white text-3xl font-light">Install Team is ranked #3</h2>
+								</div>
 								<div class="stats flex justify-between">
 									<div class="stat w-full odd:bg-white odd:bg-opacity-15 p-10px text-center text-white">
 										<h4 class="text-1.5rem">9</h4>
@@ -391,13 +393,11 @@
 										data-icon="arrow-right"
 										role="img"
 										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 448 512"
-									>
+										viewBox="0 0 448 512">
 										<path
 											class=""
 											fill="currentColor"
-											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
-										></path>
+											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
 									</svg>
 									View All
 								</a>
@@ -407,7 +407,9 @@
 					<div class="">
 						<div class="card rounded-4px shadow overflow-hidden bg-white w-full">
 							<div class="header w-full text-center bg-green-500">
-								<div class="p-10px"><h2 class="text-white text-3xl font-light">Management is ranked #4</h2></div>
+								<div class="p-10px">
+									<h2 class="text-white text-3xl font-light">Management is ranked #4</h2>
+								</div>
 								<div class="stats flex justify-between">
 									<div class="stat w-full odd:bg-white odd:bg-opacity-15 p-10px text-center text-white">
 										<h4 class="text-1.5rem">0</h4>
@@ -427,8 +429,7 @@
 								<div class="w-1/4 p-10px">
 									<div
 										class="w-100px h-100px rounded-1/2 border-4 border-blue-500 bg-center bg-contain bg-no-repeat"
-										style='background-image: url("<?= base_url('image/campaign/1713973037_original.jpg') ?>");'
-									></div>
+										style='background-image: url("<?= base_url('image/campaign/1713973037_original.jpg') ?>");'></div>
 								</div>
 								<div class="w-3/4 p-10px text-center">
 									<p class="mb-10px">George McPherson is ranked #1 in Management!!</p>
@@ -454,13 +455,11 @@
 										data-icon="arrow-right"
 										role="img"
 										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 448 512"
-									>
+										viewBox="0 0 448 512">
 										<path
 											class=""
 											fill="currentColor"
-											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
-										></path>
+											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
 									</svg>
 									View All
 								</a>
@@ -471,7 +470,9 @@
 					<div class="">
 						<div class="card rounded-4px shadow overflow-hidden bg-white w-full">
 							<div class="header w-full text-center bg-green-500">
-								<div class="p-10px"><h2 class="text-white text-3xl font-light">Duct Cleaning is ranked #4</h2></div>
+								<div class="p-10px">
+									<h2 class="text-white text-3xl font-light">Duct Cleaning is ranked #4</h2>
+								</div>
 								<div class="stats flex justify-between">
 									<div class="stat w-full odd:bg-white odd:bg-opacity-15 p-10px text-center text-white">
 										<h4 class="text-1.5rem">0</h4>
@@ -515,13 +516,11 @@
 										data-icon="arrow-right"
 										role="img"
 										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 448 512"
-									>
+										viewBox="0 0 448 512">
 										<path
 											class=""
 											fill="currentColor"
-											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
-										></path>
+											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
 									</svg>
 									View All
 								</a>
@@ -531,7 +530,9 @@
 					<div class="">
 						<div class="card rounded-4px shadow overflow-hidden bg-white w-full">
 							<div class="header w-full text-center bg-yellow-500">
-								<div class="p-10px"><h2 class="text-white text-3xl font-light">General is ranked #5</h2></div>
+								<div class="p-10px">
+									<h2 class="text-white text-3xl font-light">General is ranked #5</h2>
+								</div>
 								<div class="stats flex justify-between">
 									<div class="stat w-full odd:bg-white odd:bg-opacity-15 p-10px text-center text-white">
 										<h4 class="text-1.5rem">0</h4>
@@ -549,7 +550,7 @@
 							</div>
 							<div class="p-10px flex justify-between hover:bg-gray-200 items-center">
 								<div class="w-1/4 p-10px">
-									<div class="w-100px h-100px rounded-1/2 border-4 border-blue-500 bg-center bg-contain bg-no-repeat" style='background-image: url(<?= base_url("image/campaign/1709862934_original.png");?>)'></div>
+									<div class="w-100px h-100px rounded-1/2 border-4 border-blue-500 bg-center bg-contain bg-no-repeat" style='background-image: url(<?= base_url("image/campaign/1709862934_original.png"); ?>)'></div>
 								</div>
 								<div class="w-3/4 p-10px text-center">
 									<p class="mb-10px">Hales AC Service is ranked #1 in General!!</p>
@@ -575,13 +576,11 @@
 										data-icon="arrow-right"
 										role="img"
 										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 448 512"
-									>
+										viewBox="0 0 448 512">
 										<path
 											class=""
 											fill="currentColor"
-											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
-										></path>
+											d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
 									</svg>
 									View All
 								</a>
