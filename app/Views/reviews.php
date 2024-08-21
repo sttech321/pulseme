@@ -245,7 +245,7 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                         <input class="p-1" type="date" name="from_date" id="from_date" value="<?php echo htmlspecialchars($defaultFromDate); ?>">
                         <p class="font-bold">To</p>
                         <input class="p-1" type="date" name="to_date" id="to_date" value="<?php echo htmlspecialchars($defaultToDate); ?>">
-                        <button class="btn btn-blue" id = "update">
+                        <button class="btn btn-blue" id ="update">
                            <svg class="svg-inline--fa fa-rotate pr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rotate" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                               <path class="" fill="currentColor" d="M142.9 142.9c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5c0 0 0 0 0 0H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5c7.7-21.8 20.2-42.3 37.8-59.8zM16 312v7.6 .7V440c0 9.7 5.8 18.5 14.8 22.2s19.3 1.7 26.2-5.2l41.6-41.6c87.6 86.5 228.7 86.2 315.8-1c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.2 62.2-162.7 62.5-225.3 1L185 329c6.9-6.9 8.9-17.2 5.2-26.2s-12.5-14.8-22.2-14.8H48.4h-.7H40c-13.3 0-24 10.7-24 24z"></path>
                            </svg>
@@ -327,13 +327,14 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                      </div>
                   </div>
 
-                  <div class = "Approve"></div>
+                  <div class ="Approve"></div>
                   <div data-v-428084ba="" class="row table p-10px w-full">
                      <table data-v-428084ba="" class="w-full">                                        
                         <tr data-v-428084ba="" class="flex w-full">
                            <th data-v-428084ba="" class="p-10px w-auto">
                               <div data-v-428084ba="" class="flex justify-start items-center col-span-3 cursor-pointer">
-                              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                              <!-- <input class="form-check-input" type="checkbox" value="" id=""> -->
+                              <input type="checkbox" class="form-check-input" id="flexCheckDefault" value="">
                               </div>
                            </th>
                            <th data-v-428084ba="" class="p-10px w-60px"></th>
@@ -344,7 +345,7 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                         <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
                            <td data-v-f15ab7a3="" class="p-10px w-auto">
                               <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">
-                              <input class="form-check-input" type="checkbox" value="">
+                              <input class="form-check-input" type="checkbox" value="<?= $review['ID']; ?>">
                               </div>
                            </td>                           
                            <td data-v-f15ab7a3="" class="p-10px flex flex-col items-center justify-start w-60px">
@@ -365,9 +366,12 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                                $sum = $reviewrate1 + $reviewrate2 + $reviewrate3;
                                $average = $sum / 3;
                               ?>
+                             <?php if($average > 0){ ?>
                               <div data-v-f15ab7a3="" class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">
                                  <p data-v-f15ab7a3=""><?= $average;?></p>
                               </div>
+                             <?php } ?>
+                              
                            </td>                          
                            <td data-v-f15ab7a3="" class="p-10px w-full">
                               <!---->
@@ -405,20 +409,23 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span><?= $review['department']; ?></p>
                                  </div>
                               </div>
+                              <?php if ($reviewrate1 && $reviewrate2 &&$reviewrate3){ ?>
                               <div data-v-f15ab7a3="" class="ratings flex flex-wrap">
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">How likely are you to recommend us to your friends and family?</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewrate1;?></div>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">Professionalism</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewrate2;?></div>
-                                 </div>
-                                 <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
-                                    <p data-v-f15ab7a3="">Quality of Service</p>
-                                    <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewrate3;?></div>
-                                 </div>
+                              <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
+                                 <p data-v-f15ab7a3="">How likely are you to recommend us to your friends and family?</p>
+                                 <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewrate1;?></div>
                               </div>
+                              <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
+                                 <p data-v-f15ab7a3="">Professionalism</p>
+                                 <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewrate2;?></div>
+                              </div>
+                              <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
+                                 <p data-v-f15ab7a3="">Quality of Service</p>
+                                 <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewrate3;?></div>
+                              </div>
+                           </div>
+                             <?php }?>
+
                            </td>
                            <td data-v-f15ab7a3="" class="p-10px w-200px">                              
                               <div id="<?= $review['ID']; ?>" class="flex flex-col items-center justify-center h-full" data-id="<?= $review['ID']; ?>"  data-approved="<?= $review['isApproved']; ?>" 
@@ -451,6 +458,7 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                                              <h2 class="text-23px">Edit Review</h2>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><svg class="svg-inline--fa fa-xmark text-30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path class="" fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path></svg>
                                                 </button>
+                                                
                                           </div>
                                           <div class="modal-body">
                                              <form method="post" action="<?= base_url('/analyze/reviews/update/' . $review['ID']) ?>">
@@ -491,15 +499,12 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                            <!----><!----><!---->
                         </tr>
                      <?php endforeach; ?>
-               
                      </table>
                      <div class="pagination-container">
                      <nav>
                      <?= $pager;?>
                      </nav>
                      </div>
-
-
                   </div>
                   <!----><!---->
                </div>
@@ -513,40 +518,32 @@ document.getElementById('filter-button').addEventListener('click', function() {
     var dropdown = document.getElementById('filter-dropdown');
     dropdown.classList.toggle('hidden');
 });
-document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.selectable-icon').forEach(function(svg) {
-            svg.addEventListener('click', function() {
-                this.classList.toggle('selected');
-            });
-        });
-    });
-
-    $('#flexCheckDefault').on('change', function() {
-    // Get the state of the flexCheckDefault checkbox
+</script>
+<script>
+   $('#flexCheckDefault').on('change', function() {
     var isChecked = $(this).is(':checked');
-
-  
     $('.form-check-input').prop('checked', isChecked);
-
+    
+    var buttonContainer = $('.Approve'); // Assuming this is where you want to append the button
     var button = $('#dynamicButton');
+    
     if (isChecked) {
-       
         if (button.length === 0) {
             button = $('<button>', {
                 id: 'dynamicButton',
                 text: 'Approve',
                 class: 'btn btn-primary', 
                 click: function() {
-                    alert('Button clicked!');
+                  //   alert('Button clicked!');
+                  handleApprovalClick(12,'approve');
+
                 }
-            }).appendTo('.Approve'); 
+            }).appendTo(buttonContainer);
         }
-    } else {        
+    } else {
         button.remove();
     }
 });
-</script>
-<script>
 function handleApprovalClick(button) {
     var parentDiv = button.parentElement;
     var ID = parentDiv.getAttribute('data-id');  
@@ -605,7 +602,6 @@ function handleApprovalClick(button) {
                         '</svg>' +
                         'Edit' +
                   '</button>' +
-                 
                '</div>' +
             '</td>' 
           }
@@ -614,7 +610,6 @@ function handleApprovalClick(button) {
 </script>
 <script>
 $(document).ready(function() {
- 
     var filters = {
         campaignID: '',
         limit: '10',
@@ -623,10 +618,8 @@ $(document).ready(function() {
         includeAllReviews: false,
         noText: 0,
         archive: 0,
-        sentiment: '',
-        
+        sentiment: '',  
     };
-    
     
     $('#archive').removeClass('active');
     function handleButtonClick(sentiment) {
@@ -781,8 +774,6 @@ $(document).ready(function() {
                            '</td>'+
                      '<td class="p-10px w-auto">' +
                         '<div class="flex justify-start items-center col-span-3 cursor-pointer">' +
-                        '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">' +
-                        '</div>' +
                      '</td>' +
                      '<td class="p-10px flex flex-col items-center justify-start w-60px">' + sentimentSvg +
                         '<div class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">' +

@@ -17,6 +17,8 @@ class ReportsController extends BaseController {
 
     public function report_campaign_reviews(){
         $model = new CampaignModel();
+        $from_date = $this->request->getVar('from_date');
+        $end_date = $this->request->getVar('to_date');
         $data['campaigns'] = $model->findAll();
           
         return view('reports/campaign_review',$data);
@@ -24,14 +26,13 @@ class ReportsController extends BaseController {
 
     public function report_campaign()
     {
-        
-        
         $model = new CampaignModel();
         $campaignsWithSentiment = $model->getCampaignsWithSentiment();
         return view('reports/campaigns', [
             'campaigns' =>  $campaignsWithSentiment,
         ]);
     }
+
 
     public function departments(): string
     {
@@ -70,6 +71,34 @@ class ReportsController extends BaseController {
             $results = $technicianModel->getTechniciansBySearchs($search);
         return $this->response->setJSON($results);
     } 
+
+    public function filterCampaigns()
+    {
+        $fromDate = $this->request->getPost('from_date');
+        $toDate = $this->request->getPost('to_date');
+        
+        // Assuming you have a model called CampaignModel
+        $campaignModel = new CampaignModel();
+    
+        // Fetch campaigns with sentiment within the date range
+        $campaigns = $campaignModel->getCampaignsWithSentiment($fromDate, $toDate);
+    
+        // Return the campaigns as a JSON response
+        return $this->response->setJSON($campaigns);
+    }
+
+    public function filterDepartments()
+    {
+        $model = new CampaignModel();
+
+        $fromDate = $this->request->getPost('from_date');
+        $toDate = $this->request->getPost('to_date');
+
+        // Get the filtered data based on the date range
+        $departments = $model->getUniqueDepartments($fromDate, $toDate);
+
+        return $this->response->setJSON($departments);
+    }
 
 }
 

@@ -22,7 +22,7 @@ class CampaignModel extends Model
         $this->allowedFields = $allowedFields ? explode(',', $allowedFields) : [];
     }
 
-    public function getCampaignsWithSentiment()
+    public function getCampaignsWithSentiment($fromDate = null, $toDate = null)
     {
         $builder = $this->db->table('campaign');
         
@@ -39,17 +39,23 @@ class CampaignModel extends Model
         $builder->join('reviews', 'reviews.campaignID = campaign.id', 'left');
         $builder->join('customers_bio', 'customers_bio.campaignID = campaign.id', 'left');
         
+        // Filter by date range if provided
+        if ($fromDate && $toDate) {
+            $builder->where('campaign.created_at >=', $fromDate . ' 00:00:00');
+            $builder->where('campaign.created_at <=', $toDate . ' 23:59:59');
+        }
+        
         // Group by campaign id to aggregate the data correctly
         $builder->groupBy('campaign.id');
         
         // Execute the query
         $query = $builder->get();
-    
+        
         // Return the result as an array of objects
         return $query->getResult();
     }
-    
-    public function getUniqueDepartments()
+
+    public function getUniqueDepartments($fromDate = null, $toDate = null)
     {
         $builder = $this->db->table('campaign c');
         $builder->select('
@@ -58,11 +64,19 @@ class CampaignModel extends Model
             COUNT(CASE WHEN r.sentiment = \'negative\' THEN 1 END) AS negative_count
         ');
         $builder->join('reviews r', 'c.id = r.campaignID', 'left');
+        
+        // Apply date filtering if provided
+        if ($fromDate && $toDate) {
+            $builder->where('c.created_at >=', $fromDate . ' 00:00:00');
+            $builder->where('c.created_at <=', $toDate . ' 23:59:59');
+        }
+
         $builder->groupBy('c.department'); // Group by department to aggregate counts
-    
+
         // Execute the query and return results
         $query = $builder->get();
         return $query->getResult();
     }
-    
 }
+
+

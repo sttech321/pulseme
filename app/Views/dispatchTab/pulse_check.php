@@ -246,7 +246,7 @@ print_r($url);
                                     </button>
                                     <div class="form-group p-0">
                                         <input type="hidden" name="reviewType" value="custom">
-                                        <!-- <input type="hidden" name="contactcard" value="yes"> -->
+                                        <input type="hidden" name="status" value="pending">
                                         <input type="hidden" id="result_value" name="result_value">
                                         <input type="text" class="input form-control fg-input validate" value="" name="customer_name" placeholder="customer_name">
                                         <input type="email" class="input form-control fg-input validate" value="" name="customer_email" placeholder="customer_email">

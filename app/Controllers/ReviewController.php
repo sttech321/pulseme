@@ -72,7 +72,7 @@ class ReviewController extends BaseController
         $zipcode = $this->request->getPost('zipcode');
         $sentiment = $this->request->getPost('result_value');
         $review_type = $this->request->getPost('reviewType');
-        // $contactcard = $this->request->getPost('contactcard');
+        $status = $this->request->getPost('status');
 
         // Preparing data for insertion
         $data = [
@@ -86,6 +86,7 @@ class ReviewController extends BaseController
                 'feedback' => $feedback,
                 'Name' => $customer_name,
                 'customer_email' => $customer_email,
+                'status'=> $status,
                 'State' => $state,
                 'City' => $city,
                 'Zipcode' => $zipcode,
@@ -98,13 +99,13 @@ class ReviewController extends BaseController
         ];
 
         $reviewModel->insert($data); 
-
         // Send contact card email
         $this->sendContactCard($customer_email);
         // Display a thank you message or redirect as needed
         return redirect()->to('/')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
 
     }
+  
 
     private function sendContactCard($customer_email)
     {
@@ -302,7 +303,6 @@ class ReviewController extends BaseController
     
     public function approveReview()
     {
-      
         $id = $this->request->getPost('ID');
         $approved = $this->request->getPost('approved');
         $archive = $this->request->getPost('archive');
@@ -322,7 +322,7 @@ class ReviewController extends BaseController
             } else {
                 $newApprovedStatus = $currentApprovedStatus;
             }
-    
+
             // Determine the new archive status if provided
             if ($archive !== null) {
                 $newArchiveStatus = $archive === '1' ? '1' : '0'; 
@@ -331,15 +331,14 @@ class ReviewController extends BaseController
             }
             // Update the review status
             $reviewModel->update($id, ['isApproved' => $newApprovedStatus,'isArchive' => $newArchiveStatus]);
-    
+
             return $this->response->setJSON([
                 'id'=>$id,
                 'status' => 'success',
                 'newApprovedStatus' => $newApprovedStatus,
                 'newArchiveStatus' => $newArchiveStatus
             ]);
-        }
-    
+    }
         return $this->response->setJSON(['status' => 'error', 'message' => 'Review not found']);
     }
 
