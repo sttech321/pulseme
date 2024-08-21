@@ -146,6 +146,7 @@
                                             <td class="px-20px py-15px"></td>
                                             <!-- Positive Sentiment -->                                             
                                             <!-- Positive Sentiment -->                                             
+                                            <!-- Positive Sentiment -->                                             
                                             <td class="px-20px py-15px">
                                             <?= isset($campaign->positive_count) ? $campaign->positive_count : ''; ?>
                                             </td>

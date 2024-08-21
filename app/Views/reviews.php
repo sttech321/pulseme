@@ -532,6 +532,7 @@ document.getElementById('filter-button').addEventListener('click', function() {
             button = $('<button>', {
                 id: 'dynamicButton',
                 text: 'Approve',
+                text: 'Approve',
                 class: 'btn btn-primary', 
                 click: function() {
                   //   alert('Button clicked!');
