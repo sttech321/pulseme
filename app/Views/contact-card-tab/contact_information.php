@@ -101,9 +101,9 @@
 						<div class="flex justify-center p-10px">
 							<div class="grid grid-cols-2 grid-flow-row auto-rows-auto gap-20px w-600px">
 								<div class="col-span-2 flex justify-between items-center border-2 rounded-4px border-black p-10px">
-									<img src="/assets/contact-card-qr-hand-f68c62d9.svg" alt="" />
+									<img src="" alt="" />
 									<h2 class="w-1/3 text-center text-24px font-600">Scan to save us to your contacts.</h2>
-									<img class="w-1/3" src="https://kiliassets.speetra.com/prod/account_images/15407/qrcode/qrcode.jpg" alt="" />
+									 <img id="qr-image" class="w-1/3" src="<?= base_url('image/qrcode.png') ?>" alt="QR Code" />
 								</div>
 								<button id="download-png" class="border-2 rounded-4px p-15px border-blue-500 text-blue-500 flex justify-evenly items-center">
 									<div class=""></div>
@@ -140,7 +140,7 @@
 									<div class="relative">
 										<div
 											class="h-200px w-200px rounded-1/2 mt-2rem bg-center bg-contain bg-no-repeat" id="logo-upload-button" 
-											style='background-image: url("https://kiliassets.speetra.com/prod/account_images/15407/contact_card/logo_1713975820.jpg");'
+											style='background-image: url("<?= base_url('/image/company-logo.jpg')?>");'
 										></div>
 										<!-- <button id="logo-upload-button" class="absolute bottom-10px right-10px h-40px w-40px flex justify-center items-center rounded-1/2 btn btn-blue">
 											<svg class="svg-inline--fa fa-pen text-white" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -245,12 +245,12 @@
 										</div>
 									</div>
 									<div class="bg-orange-100 rounded-4px p-20px mb-30px">
-										<div class="grid grid-cols-2 grid-rows-2 gap-10px mb-20px">
+										<!-- <div class="grid grid-cols-2 grid-rows-2 gap-10px mb-20px">
 											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="30" value="60" /><label for="1">30 minutes</label></div>
 											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="60" value="120" /><label for="2">1 hour</label></div>
 											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="90" value="180" /><label for="3">1:30 hour</label></div>
 											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="120" value="240" /><label for="4">2 hour</label></div>
-										</div>
+										</div> -->
 										<p class="">*Contact Card will be sent 30 minutes after pulseCheck</p>
 									</div>
 									<div class="submit-button"><button id="save-changes-button" class="btn btn-blue">Save Changes</button></div>
@@ -312,6 +312,41 @@ $(document).ready(function () {
 document.getElementById('logo-upload-button').addEventListener('click', function() {
 	document.getElementById('logo-upload').click();
 });
+
+	function downloadPNG() {
+      const imgElement = document.getElementById('qr-image');
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      // Set canvas dimensions to match the image
+      canvas.width = imgElement.naturalWidth;
+      canvas.height = imgElement.naturalHeight;
+
+      // Draw the image on the canvas
+      ctx.drawImage(imgElement, 0, 0);
+
+      // Convert canvas to data URL and trigger download
+      const pngUrl = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = pngUrl;
+      link.download = 'qrcode.png';
+      link.click();
+   }
+
+   function downloadSVG() {
+      const imgElement = document.getElementById('qr-image');
+      
+      // Ensure that the image is an SVG or provide the SVG data separately
+      const svgUrl = imgElement.src; // Use SVG image URL directly
+      const link = document.createElement('a');
+      link.href = svgUrl;
+      link.download = 'qrcode.svg';
+      link.click();
+   }
+
+// Attach event listeners to buttons
+document.getElementById('download-png').addEventListener('click', downloadPNG);
+document.getElementById('download-svg').addEventListener('click', downloadSVG);
 
 </script>
 <?= $this->endsection('content') ?>			

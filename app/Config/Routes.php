@@ -98,5 +98,3 @@ $route['chart'] = 'ChartController/index';
 $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 $routes->post('/leaderboard/reports/campaigns/filter', 'ReportsController::filterCampaigns');
 $routes->post('/leaderboard/reports/filterDepartments', 'ReportsController::filterDepartments');
-
-

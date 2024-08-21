@@ -105,7 +105,6 @@ class ReviewController extends BaseController
         return redirect()->to('/')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
 
     }
-  
 
     private function sendContactCard($customer_email)
     {
@@ -301,45 +300,41 @@ class ReviewController extends BaseController
         }  
     }
     
-    public function approveReview()
-    {
+    public function approveReview() {
         $id = $this->request->getPost('ID');
         $approved = $this->request->getPost('approved');
         $archive = $this->request->getPost('archive');
-
         $reviewModel = new ReviewModal();
-       
         $review = $reviewModel->get_reviews($id);
-        
-        if ($review) {
-            $id = $review['ID'];
-            // Get the current isApproved value
-            $currentApprovedStatus = $review['isApproved'];
-            $currentArchiveStatus = $review['isArchive'];
-            // Determine the new approved status
-            if ($approved !== null) {
-                $newApprovedStatus = $approved === '1' ? '1' : '0'; 
-            } else {
-                $newApprovedStatus = $currentApprovedStatus;
-            }
+            if ($review)  {
+                $id = $review['ID'];
+                // Get the current isApproved value
+                $currentApprovedStatus = $review['isApproved'];
+                $currentArchiveStatus = $review['isArchive'];
+                // Determine the new approved status
+                if ($approved !== null) {
+                    $newApprovedStatus = $approved === '1' ? '1' : '0'; 
+                } else {
+                    $newApprovedStatus = $currentApprovedStatus;
+                }
 
-            // Determine the new archive status if provided
-            if ($archive !== null) {
-                $newArchiveStatus = $archive === '1' ? '1' : '0'; 
-            } else {
-                $newArchiveStatus = $currentArchiveStatus;
-            }
-            // Update the review status
-            $reviewModel->update($id, ['isApproved' => $newApprovedStatus,'isArchive' => $newArchiveStatus]);
+                // Determine the new archive status if provided
+                if ($archive !== null) {
+                    $newArchiveStatus = $archive === '1' ? '1' : '0'; 
+                } else {
+                    $newArchiveStatus = $currentArchiveStatus;
+                }
+                // Update the review status
+                $reviewModel->update($id, ['isApproved' => $newApprovedStatus,'isArchive' => $newArchiveStatus]);
 
-            return $this->response->setJSON([
-                'id'=>$id,
-                'status' => 'success',
-                'newApprovedStatus' => $newApprovedStatus,
-                'newArchiveStatus' => $newArchiveStatus
-            ]);
-    }
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Review not found']);
+                return $this->response->setJSON([
+                    'id'=>$id,
+                    'status' => 'success',
+                    'newApprovedStatus' => $newApprovedStatus,
+                    'newArchiveStatus' => $newArchiveStatus
+                ]);
+            }
+     return $this->response->setJSON(['status' => 'error', 'message' => 'Review not found']);
     }
 
     public function update($id)
