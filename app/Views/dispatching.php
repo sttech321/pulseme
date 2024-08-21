@@ -176,7 +176,7 @@
       });
 
       function loadTechnicians(query = '') {
-         var url = query ? '<?= base_url('/search') ?>' : '<?= base_url('/getAllTechnicians') ?>';
+         var url = query ? '<?= base_url('/searchbar') ?>' : '<?= base_url('/getAllTechnicians') ?>';
 
          $.ajax({
             url: url,

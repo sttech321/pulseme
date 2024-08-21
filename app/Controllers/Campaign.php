@@ -37,7 +37,7 @@ class Campaign extends BaseController {
         $technicianModel = new TechnicianModal();
         
         if ($search) {
-            $results = $technicianModel->getTechniciansBySearch($search);
+            $results = $technicianModel->getTechniciansBySearchs($search);
         } else {
             $results = $technicianModel->findAll(); // Return all technicians if no search query
         }
