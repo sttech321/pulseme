@@ -890,7 +890,8 @@ $(document).ready(function() {
                   let sum = rate1 + rate2 + rate3;
                   let average = sum / 3;  
                   let averagerating = '';
-                  let roundedAverage = average.toFixed(1);
+                  let roundedAverage = '';
+                  let roundedAverage = average.toFixed();
                   if (roundedAverage) {
                      averagerating = '<div class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">' +'<p>' + roundedAverage + '</p>'+'</div>';
                   }

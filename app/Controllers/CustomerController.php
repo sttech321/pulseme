@@ -26,7 +26,6 @@ class CustomerController extends Controller
 
     public function search()
     {
-
         $search = $this->request->getVar('search');
 
         $technicianModel = new TechnicianModal();
