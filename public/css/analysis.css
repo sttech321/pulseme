@@ -19,8 +19,13 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
 .shadow .img img{
     width: 600px;
     height: 600px;
-
+    object-fit: cover;
 }
+
+.width-max-content{
+    width: max-content;
+}
+
 .mr-3{
     margin-right: 10px;
 }
