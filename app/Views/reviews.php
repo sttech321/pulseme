@@ -340,7 +340,7 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                         <tr data-v-f15ab7a3="" data-v-428084ba="" class="flex w-full">
                         <td data-v-f15ab7a3="" class="p-10px w-auto">
                            <div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer" >
-                              <input class="form-check-input" type="checkbox" value="">
+                              <input class="form-check-input review-checkbox" type="checkbox" value="">
                            </div>
                         </td>
                           
@@ -512,34 +512,91 @@ document.getElementById('filter-button').addEventListener('click', function() {
     var dropdown = document.getElementById('filter-dropdown');
     dropdown.classList.toggle('hidden');
 });
+// Track selected checkboxes in an array
+var selectedCheckboxes = [];
 
 $('#flexCheckDefault').on('change', function() {
-                var isChecked = $(this).is(':checked');
-                $('.form-check-input').prop('checked', isChecked);
+    var isChecked = $(this).is(':checked');
+    $('.review-checkbox').each(function() {
+        $(this).prop('checked', isChecked);
+    });
 
-                var button = $('#dynamicButton');
-                if (isChecked) {
-                    if (button.length === 0) {
-                        button = $('<button>', {
-                            id: 'dynamicButton',
-                            text: 'Approve Pending Reviews',
-                            class: 'btn btn-primary',
-                            click: function() {
-                                approvePendingReviews();
-                            }
-                        }).appendTo('.amit');
-                    }
-                } else {
-                    button.remove();
+    if (isChecked) {
+        // If main checkbox is checked, add all checkboxes to the selected array
+        selectedCheckboxes = $('.review-checkbox').filter(':checked').toArray();
+    } else {
+        // If main checkbox is unchecked, clear the selected checkboxes array
+        selectedCheckboxes = [];
+    }
+
+    // Show or hide the button based on the state
+    var button = $('#dynamicButton');
+    if (isChecked) {
+        if (button.length === 0) {
+            button = $('<button>', {
+                id: 'dynamicButton',
+                text: 'Approve Pending Reviews',
+                class: 'btn btn-primary',
+                click: function() {
+                    approvePendingReviews();
                 }
-            });
+            }).appendTo('.amit');
+        }
+    } else {
+        button.remove();
+    }
+});
 
-            function approvePendingReviews() {
-                // Iterate over each review and call handleApprovalClick
-                $('div[data-approved="0"]').each(function() {
-                    handleApprovalClick($(this).find('.btn-approve')[0]);
-                });
-            }
+// Handle individual checkbox change
+$(document).on('change', '.review-checkbox', function() {
+    var isChecked = $(this).is(':checked');
+    var checkbox = $(this);
+
+    if (isChecked) {
+        // Add to selected checkboxes if checked
+        if (!selectedCheckboxes.includes(checkbox[0])) {
+            selectedCheckboxes.push(checkbox[0]);
+        }
+    } else {
+        // Remove from selected checkboxes if unchecked
+        selectedCheckboxes = selectedCheckboxes.filter(function(item) {
+            return item !== checkbox[0];
+        });
+    }
+
+    // Update the main checkbox state based on individual checkbox states
+    var allChecked = $('.review-checkbox').length === $('.review-checkbox:checked').length;
+    $('#flexCheckDefault').prop('checked', allChecked);
+    
+    // Show or hide the button based on the state
+    var button = $('#dynamicButton');
+    if (selectedCheckboxes.length > 0) {
+        if (button.length === 0) {
+            button = $('<button>', {
+                id: 'dynamicButton',
+                text: 'Approve Pending Reviews',
+                class: 'btn btn-primary',
+                click: function() {
+                    approvePendingReviews();
+                }
+            }).appendTo('.amit');
+        }
+    } else {
+        button.remove();
+    }
+});
+
+function approvePendingReviews() {
+    // Iterate over each selected checkbox and approve the associated review
+    selectedCheckboxes.forEach(function(checkbox) {
+        var reviewElement = $(checkbox).closest('tr'); // Assuming the checkbox is within a <tr> element
+
+        // Call handleApprovalClick on the approve button within the review row
+        handleApprovalClick(reviewElement.find('.btn-approve')[0]);
+    });
+}
+
+
 
 </script>
 
@@ -733,7 +790,8 @@ $(document).ready(function() {
                 var data = response;
                 var campaigns = data.campaigns;
       
-                var tableBody = $('.row.table.p-10px.w-full table tbody'); 
+                var tableBody = $('.row.table.p-10px.w-full table tbody');
+                //var tableBody = $('#append');  
                 var paginationContainer = $('.pagination-container');
                 tableBody.empty(); 
                 paginationContainer.empty();
@@ -776,14 +834,10 @@ $(document).ready(function() {
                  '<tr class="flex w-full">' +
                  '<td data-v-f15ab7a3="" class="p-10px w-auto">'+
                               '<div data-v-f15ab7a3="" class="flex justify-start items-center col-span-3 cursor-pointer">'+
-                              '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">'+
+                              '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefaults">'+
                               '</div>'+
                            '</td>'+
-                     '<td class="p-10px w-auto">' +
-                        '<div class="flex justify-start items-center col-span-3 cursor-pointer">' +
-                        '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">' +
-                        '</div>' +
-                     '</td>' +
+
                      '<td class="p-10px flex flex-col items-center justify-start w-60px">' + sentimentSvg +
                         '<div class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">' +
                            '<p>' + average + '</p>' +
