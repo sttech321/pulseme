@@ -515,101 +515,6 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
    </div>
 </div>
 <script>
-document.getElementById('filter-button').addEventListener('click', function() {
-    var dropdown = document.getElementById('filter-dropdown');
-    dropdown.classList.toggle('hidden');
-});
-
-// Track selected checkboxes in an array
-var selectedCheckboxes = [];
-
-$('#flexCheckDefault').on('change', function() {
-    var isChecked = $(this).is(':checked');
-    $('.review-checkbox').each(function() {
-        $(this).prop('checked', isChecked);
-    });
-
-    if (isChecked) {
-        // If main checkbox is checked, add all checkboxes to the selected array
-        selectedCheckboxes = $('.review-checkbox').filter(':checked').toArray();
-    } else {
-        // If main checkbox is unchecked, clear the selected checkboxes array
-        selectedCheckboxes = [];
-    }
-
-    // Show or hide the button based on the state
-    var button = $('#dynamicButton');
-    if (isChecked) {
-        if (button.length === 0) {
-            button = $('<button>', {
-                id: 'dynamicButton',
-                text: 'Approve selected',
-                class: 'btn btn-primary',
-                click: function() {
-                    approvePendingReviews();
-                }
-            }).appendTo('.approve');
-        }
-    } else {
-        button.remove();
-    }
-});
-
-// Handle individual checkbox change
-$(document).on('change', '.review-checkbox', function() {
-    var isChecked = $(this).is(':checked');
-    var checkbox = $(this);
-
-    if (isChecked) {
-        // Add to selected checkboxes if checked
-        if (!selectedCheckboxes.includes(checkbox[0])) {
-            selectedCheckboxes.push(checkbox[0]);
-        }
-    } else {
-        // Remove from selected checkboxes if unchecked
-        selectedCheckboxes = selectedCheckboxes.filter(function(item) {
-            return item !== checkbox[0];
-        });
-    }
-
-    // Update the main checkbox state based on individual checkbox states
-    var allChecked = $('.review-checkbox').length === $('.review-checkbox:checked').length;
-    $('#flexCheckDefault').prop('checked', allChecked);
-    
-    // Show or hide the button based on the state
-    var button = $('#dynamicButton');
-    if (selectedCheckboxes.length > 0) {
-        if (button.length === 0) {
-            button = $('<button>', {
-                id: 'dynamicButton',
-                text: 'Approve Pending Reviews',
-                class: 'btn btn-primary',
-                click: function() {
-                    approvePendingReviews();
-                }
-            }).appendTo('.approve');
-        }
-    } else {
-        button.remove();
-    }
-});
-
-function approvePendingReviews() {
-   var button = $('#dynamicButton');
-    selectedCheckboxes.forEach(function(checkbox) {
-        var reviewElement = $(checkbox).closest('tr'); 
-        var approveButton = reviewElement.find('.btn-approve');        
-        //handleApprovalClick(reviewElement.find('.btn-approve')[0]);
-        if (approveButton.length > 0 && approveButton.attr('approved') === '0') {
-            handleApprovalClick(approveButton[0], 'approved');
-            button.remove();
-            $('.form-check-input').prop('checked', false);
-        }
-    });
-}
-</script>
-
-<script>
 function handleApprovalClick(button) {
     var parentDiv = button.parentElement;
     var ID = parentDiv.getAttribute('data-id'); 
@@ -1064,6 +969,99 @@ $('#flexCheckDefault').on('change', function() {
     var isChecked = $(this).is(':checked');
     console.log('Checkbox clicked. Checked state:', isChecked);
 });
+</script>
+<script>
+document.getElementById('filter-button').addEventListener('click', function() {
+    var dropdown = document.getElementById('filter-dropdown');
+    dropdown.classList.toggle('hidden');
+});
 
+// Track selected checkboxes in an array
+var selectedCheckboxes = [];
+
+$(document).on('change','#flexCheckDefault', function() {
+    var isChecked = $(this).is(':checked');
+    $('.review-checkbox').each(function() {
+        $(this).prop('checked', isChecked);
+    });
+
+    if (isChecked) {
+        // If main checkbox is checked, add all checkboxes to the selected array
+        selectedCheckboxes = $('.review-checkbox').filter(':checked').toArray();
+    } else {
+        // If main checkbox is unchecked, clear the selected checkboxes array
+        selectedCheckboxes = [];
+    }
+
+    // Show or hide the button based on the state
+    var button = $('#dynamicButton');
+    if (isChecked) {
+        if (button.length === 0) {
+            button = $('<button>', {
+                id: 'dynamicButton',
+                text: 'Approve selected',
+                class: 'btn btn-primary',
+                click: function() {
+                    approvePendingReviews();
+                }
+            }).appendTo('.approve');
+        }
+    } else {
+        button.remove();
+    }
+});
+
+// // Handle individual checkbox change
+// $(document).on('change', '.review-checkbox', function() {
+//     var isChecked = $(this).is(':checked');
+//     var checkbox = $(this);
+
+//     if (isChecked) {
+//         // Add to selected checkboxes if checked
+//         if (!selectedCheckboxes.includes(checkbox[0])) {
+//             selectedCheckboxes.push(checkbox[0]);
+//         }
+//     } else {
+//         // Remove from selected checkboxes if unchecked
+//         selectedCheckboxes = selectedCheckboxes.filter(function(item) {
+//             return item !== checkbox[0];
+//         });
+//     }
+
+//     // Update the main checkbox state based on individual checkbox states
+//     var allChecked = $('.review-checkbox').length === $('.review-checkbox:checked').length;
+//     $('#flexCheckDefault').prop('checked', allChecked);
+    
+//     // Show or hide the button based on the state
+//     var button = $('#dynamicButton');
+//     if (selectedCheckboxes.length > 0) {
+//         if (button.length === 0) {
+//             button = $('<button>', {
+//                 id: 'dynamicButton',
+//                 text: 'Approve Pending Reviews',
+//                 class: 'btn btn-primary',
+//                 click: function() {
+//                     approvePendingReviews();
+//                 }
+//             }).appendTo('.approve');
+//         }
+//     } else {
+//         button.remove();
+//     }
+// });
+
+function approvePendingReviews() {
+   var button = $('#dynamicButton');
+    selectedCheckboxes.forEach(function(checkbox) {
+        var reviewElement = $(checkbox).closest('tr'); 
+        var approveButton = reviewElement.find('.btn-approve');        
+        //handleApprovalClick(reviewElement.find('.btn-approve')[0]);
+        if (approveButton.length > 0 && approveButton.attr('approved') === '0') {
+            handleApprovalClick(approveButton[0], 'approved');
+            button.remove();
+            $('.form-check-input').prop('checked', false);
+        }
+    });
+}
 </script>
 <?= $this->endSection() ?>
