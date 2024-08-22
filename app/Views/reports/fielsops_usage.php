@@ -82,11 +82,11 @@
 											<tbody>
 											<?php foreach ($campaigns as $campaign) : ?>
 												<tr class="!bg-opacity-50 odd:bg-sky-100">
-													<td class="px-20px py-15px">1B85A09AA6CG<?= esc($campaign['ID']) ?></td>
-													<td class="px-20px py-15px"><?= esc($campaign['name']) ?></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
-													<td class="px-20px py-15px"></td>
+													<td class="px-20px py-15px">1B85A09AA6CG<?= esc($campaign->ID) ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign->name) ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign->pulsecheck_count) ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign->bio_count) ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign->pulsecheck_count + $campaign->bio_count) ?></td>
 												</tr>
 												<?php endforeach; ?>
 											</tbody>

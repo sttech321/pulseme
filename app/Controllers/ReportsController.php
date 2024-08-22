@@ -29,15 +29,7 @@ class ReportsController extends BaseController {
         
         $model = new CampaignModel();
         $campaignsWithSentiment = $model->getCampaignsWithSentiment();
-//         echo '<pre>';
-//         print_r($campaignsWithSentiment);
-//         echo '</pre>';
-//   die;
-        return view('reports/campaigns', [
-           
-            'campaigns' =>  $campaignsWithSentiment,
-           
-        ]);
+        return view('reports/campaigns', ['campaigns' =>  $campaignsWithSentiment ]);
     }
     
     
@@ -56,8 +48,8 @@ class ReportsController extends BaseController {
 
     public function report_campaign_fieldsops(){
         $model = new CampaignModel();
-        $data['campaigns'] = $model->findAll();
-        return view('reports/fielsops_usage',$data);
+        $campaignsWithSentiment = $model->getCampaignsWithSentiment();
+        return view('reports/fielsops_usage',['campaigns' =>  $campaignsWithSentiment]);
     }
 
     public function dispatch(){
