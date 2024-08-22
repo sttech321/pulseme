@@ -44,8 +44,11 @@ class ReportsController extends BaseController {
 
     public function report_campaign_fieldsops(){
         $model = new CampaignModel();
-        $data['campaigns'] = $model->findAll();
-        return view('reports/fielsops_usage',$data);
+        $campaignsWithSentiment = $model->getCampaignsWithSentiment();
+        echo'<pre>';
+        print_r($campaignsWithSentiment);
+        die;
+        return view('reports/fielsops_usage',['campaigns' =>  $campaignsWithSentiment]);
     }
 
     public function dispatch()
@@ -68,7 +71,7 @@ class ReportsController extends BaseController {
     {
         $search = $this->request->getVar('search');
         $technicianModel = new TechnicianModal();      
-            $results = $technicianModel->getTechniciansBySearchs($search);
+            $results = $technicianModel->getTechniciansBySearch($search);
         return $this->response->setJSON($results);
     } 
 

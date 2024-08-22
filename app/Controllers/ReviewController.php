@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\I18n\Time;
 use App\Models\CampaignModel;
 use App\Models\ContactcardModal;
 use App\Models\ReviewModal;
@@ -101,9 +102,24 @@ class ReviewController extends BaseController
 
         $reviewModel->insert($data); 
         // Send contact card email
-        $this->sendContactCard($customer_email);
+        $this->sendcronjob($customer_email,$status);
         // Display a thank you message or redirect as needed
         return redirect()->to('/')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
+    }
+
+    public function sendcronjob($customer_email)
+    {
+        $reviewModel = new ReviewModal();
+        // Prepare data to be updated for cron job
+        $data = [
+            'reviewratings' => json_encode([
+            'status'        => 'done',
+            ]),
+        ];
+        // Update review entry
+        $reviewModel->update($data);
+  
+        $this->sendContactCard($customer_email);
     }
 
     public function sendContactCard($customer_email)

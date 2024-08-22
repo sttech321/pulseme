@@ -100,23 +100,33 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
          <div class="p-20px bg-white">
             <h2 class="text-2xl">Reviews</h2>
          </div>
-         <div class="px-15px bg-white flex justify-start items-center">
-               <a href="/analyze/reviews" class="tab-link active border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px" aria-current="page">Reviews</a>
-               <a href="/analyze/reviews/social-reviews" class="tab-link">Social Reviews</a>
-            </div>
+         <div class="px-15px bg-white flex justify-start items-center tabs"><a href="/analyze/reviews" class="tab-link active border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px" aria-current="page">Reviews</a><a href="/analyze/reviews/social-reviews" id="social-reviews-tab" class="tab p-10px">Social Reviews</a></div>
          <div class="flex-grow">
-            <div data-v-428084ba="" class="p-25px">
+            <div data-v-428084ba="" class="p-35px">
+               <div data-v-428084ba="" class="bg-white rounded-4px shadow p-10px">
                <div data-v-428084ba="" class="bg-white rounded-4px shadow p-10px">
                   <div data-v-428084ba="" class="row flex justify-end p-10px">
-                     <div data-v-428084ba="" class="relative w-full flex justify-end items-center">
+                     <!-- <div data-v-428084ba="" class="relative w-full flex justify-end items-center">
                         <button>
                            <svg class="svg-inline--fa fa-bars text-xl text-gray-400 hover:text-blue-500" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                               <path class="" fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path>
                            </svg>
                         </button>
-                        <!----><!---->
+                     </div> -->
+                     <div class="dropdown">
+                        <!-- <button class="dropdown-toggle"> -->
+                        <svg class="dropdown-toggle svg-inline--fa fa-bars text-xl text-gray-400 hover:text-blue-500" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                           <path class="" fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path>
+                        </svg>
+                        <!-- </button> -->
+                        <div class="dropdown-menu">
+                           <a class="dropdownItem" href="#"> <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                              Export as a CSV</a>
+                           <div class="dropdownItem">*Supported on Chrome & Firefox </div>
+                        </div>
                      </div>
                   </div>
+
                   <div data-v-428084ba="" class="row flex justify-between items-center p-10px">
                      <!-- <button data-v-428084ba="" class="btn btn-blue"> + Add Review </button> -->
                      <div class="leftSec">
@@ -237,13 +247,13 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                      $defaultToDate = $currentDate;
                      ?>
                      <div data-v-428084ba="" class="filter flex justify-end items-baseline">
-                        <svg class="svg-inline--fa fa-calendar-day mr-3" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <svg class="svg-inline--fa fa-calendar-day" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                            <path class="" fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm80 64c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80z"></path>
                         </svg>
                         <p class="font-bold">From</p>
                         <input class="p-1 shadow-date mx-10" type="date" name="from_date" id="from_date" value="<?php echo htmlspecialchars($defaultFromDate); ?>">
                         <p class="font-bold">To</p>
-                        <input class="p-1" type="date" name="to_date" id="to_date" value="<?php echo htmlspecialchars($defaultToDate); ?>">
+                        <input class="p-1 shadow-date mx-10 " type="date" name="to_date" id="to_date" value="<?php echo htmlspecialchars($defaultToDate); ?>">
                         <button class="btn btn-blue" id = "update">
                            <svg class="svg-inline--fa fa-rotate pr-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rotate" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                               <path class="" fill="currentColor" d="M142.9 142.9c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5c0 0 0 0 0 0H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5c7.7-21.8 20.2-42.3 37.8-59.8zM16 312v7.6 .7V440c0 9.7 5.8 18.5 14.8 22.2s19.3 1.7 26.2-5.2l41.6-41.6c87.6 86.5 228.7 86.2 315.8-1c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.2 62.2-162.7 62.5-225.3 1L185 329c6.9-6.9 8.9-17.2 5.2-26.2s-12.5-14.8-22.2-14.8H48.4h-.7H40c-13.3 0-24 10.7-24 24z"></path>
@@ -326,7 +336,7 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                      </div>
                   </div>
 
-                  <div class = "approve"></div>
+                  <div class = "amit"></div>
                   <div data-v-428084ba="" class="row table p-10px w-full">
                      <table data-v-428084ba="" class="w-full">                                        
                         <tr data-v-428084ba="" class="flex w-full">
@@ -364,7 +374,7 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                                $reviewrate3 = isset($reviewratings->rate3) ? (int)$reviewratings->rate3->value : 0;
                                $sum = $reviewrate1 + $reviewrate2 + $reviewrate3;
                                $average = round($sum/3);
-                               if($average){ 
+                               if($average){
                               ?>
                               <div data-v-f15ab7a3="" class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">
                                  <p data-v-f15ab7a3=""><?= $average;?></p>
@@ -409,7 +419,7 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                                     <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Department:</span><?= $review['department']; ?></p>
                                  </div>
                               </div>
-                              <?php if ($reviewrate1 && $reviewrate2 &&$reviewrate3){ ?>
+                              <?php if($reviewrate1 && $reviewrate2 && $reviewrate3){?>
                               <div data-v-f15ab7a3="" class="ratings flex flex-wrap">
                                  <div data-v-f15ab7a3="" class="info-tag bg-white py-5px px-15px rounded-full m-5px shadow border flex items-center">
                                     <p data-v-f15ab7a3="">How likely are you to recommend us to your friends and family?</p>
@@ -424,13 +434,13 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                                     <div data-v-f15ab7a3="" class="rating rounded-1/2 w-20px h-20px text-white flex justify-center items-center p-13px ml-10px bg-green-500"><?= $reviewrate3;?></div>
                                  </div>
                               </div>
-                              <?php }?>
+                              <?php } ?>
                            </td>
                            <td data-v-f15ab7a3="" class="p-10px w-200px">                              
                               <div id="<?= $review['ID']; ?>" class="flex flex-col items-center justify-center h-full" data-id="<?= $review['ID']; ?>"  data-approved="<?= $review['isApproved']; ?>" 
                               data-archive="<?= $review['isArchive'] ?>">
                              
-                           <button class="btn btn-approve w-full mb-5px <?= $review['isApproved'] == '1' ? 'btn-gray' : 'btn-green' ?>" data-approved="<?= $review['isApproved']; ?>" approved="<?= $review['isApproved']; ?>" onclick="handleApprovalClick(this,'approved')">
+                           <button class="btn btn-approve w-full mb-5px <?= $review['isApproved'] == '1' ? 'btn-gray' : 'btn-green' ?>" data-archive="<?= $review['isArchive'] ?>" approved="<?= $review['isApproved']; ?>" onclick="handleApprovalClick(this,'approved')">
                                  <svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
                                  </svg>
@@ -518,14 +528,11 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
 function handleApprovalClick(button) {
     var parentDiv = button.parentElement;
     var ID = parentDiv.getAttribute('data-id'); 
-    console.log(ID) 
     var isApproved = parentDiv.getAttribute('data-approved');
     var isArchive = parentDiv.getAttribute('data-archive');
-    //console.table('Before click handling - ID:', ID, 'isApproved:', isApproved, 'isArchive:', isArchive);
-    // Determine which button was clicked and update values accordingly
     if (button.hasAttribute('approved')) {
     isApproved = (isApproved === '1') ? '0' : '1';
- 
+
     // Define SVG icons
     const approvedSVG = `<svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">' +
                            '<path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>' +
@@ -533,20 +540,20 @@ function handleApprovalClick(button) {
     const approveSVG = `<svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">' +
                            '<path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>' +
                         '</svg>`;
- 
+
     // Update button text, class, and SVG icon
-    button.innerHTML = isApproved === '1'
-        ? `${approvedSVG} Approved`
+    button.innerHTML = isApproved === '1' 
+        ? `${approvedSVG} Approved` 
         : `${approveSVG} Approve`;
     button.classList.toggle('btn-gray', isApproved === '1');
     button.classList.toggle('btn-green', isApproved === '0');
     button.setAttribute('approved', isApproved);
 }
- 
+
     if (button.hasAttribute('archive')) {
     isArchive = (isArchive === '1') ? '0' : '1';
     console.log('Updated archive status:', isArchive);
- 
+
     // Define SVG icons
     const archiveSVG = `<svg class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
                            '<path fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>' +
@@ -554,29 +561,24 @@ function handleApprovalClick(button) {
     const unarchiveSVG = `<svg class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
                            '<path fill="currentColor" d="M32 32H480c17.7 0 32 14.3 32 32V96c0 17.7-14.3 32-32 32H32C14.3 128 0 113.7 0 96V64C0 46.3 14.3 32 32 32zm0 128H480V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V160zm128 80c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16s-7.2-16-16-16H176c-8.8 0-16 7.2-16 16z"></path>' +
                         '</svg>`;
- 
+
     // Update button text, class, and SVG icon
-    button.innerHTML = isArchive === '0'
-        ? `${archiveSVG} Archive`
+    button.innerHTML = isArchive === '0' 
+        ? `${archiveSVG} Archive` 
         : `${unarchiveSVG} Unarchive`;
     button.classList.toggle('btn-gray', isArchive === '1');
     button.classList.toggle('btn-blue', isArchive === '0');
 }
- 
     parentDiv.setAttribute('data-approved', isApproved);
     parentDiv.setAttribute('data-archive', isArchive);
-    // AJAX request
     $.ajax({
-        url: '/analyze/reviews/approve', // URL for the defined route
+        url: '/analyze/reviews/approve', 
         type: 'POST',
         dataType: 'json',
         data: { ID: ID, approved: isApproved, archive: isArchive },
         success: function(response) {
-            // Handle success
             console.table( response);
             var review = response;
-         
-            // Construct new button HTML based on approval and archive statuses
             var buttonHTML = 
             '<td class="p-10px w-200px">' +
                '<div class="flex flex-col items-center justify-center h-full">' +
@@ -605,10 +607,9 @@ function handleApprovalClick(button) {
     });
 }
 </script>
-
 <script>
-$(document).ready(function() {
- 
+$(document).ready(function() { 
+   $('#dynamicButton').remove();
     var filters = {
         campaignID: '',
         limit: '10',
@@ -617,21 +618,15 @@ $(document).ready(function() {
         includeAllReviews: false,
         noText: 0,
         archive: 0,
-        sentiment: '',
-        
-    };   
-    
+        sentiment: '',        
+    };       
     $('#archive').removeClass('active');
     function handleButtonClick(sentiment) {
-        // Update the sentiment in the filters object
         filters.sentiment = sentiment;
         $('#positive').removeClass('active');
         $('#neutral').removeClass('active');
         $('#negative').removeClass('active');
         $('#' + sentiment).addClass('active');
-        // Optionally log the updated filters object
-        console.log('Updated filters:', filters);
-        // Call filterData to apply the new filters
         filterData();
     }
     function filterData() {
@@ -640,14 +635,16 @@ $(document).ready(function() {
     }
     $('#positive').on('click', function() {
         handleButtonClick('Positive');
+        $('#dynamicButton').remove();
     });
     $('#neutral').on('click', function() {
         handleButtonClick('Neutral');
+        $('#dynamicButton').remove();
     });
     $('#negative').on('click', function() {
         handleButtonClick('Negative');
+        $('#dynamicButton').remove();
     });
-    // Event handler for change events
     $('#filter-campaings, #limit, #approved, #unapproved, #no-text').on('change', function() {
         filters.campaignID = $('#filter-campaings').val();
         filters.limit = $('#limit').val();
@@ -655,11 +652,11 @@ $(document).ready(function() {
         filters.unapproved = $('#unapproved').is(':checked') ? 1 : 0;
         filters.noText = $('#no-text').is(':checked') ? 1 : 0;
         filters.includeAllReviews = filters.approved && filters.unapproved;
+        $('#dynamicButton').remove();
         filterData();
     });
-    // Event handler for button clicks
     $(document).on('click', '#reset', function() {
-        // Reset all filters to default values
+
         filters = {
             campaignID: '',
             limit: '',
@@ -669,22 +666,20 @@ $(document).ready(function() {
             noText: 0,
             archive: 0,
             sentiment:''
-        };
-        // Reset form fields to default values
+        };       
         $('#filter-campaings').val('');
         $('#limit').val('10');
         $('#approved').prop('checked', false);
         $('#unapproved').prop('checked', false);
         $('#no-text').prop('checked', false);
-        $('#archive').removeClass('active'); // Reset the archive button
+        $('#archive').removeClass('active'); 
         $('#positive, #neutral, #negative').removeClass('active');
         $('#dynamicButton').remove();
-        // Log the reset state and fetch reviews
-        //console.log('Filters Reset:', filters);
         filterData();
     });
     $(document).on('click', '#archive', function() {
         var $button = $(this);
+        $('#dynamicButton').remove();
         $button.toggleClass('active');
         filters.archive = $button.hasClass('active') ? 1 : 0;
         if ($button.hasClass('active')) {
@@ -706,21 +701,6 @@ $(document).ready(function() {
       fetchReviews(currentPage);
    });
     function fetchReviews(page) {
-      var selectedCheckboxes = [];
-      $('#flexCheckDefault').on('change', function() {
-         var isChecked = $(this).is(':checked');
-         $('.review-checkbox').each(function() {
-            $(this).prop('checked', isChecked);
-         });
-
-         if (isChecked) {
-            // If main checkbox is checked, add all checkboxes to the selected array
-            selectedCheckboxes = $('.review-checkbox').filter(':checked').toArray();
-         } else {
-            // If main checkbox is unchecked, clear the selected checkboxes array
-            selectedCheckboxes = [];
-         }
-      });
         $.ajax({
             url: '/analyze/reviews/get',
             type: 'POST',
@@ -784,21 +764,11 @@ $(document).ready(function() {
                      : '<svg class="svg-inline--fa fa-face-frown text-4xl text-red-500 opacity-50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-frown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
                         '<path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM159.3 388.7c-2.6 8.4-11.6 13.2-20 10.5s-13.2-11.6-10.5-20C145.2 326.1 196.3 288 256 288s110.8 38.1 127.3 91.3c2.6 8.4-2.1 17.4-10.5 20s-17.4-2.1-20-10.5C340.5 349.4 302.1 320 256 320s-84.5 29.4-96.7 68.7zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>' +
                         '</svg>';
-                  // let reviewerInfo = JSON.parse(review.reviewratings);
-                  let reviewerInfo;
-                  try {
-                     reviewerInfo = JSON.parse(review.reviewratings);
-                  } catch (error) {
-                     // console.error('Error parsing review ratings:', error, 'Review:', review);
-                     return; // Skip this review if there's an error
-                  }
-                  let email = reviewerInfo?.customer_email || '';                
+                  let reviewerInfo = JSON.parse(review.reviewratings);
+                  let email = reviewerInfo?.customer_email || 'No Email Available';                
                   let rate1 = parseFloat(reviewerInfo?.rate1?.value || '');
                   let rate2 = parseFloat(reviewerInfo?.rate2?.value || '');
                   let rate3 = parseFloat(reviewerInfo?.rate3?.value || '');
-                  console.log(rate1,'1');
-                  console.log(rate2,'2');
-                  console.log(rate3,'3');
                   let sum = rate1 + rate2 + rate3;
                   let average = sum / 3;  
                   let roundedAverage = average.toFixed(); // Calculate roundedAverage
@@ -808,7 +778,7 @@ $(document).ready(function() {
                      averagerating = '<div class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">' +
                                     '<p>' + roundedAverage + '</p>' +
                                     '</div>';
-                  }
+                  }  
                   let createdOn = review.createdOn;
                   let datePart = createdOn.substring(0, 10);
                   let ratingsHtml = '';
@@ -838,7 +808,7 @@ $(document).ready(function() {
                               '</td>'+
 
                         '<td class="p-10px flex flex-col items-center justify-start w-60px">' + sentimentSvg +
-                              averagerating +
+                        averagerating +
                         '</td>' +
                         '<td class="p-10px w-full">' +
                            '<div class="comment border-l-5 border-blue-500 py-9px px-18px mb-5px">' +
@@ -864,7 +834,7 @@ $(document).ready(function() {
                                     '<p><span class="font-bold">Department:</span>' + review.department + '</p>' +
                               '</div>' +
                            '</div>' +
-                           ratingsHtml + 
+                           ratingsHtml +
                         '</td>' +
                         '<td class="p-10px w-200px">' +
                         '<div class="flex flex-col items-center justify-center h-full" data-id="' + review.ID + '" data-approved="' + review.isApproved + '" data-archive="' + review.isArchive + '">'+
@@ -964,104 +934,97 @@ $(document).ready(function() {
         });
     }
 });
-
-$('#flexCheckDefault').on('change', function() {
-    var isChecked = $(this).is(':checked');
-    console.log('Checkbox clicked. Checked state:', isChecked);
-});
 </script>
+
 <script>
-document.getElementById('filter-button').addEventListener('click', function() {
+   document.getElementById('filter-button').addEventListener('click', function() {
     var dropdown = document.getElementById('filter-dropdown');
     dropdown.classList.toggle('hidden');
 });
+   var selectedCheckboxes = [];
 
-// Track selected checkboxes in an array
-var selectedCheckboxes = [];
+   // Handle the main checkbox change event
+   $(document).on('change', '#flexCheckDefault', function() {
+       var isChecked = $(this).is(':checked');
+       $('.review-checkbox').each(function() {
+           $(this).prop('checked', isChecked);
+       });
 
-$(document).on('change','#flexCheckDefault', function() {
-    var isChecked = $(this).is(':checked');
-    $('.review-checkbox').each(function() {
-        $(this).prop('checked', isChecked);
-    });
+       // Clear and update the selectedCheckboxes array
+       selectedCheckboxes = [];
+       if (isChecked) {
+           $('.review-checkbox').each(function() {
+               toggleCheckboxInArray($(this), true);
+           });
+       }
 
-    if (isChecked) {
-        // If main checkbox is checked, add all checkboxes to the selected array
-        selectedCheckboxes = $('.review-checkbox').filter(':checked').toArray();
-    } else {
-        // If main checkbox is unchecked, clear the selected checkboxes array
-        selectedCheckboxes = [];
-    }
+       updateApproveButtonVisibility();
+   });
 
-    // Show or hide the button based on the state
-    var button = $('#dynamicButton');
-    if (isChecked) {
-        if (button.length === 0) {
-            button = $('<button>', {
-                id: 'dynamicButton',
-                text: 'Approve selected',
-                class: 'btn btn-primary',
-                click: function() {
-                    approvePendingReviews();
-                }
-            }).appendTo('.approve');
-        }
-    } else {
-        button.remove();
-    }
-});
+   // Handle individual checkbox change event
+   $(document).on('change', '.review-checkbox', function() {
+       // Clear the selectedCheckboxes array
+       selectedCheckboxes = [];
+       
+       // Update the selectedCheckboxes array based on current checked state
+       $('.review-checkbox:checked').each(function() {
+           toggleCheckboxInArray($(this), true);
+       });
 
-// // Handle individual checkbox change
-// $(document).on('change', '.review-checkbox', function() {
-//     var isChecked = $(this).is(':checked');
-//     var checkbox = $(this);
+       // Update the main checkbox state based on individual checkbox states
+       var allChecked = $('.review-checkbox').length === $('.review-checkbox:checked').length;
+       $('#flexCheckDefault').prop('checked', allChecked);
 
-//     if (isChecked) {
-//         // Add to selected checkboxes if checked
-//         if (!selectedCheckboxes.includes(checkbox[0])) {
-//             selectedCheckboxes.push(checkbox[0]);
-//         }
-//     } else {
-//         // Remove from selected checkboxes if unchecked
-//         selectedCheckboxes = selectedCheckboxes.filter(function(item) {
-//             return item !== checkbox[0];
-//         });
-//     }
+       updateApproveButtonVisibility();
+   });
 
-//     // Update the main checkbox state based on individual checkbox states
-//     var allChecked = $('.review-checkbox').length === $('.review-checkbox:checked').length;
-//     $('#flexCheckDefault').prop('checked', allChecked);
-    
-//     // Show or hide the button based on the state
-//     var button = $('#dynamicButton');
-//     if (selectedCheckboxes.length > 0) {
-//         if (button.length === 0) {
-//             button = $('<button>', {
-//                 id: 'dynamicButton',
-//                 text: 'Approve Pending Reviews',
-//                 class: 'btn btn-primary',
-//                 click: function() {
-//                     approvePendingReviews();
-//                 }
-//             }).appendTo('.approve');
-//         }
-//     } else {
-//         button.remove();
-//     }
-// });
+   // Function to add/remove checkboxes from the selected array
+   function toggleCheckboxInArray(checkbox, isChecked) {
+       if (isChecked) {
+           selectedCheckboxes.push(checkbox[0]);
+       }
+       console.log('Selected Checkboxes:', selectedCheckboxes); // Log the selected checkboxes
+   }
 
-function approvePendingReviews() {
-   var button = $('#dynamicButton');
-    selectedCheckboxes.forEach(function(checkbox) {
-        var reviewElement = $(checkbox).closest('tr'); 
-        var approveButton = reviewElement.find('.btn-approve');        
-        //handleApprovalClick(reviewElement.find('.btn-approve')[0]);
-        if (approveButton.length > 0 && approveButton.attr('approved') === '0') {
-            handleApprovalClick(approveButton[0], 'approved');
-            button.remove();
-            $('.form-check-input').prop('checked', false);
-        }
-    });
-}
+   // Function to update the visibility of the approve button
+   function updateApproveButtonVisibility() {
+       var button = $('#dynamicButton');
+       if (selectedCheckboxes.length > 1) {
+           if (button.length === 0) {
+               button = $('<button>', {
+                   id: 'dynamicButton',
+                   text: 'Approve Pending Reviews',
+                   class: 'btn btn-primary',
+                   click: function() {
+                       approvePendingReviews();
+                   }
+               }).appendTo('.amit');
+           }
+       } else {
+           button.remove();
+       }
+   }
+
+   // Function to approve selected reviews
+   function approvePendingReviews() {
+       var button = $('#dynamicButton');
+       button.remove();
+       $('.form-check-input').prop('checked', false);
+
+       selectedCheckboxes.forEach(function(checkbox) {
+           var reviewElement = $(checkbox).closest('tr');
+           var approveButton = reviewElement.find('.btn-approve');
+
+           if (approveButton.length > 0 && approveButton.attr('approved') === '0') {
+               handleApprovalClick(approveButton[0], 'approved');
+           }
+       });
+
+       // Clear the selected checkboxes array
+       selectedCheckboxes = [];
+       $('#flexCheckDefault').prop('checked', false);
+       console.log('Selected Checkboxes after approval:', selectedCheckboxes); // Log the empty array after approval
+   }
 </script>
+
 <?= $this->endSection() ?>
