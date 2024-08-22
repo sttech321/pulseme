@@ -879,7 +879,14 @@ $(document).ready(function() {
                      : '<svg class="svg-inline--fa fa-face-frown text-4xl text-red-500 opacity-50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-frown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
                         '<path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM159.3 388.7c-2.6 8.4-11.6 13.2-20 10.5s-13.2-11.6-10.5-20C145.2 326.1 196.3 288 256 288s110.8 38.1 127.3 91.3c2.6 8.4-2.1 17.4-10.5 20s-17.4-2.1-20-10.5C340.5 349.4 302.1 320 256 320s-84.5 29.4-96.7 68.7zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>' +
                         '</svg>';
-                  let reviewerInfo = JSON.parse(review.reviewratings);
+                  // let reviewerInfo = JSON.parse(review.reviewratings);
+                  let reviewerInfo;
+                  try {
+                     reviewerInfo = JSON.parse(review.reviewratings);
+                  } catch (error) {
+                     // console.error('Error parsing review ratings:', error, 'Review:', review);
+                     return; // Skip this review if there's an error
+                  }
                   let email = reviewerInfo?.customer_email || '';                
                   let rate1 = parseFloat(reviewerInfo?.rate1?.value || '');
                   let rate2 = parseFloat(reviewerInfo?.rate2?.value || '');
@@ -889,11 +896,13 @@ $(document).ready(function() {
                   console.log(rate3,'3');
                   let sum = rate1 + rate2 + rate3;
                   let average = sum / 3;  
+                  let roundedAverage = average.toFixed(); // Calculate roundedAverage
                   let averagerating = '';
-                  let roundedAverage = '';
-                  let roundedAverage = average.toFixed();
-                  if (roundedAverage) {
-                     averagerating = '<div class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">' +'<p>' + roundedAverage + '</p>'+'</div>';
+                 // Check if roundedAverage is a valid number and not "NaN"
+                  if (!isNaN(roundedAverage)) {
+                     averagerating = '<div class="w-40px h-40px rounded-full mt-10px text-white flex justify-center items-center bg-green-500">' +
+                                    '<p>' + roundedAverage + '</p>' +
+                                    '</div>';
                   }
                   let createdOn = review.createdOn;
                   let datePart = createdOn.substring(0, 10);

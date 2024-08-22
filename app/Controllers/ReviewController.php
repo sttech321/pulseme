@@ -106,7 +106,7 @@ class ReviewController extends BaseController
         return redirect()->to('/')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
     }
 
-    private function sendContactCard($customer_email)
+    public function sendContactCard($customer_email)
     {
         $contactCardModel = new ContactcardModal();
         $data['contactcard'] = $contactCardModel->first();
