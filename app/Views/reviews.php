@@ -120,7 +120,7 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                         </svg>
                         <!-- </button> -->
                         <div class="dropdown-menu">
-                           <a class="dropdownItem" href="#"> <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                           <a class="dropdownItem" href="<?= base_url('reviews/export-csv'); ?>"><i class="fa fa-file-text-o" aria-hidden="true"></i>
                               Export as a CSV</a>
                            <div class="dropdownItem">*Supported on Chrome & Firefox </div>
                         </div>
@@ -247,7 +247,7 @@ border: 2px solid #007bff; /* Optional: add a border for better visibility */
                      $defaultToDate = $currentDate;
                      ?>
                      <div data-v-428084ba="" class="filter flex justify-end items-baseline">
-                        <svg class="svg-inline--fa fa-calendar-day" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <svg class="mr-3 svg-inline--fa fa-calendar-day" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                            <path class="" fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm80 64c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80z"></path>
                         </svg>
                         <p class="font-bold">From</p>

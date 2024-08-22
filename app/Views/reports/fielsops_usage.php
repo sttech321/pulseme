@@ -20,10 +20,10 @@
 			<h2 class="text-2xl">Reports</h2>
 		</div> -->
 		<div class="px-15px flex justify-start items-center bg-white">
-			<a href="/leaderboard/reports/departments" class="p-10px">Departments</a>
-			<a href="/leaderboard/reports/campaigns" class="p-10px">Campaigns</a>
-			<a href="/leaderboard/reports/campaign-reviews" class="p-10px">Campaign Reviews</a>
-			<a href="/leaderboard/reports/fieldops-usage" class="border-b-2 border-blue-500 router-link-exact-active p-10px" aria-current="page">Fieldops Usage</a>
+			<a href="<?=base_url('/leaderboard/reports/departments')?>" class="p-10px">Departments</a>
+			<a href="<?=base_url('/leaderboard/reports/campaigns')?>" class="p-10px">Campaigns</a>
+			<a href="<?=base_url('/leaderboard/reports/campaign-reviews')?>" class="p-10px">Campaign Reviews</a>
+			<a href="<?=base_url('/leaderboard/reports/fieldops-usage')?>" class="border-b-2 border-blue-500 router-link-exact-active p-10px" aria-current="page">Fieldops Usage</a>
 			<!-- <a href="/leaderboard/reports/projection" class="p-10px">Projection</a> -->
 		</div>
 		<?php

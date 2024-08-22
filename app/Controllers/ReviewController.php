@@ -59,6 +59,7 @@ class ReviewController extends BaseController
         $reviewModel = new ReviewModal();
 
         // Collecting data from the request
+        $reviewId = $this->request->getPost('reviewId');
         $feedback = $this->request->getPost('feedback');
         $rating1_value = $this->request->getPost('rating1_value');
         $rating1_text = $this->request->getPost('rating1_text');
@@ -102,23 +103,23 @@ class ReviewController extends BaseController
 
         $reviewModel->insert($data); 
         // Send contact card email
-        $this->sendcronjob($customer_email,$status);
+        $this->updatestatus($customer_email,$status);
         // Display a thank you message or redirect as needed
         return redirect()->to('/')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
     }
 
-    public function sendcronjob($customer_email)
+    public function updatestatus($customer_email, $status)
     {
         $reviewModel = new ReviewModal();
         // Prepare data to be updated for cron job
         $data = [
             'reviewratings' => json_encode([
-            'status'        => 'done',
+                'status' => $status,
             ]),
         ];
         // Update review entry
-        $reviewModel->update($data);
-  
+        $reviewModel->update($reviewId, $data);
+    
         $this->sendContactCard($customer_email);
     }
 
@@ -397,5 +398,85 @@ class ReviewController extends BaseController
         $contactCardModel = new ContactcardModal();
         $data['contactcard'] = $contactCardModel->first();
         return view('contact-card-tab/contact_templates', $data);
+    }
+
+    public function exportCsv()
+    {
+        $reviewModel = new ReviewModal();
+        $perPage = 1000; // Set a large limit to export a significant number of reviews
+        $offset = 0; // Start from the beginning
+    
+        // Fetch reviews
+        $reviews = $reviewModel->get_reviews_with_campaign($perPage, $offset);
+    
+        // Prevent any output before headers
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
+    
+        // Set headers to force download
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="reviews.csv"');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+    
+        // Open PHP output stream
+        $output = fopen('php://output', 'w');
+    
+        // Add CSV headers
+        fputcsv($output, [
+            'ID', 
+            'Review Text', 
+            'Sentiment', 
+            'Reviewer Name',  
+            'Review Type',
+            'Department',
+            'Approval Status',
+            'Rating',  
+            'City', 
+            'State',
+            'Zip Code',  
+            'Comments', 
+            'Created On'
+        ]);
+    
+        // Write rows to CSV
+        // print_r($reviews);
+        // die;
+        foreach ($reviews as $review) {
+            $reviewRatings = json_decode($review['reviewratings'], true);  
+    
+            // Extract the relevant data from the reviewratings JSON
+            $reviewerName = isset($reviewRatings['name']) ? $reviewRatings['name'] : 'N/A';
+            $reviewerCity = isset($reviewRatings['city']) ? $reviewRatings['city'] : 'N/A';
+            $reviewerState = isset($reviewRatings['state']) ? $reviewRatings['state'] : 'N/A';
+            $reviewerZipCode = isset($reviewRatings['Zipcode']) ? $reviewRatings['Zipcode'] : 'N/A';
+            $reviewerRating = isset($reviewRatings['rating']) ? $reviewRatings['rating'] : 'N/A';
+            $reviewerComments = isset($reviewRatings['comments']) ? $reviewRatings['comments'] : 'N/A';       
+    
+            // Write the review data to the CSV file
+            fputcsv($output, [
+                $review['ID'], 
+                $review['reviewText'], 
+                $review['sentiment'], 
+                $reviewerName,  
+                $review['reviewType'],
+                $review['department'],
+                $review['isApproved'],
+                $reviewerRating,  
+                $reviewerCity, 
+                $reviewerState,
+                $reviewerZipCode,  
+                $reviewerComments, 
+                $review['createdOn']
+            ]);
+        }
+        
+    
+        // Close the output stream
+        fclose($output);
+    
+        // Exit to prevent any additional output
+        exit();
     }
 }

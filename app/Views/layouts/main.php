@@ -8,15 +8,15 @@
 	<meta name="description" content="summitRA: The small framework with powerful features">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/header.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reset.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reviews.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/variables.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/analysis.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/all.min.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/apexcharts.css') ?>">
-	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('/css/bootstrap.min.css') ?>"> -->
-	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('/css/custom-modal.css') ?>"> -->
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/header.css'). '?v=' . time()?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reset.css'). '?v=' . time() ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reviews.css'). '?v=' . time() ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/variables.css'). '?v=' . time() ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/analysis.css'). '?v=' . time() ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/all.min.css'). '?v=' . time() ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/apexcharts.css'). '?v=' . time() ?>">
+	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('/css/bootstrap.min.css'). '?v=' . time() ?>"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('/css/custom-modal.css'). '?v=' . time() ?>"> -->
 
 	<script src="<?= base_url('/js/jquery.js') ?>"></script>
 	<style>

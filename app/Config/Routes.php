@@ -100,3 +100,5 @@ $routes->post('/leaderboard/reports/campaigns/filter', 'ReportsController::filte
 $routes->post('/leaderboard/reports/filterDepartments', 'ReportsController::filterDepartments');
 
 $routes->get('/cron-job', 'ReviewController::cronJobTask');
+
+$routes->get('reviews/export-csv','ReviewController::exportCsv');
