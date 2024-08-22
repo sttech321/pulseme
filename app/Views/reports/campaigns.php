@@ -152,10 +152,10 @@
                                                 <!-- <td class="px-20px py-15px"></td> -->
                                                 <!-- <td class="px-20px py-15px"></td> -->
                                                 <td class="px-20px py-15px">
-                                                    <?= $campaign->bio_count; ?>
+                                                    <?= isset($campaign->bio_count) ? $campaign->bio_count : '0'; ?>
                                                 </td>
                                                 <td class="px-20px py-15px">
-                                                    <?= $campaign->pulsecheck_count; ?>
+                                                    <?= isset($campaign->pulsecheck_count) ? $campaign->pulsecheck_count : '0'; ?>
                                                 </td>
                                                 <td class="px-20px py-15px"></td>
                                                 <!-- Positive Sentiment -->

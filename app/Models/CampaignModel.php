@@ -24,29 +24,48 @@ class CampaignModel extends Model
 
     public function getCampaignsWithSentiment($fromDate = null, $toDate = null)
     {
-        $builder = $this->db->table($this->table);
-
-        // Select columns and aggregate counts
+        $builder = $this->db->table('campaign');
+    
+        // Select columns from campaign and aggregate counts
         $builder->select('
             campaign.*, 
-            COUNT(customers_bio.id) AS total_sends,
-            COALESCE(SUM(CASE WHEN customers_bio.formstatus = "bio" THEN 1 ELSE 0 END), 0) AS bio_count,
-            COALESCE(SUM(CASE WHEN customers_bio.formstatus = "pulsecheck" THEN 1 ELSE 0 END), 0) AS pulsecheck_count
-
+            bio_stats.total_sends,
+            bio_stats.bio_count,
+            bio_stats.pulsecheck_count,
+            COALESCE(SUM(CASE WHEN reviews.sentiment = "positive" THEN 1 ELSE 0 END), 0) AS positive_count,
+            COALESCE(SUM(CASE WHEN reviews.sentiment = "negative" THEN 1 ELSE 0 END), 0) AS negative_count
         ');
-
-        // Perform LEFT JOIN to include data from customers_bio and reviews tables
-        $builder->join('customers_bio', 'campaign.ID = customers_bio.campaignid', 'left');
-
-
+    
+        // Subquery to calculate bio and pulsecheck counts
+        $subquery = $this->db->table('customers_bio')
+            ->select('
+                customers_bio.campaignid, 
+                COUNT(customers_bio.id) AS total_sends,
+                SUM(CASE WHEN customers_bio.formstatus = "bio" THEN 1 ELSE 0 END) AS bio_count,
+                SUM(CASE WHEN customers_bio.formstatus = "pulsecheck" THEN 1 ELSE 0 END) AS pulsecheck_count
+            ')
+            ->groupBy('customers_bio.campaignid')
+            ->getCompiledSelect();
+    
+        // Join with subquery and reviews table
+        $builder->join("($subquery) AS bio_stats", 'campaign.ID = bio_stats.campaignid', 'left');
+        $builder->join('reviews', 'campaign.ID = reviews.campaignID', 'left');
+    
+        // Filter by date range if provided
+        if ($fromDate && $toDate) {
+            $builder->where('campaign.created_at >=', $fromDate . ' 00:00:00');
+            $builder->where('campaign.created_at <=', $toDate . ' 23:59:59');
+        }
+    
         // Group by campaign ID to aggregate the data correctly
         $builder->groupBy('campaign.ID');
+    
         // Fetch the result
         $query = $builder->get();
+    
         // Return the result as an array of objects
         return $query->getResult();
-
-    }
+    }    
 
 
 
