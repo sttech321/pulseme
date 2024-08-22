@@ -10,7 +10,7 @@
 <div class="headerTop">
     <div class="dropMenuWrap flexBetween">
         <div class="pageNameWrap">
-            <h3 class="secTitle">Reviews</h3>
+            <h3 class="secTitle">Dispatching </h3>
         </div>
         <div class="rightWrap">
             <div class="location-info flex flex-col justify-center items-end mr-10px">
@@ -26,13 +26,13 @@
 <div class="sidebarRightContentWrap">
     <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
         <div data-v-1ee66579="" class="dispatch">
-            <header data-v-1ee66579="" class="w-full h-[100px] bg-white flex items-center pl-4">
+            <!-- <header data-v-1ee66579="" class="w-full h-[100px] bg-white flex items-center pl-4">
                 <h1 data-v-1ee66579="" class="text-2xl">Dispatching</h1>
-            </header>
-            <div data-v-1ee66579="" class="wrap p-20px text-sm">
+            </header> -->
+            <div data-v-1ee66579="" class="wrap py-20px text-sm">
                 <div data-v-04366469="" data-v-1ee66579="" id="panel-contain" class="grid grid-cols-3 <lg:grid-cols-1 grid-flow-row auto-rows-auto gap-x-5 gap-y-8 h-full relative">
                     <div data-v-04366469="" class="flex justify-between items-center col-span-3 <lg:col-span-1">
-                        <p data-v-04366469="" class="">Overview</p>
+                        <p data-v-04366469="" class=""></p>
                         <div data-v-04366469="" class="filter flex justify-end items-baseline">
                             <svg class="svg-inline--fa fa-calendar-day mr-3" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-day" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                 <path class="" fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm80 64c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80z"></path>
@@ -434,9 +434,9 @@
                                     <div data-v-6b4913b0="" class="flex-grow w-1/2 border-right-2 -mt-10 pt-10">
                                         <div data-v-6b4913b0="" class="flex flex-col items-center">
                                             <div data-v-6b4913b0="" class="flex flex-col items-center justify-center">
-                                                <div data-v-6b4913b0="" class="w-80px h-80px bg-gray-100 flex items-center justify-center"><img data-v-6b4913b0="" src="/assets/mailicon-788ec795.svg" /></div>
-                                                <p data-v-6b4913b0="" class="text-2xl font-bold">463</p>
-                                                <p data-v-6b4913b0="" class="text-sm text-gray-500 text-center">
+                                                <div class="w-80px h-80px bg-gray-100 flex items-center justify-center"><img src="./public/image/mailicon.png" /></div>
+                                                <p class="text-2xl font-bold">463</p>
+                                                <p class="text-sm text-gray-500 text-center">
                                                     Number of<br data-v-6b4913b0="" />
                                                     Contact Cards Sent
                                                 </p>
