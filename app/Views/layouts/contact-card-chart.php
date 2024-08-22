@@ -1,4 +1,8 @@
 <div id="donut-chart"></div>
+<div id="chart-info" style="text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: Arial, sans-serif;">
+    <div class="mb-10" style="font-size: 18px; color: #333;">Card</div>
+    <div style="font-size: 16px; color: #333;">Numbers</div>
+</div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var options = {
@@ -6,8 +10,8 @@
                 type: 'donut',
                 height: 350
             },
-            colors: ['#3399ff'], // Medium-light blue color
-            series: [75], // Example value for contact card numbers
+            colors: ['#3399ff'],
+            series: [75],
             labels: ['Contact Card Numbers'],
             plotOptions: {
                 pie: {
@@ -17,10 +21,10 @@
                 }
             },
             dataLabels: {
-                enabled: false // Don't show the percentage inside the donut
+                enabled: false
             },
             legend: {
-                show: false // Hide legend
+                show: false
             }
         };
 

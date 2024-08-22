@@ -84,13 +84,13 @@
 				 <!-- </div>
 			</div>
 		</div> -->
-		<div class="flex flex-col">
+		<!-- <div class="flex flex-col">
 			<div class="sub-menu-bar pl-25px">
 				<div class="flex justify-start items-center border-b border-gray-300">
 					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="tab-link p-15px">Contact Information</a>
 					<a aria-current="page" href="<?= base_url('/settings/contact-card/templates') ?>" class="tab-link border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px">Templates</a>
 				</div>
-			</div> 
+			</div>  -->
 			<div class="contact-templateBox">
 				<div class="container">
 					<p style="font-size:20px; color:black; margin-left:10px;">Here is our company contact-card feel free to contact us.</p>

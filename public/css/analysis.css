@@ -16,6 +16,10 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
     height: 100px;
 }
 
+.mb-10{
+    margin-bottom: 10px;
+}
+
 .shadow .img img{
     width: 600px;
     height: 600px;

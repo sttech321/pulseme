@@ -29,7 +29,7 @@
       <div class="flex-grow">
          <div class="p-25px">
             <div class="main p-2rem bg-white rounded">
-               <h2 class="text-2xl">Dispatch</h2>
+               <!-- <h2 class="text-2xl">Dispatch</h2> -->
                <div class="menu flex w-full justify-end mb-2rem">
                   <div class="dropdown relative">
                      <button>

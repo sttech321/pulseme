@@ -45,9 +45,7 @@ class ReportsController extends BaseController {
     public function report_campaign_fieldsops(){
         $model = new CampaignModel();
         $campaignsWithSentiment = $model->getCampaignsWithSentiment();
-        echo'<pre>';
-        print_r($campaignsWithSentiment);
-        die;
+
         return view('reports/fielsops_usage',['campaigns' =>  $campaignsWithSentiment]);
     }
 
