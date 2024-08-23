@@ -151,7 +151,7 @@ class ReviewController extends BaseController
     
         // Preparing data for insertion
         $data = [
-            'createdOn' => date('Y-m-d H:i:s'),
+            'createdOn' => 'CURRENT_TIMESTAMP',
             'updatedOn' => date('Y-m-d H:i:s'),
             'campaignID' => $campaignId,
             'reviewText' => $feedback,
@@ -174,39 +174,30 @@ class ReviewController extends BaseController
         ];
     
         $reviewModel->insert($data);
-        // Send contact card email
-        $this->sendContactCard($customer_email , $status);
+
+        // Call the update status script
+        $this->callUpdateStatusScript();
+        
+        // Send contact card email if status is 'done'
+        if ($status === 'done') {
+            $this->sendContactCard($customer_email);
+        }
+        
         // Display a thank you message or redirect as needed
         return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
     }
     
-    // public function updatestatus($customer_email, $status)
-    // {
-    //     $reviewModel = new ReviewModal();
-    //     // Check if a review already exists for the given customer email
-    //     $existingReview = $reviewModel->where("JSON_EXTRACT(reviewratings, '$.customer_email') =", $customer_email)
-    //                                 ->first();
-    //     if ($existingReview) {
-    //         // Check if the existing review status is 'pending'
-    //         $existingStatus = json_decode($existingReview['reviewratings'], true)['status'] ?? '';
-    //         if ($existingStatus === 'pending') {
-    //             // Prepare data for update
-    //             $data = [
-    //                 'updatedOn' => date('Y-m-d H:i:s'),
-    //                 'reviewratings' => json_encode(array_merge(
-    //                     json_decode($existingReview['reviewratings'], true),
-    //                     ['status' => 'done']
-    //                 )),
-    //             ];
-    //             // Update the existing review entry
-    //             $reviewId = $existingReview['ID'];
-    //             $reviewModel->update($reviewId, $data);
-    //         }
-    //     }
-    //     // Execute sendContactCard() function
-    //     $this->sendContactCard($customer_email);
-    // }
-
+    private function callUpdateStatusScript()
+    {
+        // Execute the update status script
+        $scriptPath = WRITEPATH . 'cli/update_status.php';
+        if (file_exists($scriptPath)) {
+            exec("php " . $scriptPath);
+        } else {
+            log_message('error', 'Update status script not found.');
+        }
+    }
+    
     public function sendContactCard($customer_email)
     {
         $contactCardModel = new ContactcardModal();

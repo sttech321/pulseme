@@ -183,7 +183,7 @@
 										<div class="w-auto flex flex-col items-stretch">
 											<div class="number-list flex justify-between items-center hover px-20px border hover:border-gray-500 p-10px my-10px rounded-4px">
 												<div class="number text-left mr-20px">
-													<p><?= esc($contactcards['primary_number']) ?></p>
+													<p><?= esc($contactcards['primary_number']) ? esc($contactcards['primary_number']) : '012345678'; ?></p>
 												</div>
 											</div>
 										</div>
@@ -269,8 +269,8 @@ $(document).ready(function () {
     $('#save-changes-button').on('click', function (e) {
         e.preventDefault(); // Prevent the form from submitting normally
 
-        var formData = new FormData($('#contat-card-form')[0]);
-        console.log(formData,'formdata');
+        var formData = new FormData($('#contact-card-form')[0]);
+        console.log(formData, 'formdata');
 
         $.ajax({
             url: "<?= base_url('/contact-card') ?>", // Your route URL
@@ -280,8 +280,8 @@ $(document).ready(function () {
             processData: false,
             success: function (response) {
                 if (response.success) {
-                    // alert(response.message);
-					location.reload();
+                    alert(response.message);
+                    location.reload(); // Reload the page to reflect changes
                 } else {
                     alert("There was an error processing your request.");
                 }
@@ -293,9 +293,10 @@ $(document).ready(function () {
     });
 });
 
-document.getElementById('logo-upload-button').addEventListener('click', function() {
-	document.getElementById('logo-upload').click();
-});
+
+// document.getElementById('logo-upload-button').addEventListener('click', function() {
+// 	document.getElementById('logo-upload').click();
+// });
 
 	function downloadPNG() {
       const imgElement = document.getElementById('qr-image');

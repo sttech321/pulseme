@@ -9,17 +9,22 @@ class ContactcardController extends BaseController
     public function create_contactcard()
     {
         $contactCardModel = new ContactcardModal();
-        // Check if the table is empty
         $existingRecord = $contactCardModel->first();
-
+    
         // Handle image upload
         $campaignImage = $this->request->getFile('image');
-        $newName = $campaignImage->getRandomName();
-        $uploadPath = '/image/campaign/';
-
+        if ($campaignImage->isValid() && !$campaignImage->hasMoved()) {
+            $newName = $campaignImage->getRandomName();
+            $uploadPath = WRITEPATH . 'uploads/campaign/';
+            $campaignImage->move($uploadPath, $newName);
+            $imagePath = $uploadPath . $newName;
+        } else {
+            $imagePath = $existingRecord ? $existingRecord['image'] : ''; // Use existing image if no new image is uploaded
+        }
+    
         // Get the duration from the form (e.g., '00:01:20.000')
         $duration = $this->request->getPost('time');
-
+    
         // Prepare data
         $data = [
             'primary_number' => $this->request->getPost('primary'),
@@ -27,29 +32,26 @@ class ContactcardController extends BaseController
             'sms_number' => $this->request->getPost('sms'),
             'searchterm' => $this->request->getPost('search'),
             'notes' => $this->request->getPost('notes'),
-            'image' => $uploadPath . $newName,
             'time' => $duration,
-            'created_at' => date('Y-m-d H:i:s'),
+            'image' => $imagePath,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
-
+    
         if ($existingRecord) {
             // Update the existing record
             $contactCardModel->update($existingRecord['id'], $data);
             $message = 'Contact card updated successfully.';
         } else {
             // Insert new record
+            $data['created_at'] = date('Y-m-d H:i:s');
             $contactCardModel->insert($data);
             $message = 'Contact card created successfully.';
         }
-       
-        return $this->response->setJSON([
-            'success' => true,
-            'data' => $data,
-            'message' => $message,
-        ]);
+    
+        // Return response
+        return $this->response->setJSON(['success' => true, 'message' => $message]);
     }
-
+    
     public function contact_information()
     {
         // Check if the user is logged in
