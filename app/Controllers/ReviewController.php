@@ -176,7 +176,7 @@ class ReviewController extends BaseController
         $reviewModel->insert($data);
     
         // Send contact card email
-        $this->updatestatus($customer_email , $status);
+        $this->sendContactCard($customer_email , $status);
     
         // Display a thank you message or redirect as needed
         return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
@@ -222,7 +222,7 @@ class ReviewController extends BaseController
         $emailService = \Config\Services::email();
 
         // Building the email message
-        $message = view('contact-card-tab/contact_templates', ['contactcard' => $data['contactcard']]);
+        $message = view('contact-card-tab/contact-card-layout', ['contactcard' => $data['contactcard']]);
 
         $emailService->initialize([
             'protocol' => 'smtp',
@@ -336,10 +336,14 @@ class ReviewController extends BaseController
 
     public function reviews()
     {
-    // Ensure the session is started and check if the user is logged in
-    if (!session()->get('isLoggedIn')) {
-        return redirect()->to('/');
-    }
+        // Check if the user is logged in
+        if (!session()->get('isLoggedIn')) {
+            // Store the current URL in the session for redirecting after login
+            session()->set('redirect_back', current_url());
+
+            // Redirect to the login page
+            return redirect()->to('/');
+        }
 
         $reviewModel = new ReviewModal();
         $perPage = 10;
@@ -487,13 +491,6 @@ class ReviewController extends BaseController
         } else {
             return redirect()->to('/error');
         }
-    }
-
-    public function contact_templates()
-    {
-        $contactCardModel = new ContactcardModal();
-        $data['contactcard'] = $contactCardModel->first();
-        return view('contact-card-tab/contact_templates', $data);
     }
 
     public function exportCsv()

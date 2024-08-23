@@ -2,12 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url('/image/summitRA.jpeg')?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'summitRA - Login page' ?></title>
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/css/login.css">
-    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('/css/reset.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('/css/login.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('/css/variables.css')?>">
     </script>
     <style>
       * {

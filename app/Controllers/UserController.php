@@ -23,12 +23,20 @@ class UserController extends Controller
         
         if ($isLoggedIn) {
             // Set session data
-            $userData = [ 
+            $userData = [
                 'username' => $email,
                 'isLoggedIn' => true
             ];
             session()->set($userData);
-            return redirect()->to('/analyze/reviews');
+        
+            // Check if a redirect URL is stored in the session
+            $redirectUrl = session()->get('redirect_back') ?? '/analyze/reviews';
+        
+            // Clear the redirect URL from the session
+            session()->remove('redirect_back');
+        
+            // Redirect the user to the intended page or default to the reviews page
+            return redirect()->to($redirectUrl);
         } else {
             session()->setFlashdata('error', 'Invalid username/email or password');
             return redirect()->to('/');

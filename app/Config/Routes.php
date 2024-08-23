@@ -54,7 +54,7 @@ $routes->get('/settings/general/users', 'Home::general_users');
 $routes->get('/settings/general/reporting', 'Home::general_reporting');
 
 $routes->get('/settings/contact-card/contact-information', 'ContactcardController::contact_information');
-$routes->get('/settings/contact-card/templates', 'ReviewController::contact_templates');
+$routes->get('/settings/contact-card/templates', 'ContactcardController::contact_templates');
 $routes->get('/settings/billing/billing_subscription', 'Home::billing_subscription');
 $routes->get('settings/general/connect-social-media', 'Home::connect_social_media'); 
 $routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');

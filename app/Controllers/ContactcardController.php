@@ -50,20 +50,52 @@ class ContactcardController extends BaseController
         ]);
     }
 
-    public function contact_information(): string
+    public function contact_information()
     {
-        // Ensure the session is started (if not started elsewhere)
+        // Check if the user is logged in
         if (!session()->get('isLoggedIn')) {
+            // Store the current URL in the session for redirecting after login
+            session()->set('redirect_back', current_url());
+
+            // Redirect to the login page
             return redirect()->to('/');
         }
+
+        // Fetch contact card data
+        $contactCardModel = new ContactcardModal();
+        $data['contactcards'] = $contactCardModel->first();
+
+        // Load the view with the data
+        return view('contact-card-tab/contact_information', $data);
+    }
+
+
+    public function contact_templates()
+    {
+        // Check if the user is logged in
+        if (!session()->get('isLoggedIn')) {
+            // Store the current URL in the session for redirecting after login
+            session()->set('redirect_back', current_url());
+
+            // Redirect to the login page
+            return redirect()->to('/');
+        }
+
         $contactCardModel = new ContactcardModal();
         $data['contactcard'] = $contactCardModel->first();
-
-        return view('contact-card-tab/contact_information',$data);
+        return view('contact-card-tab/contact_templates',$data);
     }
 
     public function conactcardlayout(): string
     {
+        // Check if the user is logged in
+        if (!session()->get('isLoggedIn')) {
+            // Store the current URL in the session for redirecting after login
+            session()->set('redirect_back', current_url());
+
+            // Redirect to the login page
+            return redirect()->to('/');
+        }
         $contactCardModel = new ContactcardModal();
         $data['contactcard'] = $contactCardModel->first();
         return view('contact-card-tab/contact-card-layout',$data);

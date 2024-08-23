@@ -183,7 +183,7 @@
 										<div class="w-auto flex flex-col items-stretch">
 											<div class="number-list flex justify-between items-center hover px-20px border hover:border-gray-500 p-10px my-10px rounded-4px">
 												<div class="number text-left mr-20px">
-													<p><?= esc($contactcard['primary_number']) ?></p>
+													<p><?= esc($contactcards['primary_number']) ?></p>
 												</div>
 											</div>
 										</div>

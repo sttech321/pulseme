@@ -30,8 +30,8 @@
 			<h2 class="text-2xl">Reviews</h2>
 		</div>
 		<div class="px-15px bg-white flex justify-start items-center">
-			<a href="/analyze/reviews" class="tab-link" aria-current="page">Reviews</a>
-			<a href="/analyze/reviews/social-reviews" class="tab-link border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px">Social Reviews</a>
+			<a href="<?=base_url('/analyze/reviews')?>" class="tab-link" aria-current="page">Reviews</a>
+			<a href="<?=base_url('/analyze/reviews/social-reviews')?>" class="tab-link border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px">Social Reviews</a>
 		</div>
 	</div>
 	<div class="grid grid-cols-1 gap-y-5">
@@ -161,22 +161,6 @@
 	</div>
 	<!---->
 </div>
-<script>
-	document.addEventListener("DOMContentLoaded", function() {
-		// Get the current URL path
-		const currentPath = window.location.pathname;
-
-		// Get all tab links
-		const tabs = document.querySelectorAll('.tab-link');
-
-		// Loop through the tabs and check if their href matches the current path
-		tabs.forEach(function(tab) {
-			if (tab.getAttribute('href') === currentPath) {
-				tab.classList.add('active'); // Add 'active' class to the matching tab
-			}
-		});
-	});
-</script>
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		document.querySelectorAll('.form-select').forEach(function(select) {
