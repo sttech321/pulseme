@@ -175,7 +175,7 @@ class ReviewController extends BaseController
     
         $reviewModel->insert($data);
         // Send contact card email
-        $this->sendContactCard($customer_email , $status);
+        $this->queueEmailCommand($customer_email , $status);
         // Display a thank you message or redirect as needed
         return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
     }
@@ -207,42 +207,44 @@ class ReviewController extends BaseController
     //     $this->sendContactCard($customer_email);
     // }
 
-    // protected function queueEmailCommand($customer_email, $status)
-    // {
-    //     $command = 'php spark my:customcommand ' . escapeshellarg($customer_email) . ' ' . escapeshellarg($status);
-    //     // Use exec or a similar function to execute the command
-    //     exec($command);
-    // }
-    public function sendContactCard($customer_email)
+    protected function queueEmailCommand($customer_email, $status)
     {
-        $contactCardModel = new ContactcardModal();
-        $data['contactcard'] = $contactCardModel->first();
-
-        $emailService = \Config\Services::email();
-
-        // Building the email message
-        $message = view('contact-card-tab/contact-card-layout', ['contactcard' => $data['contactcard']]);
-
-        $emailService->initialize([
-            'protocol' => 'smtp',
-            'SMTPHost' => $_ENV['SMTP_HOST'],
-            'SMTPPort' => intval($_ENV['SMTP_PORT']),
-            'SMTPUser' => $_ENV['SMTP_USER'],
-            'SMTPPass' => $_ENV['SMTP_PASS'],
-            'mailType' => 'html',
-            'charset' => 'utf-8',
-            'newline' => "\r\n"
-        ]);
-
-        $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
-        $emailService->setTo($customer_email);
-        $emailService->setSubject('Contact-card');
-        $emailService->setMessage($message);
-
-        if (!$emailService->send()) {
-            log_message('error', $emailService->printDebugger(['headers', 'subject', 'body']));
-        }
+        $command = 'php spark my:customcommand ' . escapeshellarg($customer_email) . ' ' . escapeshellarg($status);
+        // Use exec or a similar function to execute the command
+        exec($command);
     }
+
+
+    // public function sendContactCard($customer_email)
+    // {
+    //     $contactCardModel = new ContactcardModal();
+    //     $data['contactcard'] = $contactCardModel->first();
+
+    //     $emailService = \Config\Services::email();
+
+    //     // Building the email message
+    //     $message = view('contact-card-tab/contact-card-layout', ['contactcard' => $data['contactcard']]);
+
+    //     $emailService->initialize([
+    //         'protocol' => 'smtp',
+    //         'SMTPHost' => $_ENV['SMTP_HOST'],
+    //         'SMTPPort' => intval($_ENV['SMTP_PORT']),
+    //         'SMTPUser' => $_ENV['SMTP_USER'],
+    //         'SMTPPass' => $_ENV['SMTP_PASS'],
+    //         'mailType' => 'html',
+    //         'charset' => 'utf-8',
+    //         'newline' => "\r\n"
+    //     ]);
+
+    //     $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
+    //     $emailService->setTo($customer_email);
+    //     $emailService->setSubject('Contact-card');
+    //     $emailService->setMessage($message);
+
+    //     if (!$emailService->send()) {
+    //         log_message('error', $emailService->printDebugger(['headers', 'subject', 'body']));
+    //     }
+    // }
 
     public function social_review()
     {
