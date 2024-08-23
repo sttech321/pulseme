@@ -1,6 +1,6 @@
 <style>
     .thankuMsgWrap {
-        background-image: url(/public/image/bg-enterprise-mobility.jpg);
+        background-image: url("<?= base_url('image/campaign/bg-enterprise-mobility.jpg') ?>");
         margin: -8px;
         background-size: cover;
         height: 100vh;
@@ -65,7 +65,7 @@
                 <p>
                     Thank you for visiting our website. <br />You will receive an email message shortly.
                 </p>
-                <a class="btn btn-primary" href="/">Back to Home</a>
+                <a class="btn btn-primary" href="<?=base_url('/')?>">Back to Home</a>
             </div>
         </div>
     </div>
