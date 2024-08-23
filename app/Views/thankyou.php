@@ -33,7 +33,7 @@
     .thankuMsgWrap .thankuMsg h1 {
         font-size: 85px;
         font-weight: bold;
-        margin-bottom: 29px;
+        margin-bottom: 16px;
         margin-top: 0;
         text-transform: capitalize;
     }
@@ -63,7 +63,7 @@
             <div class="thankuMsg">
                 <h1>Thank You!</h1>
                 <p>
-                    Thank you for visiting our website. <br />You will receive an email message shortly.
+                   You will receive an email message shortly.
                 </p>
                 <a class="btn btn-primary" href="<?=base_url('/')?>">Back to Home</a>
             </div>
