@@ -9,7 +9,7 @@
 <div class="headerTop">
 	<div class="dropMenuWrap flexBetween">
 		<div class="pageNameWrap">
-			<h3 class="secTitle">Operate</h3>
+			<h3 class="secTitle">Manage Your Account</h3>
 		</div>
 		<div class="rightWrap">
 			<div class="location-info flex flex-col justify-center items-end mr-10px">
@@ -22,9 +22,9 @@
 </div>
 <!-- <div class="container-fluid"> -->
 <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
-	<div class="headline bg-white p-20px border-b border-gray-200">
+	<!-- <div class="headline bg-white p-20px border-b border-gray-200">
 		<h1 class="text-2xl">Manage Your Account</h1>
-	</div>
+	</div> -->
 	<div class="flex flex-grow justify-start">
 		<div class="w-1/4 max-w-200px flex flex-shrink-0 justify-start items-start flex-col">
 			<h2 class="text-xl p-15px pt-30px">Company Settings</h2>
@@ -264,22 +264,6 @@
 		</div>
 	</div>
 </div>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Get the current URL path
-    const currentPath = window.location.pathname;
-
-    // Get all tab links
-    const tabs = document.querySelectorAll('.tab-link');
-
-    // Loop through the tabs and check if their href matches the current path
-    tabs.forEach(function(tab) {
-        if (tab.getAttribute('href') === currentPath) {
-            tab.classList.add('active'); // Add 'active' class to the matching tab
-        }
-    });
-});
-</script>
 <script>
 $(document).ready(function () {
     $('#save-changes-button').on('click', function (e) {
