@@ -90,7 +90,7 @@ $routes->post('searchbar', 'Campaign::search');
 $routes->post('/contact-card', 'ContactcardController::create_contactcard');
 $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 
-$routes->post('/contact-card', 'ContactcardController::create_contactcard');
+$routes->get('/conactcardlayout', 'ContactcardController::conactcardlayout');
 $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 
 $route['chart'] = 'ChartController/index';
@@ -99,6 +99,6 @@ $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::searc
 $routes->post('/leaderboard/reports/campaigns/filter', 'ReportsController::filterCampaigns');
 $routes->post('/leaderboard/reports/filterDepartments', 'ReportsController::filterDepartments');
 
-$routes->get('/cron-job', 'ReviewController::cronJobTask');
+$routes->get('/cron-job', 'ReviewController::updatestatus');
 
 $routes->get('reviews/export-csv','ReviewController::exportCsv');

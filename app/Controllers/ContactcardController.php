@@ -56,11 +56,17 @@ class ContactcardController extends BaseController
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/');
         }
-        
         $contactCardModel = new ContactcardModal();
         $data['contactcard'] = $contactCardModel->first();
 
         return view('contact-card-tab/contact_information',$data);
+    }
+
+    public function conactcardlayout(): string
+    {
+        $contactCardModel = new ContactcardModal();
+        $data['contactcard'] = $contactCardModel->first();
+        return view('contact-card-tab/contact-card-layout',$data);
     }
 
 }

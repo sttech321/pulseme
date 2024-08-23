@@ -34,11 +34,84 @@ class ReviewController extends BaseController
         }
     }
 
+    // public function submitReview()
+    // {
+    //     // Load necessary helpers and libraries
+    //     helper(['form', 'url']);
+
+    //     // Validation rules
+    //     $rules = [
+    //         'feedback' => 'required',
+    //         'rating1_value' => 'required',
+    //         'rating1_text' => 'required',
+    //         'rating2_value' => 'required',
+    //         'rating2_text' => 'required',
+    //         'rating3_value' => 'required',
+    //         'rating3_text' => 'required',
+    //     ];
+
+    //     // Validate form input
+    //     if (!$this->validate($rules)) {
+    //         // Redirect back with validation errors and input data
+    //         return redirect()->back()->withInput()->with('validation', $this->validator);
+    //     }
+
+    //     $reviewModel = new ReviewModal();
+
+    //     // Collecting data from the request
+    //     $feedback = $this->request->getPost('feedback');
+    //     $rating1_value = $this->request->getPost('rating1_value');
+    //     $rating1_text = $this->request->getPost('rating1_text');
+    //     $rating2_value = $this->request->getPost('rating2_value');
+    //     $rating2_text = $this->request->getPost('rating2_text');
+    //     $rating3_value = $this->request->getPost('rating3_value');
+    //     $rating3_text = $this->request->getPost('rating3_text');
+    //     $campaignId = $this->request->getPost('ID');
+    //     $customer_name = $this->request->getPost('customer_name');
+    //     $customer_email = $this->request->getPost('customer_email');
+    //     $city = $this->request->getPost('state');
+    //     $state = $this->request->getPost('city');
+    //     $zipcode = $this->request->getPost('zipcode');
+    //     $sentiment = $this->request->getPost('result_value');
+    //     $review_type = $this->request->getPost('reviewType');
+    //     $status = $this->request->getPost('status');
+
+    //     // Preparing data for insertion
+    //     $data = [
+    //         'createdOn' => date('Y-m-d H:i:s'),
+    //         'updatedOn' => date('Y-m-d H:i:s'),
+    //         'campaignID' => $campaignId,
+    //         'reviewText' => $feedback,
+    //         'reviewType' => $review_type,
+    //         'sentiment' => $sentiment,
+    //         'reviewratings' => json_encode([
+    //             'feedback' => $feedback,
+    //             'Name' => $customer_name,
+    //             'customer_email' => $customer_email,
+    //             'status'=> $status,
+    //             'State' => $state,
+    //             'City' => $city,
+    //             'Zipcode' => $zipcode,
+    //             'rate1' => ['text' => $rating1_text, 'value' => $rating1_value],
+    //             'rate2' => ['text' => $rating2_text, 'value' => $rating2_value],
+    //             'rate3' => ['text' => $rating3_text, 'value' => $rating3_value],
+    //             'sentiment' => $sentiment,
+    //             'review_type' => $review_type
+    //         ]),
+    //     ];
+
+    //     $reviewModel->insert($data); 
+    //     // Send contact card email
+    //     $this->updatestatus($customer_email,$status);
+    //     // Display a thank you message or redirect as needed
+    //     return redirect()->to('/')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
+    // }
+
     public function submitReview()
     {
         // Load necessary helpers and libraries
         helper(['form', 'url']);
-
+    
         // Validation rules
         $rules = [
             'feedback' => 'required',
@@ -49,17 +122,16 @@ class ReviewController extends BaseController
             'rating3_value' => 'required',
             'rating3_text' => 'required',
         ];
-
+    
         // Validate form input
         if (!$this->validate($rules)) {
             // Redirect back with validation errors and input data
             return redirect()->back()->withInput()->with('validation', $this->validator);
         }
-
+    
         $reviewModel = new ReviewModal();
-
+    
         // Collecting data from the request
-        $reviewId = $this->request->getPost('reviewId');
         $feedback = $this->request->getPost('feedback');
         $rating1_value = $this->request->getPost('rating1_value');
         $rating1_text = $this->request->getPost('rating1_text');
@@ -76,7 +148,7 @@ class ReviewController extends BaseController
         $sentiment = $this->request->getPost('result_value');
         $review_type = $this->request->getPost('reviewType');
         $status = $this->request->getPost('status');
-
+    
         // Preparing data for insertion
         $data = [
             'createdOn' => date('Y-m-d H:i:s'),
@@ -89,7 +161,7 @@ class ReviewController extends BaseController
                 'feedback' => $feedback,
                 'Name' => $customer_name,
                 'customer_email' => $customer_email,
-                'status'=> $status,
+                'status' => $status,
                 'State' => $state,
                 'City' => $city,
                 'Zipcode' => $zipcode,
@@ -100,28 +172,47 @@ class ReviewController extends BaseController
                 'review_type' => $review_type
             ]),
         ];
-
-        $reviewModel->insert($data); 
-        // Send contact card email
-        $this->updatestatus($customer_email,$status);
-        // Display a thank you message or redirect as needed
-        return redirect()->to('/')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
-    }
-
-    public function updatestatus($customer_email, $status)
-    {
-        $reviewModel = new ReviewModal();
-        // Prepare data to be updated for cron job
-        $data = [
-            'reviewratings' => json_encode([
-                'status' => $status,
-            ]),
-        ];
-        // Update review entry
-        $reviewModel->update($reviewId, $data);
     
-        $this->sendContactCard($customer_email);
+        $reviewModel->insert($data);
+    
+        // Send contact card email
+        $this->updatestatus($customer_email , $status);
+    
+        // Display a thank you message or redirect as needed
+        return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
     }
+    
+    // public function updatestatus($customer_email, $status)
+    // {
+    //     $reviewModel = new ReviewModal();
+        
+    //     // Check if a review already exists for the given customer email
+    //     $existingReview = $reviewModel->where("JSON_EXTRACT(reviewratings, '$.customer_email') =", $customer_email)
+    //                                 ->first();
+        
+    //     if ($existingReview) {
+    //         // Check if the existing review status is 'pending'
+    //         $existingStatus = json_decode($existingReview['reviewratings'], true)['status'] ?? '';
+
+    //         if ($existingStatus === 'pending') {
+    //             // Prepare data for update
+    //             $data = [
+    //                 'updatedOn' => date('Y-m-d H:i:s'),
+    //                 'reviewratings' => json_encode(array_merge(
+    //                     json_decode($existingReview['reviewratings'], true),
+    //                     ['status' => 'done']
+    //                 )),
+    //             ];
+
+    //             // Update the existing review entry
+    //             $reviewId = $existingReview['ID'];
+    //             $reviewModel->update($reviewId, $data);
+    //         }
+    //     }
+
+    //     // Execute sendContactCard() function
+    //     $this->sendContactCard($customer_email);
+    // }
 
     public function sendContactCard($customer_email)
     {
@@ -245,6 +336,11 @@ class ReviewController extends BaseController
 
     public function reviews()
     {
+    // Ensure the session is started and check if the user is logged in
+    if (!session()->get('isLoggedIn')) {
+        return redirect()->to('/');
+    }
+
         $reviewModel = new ReviewModal();
         $perPage = 10;
         $page = $this->request->getVar('page') ?: 1;
@@ -479,4 +575,5 @@ class ReviewController extends BaseController
         // Exit to prevent any additional output
         exit();
     }
+
 }
