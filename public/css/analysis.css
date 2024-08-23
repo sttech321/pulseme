@@ -12,11 +12,27 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
   box-sizing: content-box;
 }
 
+.h-100{
+    height: 100px;
+}
+
 .shadow .img img{
     width: 600px;
     height: 600px;
 
 }
+.mr-3{
+    margin-right: 10px;
+}
+.mx-10{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.svg-inline--fa.fa-calendar-day {
+    margin-right: 5px;
+  }
+
 .svg-inline--fa {
   display: var(--fa-display, inline-block);
   height: 1em;
@@ -7264,4 +7280,119 @@ ul {
 
 .modal-body.bg-white.w-600px.my-30px.rounded-4px.shadow.p-30px.text-center.flex.flex-col.items-stretch {
     margin: 25px 20px 25px 45px;
+}
+
+/* dispatch campaign button */
+.showFieldOps .showFieldOps {
+    margin-left: 30px;
+}
+
+/* shadow date  */
+
+.shadow-date{
+    background: #fff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    padding: 4px 10px;
+}
+
+
+/* top-20px */
+
+.top-20px{
+    top:-20px;
+}
+
+/* uploadImgBox */
+
+.uploadImgBox{text-align: center;}
+.uploadImgBox img{margin-bottom: 10px !important;}
+
+.upload-label {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    color: white;
+    background-color: #3490dc; 
+    border-radius: 100px;
+    font-size: 16px;
+}
+.upload-input {display: none;}
+.btn-blue:hover {background-color: #3490dc;}
+.uploadBtnWrap{
+    background-color: #3490dc;
+    border-radius: 35px; 
+    padding: 0;
+}
+.uploadBtnWrap label{font-size: 16px;}
+
+.socialReviewsWrap .btn { height: 44px;}
+
+.summaryContentWrap .stats p{color:#fff;}
+
+.summaryContentWrap p.mb-10px {color: #000;}
+.summaryContentWrap p {color: #fff;}
+
+/* dropdown */
+
+ .dropdown {
+    position: relative;
+    display: inline-block;
+    /* margin-right: 50px; */
+}
+
+.dropdown-toggle {
+    color: #7e7e7e;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 217px;
+    left: -185px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    justify-content: center;
+    text-align: center;
+    padding: 16px 12px;
+}
+.dropdown-menu a.dropdownItem:hover {
+    background-color: #17be6b;
+}
+.dropdown-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu .dropdownItem{
+     padding: 10px 10px;
+}
+.dropdown-menu a.dropdownItem{
+    background-color: #17be6b;
+    color: #fff;
+}
+
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown.show .dropdown-menu {
+    display: block;
+}
+
+/* dispatch content  */
+.employee .profile-img {
+    width: 101px !important;
+    object-fit: cover;
+    background-size: cover;
+    height: 100px !important;
+    margin-right: 16px;
 }

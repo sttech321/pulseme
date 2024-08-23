@@ -1,5 +1,19 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
+<div class="headerTop">
+   <div class="dropMenuWrap flexBetween">
+      <div class="pageNameWrap">
+         <h3 class="secTitle">Operate</h3>
+      </div>
+      <div class="rightWrap">
+         <div class="location-info flex flex-col justify-center items-end mr-10px">
+            <p class="leading-tight" id="Hales-AC-Service">Hales AC Service</p>
+            <p class="leading-tight">4700 95Th St N</p>
+            <p class="leading-tight">Saint Petersburg, FL US 33708-3728</p>
+         </div>
+      </div>
+   </div>
+</div>
 				<div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
 					<div class="sub-menu-bar flex flex-col items-stretch h-full">
 						<div class="p-20px bg-white"><h2 class="text-2xl">Reports</h2></div>
@@ -11,7 +25,7 @@
 							<!-- <a href="/leaderboard/reports/projection" class="p-10px">Projection</a> -->
 						</div>
 						<div class="flex-grow">
-							<div class="p-25px">
+							<div class="p-35px">
 								<div class="p-20px bg-white rounded-4px shadow w-full">
 									<div class="flex justify-end items-center mb-20px">
 										<div class="filter flex justify-end items-baseline">
@@ -84,20 +98,60 @@
 												<tr class="!bg-opacity-50 odd:bg-sky-100">
 													<td class="px-20px py-15px">1B85A09AA6CG<?= esc($campaign->ID) ?></td>
 													<td class="px-20px py-15px"><?= esc($campaign->name) ?></td>
-													<td class="px-20px py-15px"><?= esc($campaign->pulsecheck_count) ?></td>
-													<td class="px-20px py-15px"><?= esc($campaign->bio_count) ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign->pulsecheck_count)? $campaign->pulsecheck_count : '0' ?></td>
+													<td class="px-20px py-15px"><?= esc($campaign->bio_count)? $campaign->bio_count : '0' ?></td>
 													<td class="px-20px py-15px"><?= esc($campaign->pulsecheck_count + $campaign->bio_count) ?></td>
 												</tr>
 												<?php endforeach; ?>
 											</tbody>
 										</table>
-										<!---->
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+<script>
+document.getElementById('updateButton').addEventListener('click', function() {
+    const fromDate = document.getElementById('from_date').value;
+    const toDate = document.getElementById('to_date').value;
+    console.log(fromDate, toDate);
+    
+    $.ajax({
+        url: '/leaderboard/reports/campaigns/filter',
+        type: 'POST',
+        data: { from_date: fromDate, to_date: toDate }, 
+        dataType: 'json', 
+        success: function(response) {
+            let html = '<table class="mb-15px">' +
+                        '<thead>' +
+                            '<tr>' +
+                                '<th class="text-left px-20px py-10px cursor-pointer">Campaign_UID</th>' +
+                                '<th class="text-left px-20px py-10px cursor-pointer">Campaign Name</th>' +
+                                '<th class="text-left px-20px py-10px cursor-pointer">pulseCheck Count</th>' +
+                                '<th class="text-left px-20px py-10px cursor-pointer">Bio Count</th>' +
+                                '<th class="text-left px-20px py-10px cursor-pointer">Total</th>' +
+                            '</tr>' +
+                        '</thead>' +
+                        '<tbody>';
+            response.forEach(campaign => {
+                html += '<tr class="!bg-opacity-50 odd:bg-sky-100">' +
+                            `<td class="px-20px py-15px">1B85A09AA6${campaign.ID}</td>` +
+                            `<td class="px-20px py-15px">${campaign.name}</td>` +
+                            `<td class="px-20px py-15px"></td>` +
+                            `<td class="px-20px py-15px"></td>` +
+                            `<td class="px-20px py-15px"></td>` +
+                        '</tr>';
+            });
+            html += '</tbody></table>';
+            // Append the constructed HTML to the target container
+            document.getElementById('table-container').innerHTML = html;
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX Error:', status, error);
+            console.error('Response Text:', xhr.responseText);
+        }
+    });
+});
+</script>
 <?= $this->endsection('content') ?>

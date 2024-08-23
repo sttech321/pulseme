@@ -48,7 +48,5 @@ class TechnicianModal extends Model
         $query = $builder->get();
     
         return $query->getResult();  // Use getResult() to get the results
-    }
-    
-
+    }   
 }

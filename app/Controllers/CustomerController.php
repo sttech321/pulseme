@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\CustomerModel;
+use App\Models\PulsecheckModal;
 use App\Models\TestModal;
 use App\Models\TechnicianModal;
 use CodeIgniter\Controller;
@@ -9,7 +11,7 @@ use Exception;
 
 class CustomerController extends Controller
 {
-    
+
     public function __construct()
     {
         $this->session = \Config\Services::session();
@@ -24,33 +26,47 @@ class CustomerController extends Controller
 
     public function search()
     {
-       
-        $search = $this->request->getVar('search'); 
-    
-        $technicianModel = new TechnicianModal(); 
-    
+        $search = $this->request->getVar('search');
+
+        $technicianModel = new TechnicianModal();
+
         if ($search) {
             $results = $technicianModel->getTechniciansBySearch($search);
         } else {
             $results = $technicianModel->findAll();
         }
-    
+
         return $this->response->setJSON($results);
     }
-    
 
 
     public function dispatch()
     {
-        $technicianModel = new TechnicianModal();    
+        $technicianModel = new TechnicianModal();
         $data['technicians'] = $technicianModel->findAll();
-    
-        return view('dispatching',$data);
-    }
 
+        return view('dispatching', $data);
+    }
 
     public function create_dispatch()
     {
+        // Validation rules
+        $rules = [
+            'customer_email' => 'required|valid_email',
+            'customer_phone' => 'required',
+        ];
+
+        // Validate form input
+        if (!$this->validate($rules)) {
+            return $this->response->setJSON(
+                [
+                    'status' => 'error',
+                    'message' => 'Validation failed',
+                    'errors' => $this->validator->getErrors()
+                ]
+            );
+        }
+
         $name = $this->request->getPost('customer_name');
         $email = $this->request->getPost('customer_email');
         $phone = $this->request->getPost('customer_phone');
@@ -58,8 +74,6 @@ class CustomerController extends Controller
         $campaignid = $this->request->getPost('campaignid');
         $employeeid = $this->request->getPost('employeeid');
         $actionType = $this->request->getPost('actionType');
-// print_r($actionType);
-        $testModel = new TestModal();
 
         // Prepare data to insert
         $data = [
@@ -71,33 +85,27 @@ class CustomerController extends Controller
             'employeeid' => $employeeid,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
+            'formstatus' => $actionType,
         ];
-// print_r($data);
-// die;
-        $testModel->insert($data);
 
-        if ($actionType === 'sendbio') {
+        // return $this->response->setJSON(['status' => 'debug', 'data' => $data]);
+
+        if ($actionType === 'bio') {
             // Call the sendbioEmail method
+            $testModel = new CustomerModel();
+            $testModel->insert($data);
             $this->sendbioEmail($campaignid, $email);
 
-            return $this->response->setJSON(['status' => 'success', 'message' => 'Bio sent successfully!']);
-        } elseif ($actionType === 'sendpulsecheck') {
-            // Call the sendPulseCheckEmail method
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Bio sent successfully!', 'data' => $data]);
+        } elseif ($actionType === 'pulsecheck') {
+            // Insert into pulsecheck table
+            $pulsecheckModel = new CustomerModel(); // Replace with the actual model for pulsecheck table
+            $pulsecheckModel->insert($data);
             $this->sendPulseCheckEmail($employeeid, $email);
 
             return $this->response->setJSON(['status' => 'success', 'message' => 'Pulsecheck sent successfully!']);
         } else {
-            // Insert data into the database
-            $testModel->insert($data);
-
-            // Determine which button was clicked
-            if ($actionType === 'btn1') {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Demo message']);
-            } elseif ($actionType === 'btn2') {
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Demo message 2']);
-            } else {
-                return $this->response->setJSON(['status' => 'error', 'message' => 'Form submission failed.']);
-            }
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Form submission failed.']);
         }
     }
 
@@ -153,7 +161,5 @@ class CustomerController extends Controller
         if (!$emailService->send()) {
             echo $emailService->printDebugger(['headers', 'subject', 'body']);
         }
-    } 
-    
+    }
 }
-?>

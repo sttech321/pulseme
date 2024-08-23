@@ -1,6 +1,6 @@
 # Ignore writable directory and logs
 /writable/
-/public/image/campaign
+# /public/image/campaign
 # Ignore composer dependencies
 /vendor/
 composer
