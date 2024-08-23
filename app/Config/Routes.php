@@ -101,4 +101,4 @@ $routes->post('/leaderboard/reports/filterDepartments', 'ReportsController::filt
 
 $routes->get('/cron-job', 'ReviewController::updatestatus');
 
-$routes->get('reviews/export-csv','ReviewController::exportCsv');
+$routes->get('/reviews/export-csv','ReviewController::exportCsv');

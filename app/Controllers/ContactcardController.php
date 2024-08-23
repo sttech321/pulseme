@@ -65,8 +65,7 @@ class ContactcardController extends BaseController
 
         // Fetch contact card data
         $contactCardModel = new ContactcardModal();
-        $data['contactcards'] = $contactCardModel->first();
-
+        $data['contactcard'] = $contactCardModel->first();
         // Load the view with the data
         return view('contact-card-tab/contact_information', $data);
     }
