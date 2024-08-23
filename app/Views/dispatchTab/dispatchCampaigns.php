@@ -117,13 +117,14 @@
                                                    </div>
                                                    <div class="modal-body">
                                                       <div class="grid grid-cols-2 gap-20px auto-rows-auto">
-                                                         <div class="flex w-full flex-col row-span-3">
+                                                         <div class="flex w-full flex-col row-span-3 flex w-full flex-col row-span-3 uploadImgBox">
                                                             <img id="preview" class="preview-image w-200px h-auto" src="/image/campaignProfile.jpg" alt="Image Preview">
                                                             <p class="text-md">Upload your image</p>
                                                             <p class="text-sm mb-3">The preferred size is 200x200</p>
                                                             <!-- <input id="logo-upload" hidden="" type="file"> -->
-                                                            <button class="btn btn-blue w-full mb-2" type="button">
-                                                               <input type="file" id="profile-image-upload-1" name="campaignImage" style="display: block;" accept="image/*" onchange="previewImage(event)">
+                                                            <button class="btn w-full mb-2 uploadBtnWrap" type="button">
+                                                               <label for="profile-image-upload-1" class="upload-label">Upload your file</label>
+                                                               <input type="file" id="profile-image-upload-1" name="campaignImage" accept="image/*" onchange="previewImage(event)" class="upload-input">
                                                             </button>
                                                          </div>
                                                          <div class="input-group">

@@ -151,7 +151,7 @@ class ReviewController extends BaseController
     
         // Preparing data for insertion
         $data = [
-            'createdOn' => 'CURRENT_TIMESTAMP',
+            'createdOn' => date('Y-m-d H:i:s'),
             'updatedOn' => date('Y-m-d H:i:s'),
             'campaignID' => $campaignId,
             'reviewText' => $feedback,
