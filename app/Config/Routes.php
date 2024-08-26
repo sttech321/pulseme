@@ -88,10 +88,10 @@ $routes->post('example/submit', 'CustomerController::create_dispatch');
 $routes->post('searchbar', 'Campaign::search');
 
 $routes->post('/contact-card', 'ContactcardController::create_contactcard');
-$routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
+// $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 
 $routes->get('/conactcardlayout', 'ContactcardController::conactcardlayout');
-$routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
+// $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 
 $route['chart'] = 'ChartController/index';
 

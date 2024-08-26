@@ -11,31 +11,31 @@ class ContactcardController extends BaseController
         $contactCardModel = new ContactcardModal();
         $existingRecord = $contactCardModel->first();
     
-        // Handle image upload
-        $campaignImage = $this->request->getFile('image');
-        if ($campaignImage->isValid() && !$campaignImage->hasMoved()) {
-            $newName = $campaignImage->getRandomName();
-            $uploadPath = WRITEPATH . 'uploads/campaign/';
-            $campaignImage->move($uploadPath, $newName);
-            $imagePath = $uploadPath . $newName;
-        } else {
-            $imagePath = $existingRecord ? $existingRecord['image'] : ''; // Use existing image if no new image is uploaded
-        }
+         // Handle image upload
+         $campaignImage = $this->request->getfile('image');
+         $newName = $campaignImage->getRandomName();
+         $uploadPath = '/image/campaign/';
+         $imagePath = $uploadPath . $newName;
+
+         if ($campaignImage->isValid() && !$campaignImage->hasMoved()) {
+                $campaignImage->move(ROOTPATH . 'public' . $uploadPath, $newName);
+         } else {
+             return $this->response->setJSON([
+                 'success' => false,
+                 'message' => 'Failed to upload image.',
+             ]);
+         }
     
-        // Get the duration from the form (e.g., '00:01:20.000')
-        $duration = $this->request->getPost('time');
-    
-        // Prepare data
         $data = [
             'primary_number' => $this->request->getPost('primary'),
             'email' => $this->request->getPost('email'),
-            'sms_number' => $this->request->getPost('sms'),
+            'sms_number' => $this->request->getPost('sms'), 
             'searchterm' => $this->request->getPost('search'),
             'notes' => $this->request->getPost('notes'),
-            'time' => $duration,
             'image' => $imagePath,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
+        
     
         if ($existingRecord) {
             // Update the existing record

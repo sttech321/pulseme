@@ -183,27 +183,27 @@
 </div>
 
 <script>
-    document.getElementById('search').addEventListener('input', function() {
-        const query = this.value;
-        console.log(query);
-        $.ajax({
-            url: '/leaderboard/reports/campaigns/search',
-            type: 'POST',
-            data: {
-                search: query
-            },
-            dataType: 'json',
-            success: function(response) {
-                // Assuming response is an array of campaign objects
-                let html = '<table class="mb-15px">' +
+document.getElementById('search').addEventListener('input', function() {
+    const query = this.value;
+    console.log('Search Query:', query); // Log search query
+    
+    $.ajax({
+        url: '/leaderboard/reports/campaigns/search',
+        type: 'POST',
+        data: {
+            search: query
+        },
+        dataType: 'json',
+        success: function(response) {
+            console.log('AJAX Response:', response); // Log response
+            
+            let html = '<table class="mb-15px">' +
                     '<thead>' +
                     '<tr>' +
                     '<th class="text-left px-20px py-10px cursor-pointer">Campaign_UID</th>' +
                     '<th class="text-left px-20px py-10px cursor-pointer">Name</th>' +
                     '<th class="text-left px-20px py-10px cursor-pointer">Emp ID</th>' +
                     '<th class="text-left px-20px py-10px cursor-pointer">Department</th>' +
-                    '<th class="text-left px-20px py-10px cursor-pointer">Leaderboard Points</th>' +
-                    '<th class="text-left px-20px py-10px cursor-pointer">pulseM Index</th>' +
                     '<th class="text-left px-20px py-10px cursor-pointer">Bios</th>' +
                     '<th class="text-left px-20px py-10px cursor-pointer">Pulse Checks</th>' +
                     '<th class="text-left px-20px py-10px cursor-pointer">Review Leads</th>' +
@@ -218,26 +218,25 @@
                         `<td class="px-20px py-15px">${campaign.name}</td>` +
                         `<td class="px-20px py-15px">${campaign.employeeId}</td>` +
                         `<td class="px-20px py-15px">${campaign.department}</td>` +
-                        '<td class="px-20px py-15px"></td>' +
-                        '<td class="px-20px py-15px"></td>' +
                         `<td class="px-20px py-15px">${campaign.bio_count}</td>` +
                         `<td class="px-20px py-15px">${campaign.pulsecheck_count}</td>` +
-                        '<td class="px-20px py-15px"></td>' +
-                        `<td class="px-20px py-15px">${campaign.positive_count}</td>` +
-                        `<td class="px-20px py-15px">${campaign.negative_count}</td></td>` +
+                        `<td class="px-20px py-15px">${campaign.review_leads || ''}</td>` +
+                        `<td class="px-20px py-15px">${campaign.positive_count || ''}</td>` +
+                        `<td class="px-20px py-15px">${campaign.negative_count || ''}</td>` +
                         '</tr>';
                 });
                 html += '</tbody></table>';
                 // Append the constructed HTML to the target container
                 document.getElementById('table-container').innerHTML = html;
             },
-            error: function(xhr, status, error) {
-                console.error('AJAX Error:', status, error);
-                console.error('Response Text:', xhr.responseText);
-            }
-        });
+        error: function(xhr, status, error) {
+            console.error('AJAX Error:', status, error);
+            console.error('Response Text:', xhr.responseText);
+        }
     });
+});
 </script>
+
 <script>
     document.getElementById('updateButton').addEventListener('click', function() {
         const fromDate = document.getElementById('from_date').value;

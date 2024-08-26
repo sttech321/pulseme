@@ -177,7 +177,7 @@
 				localStorage.setItem('selectedOption-' + id, selectedOption);
 
 				// Send AJAX request to update the database
-				fetch('/analyze/reviews/social-reviews/' + id, {
+				fetch('<?= base_url('/analyze/reviews/social-reviews/') ?>' + id, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',

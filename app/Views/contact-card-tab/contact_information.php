@@ -138,10 +138,12 @@
 							<div class="row p-10px flex">
 								<div class="column w-2/5 flex justify-center items-start">
 									<div class="relative">
-										<div
-											class="h-200px w-200px rounded-1/2 mt-2rem bg-center bg-contain bg-no-repeat" id="logo-upload-button" 
-											style='background-image: url("<?= base_url('/image/company-logo.jpg')?>");'
-										></div>
+									<div
+										class="h-200px w-200px rounded-1/2 mt-2rem bg-center bg-contain bg-no-repeat"
+										id="logo-upload-button"
+										style="background-image: url('<?= base_url(esc($contactcard['image']))?>');"
+									></div>
+
 										<!-- <button id="logo-upload-button" class="absolute bottom-10px right-10px h-40px w-40px flex justify-center items-center rounded-1/2 btn btn-blue">
 											<svg class="svg-inline--fa fa-pen text-white" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 												<path
@@ -270,7 +272,10 @@ $(document).ready(function () {
         e.preventDefault(); // Prevent the form from submitting normally
 
         var formData = new FormData($('#contact-card-form')[0]);
-        console.log(formData, 'formdata');
+		formData.forEach(function(value, key) {
+			console.log(key + ': ' + value);
+		});
+
 
         $.ajax({
             url: "<?= base_url('/contact-card') ?>", // Your route URL
@@ -281,7 +286,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.success) {
                     alert(response.message);
-                    location.reload(); // Reload the page to reflect changes
+                    // location.reload(); // Reload the page to reflect changes
                 } else {
                     alert("There was an error processing your request.");
                 }
@@ -293,10 +298,9 @@ $(document).ready(function () {
     });
 });
 
-
-// document.getElementById('logo-upload-button').addEventListener('click', function() {
-// 	document.getElementById('logo-upload').click();
-// });
+document.getElementById('logo-upload-button').addEventListener('click', function() {
+	document.getElementById('logo-upload').click();
+});
 
 	function downloadPNG() {
       const imgElement = document.getElementById('qr-image');
