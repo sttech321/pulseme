@@ -103,9 +103,36 @@ class ReviewController extends BaseController
     
         $reviewModel->insert($data);
         // Send contact card email
-        $this->sendContactCard($customer_email , $status);
+        $this->updatestatus($customer_email , $status);
         // Display a thank you message or redirect as needed
         return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
+    }
+
+    public function updatestatus($customer_email, $status)
+    {
+        $reviewModel = new ReviewModal();
+        // Check if a review already exists for the given customer email
+        $existingReview = $reviewModel->where("JSON_EXTRACT(reviewratings, '$.customer_email') =", $customer_email)
+                                    ->first();
+        if ($existingReview) {
+            // Check if the existing review status is 'pending'
+            $existingStatus = json_decode($existingReview['reviewratings'], true)['status'] ?? '';
+            if ($existingStatus === 'pending') {
+                // Prepare data for update
+                $data = [
+                    'updatedOn' => date('Y-m-d H:i:s'),
+                    'reviewratings' => json_encode(array_merge(
+                        json_decode($existingReview['reviewratings'], true),
+                        ['status' => 'done']
+                    )),
+                ];
+                // Update the existing review entry
+                $reviewId = $existingReview['ID'];
+                $reviewModel->update($reviewId, $data);
+            }
+        }
+        // Execute sendContactCard() function
+        $this->sendContactCard($customer_email);
     }
 
     public function sendContactCard($customer_email)

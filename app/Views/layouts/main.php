@@ -7,7 +7,7 @@
 	<title><?= $title ?? 'Untitled' ?></title>
 	<meta name="description" content="summitRA: The small framework with powerful features">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?=base_url('/image/summitRA.jpeg')?>">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/header.css'). '?v=' . time()?>">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reset.css'). '?v=' . time() ?>">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reviews.css'). '?v=' . time() ?>">
@@ -151,7 +151,7 @@
 										<a href="<?= base_url('/leaderboard/summary') ?>"><img width="15" src="<?= base_url('/image/summary.svg') ?>" alt="sidebar icon">Summary</a>
 									</li>
 									<li>
-										<a href="<?= base_url('/leaderboard/reports/campaigns') ?>"><img width="15" src="<?= base_url('/image/reports.svg') ?>" alt="sidebar icon">Reports</a>
+										<a href="<?= base_url('/leaderboard/reports/departments') ?>"><img width="15" src="<?= base_url('/image/reports.svg') ?>" alt="sidebar icon">Reports</a>
 									</li>
 								</ul>
 							</div>

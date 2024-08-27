@@ -84,7 +84,7 @@
 
                                  <td class="employee flex items-center w-1/4">
                                     <div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0"
-                                       id="<?= $technician['ID'] ?>" style="position: relative; background-image: url('<?= $technician['image'] ?>');">
+                                       id="<?= $technician['ID'] ?>" style="position: relative; background-image: url('<?= base_url($technician['image']) ?>');">
                                     </div>
                                     <div class="flex-grow">
                                        <p class="name"><?= $technician['name'] ?></p>

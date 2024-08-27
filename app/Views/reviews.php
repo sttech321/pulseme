@@ -601,7 +601,7 @@
          parentDiv.setAttribute('data-approved', isApproved);
          parentDiv.setAttribute('data-archive', isArchive);
          $.ajax({
-            url: '/analyze/reviews/approve',
+            url: '<?=base_url('/analyze/reviews/approve')?>',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -738,7 +738,7 @@
 
          function fetchReviews(page) {
             $.ajax({
-               url: '/analyze/reviews/get',
+               url: '<?=base_url('/analyze/reviews/get')?>',
                type: 'POST',
                data: {
                   campaign_id: filters.campaignID,

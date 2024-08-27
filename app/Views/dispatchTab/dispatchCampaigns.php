@@ -118,7 +118,7 @@
                                                    <div class="modal-body">
                                                       <div class="grid grid-cols-2 gap-20px auto-rows-auto">
                                                          <div class="flex w-full flex-col row-span-3 flex w-full flex-col row-span-3 uploadImgBox">
-                                                            <img id="preview" class="preview-image w-200px h-auto" src="/image/campaignProfile.jpg" alt="Image Preview">
+                                                            <img id="preview" class="preview-image w-200px h-auto" src="<?=base_url('/image/campaignProfile.jpg')?>" alt="Image Preview">
                                                             <p class="text-md">Upload your image</p>
                                                             <p class="text-sm mb-3">The preferred size is 200x200</p>
                                                             <!-- <input id="logo-upload" hidden="" type="file"> -->
@@ -291,7 +291,7 @@
                                              <div class="modal-body">
                                                 <div class="grid grid-cols-2 gap-20px auto-rows-auto">
                                                    <div class="flex w-full flex-col row-span-3 uploadImgBox">
-                                                      <img id="preview" class="preview-image w-200px h-auto" src="<?= esc($campaign['image']) ?>" alt="Image Preview">
+                                                      <img id="preview" class="preview-image w-200px h-auto" src="<?= base_url(esc($campaign['image'])) ?>" alt="Image Preview">
                                                       <p class="text-md">Upload your image</p>
                                                       <p class="text-sm mb-3">The preferred size is 200x200</p>
                                                       <button class="btn w-full mb-2 uploadBtnWrap" type="button">
@@ -365,7 +365,7 @@
                                     <div class="modal-dialog modalContent mx-700">
                                        <div class="modal-content">
                                           <div class="modal-body bg-white relative  my-30px rounded-4px shadow p-30px text-center flex flex-col items-center">
-                                             <div class="img mb-5 "><img class="rounded" src="<?= esc($campaign['image']) ?>" alt=""></div>
+                                             <div class="img mb-5 "><img class="rounded" src="<?= base_url(esc($campaign['image'])) ?>" alt=""></div>
                                              <h1 class="text-30px font-bold mb-15px">What would you like to see?</h1>
                                              <button type="button" class="btn-close text-gray-400 hover:text-black absolute top-20px right-10px" data-bs-dismiss="modal" aria-label="Close">
                                                 <svg class="svg-inline--fa fa-xmark text-30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -390,7 +390,7 @@
                         <tr class="flex odd:bg-sky-100 odd:bg-opacity-50 py-15px px-10px">
                            <td class="employee flex items-center px-10px py-20px flex-shrink-0 w-1/12">
                               <div class="profile-img w-full h-auto mr-10px flex justify-center items-center">
-                                 <img w-full="" src="<?= base_url($campaign['image']) ?>" alt="">
+                                 <img w-full="" src="<?= base_url(esc($campaign['image'])) ?>" alt="">
                               </div>
                            </td>
                            <td class="employee flex items-center px-10px flex-shrink-0 w-1/6">

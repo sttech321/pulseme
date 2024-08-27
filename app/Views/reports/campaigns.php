@@ -188,7 +188,7 @@ document.getElementById('search').addEventListener('input', function() {
     console.log('Search Query:', query); // Log search query
     
     $.ajax({
-        url: '/leaderboard/reports/campaigns/search',
+        url: '<?=base_url('/leaderboard/reports/campaigns/search')?>',
         type: 'POST',
         data: {
             search: query
@@ -244,7 +244,7 @@ document.getElementById('search').addEventListener('input', function() {
         console.log(fromDate, toDate);
 
         $.ajax({
-            url: '/leaderboard/reports/campaigns/filter',
+            url: '<?=base_url('/leaderboard/reports/campaigns/filter')?>',
             type: 'POST',
             data: {
                 from_date: fromDate,
