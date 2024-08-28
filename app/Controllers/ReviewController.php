@@ -109,41 +109,50 @@ class ReviewController extends BaseController
 
     public function updatestatus($customer_email, $status)
     {
-        $reviewModel = new ReviewModal();
+        $reviewModel = new ReviewModal(); // Correct the model name if it's 'ReviewModel' instead of 'ReviewModal'
         // Check if a review already exists for the given customer email
         $existingReview = $reviewModel->where("JSON_EXTRACT(reviewratings, '$.customer_email') =", $customer_email)
-                                    ->first();
+                                      ->first();
         if ($existingReview) {
-            // Check if the existing review status is 'pending'
-            $existingStatus = json_decode($existingReview['reviewratings'], true)['status'] ?? '';
+            // Decode the reviewratings JSON to check the status
+            $reviewRatings = json_decode($existingReview['reviewratings'], true);
+            $existingStatus = $reviewRatings['status'] ?? '';
+            print_r($existingStatus);
+            // print_r($existingStatus); // Debug: Print the existing status to verify it's correct
+            // Check if the status is 'pending'
             if ($existingStatus === 'pending') {
+                // Update the status to 'done'
+                $reviewRatings['status'] = 'done';
                 // Prepare data for update
                 $data = [
                     'updatedOn' => date('Y-m-d H:i:s'),
-                    'reviewratings' => json_encode(array_merge(
-                        json_decode($existingReview['reviewratings'], true),
-                        ['status' => 'done']
-                    )),
+                    'reviewratings' => json_encode($reviewRatings), // Re-encode the updated review ratings
                 ];
-                // Update the existing review entry
+                echo'<br>';
+                print_r($data);
+                // Get the review ID
                 $reviewId = $existingReview['ID'];
+                // print_r($reviewId); // Debug: Print the review ID to verify it's correct
+                
+                // Update the existing review entry
+                // die;
                 $reviewModel->update($reviewId, $data);
+                // Execute sendContactCard() function only if status was updated to 'done'
+                $this->sendContactCard($customer_email);
             }
+        } else {
+
         }
-        // Execute sendContactCard() function
-        $this->sendContactCard($customer_email);
     }
+    
 
     public function sendContactCard($customer_email)
     {
         $contactCardModel = new ContactcardModal();
         $data['contactcard'] = $contactCardModel->first();
-
         $emailService = \Config\Services::email();
-
         // Building the email message
         $message = view('contact-card-tab/contact-card-layout', ['contactcard' => $data['contactcard']]);
-
         $emailService->initialize([
             'protocol' => 'smtp',
             'SMTPHost' => $_ENV['SMTP_HOST'],
@@ -159,7 +168,7 @@ class ReviewController extends BaseController
         $emailService->setTo($customer_email);
         $emailService->setSubject('Contact-card');
         $emailService->setMessage($message);
-
+        
         if (!$emailService->send()) {
             log_message('error', $emailService->printDebugger(['headers', 'subject', 'body']));
         }

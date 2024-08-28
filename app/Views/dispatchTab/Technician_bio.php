@@ -21,7 +21,7 @@
 
 			<div id="bio" class="clearfix">
 				<div class="col-xs-4 text-center">
-					<img id="bio-img" src="<?= base_url(esc($campaign['image'])) ?>" style="max-width: 100%; max-height: 160px;" />
+					<img id="bio-img" src="<?= esc($technician['image']) ?>" style="max-width: 100%; max-height: 160px;" />
 				</div>
 
 				<div id="bio-profile" class="bio-profile">
