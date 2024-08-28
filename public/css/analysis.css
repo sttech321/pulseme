@@ -7312,7 +7312,7 @@ ul {
 .uploadImgBox{text-align: center;}
 .uploadImgBox img{margin-bottom: 10px !important;}
 
-.upload-label {
+.upload-labels {
     cursor: pointer;
     display: block;
     width: 100%;
@@ -7323,7 +7323,14 @@ ul {
     border-radius: 100px;
     font-size: 16px;
 }
-.upload-input {display: none;}
+
+/* #fileLabel {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+#fileInput{display: none;} */
+.upload-inputs {display: none;}
 .btn-blue:hover {background-color: #3490dc;}
 .uploadBtnWrap{
     background-color: #3490dc;

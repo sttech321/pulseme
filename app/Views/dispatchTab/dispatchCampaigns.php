@@ -123,8 +123,8 @@
                                                             <p class="text-sm mb-3">The preferred size is 200x200</p>
                                                             <!-- <input id="logo-upload" hidden="" type="file"> -->
                                                             <button class="btn w-full mb-2 uploadBtnWrap" type="button">
-                                                               <label for="profile-image-upload-1" class="upload-label">Upload your file</label>
-                                                               <input type="file" id="profile-image-upload-1" name="campaignImage" accept="image/*" onchange="previewImage(event)" class="upload-input">
+                                                               <label for="profile-image-upload-1" class="upload-labels">Upload your file</label>
+                                                               <input type="file" id="profile-image-upload-1" name="campaignImage" accept="image/*" onchange="previewImage(event)" class="upload-inputs">
                                                             </button>
                                                          </div>
                                                          <div class="input-group">
@@ -295,9 +295,10 @@
                                                       <p class="text-md">Upload your image</p>
                                                       <p class="text-sm mb-3">The preferred size is 200x200</p>
                                                       <button class="btn w-full mb-2 uploadBtnWrap" type="button">
-                                                         <label for="profile-image-upload-1" class="upload-label">Upload your file</label>
-                                                         <!-- <input type="file" id="profile-image-upload-1" name="campaignImages" accept="image/*" onchange="previewImage(event)" class="upload-input"> -->
-                                                         <input type="file" id="profile-image-upload-1" name="campaignimg" accept="image/*" onchange="previewImage(event)" style="">
+                                                         <!-- <p for="profile-image-upload-1" class="upload-labels" id="upload-labelss">Upload your file</p>
+                                                         <input type="file" id="profile-image-uploadss" name="campaignImages" accept="image/*"  class="upload-input"> -->
+                                                         <!-- <p id="fileLabel" class="upload-labels">Upload your file</p> -->
+                                                         <input type="file" id="fileInput" name="campaignImages">
                                                       </button>
                                                    </div>
                                                    <div class="input-group">
@@ -458,14 +459,14 @@
    }
 </style>
 <script>
-   function previewImage(event) {
-      var reader = new FileReader();
-      reader.onload = function() {
-         var output = document.getElementById('preview');
-         output.src = reader.result;
-      }
-      reader.readAsDataURL(event.target.files[0]);
-   }
+   // function previewImage(event) {
+   //    var reader = new FileReader();
+   //    reader.onload = function() {
+   //       var output = document.getElementById('preview');
+   //       output.src = reader.result;
+   //    }
+   //    reader.readAsDataURL(event.target.files[0]);
+   // }
 </script>
 <script>
    $('#campaignForm').on('submit', function(e) {
@@ -484,6 +485,7 @@
                $('#campaignModal').modal('hide');
                // Show success message or redirect
                alert('Campaign saved successfully!');
+               location.reload();
             } else {
                // Display validation errors
                $('#validation-errors').html('');
@@ -607,9 +609,8 @@
                                        <p class="text-md">Upload your image</p>
                                        <p class="text-sm mb-3">The preferred size is 200x200</p>
                                           <button class="btn w-full mb-2 uploadBtnWrap" type="button">
-                                             <label for="profile-image-upload-1" class="upload-label">Upload your file</label>
-                                             // <input type="file" id="profile-image-upload-1" name="campaignImages" accept="image/*" onchange="previewImage(event)" class="upload-input">
-                                              <input type="file" id="" name="campaignimg" accept="image/*" onchange="previewImage(event)" style="">
+                                             //  <p id="fileLabel" class="upload-labels">Upload your file</p>
+                                                <input type="file" id="fileInput" name="campaignImages">
                                           </button>
                                     </div>
                                     <div class="input-group">
@@ -699,5 +700,11 @@
          }
       });
    });
+
+</script>
+<script>
+// document.getElementById('fileLabel').addEventListener('click', function() {
+//    document.getElementById('fileInput').click();
+// });
 </script>
 <?= $this->endsection('content') ?>

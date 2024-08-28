@@ -119,7 +119,9 @@ class Campaign extends BaseController {
     public function update($id) 
     { 
         $campaignModel = new CampaignModel();
-        $imageFile = $this->request->getFile('campaignimg');
+           // Retrieve the existing campaign data
+        $existingCampaign = $campaignModel->find($id);
+        $imageFile = $this->request->getFile('campaignImages');
         if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved()) {
             // Define the upload path
             $uploadPath = '/image/campaign/';
@@ -133,8 +135,7 @@ class Campaign extends BaseController {
                 ]);
             }
         } else {
-            // If no file is uploaded, set imagePath to null or handle as needed
-            $imagePath = null;
+            $imagePath = $existingCampaign['image'] ?? ''; 
         }
 
         $data = [
