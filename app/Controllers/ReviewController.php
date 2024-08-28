@@ -34,7 +34,6 @@ class ReviewController extends BaseController
         }
     }
 
-
     public function submitReview()
     {
         // Load necessary helpers and libraries

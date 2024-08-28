@@ -297,7 +297,7 @@
                                                       <button class="btn w-full mb-2 uploadBtnWrap" type="button">
                                                          <!-- <p for="profile-image-upload-1" class="upload-labels" id="upload-labelss">Upload your file</p>
                                                          <input type="file" id="profile-image-uploadss" name="campaignImages" accept="image/*"  class="upload-input"> -->
-                                                         <!-- <p id="fileLabel" class="upload-labels">Upload your file</p> -->
+                                                         <!-- <p id="fileLabel" style="cursor: pointer; color: blue; text-decoration: underline;">Upload your file</p> -->
                                                          <input type="file" id="fileInput" name="campaignImages">
                                                       </button>
                                                    </div>
@@ -459,14 +459,14 @@
    }
 </style>
 <script>
-   // function previewImage(event) {
-   //    var reader = new FileReader();
-   //    reader.onload = function() {
-   //       var output = document.getElementById('preview');
-   //       output.src = reader.result;
-   //    }
-   //    reader.readAsDataURL(event.target.files[0]);
-   // }
+   function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function() {
+         var output = document.getElementById('preview');
+         output.src = reader.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+   }
 </script>
 <script>
    $('#campaignForm').on('submit', function(e) {
@@ -609,7 +609,6 @@
                                        <p class="text-md">Upload your image</p>
                                        <p class="text-sm mb-3">The preferred size is 200x200</p>
                                           <button class="btn w-full mb-2 uploadBtnWrap" type="button">
-                                             //  <p id="fileLabel" class="upload-labels">Upload your file</p>
                                                 <input type="file" id="fileInput" name="campaignImages">
                                           </button>
                                     </div>
@@ -685,26 +684,5 @@
       loadTechnicians();
    });
 </script>
-<script>
-   document.addEventListener("DOMContentLoaded", function() {
-      // Get the current URL path
-      const currentPath = window.location.pathname;
 
-      // Get all tab links
-      const tabs = document.querySelectorAll('.tab-link');
-
-      // Loop through the tabs and check if their href matches the current path
-      tabs.forEach(function(tab) {
-         if (tab.getAttribute('href') === currentPath) {
-            tab.classList.add('active'); // Add 'active' class to the matching tab
-         }
-      });
-   });
-
-</script>
-<script>
-// document.getElementById('fileLabel').addEventListener('click', function() {
-//    document.getElementById('fileInput').click();
-// });
-</script>
 <?= $this->endsection('content') ?>
