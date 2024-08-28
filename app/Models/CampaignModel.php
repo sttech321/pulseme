@@ -65,9 +65,7 @@ class CampaignModel extends Model
     
         // Return the result as an array of objects
         return $query->getResult();
-    }    
-
-
+    }
 
     public function getUniqueDepartments($fromDate = null, $toDate = null)
     {

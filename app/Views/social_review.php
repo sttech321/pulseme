@@ -85,19 +85,9 @@
 					</div>
 					<div class="flex flex-col items-start flex-grow">
 						<div class="top-line grid grid-rows-1 grid-flow-col gap-10px">
-							<?php
-							// Get the JSON string from the reviewerInfo
-							$jsonString = json_decode($review['reviewerInfo'], true);
-							if (isset($jsonString['Name'])) {
-								$name = $jsonString['Name'];
-							} else {
-								// Handle the case where the 'Name' key does not exist
-								$name = '';
-							} ?>
-							<p class="text-gray-400"><?php echo $name; ?></p>
-							<?php
+						<?php
 							$currentDate = new DateTime(); // Get current date and time
-							$createdOn = new DateTime($review['updatedOn']); // Assuming $review['updatedOn'] is a valid date string
+							$createdOn = new DateTime($review['createdOn']); // Assuming $review['createdOn'] is a valid date string
 
 							// Calculate the difference between the two dates
 							$interval = $currentDate->diff($createdOn);
@@ -106,15 +96,18 @@
 							$days = $interval->days;
 							$hours = $interval->h;
 
-							// Determine if the difference is less than 24 hours
-							if ($days === 0 && $hours > 0) {
-								$relativeTime = $hours . ' hours';
+							// Determine the relative time
+							if ($days >= 7) {
+								$weeks = floor($days / 7);
+								$relativeTime = $weeks . ' week' . ($weeks > 1 ? 's' : '');
 							} elseif ($days > 0) {
-								$relativeTime = $days . ' days';
+								$relativeTime = $days . ' day' . ($days > 1 ? 's' : '');
+							} elseif ($hours > 0) {
+								$relativeTime = $hours . ' hour' . ($hours > 1 ? 's' : '');
 							} else {
 								$relativeTime = '0 hours'; // In case the dates are the same
 							}
-							?>
+						?>
 							<p class="text-gray-400"><?php echo esc($relativeTime); ?></p>
 						</div>
 						<div class="content my-10px">

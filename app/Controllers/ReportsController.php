@@ -33,14 +33,12 @@ class ReportsController extends BaseController {
         ]);
     }
 
-
     public function departments(): string
     {
         $model = new CampaignModel();
         $data['departments'] = $model->getUniqueDepartments();
         return view('reports/departments', $data);
     }
-
 
     public function report_campaign_fieldsops(){
         $model = new CampaignModel();
@@ -58,7 +56,6 @@ class ReportsController extends BaseController {
         return view('dispatch', $chartData);
     }
     
-
     public function summary()
     {
         return view('summary');

@@ -115,47 +115,28 @@ class Campaign extends BaseController {
             ]);
         }
     }
-    
-    public function update($id)
-    {
-        helper(['form']);
-        
-        // Validation rules
-        $rules = [
-            'CampaignName' => 'required',
-            'campaignDescription' => 'required',
-            'campaignDepartment' => 'required',
-        ];
-    
-        // Handle file upload
-        $campaignImage = $this->request->getFile('campaignImage');
-        if ($campaignImage && $campaignImage->isValid()) {
-            $rules['campaignImage'] = 'uploaded[campaignImage]|max_size[campaignImage,1024]|is_image[campaignImage]';
-        }
-    
-        // Validate form input
-        if (!$this->validate($rules)) {
-            // Return JSON response for AJAX
-            return $this->response->setJSON([
-                'success' => false,
-                'message' => 'Validation failed.',
-                'errors' => $this->validator->getErrors()
-            ]);
-        }
-    
-        // Move uploaded file to designated directory
-        if ($campaignImage && $campaignImage->isValid() && !$campaignImage->hasMoved()) {
-            $newName = $campaignImage->getRandomName();
+
+    public function update($id) 
+    { 
+        $campaignModel = new CampaignModel();
+        $imageFile = $this->request->getFile('campaignimg');
+        if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved()) {
+            // Define the upload path
             $uploadPath = '/image/campaign/';
-            $campaignImage->move(ROOTPATH . 'public/image/campaign', $newName);
-            $imagePath = $uploadPath . $newName;
+            $fileName = $imageFile->getRandomName();
+            if ($imageFile->move(ROOTPATH . 'public' . $uploadPath, $fileName)) {
+                $imagePath = $uploadPath . $fileName;
+            } else {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Failed to upload the image.',
+                ]);
+            }
         } else {
-            $imagePath = ''; // Handle case where no new image is uploaded
+            // If no file is uploaded, set imagePath to null or handle as needed
+            $imagePath = null;
         }
-    
-        // Update campaign data in database
-        $model = new CampaignModel();
-    
+
         $data = [
             'name' => $this->request->getPost('CampaignName'),
             'description' => $this->request->getPost('campaignDescription'),
@@ -164,28 +145,22 @@ class Campaign extends BaseController {
             'employeeId' => $this->request->getPost('employeeId'),
             'email' => $this->request->getPost('email'),
             'deviceId' => $this->request->getPost('deviceId'),
+            'image' => $imagePath,
         ];
     
-        // Include image path in data if uploaded
-        if (!empty($imagePath)) {
-            $data['image'] = $imagePath;
-        }
-      
-        // Perform the update
-        if ($model->update($id, $data)) {
-            // Return JSON response for AJAX
+        if ($campaignModel->update($id, $data)) {
             return $this->response->setJSON([
+                'data' => $data,
                 'success' => true,
-                'message' => 'Campaign updated successfully.'
+                'message' => 'Campaign updated successfully.',
             ]);
         } else {
-            // Return JSON response for AJAX
             return $this->response->setJSON([
                 'success' => false,
-                'message' => 'Failed to update campaign.'
+                'message' => 'Failed to update the campaign.',
             ]);
         }
-    }    
+    }
 
     public function technician_bio($id) {
         $model = new CampaignModel();

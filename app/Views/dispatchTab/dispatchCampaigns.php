@@ -296,7 +296,8 @@
                                                       <p class="text-sm mb-3">The preferred size is 200x200</p>
                                                       <button class="btn w-full mb-2 uploadBtnWrap" type="button">
                                                          <label for="profile-image-upload-1" class="upload-label">Upload your file</label>
-                                                         <input type="file" id="profile-image-upload-1" name="campaignImage" accept="image/*" onchange="previewImage(event)" class="upload-input">
+                                                         <!-- <input type="file" id="profile-image-upload-1" name="campaignImages" accept="image/*" onchange="previewImage(event)" class="upload-input"> -->
+                                                         <input type="file" id="profile-image-upload-1" name="campaignimg" accept="image/*" onchange="previewImage(event)" style="">
                                                       </button>
                                                    </div>
                                                    <div class="input-group">
@@ -499,34 +500,29 @@
    });
 
    $(document).ready(function() {
-      // Bind the form submit event
       $(document).on('submit', 'form[data-ajax="true"]', function(event) {
          event.preventDefault(); // Prevent default form submission
 
          var form = $(this);
-         var formData = new FormData(form[0]); // Get form data
+         var formData = new FormData(form[0]); // Get form data, including filesa
 
          $.ajax({
             url: form.attr('action'),
-            type: 'POST',
-            data: formData,
-            processData: false, // Important: prevent jQuery from automatically transforming the data into a query string
-            contentType: false, // Important: prevent jQuery from setting the content-type header
-            success: function(response) {
-               // Handle success response here
-               if (response.success) {
-                  alert('Campaign updated successfully.');
-                  // Optionally, refresh the page or update the UI
-                  location.reload(); // Reload page to see changes
-               } else {
-                  // Handle validation errors or other response data
-                  alert('Failed to update campaign: ' + response.message);
+               type: 'POST',
+               data: formData,
+               processData: false, // Prevent jQuery from transforming the data into a query string
+               contentType: false, // Prevent jQuery from setting the content-type header
+               success: function(response) {
+                  if (response.success) {
+                     alert('Campaign updated successfully.');
+                     location.reload(); 
+                  } else {
+                     alert('Failed to update campaign: ' + response.message);
+                  }
+               },
+               error: function(xhr, status, error) {
+                  alert('An error occurred: ' + error);
                }
-            },
-            error: function(xhr, status, error) {
-               // Handle AJAX errors here
-               alert('An error occurred: ' + error);
-            }
          });
       });
    });
@@ -612,7 +608,8 @@
                                        <p class="text-sm mb-3">The preferred size is 200x200</p>
                                           <button class="btn w-full mb-2 uploadBtnWrap" type="button">
                                              <label for="profile-image-upload-1" class="upload-label">Upload your file</label>
-                                             <input type="file" id="profile-image-upload-1" name="campaignImage" accept="image/*" onchange="previewImage(event)" class="upload-input">
+                                             // <input type="file" id="profile-image-upload-1" name="campaignImages" accept="image/*" onchange="previewImage(event)" class="upload-input">
+                                              <input type="file" id="" name="campaignimg" accept="image/*" onchange="previewImage(event)" style="">
                                           </button>
                                     </div>
                                     <div class="input-group">
