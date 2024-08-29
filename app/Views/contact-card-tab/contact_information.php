@@ -1,5 +1,11 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
+<style>
+.tab-link.active {
+    font-weight: bold;
+    color: #1a73e8; /* Example color */
+}
+</style>
 <div class="headerTop">
 	<div class="dropMenuWrap flexBetween">
 		<div class="pageNameWrap">
@@ -54,7 +60,7 @@
 						Dispatch
 					</a>
 					<!---->
-					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="p-15px">
+					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="tab-link border-blue-500 text-blue-500 border-l-2 p-15px">
 						<svg class="svg-inline--fa fa-address-card mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="address-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
 							<path
 								class=""
@@ -81,8 +87,8 @@
 		<div class="flex flex-col">
 			<div class="sub-menu-bar pl-25px">
 				<div class="flex justify-start items-center border-b border-gray-300">
-					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="p-15px">Contact Information</a>
-					<a aria-current="page" href="<?= base_url('/settings/contact-card/templates') ?>" class="border-b-2  router-link-exact-active p-15px">Templates</a>
+					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="tab-link active border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px">Contact Information</a>
+					<a aria-current="page" href="<?= base_url('/settings/contact-card/templates') ?>" class="tab-link p-15px">Templates</a>
 				</div>
 			</div>
 			<div class="p-25px flex flex-col justify-start items-stretch contact-information">
@@ -95,10 +101,57 @@
 						<div class="flex justify-center p-10px">
 							<div class="grid grid-cols-2 grid-flow-row auto-rows-auto gap-20px w-600px">
 								<div class="col-span-2 flex justify-between items-center border-2 rounded-4px border-black p-10px">
-									<img src="/assets/contact-card-qr-hand-f68c62d9.svg" alt="" />
+									<img src="" alt="" />
 									<h2 class="w-1/3 text-center text-24px font-600">Scan to save us to your contacts.</h2>
-									<img class="w-1/3" src="https://kiliassets.speetra.com/prod/account_images/15407/qrcode/qrcode.jpg" alt="" />
-								</div>
+
+
+
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+
+<div id="qr-image"></div>
+<script>
+    // Create a vCard string with line breaks
+    var vCardData = [
+		"BEGIN:VCARD",
+        "VERSION:3.0",
+        "PHOTO;TYPE=PNG:" + "<?= $contactcard['image']; ?>",
+        "TEL;TYPE=cell:" + "<?= $contactcard['primary_number']; ?>",
+        "EMAIL:" + "<?= $contactcard['email']; ?>",
+        "SMS:" + "<?= $contactcard['sms_number']; ?>",
+        "NOTE:" + "<?= $contactcard['notes']; ?>",
+        "SEARCHTERM:" + "<?= $contactcard['searchterm']; ?>",
+        "END:VCARD"
+    ].join("\r\n");
+
+    // Generate the QR code
+    var qrcode = new QRCode(
+        "qr-image",
+        {
+            text: vCardData,
+            width: 400,
+            height: 400
+        }
+    );
+</script>
+
+
+
+
+<!-- <img id="qr-image" class="w-1/3" src="" alt="QR Code" /> -->
+
+
+									 <!-- <img id="qr-image" class="w-1/3" src="<?// = base_url('image/qrcode.png') ?>" alt="QR Code" /> -->
+								
+
+
+
+
+
+
+
+
+									</div>
 								<button id="download-png" class="border-2 rounded-4px p-15px border-blue-500 text-blue-500 flex justify-evenly items-center">
 									<div class=""></div>
 									<div class="flex flex-col items-center"><span class="font-bold text-16px mb-2px">Download PNG</span><span>High quality image</span></div>
@@ -125,7 +178,7 @@
 						</div>
 					</div>
 					<div class="flex flex-col justify-start items-stretch">
-               <form id="contact-card-form" method="post" enctype="multipart/form-data">
+              		 <form id="contact-card-form" method="post" enctype="multipart/form-data">
 							<div class="row p-10px mb-1rem">
 								<h2 class="text-30px font-light">Configure</h2>
 							</div>
@@ -134,7 +187,7 @@
 									<div class="relative">
 										<div
 											class="h-200px w-200px rounded-1/2 mt-2rem bg-center bg-contain bg-no-repeat" id="logo-upload-button" 
-											style='background-image: url("https://kiliassets.speetra.com/prod/account_images/15407/contact_card/logo_1713975820.jpg");'
+											style='background-image: url("<?= base_url('/image/company-logo.jpg')?>");'
 										></div>
 										<!-- <button id="logo-upload-button" class="absolute bottom-10px right-10px h-40px w-40px flex justify-center items-center rounded-1/2 btn btn-blue">
 											<svg class="svg-inline--fa fa-pen text-white" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -177,7 +230,7 @@
 										<div class="w-auto flex flex-col items-stretch">
 											<div class="number-list flex justify-between items-center hover px-20px border hover:border-gray-500 p-10px my-10px rounded-4px">
 												<div class="number text-left mr-20px">
-													<p></p>
+													<p><?= esc($contactcard['primary_number']) ?></p>
 												</div>
 											</div>
 										</div>
@@ -186,7 +239,7 @@
 									<div class="info-field flex flex-col justify-start items-start mb-20px">
 										<h5 class="text-lg font-bold">Emails</h5>
 										<p class="text-sm text-gray-500 my-2">Emails where a customer can reach you for support or service.</p>
-										<div class="w-auto flex flex-col items-stretch">
+										<div class="7``w-auto flex flex-col items-stretch">
 											<div class="number-list flex justify-between items-center hover px-20px border hover:border-gray-500 p-10px my-10px rounded-4px">
 												<div class="number text-left mr-20px">
 													<!-- <p>customer.support@halesac.com</p> -->
@@ -239,12 +292,12 @@
 										</div>
 									</div>
 									<div class="bg-orange-100 rounded-4px p-20px mb-30px">
-										<div class="grid grid-cols-2 grid-rows-2 gap-10px mb-20px">
-											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="30" value="60" /><label for="1">1 minutes</label></div>
-											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="60" value="120" /><label for="2">2 minutes</label></div>
-											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="90" value="180" /><label for="3">3 minutes</label></div>
-											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="120" value="240" /><label for="4">4 minutes</label></div>
-										</div>
+										<!-- <div class="grid grid-cols-2 grid-rows-2 gap-10px mb-20px">
+											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="30" value="60" /><label for="1">30 minutes</label></div>
+											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="60" value="120" /><label for="2">1 hour</label></div>
+											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="90" value="180" /><label for="3">1:30 hour</label></div>
+											<div class="flex justify-start items-center"><input class="mr-30px" type="radio" name="time" id="120" value="240" /><label for="4">2 hour</label></div>
+										</div> -->
 										<p class="">*Contact Card will be sent 30 minutes after pulseCheck</p>
 									</div>
 									<div class="submit-button"><button id="save-changes-button" class="btn btn-blue">Save Changes</button></div>
@@ -259,11 +312,27 @@
 	</div>
 </div>
 <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the current URL path
+    const currentPath = window.location.pathname;
+
+    // Get all tab links
+    const tabs = document.querySelectorAll('.tab-link');
+
+    // Loop through the tabs and check if their href matches the current path
+    tabs.forEach(function(tab) {
+        if (tab.getAttribute('href') === currentPath) {
+            tab.classList.add('active'); // Add 'active' class to the matching tab
+        }
+    });
+});
+</script>
+<script>
 $(document).ready(function () {
     $('#save-changes-button').on('click', function (e) {
         e.preventDefault(); // Prevent the form from submitting normally
 
-        var formData = new FormData($('#contact-card-form')[0]);
+        var formData = new FormData($('#contat-card-form')[0]);
         console.log(formData,'formdata');
 
         $.ajax({
@@ -287,10 +356,44 @@ $(document).ready(function () {
     });
 });
 
+document.getElementById('logo-upload-button').addEventListener('click', function() {
+	document.getElementById('logo-upload').click();
+});
 
-   document.getElementById('logo-upload-button').addEventListener('click', function() {
-      document.getElementById('logo-upload').click();
-   });
+	function downloadPNG() {
+      const imgElement = document.getElementById('qr-image');
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      // Set canvas dimensions to match the image
+      canvas.width = imgElement.naturalWidth;
+      canvas.height = imgElement.naturalHeight;
+
+      // Draw the image on the canvas
+      ctx.drawImage(imgElement, 0, 0);
+
+      // Convert canvas to data URL and trigger download
+      const pngUrl = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = pngUrl;
+      link.download = 'qrcode.png';
+      link.click();
+   }
+
+   function downloadSVG() {
+      const imgElement = document.getElementById('qr-image');
+      
+      // Ensure that the image is an SVG or provide the SVG data separately
+      const svgUrl = imgElement.src; // Use SVG image URL directly
+      const link = document.createElement('a');
+      link.href = svgUrl;
+      link.download = 'qrcode.svg';
+      link.click();
+   }
+
+// Attach event listeners to buttons
+document.getElementById('download-png').addEventListener('click', downloadPNG);
+document.getElementById('download-svg').addEventListener('click', downloadSVG);
 
 </script>
 <?= $this->endsection('content') ?>			

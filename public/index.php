@@ -58,6 +58,7 @@ exit(CodeIgniter\Boot::bootWeb($paths));
 require_once __DIR__ . '/../vendor/autoload.php'; // Ensure Composer autoloader is included
 
 use Dotenv\Dotenv;
+use CodeIgniter\CodeIgniter;
 
 // Load environment variables from .env file
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
@@ -68,9 +69,37 @@ if (!defined('ROOTPATH')) {
     define('ROOTPATH', realpath(__DIR__ . '/../') . DIRECTORY_SEPARATOR);
 }
 
-// The rest of your CodeIgniter application bootstrap...
+
 $app = require_once realpath(__DIR__ . '/../') . '/bootstrap/app.php';
 
-$app->run();
 
+if (php_sapi_name() === 'cli') {
+    global $argv;
+    
+    echo "CLI mode detected\n";
+    // Initialize CodeIgniter for CLI use
+    $app = CodeIgniter\CodeIgniter::createApplication($paths);
+
+    // Extract command-line arguments
+    $command = isset($argv[1]) ? $argv[1] : '';
+
+    // Handle the CLI command
+    if ($command === 'processPendingReviews') {
+        require_once APPPATH . 'Controllers/ReviewController.php';
+        // Handle the CLI command
+        $customer_email = isset($argv[2]) ? $argv[2] : null;
+        $status = isset($argv[3]) ? $argv[3] : null;
+
+        $controller = new \App\Controllers\ReviewController();
+        $controller->processPendingReviews($customer_email, $status);
+        echo "Review processed for $customer_email with status $status\n";
+        exit(0); // End the script after processing the command
+    } else {
+        echo "Unknown command: $command\n";
+        exit(1);
+    }
+} else {
+    // Web request handling
+    $app->run();
+}
 

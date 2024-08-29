@@ -1,6 +1,12 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
-<div class="headerTop">
+<style>
+.tab-link.active {
+    font-weight: bold;
+    color: #1a73e8; /* Example color */
+}
+</style>
+<!-- <div class="headerTop">
 	<div class="dropMenuWrap flexBetween">
 		<div class="pageNameWrap">
 			<h3 class="secTitle">Operate</h3>
@@ -13,9 +19,9 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 
-<div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
+<!-- <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
 	<div class="headline bg-white p-20px border-b border-gray-200">
 		<h1 class="text-2xl">Manage Your Account</h1>
 	</div>
@@ -23,7 +29,7 @@
 		<div class="w-1/4 max-w-200px flex flex-shrink-0 justify-start items-start flex-col">
 			<h2 class="text-xl p-15px pt-30px">Company Settings</h2>
 			<div class="p-15px">
-				<div class="links flex flex-col border-l border-gray-400">
+				<div class="links flex flex-col border-l border-gray-400"> -->
 					<!-- <a href="/settings/general/connect-social-media" class="border-blue-500 text-blue-500 border-l-2 p-15px">
 						<svg class="svg-inline--fa fa-chart-line mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-line" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 							<path
@@ -34,8 +40,8 @@
 						</svg>
 						General
 					</a> -->
-					<a href="<?= base_url('/settings/dispatch/campaigns') ?>" class="p-15px" tabindex="0">
-						<svg
+					<!-- <a href="<?= base_url('/settings/dispatch/campaigns') ?>" class="p-15px" tabindex="0"> -->
+						<!-- <svg
 							class="svg-inline--fa fa-arrow-right-arrow-left mr-5px"
 							aria-hidden="true"
 							focusable="false"
@@ -52,10 +58,10 @@
 							></path>
 						</svg>
 						Dispatch
-					</a>
+					</a> -->
 					<!---->
-					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="p-15px">
-						<svg class="svg-inline--fa fa-address-card mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="address-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+					<!-- <a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="tab-link border-blue-500 text-blue-500 border-l-2 p-15px"> -->
+						<!-- <svg class="svg-inline--fa fa-address-card mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="address-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
 							<path
 								class=""
 								fill="currentColor"
@@ -63,7 +69,7 @@
 							></path>
 						</svg>
 						Contact Card
-					</a>
+					</a> -->
 					<!---->
 					<!-- <a href="/settings/billing/billing_subscription" class="p-15px">
 						<svg class="svg-inline--fa fa-credit-card mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="credit-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -75,31 +81,50 @@
 						</svg>
 						Billing
 					</a> -->
-				</div>
+				 <!-- </div>
 			</div>
-		</div>
+		</div> -->
 		<div class="flex flex-col">
 			<div class="sub-menu-bar pl-25px">
 				<div class="flex justify-start items-center border-b border-gray-300">
-					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="p-15px">Contact Information</a>
-					<a aria-current="page" href="<?= base_url('/settings/contact-card/templates') ?>" class="border-b-2  router-link-exact-active p-15px">Templates</a>
+					<a href="<?= base_url('/settings/contact-card/contact-information') ?>" class="tab-link p-15px">Contact Information</a>
+					<a aria-current="page" href="<?= base_url('/settings/contact-card/templates') ?>" class="tab-link border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px">Templates</a>
 				</div>
-			</div>
+			</div> 
+			<div class="contact-templateBox">
 				<div class="container">
 					<p style="font-size:20px; color:black; margin-left:10px;">Here is our company contact-card feel free to contact us.</p>
 					<ul class="cards" style="border:2px solid black;width:600px;margin:15px">
 						<li><img src="<?= base_url('/image/campaign/1721044880_6b3f9e64dbee8f537125.jpg') ?>" width="25%">
 							<div class="details" style="margin:10px; font-size:17px; line-height:2; color:black">
 								<div class="name">RigthAwayGroups</div>
+								<?php print_r($contactcard); ?>
 								<div class="title"><?= esc($contactcard['notes']) ?></div>
 								<div class="phone"><?= esc($contactcard['primary_number']) ?></div>
 								<div class="phone"><?= esc($contactcard['sms_number']) ?></div>
 								<div class="email"><?= esc($contactcard['email']) ?></div>
 							</div>
-						</li> 
+						</li>
 					</ul>
 				</div>
+			</div>
 		</div>
 	</div>
 </div>
-<?= $this->endsection('content') ?>			
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the current URL path
+    const currentPath = window.location.pathname;
+
+    // Get all tab links
+    const tabs = document.querySelectorAll('.tab-link');
+
+    // Loop through the tabs and check if their href matches the current path
+    tabs.forEach(function(tab) {
+        if (tab.getAttribute('href') === currentPath) {
+            tab.classList.add('active'); // Add 'active' class to the matching tab
+        }
+    });
+});
+</script>
+<?= $this->endsection('content') ?>

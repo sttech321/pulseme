@@ -19,6 +19,11 @@ class Campaign extends BaseController {
 
     public function index()
     {
+        // Ensure the session is started (if not started elsewhere)
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/');
+        }
+        
         $model = new CampaignModel();
         $data['campaigns'] = $model->findAll();
         // print_r($data['campaigns'][0]);
@@ -32,7 +37,7 @@ class Campaign extends BaseController {
         $technicianModel = new TechnicianModal();
         
         if ($search) {
-            $results = $technicianModel->getTechniciansBySearch($search);
+            $results = $technicianModel->getTechniciansBySearchs($search);
         } else {
             $results = $technicianModel->findAll(); // Return all technicians if no search query
         }
@@ -113,44 +118,33 @@ class Campaign extends BaseController {
     
     public function update($id)
     {
-        helper(['form']);
-        
-        // Validation rules
-        $rules = [
-            'CampaignName' => 'required',
-            'campaignDescription' => 'required',
-            'campaignDepartment' => 'required',
-        ];
-    
-        // Handle file upload
-        $campaignImage = $this->request->getFile('campaignImage');
-        if ($campaignImage && $campaignImage->isValid()) {
-            $rules['campaignImage'] = 'uploaded[campaignImage]|max_size[campaignImage,1024]|is_image[campaignImage]';
-        }
-    
-        // Validate form input
-        if (!$this->validate($rules)) {
-            // Return JSON response for AJAX
-            return $this->response->setJSON([
-                'success' => false,
-                'message' => 'Validation failed.',
-                'errors' => $this->validator->getErrors()
-            ]);
-        }
-    
-        // Move uploaded file to designated directory
-        if ($campaignImage && $campaignImage->isValid() && !$campaignImage->hasMoved()) {
-            $newName = $campaignImage->getRandomName();
+        $campaignModel = new CampaignModel();
+        $imageFile = $this->request->getFile('campaignimg');
+ 
+        // Check if the file was uploaded
+        if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved()) {
+            // Define the upload path
             $uploadPath = '/image/campaign/';
-            $campaignImage->move(ROOTPATH . 'public/image/campaign', $newName);
-            $imagePath = $uploadPath . $newName;
+ 
+            // Generate a unique name for the file to avoid conflicts
+            $fileName = $imageFile->getRandomName();
+ 
+            // Move the file to the upload path
+            if ($imageFile->move(ROOTPATH . 'public' . $uploadPath, $fileName)) {
+                // Store the file path
+                $imagePath = $uploadPath . $fileName;
+            } else {
+                // Handle file move error
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Failed to upload the image.',
+                ]);
+            }
         } else {
-            $imagePath = ''; // Handle case where no new image is uploaded
+            // If no file is uploaded, set imagePath to null or handle as needed
+            $imagePath = null;
         }
-    
-        // Update campaign data in database
-        $model = new CampaignModel();
-    
+ 
         $data = [
             'name' => $this->request->getPost('CampaignName'),
             'description' => $this->request->getPost('campaignDescription'),
@@ -159,28 +153,22 @@ class Campaign extends BaseController {
             'employeeId' => $this->request->getPost('employeeId'),
             'email' => $this->request->getPost('email'),
             'deviceId' => $this->request->getPost('deviceId'),
+            'image' => $imagePath,
         ];
-    
-        // Include image path in data if uploaded
-        if (!empty($imagePath)) {
-            $data['image'] = $imagePath;
-        }
-      
-        // Perform the update
-        if ($model->update($id, $data)) {
-            // Return JSON response for AJAX
+   
+        if ($campaignModel->update($id, $data)) {
             return $this->response->setJSON([
+                'data' => $data,
                 'success' => true,
-                'message' => 'Campaign updated successfully.'
+                'message' => 'Campaign updated successfully.',
             ]);
         } else {
-            // Return JSON response for AJAX
             return $this->response->setJSON([
                 'success' => false,
-                'message' => 'Failed to update campaign.'
+                'message' => 'Failed to update the campaign.',
             ]);
         }
-    }    
+    }
 
     public function technician_bio($id) {
         $model = new CampaignModel();

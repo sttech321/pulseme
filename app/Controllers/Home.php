@@ -124,8 +124,5 @@ class Home extends BaseController
     {
         return view('general-tab/general_users');
     }
-    
-
-
-    
+        
 }

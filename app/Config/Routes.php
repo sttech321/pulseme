@@ -89,3 +89,17 @@ $routes->post('searchbar', 'Campaign::search');
 
 $routes->post('/contact-card', 'ContactcardController::create_contactcard');
 $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
+
+$routes->post('/contact-card', 'ContactcardController::create_contactcard');
+$routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
+
+$route['chart'] = 'ChartController/index';
+
+$routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
+$routes->post('/leaderboard/reports/campaigns/filter', 'ReportsController::filterCampaigns');
+$routes->post('/leaderboard/reports/filterDepartments', 'ReportsController::filterDepartments');
+
+
+$routes->cli('/reviews/processPendingReviews/(:any)/(:any)/(:any)', 'ReviewController::processPendingReviews/$1/$2/$3');
+
+
