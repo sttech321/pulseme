@@ -212,14 +212,15 @@
                                                 </div>
                                              </div>
                                              <div class="col-12 col-md-6">
-                                                <div class="inputBox">
-                                                   <select class="form-select form-select-md mb-3" name="campaign" aria-label=".form-select-lg example">
+                                             <div class="inputBox">
+                                                   <select id="campaignSelect" class="form-select form-select-md mb-3" name="campaign" aria-label=".form-select-lg example">
                                                       <option disabled selected>Campaign</option>
                                                       <?php foreach ($campaigns as $reviewss): ?>
-                                                         <option data-v-428084ba="" value="<?= $reviewss['ID']; ?>"><?= $reviewss['name']; ?></option>
-                                                      <?php endforeach; ?>
-
+                                                         <option value="<?= htmlspecialchars($reviewss['ID']); ?>" data-campaign-name="<?= htmlspecialchars($reviewss['name']); ?>">
+                                                            <?= htmlspecialchars($reviewss['name']); ?>
+                                                            <?php endforeach; ?>
                                                    </select>
+                                                   <input type="hidden" id="socialcampaign" name="socialcampaign" value="">
                                                 </div>
                                              </div>
                                              <div class="col-12 col-md-12">
@@ -1062,5 +1063,13 @@
          console.log('Selected Checkboxes after approval:', selectedCheckboxes); // Log the empty array after approval
       }
    </script>
-
+   <script>
+    document.getElementById('campaignSelect').addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        console.log(selectedOption);
+        var campaignName = selectedOption.getAttribute('data-campaign-name');
+        //console.log(campaignName);
+        document.getElementById('socialcampaign').value = campaignName;
+    });
+</script>
    <?= $this->endSection() ?>

@@ -170,11 +170,10 @@ class ReviewController extends BaseController
 
     public function social_review()
     {
-        $model = new ReviewModal();
-        $model1 = new CampaignModel();
-        $data['reviews'] = $model->getReviewsByType('google');
-        $data['reviewss'] = $model1->findAll();
-        // Load the view with data
+        $reviewModel = new ReviewModal();
+
+        $data['reviews'] = $reviewModel->getReviewsByType();
+        $data['campaigns'] = $reviewModel->get_campaign_name();
         return view('social_review', $data);
     }
 
@@ -236,6 +235,7 @@ class ReviewController extends BaseController
 
         // Convert the array to a JSON string
         $reviewinfoJson = json_encode($reviewinfo); // Corrected to encode to JSON
+        $credito = [$this->request->getPost('socialcampaign')];
 
         $data = [
             'reviewType' => $this->request->getPost('reviewType'),
@@ -243,6 +243,7 @@ class ReviewController extends BaseController
             'sentiment' => $this->request->getPost('sentiment'),
             'campaignID' => $this->request->getPost('campaign'),
             'reviewText' => $this->request->getPost('comment'),
+            'creditTo' => json_encode($credito),
             'reviewratings' => $reviewinfoJson,  // Store the JSON string
             'createdOn' => date('Y-m-d H:i:s'),
             'updatedOn' => date('Y-m-d H:i:s'),
@@ -415,6 +416,53 @@ class ReviewController extends BaseController
             return redirect()->to('/error');
         }
     }
+
+    public function update_social_review(){
+        if ($this->request->isAJAX()) {
+        $reviewModel = new ReviewModal();
+        $data = $this->request->getPost();
+        
+            if (isset($data['buttonID']) && isset($data['campaignName'])) {
+                $buttonID = $data['buttonID'];
+            
+                $campaignName = $data['campaignName'];
+
+                // Update the review in the database
+                $result = $reviewModel->updateReviewCampaign($buttonID, $campaignName);
+
+                // Check if the update was successful
+                if ($result) {
+                    $updatedReview = $reviewModel->getReviewByID($buttonID);
+                    return $this->response->setJSON(['status' => 'success', 'creditTo' => $updatedReview['creditTo']]);
+                } else {
+                    return $this->response->setJSON(['status' => 'error']);
+                }
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid input.']);
+            }
+        }
+    }
+
+    public function delete_social_review() {
+        if ($this->request->isAJAX()) {
+            $data = $this->request->getPost();
+            $reviewModel = new ReviewModal();
+            $creditTo = $data['creditTo'];
+            $ID = $data['divId'];
+            
+            $result = $reviewModel->deleteReviewCampaign($ID, $creditTo);
+            
+            // Send a JSON response
+            return $this->response->setJSON([
+                'success' => $result,
+                'data'    => $reviewModel,
+                'creditTo' => $creditTo,
+        ]);
+
+        } else {
+            return $this->response->setJSON(['success' => false, 'data'    => $reviewModel, 'creditTo' => $creditTo,'message' => 'Invalid input.']);
+        }
+    }    
 
     public function exportCsv()
     {

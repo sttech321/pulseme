@@ -104,3 +104,6 @@ $routes->get('/cron-job', 'ReviewController::updatestatus');
 $routes->get('/reviews/export-csv','ReviewController::exportCsv');
 
 $routes->cli('/reviews/updatestatus/(:any)/(:any)/(:any)', 'ReviewController::updatestatus/$1/$2/$3');
+
+$routes->post('/analyze/reviews/social-reviews/update', 'ReviewController::update_social_review');
+$routes->post('/analyze/reviews/social-reviews/delete', 'ReviewController::delete_social_review');
