@@ -57,7 +57,6 @@ class ReviewController extends BaseController
         }
     
         $reviewModel = new ReviewModal();
-    
         // Collecting data from the request
         $feedback = $this->request->getPost('feedback');
         $rating1_value = $this->request->getPost('rating1_value');
@@ -101,51 +100,46 @@ class ReviewController extends BaseController
         ];
     
         $reviewModel->insert($data);
+        $insertedID = $reviewModel->getInsertID();
         // Send contact card email
-        $this->updatestatus($customer_email , $status);
+        // $this->updatestatus($customer_email , $status, $insertedID);
+        $phpPath = 'D:\\xampp\\php\\php.exe';
+        // // $filePath = 'C:\\xampp\\htdocs\\crm\\public\\index.php';
+         $filePath = 'D:\\xampp\\htdocs\\pulseme\\cli.php';
+         $command = "\"$phpPath\" \"$filePath\" reviews/updatestatus " . escapeshellarg($customer_email) . " " . escapeshellarg($status) . " " . escapeshellarg($insertedID);
+         $time = date('H:i', strtotime('+5 minutes'));
+         $taskCommand = "schtasks /create /tn updatestatus /tr \"$command\" /sc once /st $time /f";
+        //  exec($taskCommand);
+        //  echo $taskCommand;
         // Display a thank you message or redirect as needed
         return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
     }
 
-    public function updatestatus($customer_email, $status)
+    public function updatestatus($customer_email, $status, $insertedID)
     {
-        $reviewModel = new ReviewModal(); // Correct the model name if it's 'ReviewModel' instead of 'ReviewModal'
-        // Check if a review already exists for the given customer email
-        $existingReview = $reviewModel->where("JSON_EXTRACT(reviewratings, '$.customer_email') =", $customer_email)
-                                      ->first();
+        $reviewModel = new ReviewModal();
+    
+        // Fetch the existing review using the inserted ID
+        $existingReview = $reviewModel->find($insertedID);
+    
         if ($existingReview) {
-            // Decode the reviewratings JSON to check the status
+            // Decode the reviewratings JSON to check and update the status
             $reviewRatings = json_decode($existingReview['reviewratings'], true);
             $existingStatus = $reviewRatings['status'] ?? '';
-            print_r($existingStatus);
-            // print_r($existingStatus); // Debug: Print the existing status to verify it's correct
-            // Check if the status is 'pending'
             if ($existingStatus === 'pending') {
-                // Update the status to 'done'
-                $reviewRatings['status'] = 'done';
+                $reviewRatings['status'] = 'done'; // Update status to the provided value
                 // Prepare data for update
                 $data = [
                     'updatedOn' => date('Y-m-d H:i:s'),
                     'reviewratings' => json_encode($reviewRatings), // Re-encode the updated review ratings
                 ];
-                echo'<br>';
-                print_r($data);
-                // Get the review ID
-                $reviewId = $existingReview['ID'];
-                // print_r($reviewId); // Debug: Print the review ID to verify it's correct
-                
-                // Update the existing review entry
-                // die;
-                $reviewModel->update($reviewId, $data);
-                // Execute sendContactCard() function only if status was updated to 'done'
+                // Update the review with the new data
+                $reviewModel->update($insertedID, $data);
                 $this->sendContactCard($customer_email);
             }
-        } else {
-
         }
     }
     
-
     public function sendContactCard($customer_email)
     {
         $contactCardModel = new ContactcardModal();

@@ -30,7 +30,7 @@
   <form method="post" action="<?= base_url('loginAuth') ?>">
       <div data-v-139b8be6="" class="wrapper sessionWrap">
         <div class="contact-form-wrap">
-          <img data-v-139b8be6="" width="230" src="/image/login-img.png">
+          <img data-v-139b8be6="" width="230" src="<?= base_url('/image/login-img.png')?>">
           <div data-v-139b8be6="" class="formField">
             <p style="color:red;"><?= session()->get('error') ?></p>
             <p style="color:green;"><?= session()->get('success') ?></p>

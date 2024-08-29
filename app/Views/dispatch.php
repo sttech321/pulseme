@@ -434,7 +434,7 @@
                                     <div data-v-6b4913b0="" class="flex-grow w-1/2 border-right-2 -mt-10 pt-10">
                                         <div data-v-6b4913b0="" class="flex flex-col items-center">
                                             <div data-v-6b4913b0="" class="flex flex-col items-center justify-center">
-                                                <div class="w-80px h-80px bg-gray-100 flex items-center justify-center"><img src="<?=base_rl('/image/mailicon.png')?>" /></div>
+                                                <div class="w-80px h-80px bg-gray-100 flex items-center justify-center"><img src="/image/mailicon.png" /></div>
                                                 <p class="text-2xl font-bold">463</p>
                                                 <p class="text-sm text-gray-500 text-center">
                                                     Number of<br data-v-6b4913b0="" />

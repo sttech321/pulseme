@@ -10,9 +10,9 @@
                 type: 'donut',
                 height: 350
             },
-            colors: ['#3399ff'],
-            series: [75],
-            labels: ['Contact Card Numbers'],
+            colors: ['#3399ff', '#ff9900'],
+            series: [75, 25],
+            labels: ['Contact Card Numbers','pending'],
             plotOptions: {
                 pie: {
                     donut: {
