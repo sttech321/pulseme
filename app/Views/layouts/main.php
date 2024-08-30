@@ -4,7 +4,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title><?= $title ?? 'Untitled' ?></title>
+	<title><?= $title ?? 'SummitRA' ?></title>
 	<meta name="description" content="summitRA: The small framework with powerful features">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/png" sizes="32x32" href="<?=base_url('/image/summitRA.jpeg')?>">
@@ -87,7 +87,7 @@
 										</div>
 									</div>
 								</li>
-								<li><a class="menuListItem" href="#"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
+								<li><a class="menuListItem" href="<?= base_url('/user-preferences')?> "><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
 								<li><a class="menuListItem" href="<?= base_url('/settings/dispatch/campaigns') ?>"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
 								<!-- <li><a class="menuListItem" href="/logs/outbound"><i class="fa fa-envelope" aria-hidden="true"></i>Logs</a></li> -->
 								<li>

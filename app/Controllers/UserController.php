@@ -154,7 +154,7 @@ class UserController extends Controller
         return view('resetPassword', $data);
     }
 
-    function resetPasswordProcess () {
+    public function resetPasswordProcess () {
         // Load necessary helpers and libraries
         helper(['form']);
 
@@ -191,4 +191,25 @@ class UserController extends Controller
             }
         }
     }
+
+    public function profile(){
+        return view('layouts/myprofile');
+    }
+
+    public function updateProfile()
+    {
+        $userModel = new UserModel();
+        
+        $data = [
+            'first_name' => $this->request->getPost('first_name'),
+            'last_name' => $this->request->getPost('last_name'),
+            'email' => $this->request->getPost('email')
+        ];
+
+        // Update the first row (assuming 'id' is the primary key and you want to update row 1)
+        $userModel->update(1, $data);
+
+        return redirect()->to('/user-preferences')->with('status', 'Profile updated successfully');
+    }
+
 }

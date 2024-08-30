@@ -88,10 +88,8 @@ $routes->post('example/submit', 'CustomerController::create_dispatch');
 $routes->post('searchbar', 'Campaign::search');
 
 $routes->post('/contact-card', 'ContactcardController::create_contactcard');
-// $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 
 $routes->get('/conactcardlayout', 'ContactcardController::conactcardlayout');
-// $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 
 $route['chart'] = 'ChartController/index';
 
@@ -107,3 +105,6 @@ $routes->cli('/reviews/updatestatus/(:any)/(:any)/(:any)', 'ReviewController::up
 
 $routes->post('/analyze/reviews/social-reviews/update', 'ReviewController::update_social_review');
 $routes->post('/analyze/reviews/social-reviews/delete', 'ReviewController::delete_social_review');
+
+$routes->get('/user-preferences', 'UserController::profile');
+$routes->post('/user-preferences/update', 'UserController::updateProfile');

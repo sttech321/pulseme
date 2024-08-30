@@ -7337,7 +7337,7 @@ ul {
     background-color: #3490dc;
     border-radius: 35px; 
     padding: 0;
-    /* height: 50px; */
+    height: 50px;
 }
 .uploadBtnWrap label{font-size: 16px;}
 

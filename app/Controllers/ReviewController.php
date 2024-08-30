@@ -74,6 +74,7 @@ class ReviewController extends BaseController
         $sentiment = $this->request->getPost('result_value');
         $review_type = $this->request->getPost('reviewType');
         $status = $this->request->getPost('status');
+        $address = $this->request->getPost('address');
     
         // Preparing data for insertion
         $data = [
@@ -91,6 +92,7 @@ class ReviewController extends BaseController
                 'State' => $state,
                 'City' => $city,
                 'Zipcode' => $zipcode,
+                'Address' => $address,
                 'rate1' => ['text' => $rating1_text, 'value' => $rating1_value],
                 'rate2' => ['text' => $rating2_text, 'value' => $rating2_value],
                 'rate3' => ['text' => $rating3_text, 'value' => $rating3_value],
@@ -107,12 +109,10 @@ class ReviewController extends BaseController
         // // $filePath = 'C:\\xampp\\htdocs\\crm\\public\\index.php';
          $filePath = 'D:\\xampp\\htdocs\\pulseme\\cli.php';
          $command = "\"$phpPath\" \"$filePath\" reviews/updatestatus " . escapeshellarg($customer_email) . " " . escapeshellarg($status) . " " . escapeshellarg($insertedID);
-         $time = date('H:i', strtotime('+5 minutes'));
+         $time = date('H:i', strtotime('+1 minutes'));
          $taskCommand = "schtasks /create /tn updatestatus /tr \"$command\" /sc once /st $time /f";
-        //  exec($taskCommand);
-        //  echo $taskCommand;
-        // Display a thank you message or redirect as needed
-        return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
+
+         return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
     }
 
     public function updatestatus($customer_email, $status, $insertedID)
@@ -139,7 +139,7 @@ class ReviewController extends BaseController
             }
         }
     }
-    
+
     public function sendContactCard($customer_email)
     {
         $contactCardModel = new ContactcardModal();
@@ -237,7 +237,7 @@ class ReviewController extends BaseController
         // Convert the array to a JSON string
         $reviewinfoJson = json_encode($reviewinfo); // Corrected to encode to JSON
         $credito = [$this->request->getPost('socialcampaign')];
-
+        $date = [$this->request->getPost('date')];
         $data = [
             'reviewType' => $this->request->getPost('reviewType'),
             'createdOn' => $this->request->getPost('date'),
@@ -246,7 +246,7 @@ class ReviewController extends BaseController
             'reviewText' => $this->request->getPost('comment'),
             'creditTo' => json_encode($credito),
             'reviewratings' => $reviewinfoJson,  // Store the JSON string
-            'createdOn' => date('Y-m-d H:i:s'),
+            'createdOn' => $date,
             'updatedOn' => date('Y-m-d H:i:s'),
         ];
 
@@ -289,8 +289,10 @@ class ReviewController extends BaseController
         if ($this->request->isAJAX()) {
             $campaignID = $this->request->getPost('campaign_id');
             $approve = $this->request->getPost('approved');
-            $limit = intval($this->request->getPost('limit')) ?: 10;
-            $page = intval($this->request->getPost('page')) ?: 1;
+            $unapprove = $this->request->getPost('unapproved');
+            $includeAllReviews = $this->request->getPost('include_all_reviews');
+            $limit = intval($this->request->getPost('limit'))?: 10; 
+            $page = intval($this->request->getPost('page')) ?: 1;        
             $noText = $this->request->getPost('noText');
             $archive = $this->request->getPost('archive');
             $sentiment = $this->request->getPost('sentiment');
@@ -309,8 +311,15 @@ class ReviewController extends BaseController
             if (!empty($archive)) {
                 $builder->where('reviews.isArchive', $archive);
             }
-            if (!empty($approve)) {
-                $builder->where('reviews.isApproved', $approve);
+            if (!$includeAllReviews) {
+                $approved = $this->request->getPost('approved');
+                $unapproved = $this->request->getPost('unapproved');
+                if ($approved) {
+                    $builder->where('isApproved', '1');
+                }
+                if ($unapproved) {
+                   $builder->where('isApproved', '0');
+                }
             }
             if (!empty($fromdate) && !empty($todate)) {
                 $builder->where('reviews.createdOn >=', $fromdate);
@@ -447,39 +456,34 @@ class ReviewController extends BaseController
     public function delete_social_review() {
         if ($this->request->isAJAX()) {
             $data = $this->request->getPost();
-            $reviewModel = new ReviewModal();
-            $creditTo = $data['creditTo'];
+            // print_r($data);
+            // die;
             $ID = $data['divId'];
-            
-            $result = $reviewModel->deleteReviewCampaign($ID, $creditTo);
+            $creditTo = $data['creditTo'];
+            $reviewModel = new ReviewModal();
+            // Call the model method
+            $reviewModel->deleteReviewCampaign($ID, $creditTo);
             
             // Send a JSON response
-            return $this->response->setJSON([
-                'success' => $result,
-                'data'    => $reviewModel,
-                'creditTo' => $creditTo,
-        ]);
-
+           // echo json_encode(['status' => 'success']);
         } else {
-            return $this->response->setJSON(['success' => false, 'data'    => $reviewModel, 'creditTo' => $creditTo,'message' => 'Invalid input.']);
+            // Handle non-AJAX requests
+           // return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid input.']);
         }
-    }    
+    }
 
     public function exportCsv()
     {
         $reviewModel = new ReviewModal();
         $perPage = 1000; // Set a large limit to export a significant number of reviews
         $offset = 0; // Start from the beginning
-    
-        // Fetch reviews
+
         $reviews = $reviewModel->get_reviews_with_campaign($perPage, $offset);
-    
-        // Prevent any output before headers
+
         if (ob_get_length()) {
             ob_end_clean();
         }
-    
-        // Set headers to force download
+
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="reviews.csv"');
         header('Pragma: no-cache');
@@ -536,13 +540,10 @@ class ReviewController extends BaseController
                 $review['createdOn']
             ]);
         }
-        
-    
-        // Close the output stream
+
         fclose($output);
-    
-        // Exit to prevent any additional output
+
         exit();
     }
-
-}
+       
+    }

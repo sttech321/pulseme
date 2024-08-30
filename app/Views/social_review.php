@@ -166,17 +166,37 @@ $(document).ready(function() {
     $(document).on('click', '.delete-button', function() {
         var button = $(this);
         var creditToJson = button.data('credit-to');
-        var parentDiv = button.closest('div.bg-white');
+		var parentDiv = button.closest('div.bg-white');
         var divId = parentDiv.attr('id');
-
+        
         try {
             var creditToData = JSON.parse(creditToJson);
+            var creditToName = creditToData.name || 'update data'; // Adjust based on your JSON structure
 
-            var creditToName = creditToJson; // Adjust based on your JSON structure
+            // Create the confirmation buttons
+            var confirmationButtons = `
+                <div class="confirm">
+                    <button class="btn btn-blue rounded-full relative z-1">
+                        <svg class="svg-inline--fa fa-paper-plane mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="paper-plane" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor" d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"></path>
+                        </svg>
+                        <span>${creditToName}</span>
+                    </button>
+                    <button class="btn btn-red rounded-full relative pl-40px" style="transform: translateX(-32px); margin-right: -32px;">
+                        Remove
+                    </button>
+                </div>`;
 
-            if (confirm('Are you sure you want to delete "' + creditToName + '"?')) {
+            // Remove any existing confirmation buttons before appending new ones
+            button.closest('.grid').find('.confirm').remove();
+
+            // Append the confirmation buttons right after the clicked button
+            button.after(confirmationButtons);
+
+            // Attach click event to the new remove button
+            button.next('.confirm').find('.btn-red').on('click', function() {
                 $.ajax({
-                    url: '<?=base_url('/analyze/reviews/social-reviews/delete')?>', 
+                    url: '<?=base_url('/analyze/reviews/social-reviews/delete')?>',
                     type: 'POST',
                     data: {
                         creditTo: creditToJson,
@@ -185,20 +205,22 @@ $(document).ready(function() {
                     dataType: 'json',
                     contentType: 'application/x-www-form-urlencoded',
                     success: function(response) {
-                            button.closest('div.bg-white').remove();
-							location.reload();
+                        button.closest('.give-credit').remove();
+                        location.reload();
                     },
                     error: function(xhr, status, error) {
                         console.error('AJAX Error:', error);
                         alert('An error occurred. Please try again.');
                     }
                 });
-            }
+            });
         } catch (e) {
             console.error('JSON Parse Error:', e);
             alert('Invalid data format. Please try again.');
         }
     });
 });
+
 </script>
+
 <?= $this->endsection('content') ?>

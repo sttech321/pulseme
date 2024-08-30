@@ -212,7 +212,7 @@
                                                 </div>
                                              </div>
                                              <div class="col-12 col-md-6">
-                                             <div class="inputBox">
+                                                <div class="inputBox">
                                                    <select id="campaignSelect" class="form-select form-select-md mb-3" name="campaign" aria-label=".form-select-lg example">
                                                       <option disabled selected>Campaign</option>
                                                       <?php foreach ($campaigns as $reviewss): ?>
@@ -301,6 +301,7 @@
                                     <option data-v-428084ba="" value="">All Campaigns</option>
                                     <?php foreach ($campaigns as $reviewss): ?>
                                        <option data-v-428084ba="" value="<?= $reviewss['ID']; ?>"><?= $reviewss['name']; ?></option>
+                                      
                                     <?php endforeach; ?>
                                  </select>
                               </div>
@@ -602,7 +603,7 @@
          parentDiv.setAttribute('data-approved', isApproved);
          parentDiv.setAttribute('data-archive', isArchive);
          $.ajax({
-            url: '<?=base_url('/analyze/reviews/approve')?>',
+            url: '/analyze/reviews/approve',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -739,7 +740,7 @@
 
          function fetchReviews(page) {
             $.ajax({
-               url: '<?=base_url('/analyze/reviews/get')?>',
+               url: '/analyze/reviews/get',
                type: 'POST',
                data: {
                   campaign_id: filters.campaignID,
@@ -1072,4 +1073,5 @@
         document.getElementById('socialcampaign').value = campaignName;
     });
 </script>
+
    <?= $this->endSection() ?>

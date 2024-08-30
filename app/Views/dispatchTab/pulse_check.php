@@ -253,7 +253,8 @@
                                             <input type="email" class="input form-control fg-input validate" value="" name="customer_email" placeholder="customer_email">
                                             <input type="text" class="input form-control fg-input validate" value="" name="state" placeholder="state">
                                             <input type="text" class="input form-control fg-input validate" value="" name="city" placeholder="city">
-                                            <input type="number" class="input form-control fg-input validate" value="" name="zipcode" placeholder="zipcode">
+                                            <input type="text" class="input form-control fg-input validate" value="" name="address" placeholder="address">
+                                            <input type="text" class="input form-control fg-input validate" value="" name="zipcode" placeholder="zipcode">
 
                                             <div class="fg-line">
                                                 <textarea class="input form-control fg-input validate w-100" name="feedback" rows="5" placeholder="Type your feedback..." data-empty-error="Feedback cannot be left blank" data-max-length="999" spellcheck="false"></textarea>
