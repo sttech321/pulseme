@@ -168,6 +168,7 @@ class ReviewController extends BaseController
         }
     }
 
+    // view function of social review page
     public function social_review()
     {
         $reviewModel = new ReviewModal();

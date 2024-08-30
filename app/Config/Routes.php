@@ -81,7 +81,7 @@ $routes->post('analyze/reviews/social-reviews/(:num)', 'ReviewController::google
 $routes->get('/thankyou', 'ReviewController::thankyou');
 
 $routes->post('/analyze/reviews/update/(:num)', 'ReviewController::update/$1');
-$routes->get('/analyze/dispatching', 'ReportsController::dispatch');
+$routes->get('/analyze/dispatching', 'ReportsController::dispatching');
 
 $routes->get('/example', 'TestController::data');
 $routes->post('example/submit', 'CustomerController::create_dispatch');

@@ -133,9 +133,9 @@ class ReviewModal extends Model
         // Initialize counters and accumulators
         $positive = 0;
         $negative = 0;
-        $ratetext1 = '';
-        $ratetext2 = '';
-        $ratetext3 = '';
+        $ratetext1 = 'How likely are you to recommend us to your friends and family?';
+        $ratetext2 = 'Professionalism';
+        $ratetext3 = 'Quality of Service';
         $rate1Sum = 0;
         $rate2Sum = 0;
         $rate3Sum = 0;
@@ -198,9 +198,9 @@ class ReviewModal extends Model
         $averagerating3 = ($rate3Count > 0) ? ($rate3Sum / $rate3Count) : 0;
     
         // Convert average ratings to half-points
-        $ratepoint1 = $averagerating1 / 2;
-        $ratepoint2 = $averagerating2 / 2;
-        $ratepoint3 = $averagerating3 / 2;
+        $ratepoint1 = $averagerating1 / 2 ? $averagerating1 / 2 : 1;
+        $ratepoint2 = $averagerating2 / 2 ? $averagerating2 / 2 : 1;
+        $ratepoint3 = $averagerating3 / 2 ? $averagerating3 / 2 : 1;
     
         // Function to generate star rating HTML
         function getStarRatingHTML($rating) {
@@ -227,12 +227,18 @@ class ReviewModal extends Model
         // print_r($pulseCheckData);
         $statusdone = 0;
         $statuspending = 0;
-        $sql ="SELECT JSON_UNQUOTE(JSON_EXTRACT(reviewratings, '$.status')) AS status, COUNT(*) AS count FROM reviews GROUP BY status";
+        
+        $sql = "SELECT JSON_UNQUOTE(JSON_EXTRACT(reviewratings, '$.status')) AS status, COUNT(*) AS count FROM reviews GROUP BY status";
         $query = $db->query($sql);
         $results = $query->getResultArray();
-     
-        $statusdone =  $results[1]['count'];
-        $statuspending =  $results[2]['count'];
+        
+        foreach ($results as $result) {
+            if ($result['status'] === 'done') {
+                $statusdone = $result['count'];
+            } elseif ($result['status'] === 'pending') {
+                $statuspending = $result['count'];
+            }
+        }
     
         // Prepare arrays for the result
         $bioDates = [];

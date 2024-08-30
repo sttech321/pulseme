@@ -39,13 +39,11 @@ class CustomerController extends Controller
         return $this->response->setJSON($results);
     }
 
-
     public function dispatch()
     {
         $technicianModel = new TechnicianModal();
         $data['technicians'] = $technicianModel->findAll();
-
-        return view('dispatching', $data);
+        return view('dispatch', $data);
     }
 
     public function create_dispatch()

@@ -46,14 +46,14 @@ class ReportsController extends BaseController {
         return view('reports/fielsops_usage',['campaigns' =>  $campaignsWithSentiment]);
     }
 
-    public function dispatch()
+    public function dispatching()
     {
         $model = new ReviewModal();
         // Call the dispatchingchart method and store the returned data
         $chartData = $model->dispatchingchart();
-    
+
         // Pass the chart data to the view
-        return view('dispatch', $chartData);
+        return view('dispatching', $chartData);
     }
     
     public function summary()
