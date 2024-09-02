@@ -97,8 +97,6 @@ $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::searc
 $routes->post('/leaderboard/reports/campaigns/filter', 'ReportsController::filterCampaigns');
 $routes->post('/leaderboard/reports/filterDepartments', 'ReportsController::filterDepartments');
 
-$routes->get('/cron-job', 'ReviewController::updatestatus');
-
 $routes->get('/reviews/export-csv','ReviewController::exportCsv');
 
 $routes->cli('/reviews/updatestatus/(:any)/(:any)/(:any)', 'ReviewController::updatestatus/$1/$2/$3');
@@ -107,4 +105,4 @@ $routes->post('/analyze/reviews/social-reviews/update', 'ReviewController::updat
 $routes->post('/analyze/reviews/social-reviews/delete', 'ReviewController::delete_social_review');
 
 $routes->get('/user-preferences', 'UserController::profile');
-$routes->post('/user-preferences/update', 'UserController::updateProfile');
+$routes->post('/user-preferences/update/(:num)', 'UserController::updateProfile/$1');

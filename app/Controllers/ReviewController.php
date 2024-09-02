@@ -16,6 +16,12 @@ class ReviewController extends BaseController
     {
         // Load session service
         $this->session = \Config\Services::session();
+
+        if (!$this->session->get('logged_in')) 
+        {
+            return redirect()->to('/');
+        }
+ 
     }
 
     public function thankyou()
@@ -237,7 +243,7 @@ class ReviewController extends BaseController
         // Convert the array to a JSON string
         $reviewinfoJson = json_encode($reviewinfo); // Corrected to encode to JSON
         $credito = [$this->request->getPost('socialcampaign')];
-        $date = [$this->request->getPost('date')];
+        $date = $this->request->getPost('date');
         $data = [
             'reviewType' => $this->request->getPost('reviewType'),
             'createdOn' => $this->request->getPost('date'),

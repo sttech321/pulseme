@@ -74,7 +74,7 @@
 		<?php foreach ($reviews as $review): ?>
 		<?php
 		$creditToArray = json_decode($review['creditTo'], true) ?? [];
-		//print_r($creditToArray);
+		
 		?>
     <div class="bg-white p-25px rounded flex mb-4" id = "<?= $review['ID'] ?>">
         <div class="logo flex justify-center mr-10px">
@@ -89,11 +89,24 @@
             <div class="top-line grid grid-rows-1 grid-flow-col gap-10px">
                 <p class="text-gray-400"><?= esc($review['Name']); ?></p>
                 <p class="text-gray-400">
-                    <?php 
-                    // Example relative time calculation
-                    // Ensure you define $relativeTime somewhere if needed
-                    // echo esc($relativeTime); 
-                    ?>
+				<?php
+					$currentDate = new DateTime();
+					$createdOn = new DateTime($review['createdOn']); 
+					$interval = $currentDate->diff($createdOn);
+					$days = $interval->days;
+					$hours = $interval->h;
+					if ($days >= 7) {
+						$weeks = floor($days / 7);
+						$relativeTime = $weeks . ' week' . ($weeks > 1 ? 's' : '');
+					} elseif ($days > 0) {
+						$relativeTime = $days . ' day' . ($days > 1 ? 's' : '');
+					} elseif ($hours > 0) {
+						$relativeTime = $hours . ' hour' . ($hours > 1 ? 's' : '');
+					} else {
+						$relativeTime = '0 hours';
+					}
+					echo $relativeTime;
+					?>
                 </p>
             </div>
             <div class="content my-10px">
@@ -161,18 +174,19 @@ $(document).ready(function() {
 });
 
 </script>
+
 <script>
 $(document).ready(function() {
     $(document).on('click', '.delete-button', function() {
         var button = $(this);
         var creditToJson = button.data('credit-to');
-		var parentDiv = button.closest('div.bg-white');
+        var parentDiv = button.closest('div.bg-white');
         var divId = parentDiv.attr('id');
         
         try {
+            // Parse the JSON string to object
             var creditToData = JSON.parse(creditToJson);
-            var creditToName = creditToData.name || 'update data'; // Adjust based on your JSON structure
-
+            console.log(creditToData, '111111');
             // Create the confirmation buttons
             var confirmationButtons = `
                 <div class="confirm">
@@ -180,21 +194,18 @@ $(document).ready(function() {
                         <svg class="svg-inline--fa fa-paper-plane mr-5px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="paper-plane" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path fill="currentColor" d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"></path>
                         </svg>
-                        <span>${creditToName}</span>
+                        <span>${creditToData}</span>
                     </button>
                     <button class="btn btn-red rounded-full relative pl-40px" style="transform: translateX(-32px); margin-right: -32px;">
                         Remove
                     </button>
                 </div>`;
-
-            // Remove any existing confirmation buttons before appending new ones
-            button.closest('.grid').find('.confirm').remove();
-
-            // Append the confirmation buttons right after the clicked button
-            button.after(confirmationButtons);
-
+            console.log(confirmationButtons, '333333');
+            // Replace the existing button with the confirmation buttons
+            button.replaceWith(confirmationButtons);
             // Attach click event to the new remove button
-            button.next('.confirm').find('.btn-red').on('click', function() {
+            parentDiv.find('.confirm .btn-red').on('click', function() {
+                // Directly perform the AJAX request to delete the item
                 $.ajax({
                     url: '<?=base_url('/analyze/reviews/social-reviews/delete')?>',
                     type: 'POST',
@@ -205,12 +216,12 @@ $(document).ready(function() {
                     dataType: 'json',
                     contentType: 'application/x-www-form-urlencoded',
                     success: function(response) {
-                        button.closest('.give-credit').remove();
-                        location.reload();
+                        parentDiv.remove();  // Remove the parentDiv directly after successful deletion
+                        console.log(button, 'dddd');
+                        location.reload();  // Reload the page after successful deletion
                     },
                     error: function(xhr, status, error) {
-                        console.error('AJAX Error:', error);
-                        alert('An error occurred. Please try again.');
+						location.reload();
                     }
                 });
             });
@@ -220,7 +231,6 @@ $(document).ready(function() {
         }
     });
 });
-
 </script>
 
 <?= $this->endsection('content') ?>

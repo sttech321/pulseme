@@ -60,12 +60,14 @@
 						<div class="user-pic">
 							<img data-v-139b8be6="" width="230" src="<?= base_url('/image/person.jpg') ?>" alt="user picture">
 						</div>
+						<?php if (!empty($admin1)): ?>
 						<div class="user-info">
-							<span class="user-name">Jhon
-								<strong>Smith</strong>
+							<span class="user-name"><?= esc($admin1['first_name']) ?>
+								<strong><?= esc($admin1['last_name']) ?></strong>
 							</span>
 							<span class="user-role">Administrator</span>
 						</div>
+						<?php endif; ?>
 					</div>
 					<div class="rightSec">
 						<div class="dropdown toggle">
@@ -78,16 +80,18 @@
 											<div class="user-pic">
 												<img data-v-139b8be6="" width="230" src="<?= base_url('/image/person.jpg') ?>" alt="user picture">
 											</div>
+											<?php if (!empty($admin1)): ?>
 											<div class="user-info">
-												<span class="user-name">Jhon
-													<strong>Smith</strong>
+												<span class="user-name"><?= esc($admin1['first_name']) ?>
+													<strong><?= esc($admin1['last_name']) ?></strong>
 												</span>
 												<span class="user-role">Administrator</span>
 											</div>
+											<?php endif; ?>
 										</div>
 									</div>
 								</li>
-								<li><a class="menuListItem" href="<?= base_url('/user-preferences')?> "><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
+								<li><a class="menuListItem" href="<?= base_url('/user-preferences')?>"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
 								<li><a class="menuListItem" href="<?= base_url('/settings/dispatch/campaigns') ?>"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
 								<!-- <li><a class="menuListItem" href="/logs/outbound"><i class="fa fa-envelope" aria-hidden="true"></i>Logs</a></li> -->
 								<li>

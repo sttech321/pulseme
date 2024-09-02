@@ -192,14 +192,22 @@ class UserController extends Controller
         }
     }
 
-    public function profile(){
-        return view('layouts/myprofile');
-    }
-
-    public function updateProfile()
+    public function profile()
     {
         $userModel = new UserModel();
-        
+        $userdata = $userModel->findAll();
+        $admin1 = $userModel->find(1);
+        $data = [
+            'admin' => $userdata,
+            'admin1' => $admin1,
+        ];
+        return view('layouts/myprofile', $data);
+    }
+    
+
+    public function updateProfile($id)
+    {
+        $userModel = new UserModel();
         $data = [
             'first_name' => $this->request->getPost('first_name'),
             'last_name' => $this->request->getPost('last_name'),
@@ -207,7 +215,7 @@ class UserController extends Controller
         ];
 
         // Update the first row (assuming 'id' is the primary key and you want to update row 1)
-        $userModel->update(1, $data);
+        $userModel->update($id, $data);
 
         return redirect()->to('/user-preferences')->with('status', 'Profile updated successfully');
     }

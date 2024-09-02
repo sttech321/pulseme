@@ -11,11 +11,10 @@ class UserModel extends Model
     // Construc Function
     public function __construct() {
         parent::__construct();
-        // Load table name from environment variable
-        $this->table = getenv('USER_TABLE');
-        // Load allowed fields from environment variable and convert to array
-        $fields = getenv('USER_FIELD');
-        $this->allowedFields = explode(',', $fields);
+        // Load environment variables
+        $this->table = getenv('USER.TABLE');
+        $this->primaryKey = getenv('USER.TABLE.PRIMARY_KEY');
+        $this->allowedFields = explode(',', getenv('USER.FIELD'));
     }
 
     // Function to set OTP
