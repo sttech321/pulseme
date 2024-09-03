@@ -14,14 +14,7 @@ class ReviewController extends BaseController
 {
     public function __construct()
     {
-        // Load session service
         $this->session = \Config\Services::session();
-
-        if (!$this->session->get('logged_in')) 
-        {
-            return redirect()->to('/');
-        }
- 
     }
 
     public function thankyou()
@@ -124,7 +117,6 @@ class ReviewController extends BaseController
     public function updatestatus($customer_email, $status, $insertedID)
     {
         $reviewModel = new ReviewModal();
-    
         // Fetch the existing review using the inserted ID
         $existingReview = $reviewModel->find($insertedID);
     
@@ -172,7 +164,7 @@ class ReviewController extends BaseController
         if (!$emailService->send()) {
             log_message('error', $emailService->printDebugger(['headers', 'subject', 'body']));
         }
-    }
+    } 
 
     // view function of social review page
     public function social_review()

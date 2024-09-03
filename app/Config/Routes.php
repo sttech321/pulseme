@@ -15,6 +15,7 @@ $routes->set404Override();
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index', ['filter' => 'auth']);
 $routes->get('/logout', 'UserController::logout');
 $routes->post('/loginAuth', 'UserController::loginAuth');
 $routes->add('/forgot-password', 'UserController::forgotPassword');
@@ -106,3 +107,7 @@ $routes->post('/analyze/reviews/social-reviews/delete', 'ReviewController::delet
 
 $routes->get('/user-preferences', 'UserController::profile');
 $routes->post('/user-preferences/update/(:num)', 'UserController::updateProfile/$1');
+// $routes->get('/clear-cache', 'UserController::clear');
+
+// $routes->get('guest-url', 'GuestController::index');
+// $routes->get('logged-in-url', 'UserController::index', ['filter' => 'auth']);

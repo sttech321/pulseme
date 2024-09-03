@@ -246,11 +246,23 @@
                                                    <input class="form-control" autocomplete="off" name="City" type="text" placeholder="City">
                                                 </div>
                                              </div>
-                                             <div class="col-12 col-md-4">
-                                                <div class="inputBox">
-                                                   <input class="form-control" autocomplete="off" name="State" type="text" placeholder="State">
-                                                </div>
-                                             </div>
+                                             <div class="col-12 col-md-6">
+                                          <div class="inputBox">
+                                             <select class="form-select form-select-md mb-3" name="State">
+                                                <option disabled selected>State</option>
+                                                   <?php
+                                                   // Define the list of states
+                                                   $locations = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+                                                   // Assuming $state contains the currently selected state
+                                                   ?>                                    
+                                                   <?php foreach ($locations as $location): ?>
+                                                      <option value="<?= $location; ?>">
+                                                         <?= $location; ?>
+                                                      </option>
+                                                   <?php endforeach; ?>
+                                                </select>
+                                          </div>
+                                       </div>
                                              <div class="col-12 col-md-4">
                                                 <div class="inputBox">
                                                    <input class="form-control" autocomplete="off" name="Zipcode" type="text" placeholder="Zipcode">
@@ -426,6 +438,8 @@
                                     $reviewrate1 = isset($reviewratings->rate1) ? $reviewratings->rate1->value : '';
                                     $reviewrate2 = isset($reviewratings->rate2) ? $reviewratings->rate2->value : '';
                                     $reviewrate3 = isset($reviewratings->rate3) ? $reviewratings->rate3->value : '';
+                                     // Define the list of states
+                                     
                                     ?>
                                     <div data-v-f15ab7a3="" class="info flex flex-wrap">
                                     <?php if($name) { ?>
@@ -526,7 +540,14 @@
                                                          <input class="outline-none py-7px border-b focus:border-blue-500" name="city" value="<?= $city; ?>" type="text" placeholder="<?= $city; ?>">
                                                          <select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">
                                                             <option disabled selected>State</option>
-                                                            <option value="<?= $state; ?>"><?= $state; ?></option>
+                                                            <?php 
+                                                            $locations = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+                                                            ?>
+                                                            <?php foreach ($locations as $location): ?>
+                                                               <option value="<?= $location; ?>" <?= $location == $state ? 'selected' : ''; ?>>
+                                                                  <?= $location; ?>
+                                                               </option>
+                                                            <?php endforeach; ?>
                                                          </select>
                                                          <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value=" <?= $zipcode; ?>" type="text" placeholder=" <?= $zipcode; ?>">
                                                       </div>
@@ -642,7 +663,6 @@
                   '</svg>' +
                   'Edit' +
                   '</button>' +
-
                   '</div>' +
                   '</td>'
             }
@@ -793,6 +813,8 @@
                   }
                   //console.log('the campaign name with their values are :',campaignOptions)
                   if (Array.isArray(data.reviews) && data.reviews.length > 0) {
+                       // Define the list of states
+                  let locations = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
 
                      data.reviews.forEach(function(review) {
                         var id = review.ID;
@@ -944,9 +966,11 @@
                            '</div>' +
                            '<input class="outline-none py-7px border-b focus:border-blue-500" name="city" value="' + reviewerInfo.City + '" type="text" placeholder="test">' +
                            '<select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">' +
-                           '<option disabled="" selected="">State</option>' +
-                           '<option value="No State Available">No State Available</option>' +
-                           '</select>' +
+                           '<option disabled="" selected="">State</option>'
+                            + locations.map(function(state) {
+                              return '<option value="' + state + '"' + (state === reviewerInfo.State ? ' selected' : '') + '>' + state + '</option>';
+                           }).join('')  +          
+                           '</select>'                           +
                            '<input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="' + reviewerInfo.Zipcode + '" type="text" placeholder="">' +
                            '</div>' +
                            '<div class="modal-footer">' +

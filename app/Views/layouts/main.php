@@ -61,8 +61,9 @@
 							<img data-v-139b8be6="" width="230" src="<?= base_url('/image/person.jpg') ?>" alt="user picture">
 						</div>
 						<?php if (!empty($admin1)): ?>
+							
 						<div class="user-info">
-							<span class="user-name"><?= esc($admin1['first_name']) ?>
+							<span class="user-name"><?= isset($admin1['first_name']) && !empty($admin1['first_name']) ? esc($admin1['first_name']) : 'George' ?>
 								<strong><?= esc($admin1['last_name']) ?></strong>
 							</span>
 							<span class="user-role">Administrator</span>

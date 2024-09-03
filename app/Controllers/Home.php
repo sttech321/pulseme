@@ -4,11 +4,15 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     public function index(): string
     {
-        // die("555555555");
         return view('login/login');
-    }
+    }    
 
     public function login(): string
     {
