@@ -10,7 +10,7 @@
 <div class="headerTop">
    <div class="dropMenuWrap flexBetween">
       <div class="pageNameWrap">
-         <h3 class="secTitle">Operate</h3>
+         <h3 class="secTitle">Manage Your Account</h3>
       </div>
       <div class="rightWrap">
          <div class="location-info flex flex-col justify-center items-end mr-10px">
@@ -23,9 +23,9 @@
 </div>
 <div class="sidebarRightContent">
    <div class="flex-grow flex flex-col items-stretch bg-gray-100 h-auto">
-      <div class="headline bg-white p-20px border-b border-gray-200">
+      <!-- <div class="headline bg-white p-20px border-b border-gray-200">
          <h1 class="text-2xl">Manage Your Account</h1>
-      </div>
+      </div> -->
       <div class="flex flex-grow justify-start">
          <div class="w-1/4 max-w-200px flex flex-shrink-0 justify-start items-start flex-col">
             <h2 class="text-xl p-15px pt-30px">Company Settings</h2>
@@ -117,13 +117,14 @@
                                                    </div>
                                                    <div class="modal-body">
                                                       <div class="grid grid-cols-2 gap-20px auto-rows-auto">
-                                                         <div class="flex w-full flex-col row-span-3">
-                                                            <img id="preview" class="preview-image w-200px h-auto" src="/image/campaignProfile.jpg" alt="Image Preview">
+                                                         <div class="flex w-full flex-col row-span-3 flex w-full flex-col row-span-3 uploadImgBox">
+                                                            <img id="preview" class="preview-image w-200px h-auto" src="<?=base_url('/image/campaignProfile.jpg')?>" alt="Image Preview">
                                                             <p class="text-md">Upload your image</p>
                                                             <p class="text-sm mb-3">The preferred size is 200x200</p>
                                                             <!-- <input id="logo-upload" hidden="" type="file"> -->
-                                                            <button class="btn btn-blue w-full mb-2" type="button">
-                                                               <input type="file" id="profile-image-upload-1" name="campaignImage" style="display: block;" accept="image/*" onchange="previewImage(event)">
+                                                            <button class="btn w-full mb-2 uploadBtnWrap" type="button">
+                                                               <label for="profile-image-upload-1" class="upload-labels">Upload your file</label>
+                                                               <input type="file" id="profile-image-upload-1" name="campaignImage" accept="image/*" onchange="previewImage(event)" class="upload-inputs">
                                                             </button>
                                                          </div>
                                                          <div class="input-group">
@@ -292,17 +293,14 @@
                                              <div class="modal-body">
                                                 <div class="grid grid-cols-2 gap-20px auto-rows-auto">
                                                    <div class="flex w-full flex-col row-span-3 uploadImgBox">
-                                                      <img id="preview" class="preview-image w-200px h-auto" src="<?= esc($campaign['image']) ?>" alt="Image Preview">
+                                                      <img id="preview" class="preview-image w-200px h-auto" src="<?= base_url(esc($campaign['image'])) ?>" alt="Image Preview">
                                                       <p class="text-md">Upload your image</p>
                                                       <p class="text-sm mb-3">The preferred size is 200x200</p>
                                                       <button class="btn w-full mb-2 uploadBtnWrap" type="button">
-                                                         <label for="profile-image-upload-1" class="upload-label">Upload your file</label>
-
-                                                         <!-- <input type="file" id="profile-image-upload-1" name="campaignImage" accept="image/*" onchange="previewImage(event)" class="upload-input"> -->
-
-                                                         <!-- <input type="file" id="profile-image-upload-1" name="campaignimg" accept="image/*" onchange="previewImage(event)" > -->
-
-
+                                                         <!-- <p for="profile-image-upload-1" class="upload-labels" id="upload-labelss">Upload your file</p>
+                                                         <input type="file" id="profile-image-uploadss" name="campaignImages" accept="image/*"  class="upload-input"> -->
+                                                         <!-- <p id="fileLabel" style="cursor: pointer; color: blue; text-decoration: underline;">Upload your file</p> -->
+                                                         <input type="file" id="fileInput" name="campaignImages">
                                                       </button>
                                                    </div>
                                                    <div class="input-group">
@@ -371,7 +369,7 @@
                                     <div class="modal-dialog modalContent mx-700">
                                        <div class="modal-content">
                                           <div class="modal-body bg-white relative  my-30px rounded-4px shadow p-30px text-center flex flex-col items-center">
-                                             <div class="img mb-5 "><img class="rounded" src="<?= esc($campaign['image']) ?>" alt=""></div>
+                                             <div class="img mb-5 "><img class="rounded" src="<?= base_url(esc($campaign['image'])) ?>" alt=""></div>
                                              <h1 class="text-30px font-bold mb-15px">What would you like to see?</h1>
                                              <button type="button" class="btn-close text-gray-400 hover:text-black absolute top-20px right-10px" data-bs-dismiss="modal" aria-label="Close">
                                                 <svg class="svg-inline--fa fa-xmark text-30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -396,7 +394,7 @@
                         <tr class="flex odd:bg-sky-100 odd:bg-opacity-50 py-15px px-10px">
                            <td class="employee flex items-center px-10px py-20px flex-shrink-0 w-1/12">
                               <div class="profile-img w-full h-auto mr-10px flex justify-center items-center">
-                                 <img w-full="" src="<?= base_url($campaign['image']) ?>" alt="">
+                                 <img w-full="" src="<?= base_url(esc($campaign['image'])) ?>" alt="">
                               </div>
                            </td>
                            <td class="employee flex items-center px-10px flex-shrink-0 w-1/6">
@@ -409,14 +407,14 @@
                               <p class="description"><?= esc($campaign['description']) ?></p>
                            </td>
                            <td class="flex flex-col justify-center items-end col-span-3 flex-shrink-0 px-10px w-1/4">
-                              <div class="grid grid-rows-2 grid-flow-col gap-10px">
+                              <div class="grid grid-rows-1 grid-flow-col gap-10px">
                                  <!-- <a href="<?= base_url('/settings/dispatch/campaigns/' . $campaign['ID']) ?>" class="btn btn-blue w-full rounded-2px"> -->
                                  <button data-bs-toggle="modal" data-bs-target="#EDITcampaignModal-<?= $campaign['ID'] ?>" class="btn btn-blue w-full rounded-2px" id="editCampaign-<?= esc($campaign['ID']) ?>">
                                     <svg class="svg-inline--fa fa-face-grin" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                        <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z">
                                        </path>
                                     </svg>
-                                    Edit Campaign
+                                    Edit
                                  </button>
                                  <!-- </a> -->
                                  <!-- <button data-bs-toggle="modal" data-bs-target="#EDITDefault" class="btn btn-blue w-full rounded-2px" id="showFieldOps-<?= esc($campaign['employeeId']) ?>">
@@ -426,13 +424,13 @@
                                        </svg>
                                        FieldOps App 
                                     </button> -->
-                                 <a href="<?= base_url('/settings/dispatch/campaigns/delete/' . $campaign['ID']) ?>" class="delete-campaign-btn btn btn-red w-full rounded-2px showFieldOps">
-                                    <button class="btn btn-red rounded-2px" id="showFieldOps-<?= esc($campaign['ID']) ?>">
-                                       <svg class="showFieldOps svg-inline--fa fa-trash" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                          <path class="" fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                                          </path>
-                                       </svg>
-                                    </button>
+                                 <a href="<?= base_url('/settings/dispatch/campaigns/delete/' . $campaign['ID']) ?>" class="delete-campaign-btn btn btn-red width-max-content rounded-2px showFieldOps">
+                                    <!-- <button class="btn btn-red rounded-2px" id="showFieldOps-<?= esc($campaign['ID']) ?>"> -->
+                                    <svg class="svg-inline--fa fa-trash" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                       <path class="" fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                                       </path>
+                                    </svg>
+                                    <!-- </button> -->
                                  </a>
                                  <button data-bs-toggle="modal" data-bs-target="#EDITscampaignModal-<?php echo $campaign['employeeId']; ?>" class="btn btn-blue rounded-2px" id="showSample-<?= esc($campaign['employeeId']) ?>">
                                     <svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -489,6 +487,7 @@
                $('#campaignModal').modal('hide');
                // Show success message or redirect
                alert('Campaign saved successfully!');
+               location.reload();
             } else {
                // Display validation errors
                $('#validation-errors').html('');
@@ -505,34 +504,29 @@
    });
 
    $(document).ready(function() {
-      // Bind the form submit event
       $(document).on('submit', 'form[data-ajax="true"]', function(event) {
          event.preventDefault(); // Prevent default form submission
 
          var form = $(this);
-         var formData = new FormData(form[0]); // Get form data
+         var formData = new FormData(form[0]); // Get form data, including filesa
 
          $.ajax({
             url: form.attr('action'),
-            type: 'POST',
-            data: formData,
-            processData: false, // Important: prevent jQuery from automatically transforming the data into a query string
-            contentType: false, // Important: prevent jQuery from setting the content-type header
-            success: function(response) {
-               // Handle success response here
-               if (response.success) {
-                  alert('Campaign updated successfully.');
-                  // Optionally, refresh the page or update the UI
-                  // location.reload(); // Reload page to see changes
-               } else {
-                  // Handle validation errors or other response data
-                  alert('Failed to update campaign: ' + response.message);
+               type: 'POST',
+               data: formData,
+               processData: false, // Prevent jQuery from transforming the data into a query string
+               contentType: false, // Prevent jQuery from setting the content-type header
+               success: function(response) {
+                  if (response.success) {
+                     alert('Campaign updated successfully.');
+                     location.reload(); 
+                  } else {
+                     alert('Failed to update campaign: ' + response.message);
+                  }
+               },
+               error: function(xhr, status, error) {
+                  alert('An error occurred: ' + error);
                }
-            },
-            error: function(xhr, status, error) {
-               // Handle AJAX errors here
-               alert('An error occurred: ' + error);
-            }
          });
       });
    });
@@ -597,7 +591,7 @@
                   var table = $('<table class="w-full"></table>');
                   $.each(data, function(index, technician) {
                      var row =
-                        `<tr class="flex odd:bg-sky-100 odd:bg-opacity-50 py-15px px-10px"><td class="employee flex items-center px-10px py-20px flex-shrink-0 w-1/12"><div class="profile-img w-full h-auto mr-10px flex justify-center items-center"> <img w-full="" src="http://localhost:8080${technician.image}" alt=""> </div> </td><td class="employee flex items-center px-10px flex-shrink-0 w-1/6"><div class=""><p class="name font-17px font-bold">${technician.name}</p> <p class="department font-14px text-gray-500">${technician.department}</p> </div></td><td class="recipient-info col-span-6 flex flex-col w-1/2 justify-center items-start px-10px"><p class="description">${technician.description}</p></td><td class="flex flex-col justify-center items-end col-span-3 flex-shrink-0 px-10px w-1/4"><div class="grid grid-rows-2 grid-flow-col gap-10px"><button data-bs-toggle="modal" data-bs-target="#EDITcampaignModal-${technician.ID}" class="btn btn-blue w-full rounded-2px" id="editCampaign-${technician.employeeId}" ><svg class="svg-inline--fa fa-face-grin" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"> </path> </svg> Edit Campaign  </button><a href="http://localhost:8080/settings/dispatch/campaigns/delete/${technician.ID}" class="delete-campaign-btn btn btn-red w-full rounded-2px showFieldOps" > <button class="btn btn-red rounded-2px" id="showFieldOps-${technician.ID}"><svg class="showFieldOps svg-inline--fa fa-trash" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"> <path class="" fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg> </button></a><button data-bs-toggle="modal" data-bs-target="#EDITscampaignModal-${technician.employeeId}" class="btn btn-blue rounded-2px" id="showSample-${technician.employeeId}"> <svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path class="" fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg></button></div></td></tr>`;
+                        `<tr class="flex odd:bg-sky-100 odd:bg-opacity-50 py-15px px-10px"><td class="employee flex items-center px-10px py-20px flex-shrink-0 w-1/12"><div class="profile-img w-full h-auto mr-10px flex justify-center items-center"> <img w-full="" src="http://localhost:8080${technician.image}" alt=""> </div> </td><td class="employee flex items-center px-10px flex-shrink-0 w-1/6"><div class=""><p class="name font-17px font-bold">${technician.name}</p> <p class="department font-14px text-gray-500">${technician.department}</p> </div></td><td class="recipient-info col-span-6 flex flex-col w-1/2 justify-center items-start px-10px"><p class="description">${technician.description}</p></td><td class="flex flex-col justify-center items-end col-span-3 flex-shrink-0 px-10px w-1/4"><div class="grid grid-rows-1 grid-flow-col gap-10px"><button data-bs-toggle="modal" data-bs-target="#EDITcampaignModal-${technician.ID}" class="btn btn-blue w-full rounded-2px" id="editCampaign-${technician.employeeId}" ><svg class="svg-inline--fa fa-face-grin" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-grin" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"> </path> </svg> Edit </button><a href="http://localhost:8080/settings/dispatch/campaigns/delete/${technician.ID}" class="delete-campaign-btn btn btn-red  rounded-2px showFieldOps width-max-content" > <svg class="svg-inline--fa fa-trash" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"> <path class="" fill="currentColor" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg></a><button data-bs-toggle="modal" data-bs-target="#EDITscampaignModal-${technician.employeeId}" class="btn btn-blue rounded-2px" id="showSample-${technician.employeeId}"> <svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path class="" fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg></button></div></td></tr>`;
                      table.append(row);
 
                      var modal = `
@@ -617,8 +611,7 @@
                                        <p class="text-md">Upload your image</p>
                                        <p class="text-sm mb-3">The preferred size is 200x200</p>
                                           <button class="btn w-full mb-2 uploadBtnWrap" type="button">
-                                             <label for="profile-image-upload-1" class="upload-label">Upload your file</label>
-                                             <input type="file" id="profile-image-upload-1" name="campaignimg" accept="image/*" onchange="previewImage(event)" >
+                                                <input type="file" id="fileInput" name="campaignImages">
                                           </button>
                                     </div>
                                     <div class="input-group">
@@ -659,9 +652,9 @@
                      <div class="modal-dialog modalContent mx-700">
                            <div class="modal-content">
                            <div class="modal-body bg-white relative  my-30px rounded-4px shadow p-30px text-center flex flex-col items-center">
-                                    <div class="img"><img src="${technician.image}" alt=""></div>
+                                    <div class="img mb-5"><img src="${technician.image}" alt=""></div>
                                     <h1 class="text-30px font-bold mb-15px">What would you like to see?</h1>
-                                    <button type="button" class="btn-close text-gray-400 hover:text-black absolute top-10px right-10px" data-bs-dismiss="modal" aria-label="Close">  
+                                    <button type="button" class="btn-close text-gray-400 hover:text-black absolute top-20px right-10px" data-bs-dismiss="modal" aria-label="Close">  
                                        <svg class="svg-inline--fa fa-xmark text-30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                           <path class="" fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
                                        </svg>
@@ -693,20 +686,5 @@
       loadTechnicians();
    });
 </script>
-<script>
-   document.addEventListener("DOMContentLoaded", function() {
-      // Get the current URL path
-      const currentPath = window.location.pathname;
 
-      // Get all tab links
-      const tabs = document.querySelectorAll('.tab-link');
-
-      // Loop through the tabs and check if their href matches the current path
-      tabs.forEach(function(tab) {
-         if (tab.getAttribute('href') === currentPath) {
-            tab.classList.add('active'); // Add 'active' class to the matching tab
-         }
-      });
-   });
-</script>
 <?= $this->endsection('content') ?>

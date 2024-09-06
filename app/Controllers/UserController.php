@@ -16,24 +16,39 @@ class UserController extends Controller
 
     public function loginAuth() {
         helper(['form']);
+        
+        // Load the UserModel
         $model = new UserModel();
-        $email = $this->request->getVar('email');
-        $password = $this->request->getVar('password');      
+        
+        // Get email and password from the request
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+        
+        // Validate credentials
         $isLoggedIn = $model->userCanLogin($email, $password);
         
         if ($isLoggedIn) {
             // Set session data
-            $userData = [ 
+            $userData = [
                 'username' => $email,
                 'isLoggedIn' => true
             ];
             session()->set($userData);
-            return redirect()->to('/analyze/reviews');
+            
+            // Check if a redirect URL is stored in the session
+            $redirectUrl = session()->get('redirect_back') ?? '/analyze/reviews';
+            
+            // Clear the redirect URL from the session
+            session()->remove('redirect_back');
+            
+            // Redirect the user to the intended page or default to the reviews page
+            return redirect()->to($redirectUrl);
         } else {
+            // Set an error message and redirect to the login page
             session()->setFlashdata('error', 'Invalid username/email or password');
             return redirect()->to('/');
         }
-    }
+    }    
 
     public function logout() {
         // Destroy session data on logout

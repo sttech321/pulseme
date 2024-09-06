@@ -37,7 +37,7 @@ class Campaign extends BaseController {
         $technicianModel = new TechnicianModal();
         
         if ($search) {
-            $results = $technicianModel->getTechniciansBySearchs($search);
+            $results = $technicianModel->getTechniciansBySearch($search);
         } else {
             $results = $technicianModel->findAll(); // Return all technicians if no search query
         }
@@ -115,36 +115,29 @@ class Campaign extends BaseController {
             ]);
         }
     }
-    
-    public function update($id)
-    {
+
+    public function update($id) 
+    { 
         $campaignModel = new CampaignModel();
-        $imageFile = $this->request->getFile('campaignimg');
- 
-        // Check if the file was uploaded
+           // Retrieve the existing campaign data
+        $existingCampaign = $campaignModel->find($id);
+        $imageFile = $this->request->getFile('campaignImages');
         if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved()) {
             // Define the upload path
             $uploadPath = '/image/campaign/';
- 
-            // Generate a unique name for the file to avoid conflicts
             $fileName = $imageFile->getRandomName();
- 
-            // Move the file to the upload path
             if ($imageFile->move(ROOTPATH . 'public' . $uploadPath, $fileName)) {
-                // Store the file path
                 $imagePath = $uploadPath . $fileName;
             } else {
-                // Handle file move error
                 return $this->response->setJSON([
                     'success' => false,
                     'message' => 'Failed to upload the image.',
                 ]);
             }
         } else {
-            // If no file is uploaded, set imagePath to null or handle as needed
-            $imagePath = null;
+            $imagePath = $existingCampaign['image'] ?? ''; 
         }
- 
+
         $data = [
             'name' => $this->request->getPost('CampaignName'),
             'description' => $this->request->getPost('campaignDescription'),
@@ -155,7 +148,7 @@ class Campaign extends BaseController {
             'deviceId' => $this->request->getPost('deviceId'),
             'image' => $imagePath,
         ];
-   
+    
         if ($campaignModel->update($id, $data)) {
             return $this->response->setJSON([
                 'data' => $data,

@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
+  <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url('/image/summitRA.jpeg')?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Verify OTP</title>
-  <link rel="stylesheet" type="text/css" href="/css/reset.css">
-  <link rel="stylesheet" type="text/css" href="/css/login.css">
-  <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('/css/reset.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('/css/login.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('/css/variables.css')?>">
   </script>
   <style>
     * {
@@ -30,7 +30,7 @@
 <form action="<?= base_url('/forgot-password/reset/process') ?>" method="post" id="passwordForm">
     <div class="wrapper sessionWrap">
       <div class="contact-form-wrap">
-        <img style="margin-bottom:35px;" width="230" src="/image/login-img.png">
+        <img style="margin-bottom:35px;" width="230" src="<?= base_url('/image/login-img.png')?>">
         <?php if ($session->getFlashdata('error')): ?>
             <p style="color:red;"><?php echo $session->getFlashdata('error'); ?></p>
         <?php endif; ?>

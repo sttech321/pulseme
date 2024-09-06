@@ -2,12 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url('/image/summitRA.jpeg')?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'summitRA - Login page' ?></title>
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/css/login.css">
-    <link rel="stylesheet" type="text/css" href="/css/variables.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('/css/reset.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('/css/login.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('/css/variables.css')?>">
     </script>
     <style>
       * {
@@ -30,7 +30,7 @@
   <form method="post" action="<?= base_url('loginAuth') ?>">
       <div data-v-139b8be6="" class="wrapper sessionWrap">
         <div class="contact-form-wrap">
-          <img data-v-139b8be6="" width="230" src="/image/login-img.png">
+          <img data-v-139b8be6="" width="230" src="<?= base_url('/image/login-img.png')?>">
           <div data-v-139b8be6="" class="formField">
             <p style="color:red;"><?= session()->get('error') ?></p>
             <p style="color:green;"><?= session()->get('success') ?></p>

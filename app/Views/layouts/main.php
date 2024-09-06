@@ -7,16 +7,16 @@
 	<title><?= $title ?? 'Untitled' ?></title>
 	<meta name="description" content="summitRA: The small framework with powerful features">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/header.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reset.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reviews.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/variables.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/analysis.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/all.min.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/apexcharts.css') ?>">
-	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('/css/bootstrap.min.css') ?>"> -->
-	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('/css/custom-modal.css') ?>"> -->
+	<link rel="icon" type="image/png" sizes="32x32" href="<?=base_url('/image/summitRA.jpeg')?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/header.css'). '?v=' . time()?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reset.css'). '?v=' . time() ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reviews.css'). '?v=' . time() ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/variables.css'). '?v=' . time() ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/analysis.css'). '?v=' . time() ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/all.min.css'). '?v=' . time() ?>">
+	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/apexcharts.css'). '?v=' . time() ?>">
+	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('/css/bootstrap.min.css'). '?v=' . time() ?>"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="<?= base_url('/css/custom-modal.css'). '?v=' . time() ?>"> -->
 
 	<script src="<?= base_url('/js/jquery.js') ?>"></script>
 	<style>
@@ -151,7 +151,7 @@
 										<a href="<?= base_url('/leaderboard/summary') ?>"><img width="15" src="<?= base_url('/image/summary.svg') ?>" alt="sidebar icon">Summary</a>
 									</li>
 									<li>
-										<a href="<?= base_url('/leaderboard/reports/campaigns') ?>"><img width="15" src="<?= base_url('/image/reports.svg') ?>" alt="sidebar icon">Reports</a>
+										<a href="<?= base_url('/leaderboard/reports/departments') ?>"><img width="15" src="<?= base_url('/image/reports.svg') ?>" alt="sidebar icon">Reports</a>
 									</li>
 								</ul>
 							</div>
@@ -332,24 +332,44 @@
 	</script>
 
 	<script>
-		// document.querySelector('.dropdown-toggle').addEventListener('click', function() {
-		// 	this.parentElement.classList.toggle('show');
-		// });
-		// window.addEventListener('click', function(event) {
-		// 	if (!event.target.matches('.dropdown-toggle')) {
-		// 		var dropdowns = document.getElementsByClassName("dropdown");
-		// 		for (var i = 0; i < dropdowns.length; i++) {
-		// 			var openDropdown = dropdowns[i];
-		// 			if (openDropdown.classList.contains('show')) {
-		// 				openDropdown.classList.remove('show');
-		// 			}
-		// 		}
-		// 	}
-		// });
+	document.addEventListener('DOMContentLoaded', function() {
+		var dropdownToggle = document.querySelector('.dropdown-toggle');
+		
+		if (dropdownToggle) { // Check if the element exists
+			dropdownToggle.addEventListener('click', function() {
+				this.parentElement.classList.toggle('show');
+			});
+		}
+
+		window.addEventListener('click', function(event) {
+			if (!event.target.matches('.dropdown-toggle')) {
+				var dropdowns = document.getElementsByClassName("dropdown");
+				for (var i = 0; i < dropdowns.length; i++) {
+					var openDropdown = dropdowns[i];
+					if (openDropdown.classList.contains('show')) {
+						openDropdown.classList.remove('show');
+					}
+				}
+			}
+		});
+	});
 	</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the current URL path
+    const currentPath = window.location.pathname;
 
+    // Get all tab links
+    const tabs = document.querySelectorAll('.tab-link');
 
+    // Loop through the tabs and check if their href matches the current path
+    tabs.forEach(function(tab) {
+        if (tab.getAttribute('href') === currentPath) {
+            tab.classList.add('active'); // Add 'active' class to the matching tab
+        }
+    });
+});
+</script>
 
 </body>
-
 </html>

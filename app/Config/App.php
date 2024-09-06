@@ -82,7 +82,8 @@ class App extends BaseConfig
     |
     */
     // public string $permittedURIChars = 'a-z 0-9~%.:_\-';
-    public string $permittedURIChars = 'a-z 0-9~%.:_\-()@!';
+    public string $permittedURIChars = 'a-z 0-9~%.:_\-@';
+
 
     /**
      * --------------------------------------------------------------------------
@@ -134,7 +135,6 @@ class App extends BaseConfig
      * @see https://www.php.net/manual/en/timezones.php for list of timezones
      *      supported by PHP.
      */
-    // public string $appTimezone = 'UTC';
     public string $appTimezone = 'Asia/Kolkata';
 
     /**

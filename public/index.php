@@ -72,26 +72,27 @@ if (!defined('ROOTPATH')) {
 
 $app = require_once realpath(__DIR__ . '/../') . '/bootstrap/app.php';
 
-
+// $app->run();
+ 
 if (php_sapi_name() === 'cli') {
     global $argv;
-    
+   
     echo "CLI mode detected\n";
     // Initialize CodeIgniter for CLI use
     $app = CodeIgniter\CodeIgniter::createApplication($paths);
-
+ 
     // Extract command-line arguments
     $command = isset($argv[1]) ? $argv[1] : '';
-
+ 
     // Handle the CLI command
-    if ($command === 'processPendingReviews') {
+    if ($command === 'updatestatus') {
         require_once APPPATH . 'Controllers/ReviewController.php';
         // Handle the CLI command
         $customer_email = isset($argv[2]) ? $argv[2] : null;
         $status = isset($argv[3]) ? $argv[3] : null;
-
+ 
         $controller = new \App\Controllers\ReviewController();
-        $controller->processPendingReviews($customer_email, $status);
+        $controller->updatestatus($customer_email, $status);
         echo "Review processed for $customer_email with status $status\n";
         exit(0); // End the script after processing the command
     } else {
@@ -102,4 +103,3 @@ if (php_sapi_name() === 'cli') {
     // Web request handling
     $app->run();
 }
-

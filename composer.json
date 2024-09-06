@@ -13,7 +13,7 @@
         "php": "^8.1",
         "ext-intl": "*",
         "ext-mbstring": "*",
-        "daycry/cronjob": "^2.2",
+        "codeigniter4/tasks": "dev-develop",
         "guzzlehttp/guzzle": "^7.9",
         "laminas/laminas-escaper": "^2.13",
         "psr/log": "^3.0",
@@ -65,5 +65,7 @@
     },
     "scripts": {
         "test": "phpunit"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

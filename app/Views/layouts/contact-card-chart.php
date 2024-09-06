@@ -1,14 +1,21 @@
 <div id="donut-chart"></div>
+<div id="chart-info" style="text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: Arial, sans-serif;">
+    <div style="font-size: 16px; color: #333;">Scans</div>
+    <div style="margin-top:10px;"><?= $statuspending ?></div>
+</div>
 <script>
+    var statusDone = <?= $statusdones ?>;
+    var statusPending = <?= $statuspending ?>;
+    
     document.addEventListener("DOMContentLoaded", function() {
         var options = {
             chart: {
                 type: 'donut',
                 height: 350
             },
-            colors: ['#3399ff', '#ffff00'], // Medium-light blue and yellow color
-            series: [75, 25], // 75% for the first color, 25% for the second
-            labels: ['Contact Card Numbers', 'Other Category'],
+            colors: ['#3399ff', '#ff9900'],
+            series: [statusDone, statusPending], // Corrected variable name
+            labels: ['Contact Card Numbers', 'Pending'], // Updated labels for consistency
             plotOptions: {
                 pie: {
                     donut: {
@@ -17,10 +24,10 @@
                 }
             },
             dataLabels: {
-                enabled: false // Don't show the percentage inside the donut
+                enabled: false
             },
             legend: {
-                show: false // Hide legend
+                show: false
             }
         };
 

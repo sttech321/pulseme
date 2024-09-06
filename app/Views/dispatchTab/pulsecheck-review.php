@@ -61,8 +61,4 @@
         </div>
     </div>
 </body>
-<<<<<<< HEAD
-=======
-
->>>>>>> remotes/origin/vikash
 </html>

@@ -14,7 +14,7 @@ $routes->set404Override();
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index', ['filter' => 'auth']);
 $routes->get('/logout', 'UserController::logout');
 $routes->post('/loginAuth', 'UserController::loginAuth');
 $routes->add('/forgot-password', 'UserController::forgotPassword');
@@ -54,7 +54,7 @@ $routes->get('/settings/general/users', 'Home::general_users');
 $routes->get('/settings/general/reporting', 'Home::general_reporting');
 
 $routes->get('/settings/contact-card/contact-information', 'ContactcardController::contact_information');
-$routes->get('/settings/contact-card/templates', 'ReviewController::contact_templates');
+$routes->get('/settings/contact-card/templates', 'ContactcardController::contact_templates');
 $routes->get('/settings/billing/billing_subscription', 'Home::billing_subscription');
 $routes->get('settings/general/connect-social-media', 'Home::connect_social_media'); 
 $routes->get('/dispatch-tab/demo-test', 'DispatchController::insert_campaign');
@@ -88,10 +88,10 @@ $routes->post('example/submit', 'CustomerController::create_dispatch');
 $routes->post('searchbar', 'Campaign::search');
 
 $routes->post('/contact-card', 'ContactcardController::create_contactcard');
-$routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
+// $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 
-$routes->post('/contact-card', 'ContactcardController::create_contactcard');
-$routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
+$routes->get('/conactcardlayout', 'ContactcardController::conactcardlayout');
+// $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 
 $route['chart'] = 'ChartController/index';
 
@@ -99,7 +99,8 @@ $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::searc
 $routes->post('/leaderboard/reports/campaigns/filter', 'ReportsController::filterCampaigns');
 $routes->post('/leaderboard/reports/filterDepartments', 'ReportsController::filterDepartments');
 
+$routes->get('/cron-job', 'ReviewController::updatestatus');
 
-$routes->cli('/reviews/processPendingReviews/(:any)/(:any)/(:any)', 'ReviewController::processPendingReviews/$1/$2/$3');
+$routes->get('/reviews/export-csv','ReviewController::exportCsv');
 
-
+$routes->cli('/reviews/updatestatus/(:any)/(:any)/(:any)', 'ReviewController::updatestatus/$1/$2/$3');

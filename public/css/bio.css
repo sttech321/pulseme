@@ -26602,3 +26602,10 @@ div.table {
 div#reviews .review {
     padding: 10px;
 }
+
+/* bio  */
+
+.mt-5{
+    margin-top: 5px;
+    display: block;
+}

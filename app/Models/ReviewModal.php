@@ -84,7 +84,6 @@ class ReviewModal extends Model
         $query = $this->db->query($sql, [$id]);
         return $query->getRowArray(); 
     }
-    
 
     public function get_reviews_campaignId($campaignID){
         $sql = "SELECT reviews.*, campaign.name, campaign.department, campaign.employeeId
@@ -109,7 +108,6 @@ class ReviewModal extends Model
         return $query->getResultArray();
     }
      
-
     public function dispatchingchart(){
         // Load the database
         $db = \Config\Database::connect();
@@ -221,7 +219,17 @@ class ReviewModal extends Model
         // Get pulse check data by month
         $pulseCheckData = $this->getPulseCheckDataByMonth();
         // print_r($pulseCheckData);
-    
+        $statusdone = 0;
+        $statuspending = 0;
+        $sql ="SELECT JSON_UNQUOTE(JSON_EXTRACT(reviewratings, '$.status')) AS status, COUNT(*) AS count FROM reviews GROUP BY status";
+        $query = $db->query($sql);
+        $results = $query->getResultArray();
+      
+        $statusdone =  $results[1]['count'];
+        $statuspending =  $results[2]['count'];
+
+        // print_r($statusdone);
+        // print_r($statuspending);
         // Prepare arrays for the result
         $bioDates = [];
         $pulsecheckDates = [];
@@ -259,6 +267,8 @@ class ReviewModal extends Model
             'pulsecheckDates' => json_encode($pulsecheckDates),
             'bioCounts'       => json_encode($bioCounts),
             'pulsecheckCounts'=> json_encode($pulsecheckCounts),
+            'statusdones'      => $statusdone,
+            'statuspending'   => $statuspending,
         ];
     }    
 

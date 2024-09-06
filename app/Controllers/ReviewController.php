@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\I18n\Time;
 use App\Models\CampaignModel;
 use App\Models\ContactcardModal;
 use App\Models\ReviewModal;
@@ -39,7 +40,7 @@ class ReviewController extends BaseController
     {
         // Load necessary helpers and libraries
         helper(['form', 'url']);
-
+    
         // Validation rules
         $rules = [
             'customer_email' => 'required|valid_email',
@@ -51,16 +52,14 @@ class ReviewController extends BaseController
             'rating3_value' => 'required',
             'rating3_text' => 'required',
         ];
-
+    
         // Validate form input
         if (!$this->validate($rules)) {
             // Redirect back with validation errors and input data
             return redirect()->back()->withInput()->with('validation', $this->validator);
         }
-
+    
         $reviewModel = new ReviewModal();
-        echo '<pre>';
-        // print_r($reviewModel);
         // Collecting data from the request
         $feedback = $this->request->getPost('feedback');
         $rating1_value = $this->request->getPost('rating1_value');
@@ -72,13 +71,13 @@ class ReviewController extends BaseController
         $campaignId = $this->request->getPost('ID');
         $customer_name = $this->request->getPost('customer_name');
         $customer_email = $this->request->getPost('customer_email');
-        $city = $this->request->getPost('state');
-        $state = $this->request->getPost('city');
+        $state = $this->request->getPost('state');
+        $city = $this->request->getPost('city');
         $zipcode = $this->request->getPost('zipcode');
         $sentiment = $this->request->getPost('result_value');
         $review_type = $this->request->getPost('reviewType');
         $status = $this->request->getPost('status');
-
+    
         // Preparing data for insertion
         $data = [
             'createdOn' => date('Y-m-d H:i:s'),
@@ -91,6 +90,7 @@ class ReviewController extends BaseController
                 'feedback' => $feedback,
                 'Name' => $customer_name,
                 'customer_email' => $customer_email,
+                'status' => $status,
                 'State' => $state,
                 'City' => $city,
                 'Zipcode' => $zipcode,
@@ -103,147 +103,71 @@ class ReviewController extends BaseController
                 'created_at' => date('Y-m-d H:i:s')
             ]),
         ];
-
-        $reviewModel->insert($data); 
-        $insertedId = $reviewModel->getInsertID();
-
-        print_r($data);
-        // $this->sendContactCard($customer_email);
+    
+        $reviewModel->insert($data);
+        $insertedID = $reviewModel->getInsertID();
+        // Send contact card email
+        // $this->updatestatus($customer_email , $status, $insertedID);
         $phpPath = 'D:\\xampp\\php\\php.exe';
         // // $filePath = 'C:\\xampp\\htdocs\\crm\\public\\index.php';
-        $filePath = 'D:\\xampp\\htdocs\\crm\\cli.php';
-        $command = "\"$phpPath\" \"$filePath\"  reviews/processPendingReviews " . escapeshellarg($customer_email) . " " . escapeshellarg($status) ." ". escapeshellarg($insertedId);
-        $time = date('H:i', strtotime('+1 minutes')); 
-        $taskCommand = "schtasks /create /tn processPendingReviews /tr \"$command\" /sc once /st $time /f";
-        exec($taskCommand);
-        echo $taskCommand;
-
-        
-        // $phpPath = 'D:\\xampp\\php\\php.exe';
-        // // $filePath = 'D:\\xampp\\htdocs\\crm\\public\\index.php';
-        // $filePath = 'D:\\xampp\\htdocs\\crm\\cli.php';
-        // $command = "\"$phpPath\" \"$filePath\"  reviews/processPendingReviews " . escapeshellarg($this->request->getPost('customer_email')) . " " . escapeshellarg($this->request->getPost('status'));
-        // $time = date('H:i', strtotime('+1 minutes')); 
-        // $taskCommand = "schtasks /create /tn processPendingReviews /tr \"$command\" /sc once /st $time /f";
-        // exec($taskCommand);
-        // echo $taskCommand;
-        // log_message('info', "Scheduled task command: $taskCommand");
-        // $this->queueEmailCommand($customer_email, $status);
+         $filePath = 'D:\\xampp\\htdocs\\pulseme\\cli.php';
+         $command = "\"$phpPath\" \"$filePath\" reviews/updatestatus " . escapeshellarg($customer_email) . " " . escapeshellarg($status) . " " . escapeshellarg($insertedID);
+         $time = date('H:i', strtotime('+5 minutes'));
+         $taskCommand = "schtasks /create /tn updatestatus /tr \"$command\" /sc once /st $time /f";
+        //  exec($taskCommand);
+        //  echo $taskCommand;
         // Display a thank you message or redirect as needed
-        // return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
-
-        // if ($status === 'pending') {
-        //     print_r($status);
-        //     $data = ['reviewratings' => json_encode(['status' => 'done'])];
-        //     $this->reviewModel->where('ID', 268);
-        //     $this->reviewModel->update($data);
-        //     print_r($data);
-        //  $this->processPendingReviews($customer_email , $status , $insertedId);
-        // } else {
-        //     echo 'No pending reviews found or incorrect status.\n';
-        //     }
-
-
+        return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
     }
 
-
-    public function processPendingReviews($customer_email, $status, $insertedId)
+    public function updatestatus($customer_email, $status, $insertedID)
     {
         $reviewModel = new ReviewModal();
-
-        $existingReview = $reviewModel->find($insertedId);
-
+    
+        // Fetch the existing review using the inserted ID
+        $existingReview = $reviewModel->find($insertedID);
+    
         if ($existingReview) {
-            // Check if the existing review status is 'pending'
-            $reviewratings = json_decode($existingReview['reviewratings'], true);
-            $existingStatus = $reviewratings['status'] ?? '';
-
+            // Decode the reviewratings JSON to check and update the status
+            $reviewRatings = json_decode($existingReview['reviewratings'], true);
+            $existingStatus = $reviewRatings['status'] ?? '';
             if ($existingStatus === 'pending') {
-                $reviewratings['status'] = 'done';
+                $reviewRatings['status'] = 'done'; // Update status to the provided value
                 // Prepare data for update
                 $data = [
                     'updatedOn' => date('Y-m-d H:i:s'),
-                    'reviewratings' => json_encode($reviewratings),
+                    'reviewratings' => json_encode($reviewRatings), // Re-encode the updated review ratings
                 ];
-                // Update the existing review entry
-                $reviewId = $insertedId;
-                $reviewModel->update($reviewId, $data);
+                // Update the review with the new data
+                $reviewModel->update($insertedID, $data);
                 $this->sendContactCard($customer_email);
             }
         }
     }
-
-
-
-    // public function processPendingReviews($customer_email = null, $status = null)
-    // {
-    //     $reviewModel = new ReviewModal();
-    //     print_r($status);
-        
-    //     if ($this->request->isCLI()) {
-    //         if ($status === 'pending') {
-    //             // Define the condition for which record(s) to update
-    //             $condition = ['customer_email' => $customer_email, 'status' => 'pending'];
     
-    //             // Data to be updated
-    //             $data = ['reviewratings' => json_encode(['status' => 'done'])];
-    
-    //             // Perform the update
-    //             if ($reviewModel->where($condition)->update(null, $data)) {
-    //                 print_r($data);
-    //                 $this->sendContactCard($customer_email);
-    //                 echo "Review updated and email sent for $customer_email\n";
-    //             } else {
-    //                 echo "Failed to update the review for $customer_email\n";
-    //             }
-    //         } else {
-    //             echo 'No pending reviews found or incorrect status.\n';
-    //         }
-    //     } else {
-    //         echo 'This action can only be run via CLI.';
-    //     }
-    // }
-    
-
-// public function process($customer_email = null, $status = null, $campaignId = null){
-//     $reviewModel = new ReviewModal();
-//     if ($status === 'pending') {
-//         $data = ['reviewratings' => json_encode(['status' => 'done'])];
-//         // $this->reviewModel->update($data);
-//         print_r($data);
-//         // $this->sendContactCard($customer_email);
-//     } else {
-//         echo 'No pending reviews found or incorrect status.\n';
-//         }
-// }
-//  function process();
-
     public function sendContactCard($customer_email)
     {
-    $contactCardModel = new ContactCardModal(); // Corrected model class name
-    $data['contactcard'] = $contactCardModel->first();
+        $contactCardModel = new ContactcardModal();
+        $data['contactcard'] = $contactCardModel->first();
+        $emailService = \Config\Services::email();
+        // Building the email message
+        $message = view('contact-card-tab/contact-card-layout', ['contactcard' => $data['contactcard']]);
+        $emailService->initialize([
+            'protocol' => 'smtp',
+            'SMTPHost' => $_ENV['SMTP_HOST'],
+            'SMTPPort' => intval($_ENV['SMTP_PORT']),
+            'SMTPUser' => $_ENV['SMTP_USER'],
+            'SMTPPass' => $_ENV['SMTP_PASS'],
+            'mailType' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ]);
 
-    $emailService = \Config\Services::email();
-
-    // // Building the email message
-    $message = view('contact-card-tab/contact_templates', ['contactcard' => $data['contactcard']]);
-
-    $emailService->initialize([
-        'protocol' => 'smtp',
-        'SMTPHost' => $_ENV['SMTP_HOST'],
-        'SMTPPort' => intval($_ENV['SMTP_PORT']),
-        'SMTPUser' => $_ENV['SMTP_USER'],
-        'SMTPPass' => $_ENV['SMTP_PASS'],
-        'mailType' => 'html',
-        'charset' => 'utf-8',
-        'newline' => "\r\n"
-    ]);
-
-    $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
-    $emailService->setTo($customer_email);
-    $emailService->setSubject('Contact-card');
-    $emailService->setMessage($message);
-
+        $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
+        $emailService->setTo($customer_email);
+        $emailService->setSubject('Contact-card');
+        $emailService->setMessage($message);
+        
         if (!$emailService->send()) {
             log_message('error', $emailService->printDebugger(['headers', 'subject', 'body']));
         }
@@ -341,6 +265,15 @@ class ReviewController extends BaseController
 
     public function reviews()
     {
+        // Check if the user is logged in
+        if (!session()->get('isLoggedIn')) {
+            // Store the current URL in the session for redirecting after login
+            session()->set('redirect_back', current_url());
+
+            // Redirect to the login page
+            return redirect()->to('/');
+        }
+
         $reviewModel = new ReviewModal();
         $perPage = 10;
         $page = $this->request->getVar('page') ?: 1;
@@ -489,10 +422,84 @@ class ReviewController extends BaseController
         }
     }
 
-    public function contact_templates()
+    public function exportCsv()
     {
-        $contactCardModel = new ContactcardModal();
-        $data['contactcard'] = $contactCardModel->first();
-        return view('contact-card-tab/contact_templates', $data);
+        $reviewModel = new ReviewModal();
+        $perPage = 1000; // Set a large limit to export a significant number of reviews
+        $offset = 0; // Start from the beginning
+    
+        // Fetch reviews
+        $reviews = $reviewModel->get_reviews_with_campaign($perPage, $offset);
+    
+        // Prevent any output before headers
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
+    
+        // Set headers to force download
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="reviews.csv"');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+    
+        // Open PHP output stream
+        $output = fopen('php://output', 'w');
+    
+        // Add CSV headers
+        fputcsv($output, [
+            'ID', 
+            'Review Text', 
+            'Sentiment', 
+            'Reviewer Name',  
+            'Review Type',
+            'Department',
+            'Approval Status',
+            'Rating',  
+            'City', 
+            'State',
+            'Zip Code',  
+            'Comments', 
+            'Created On'
+        ]);
+    
+        // Write rows to CSV
+        // print_r($reviews);
+        // die;
+        foreach ($reviews as $review) {
+            $reviewRatings = json_decode($review['reviewratings'], true);  
+    
+            // Extract the relevant data from the reviewratings JSON
+            $reviewerName = isset($reviewRatings['name']) ? $reviewRatings['name'] : 'N/A';
+            $reviewerCity = isset($reviewRatings['city']) ? $reviewRatings['city'] : 'N/A';
+            $reviewerState = isset($reviewRatings['state']) ? $reviewRatings['state'] : 'N/A';
+            $reviewerZipCode = isset($reviewRatings['Zipcode']) ? $reviewRatings['Zipcode'] : 'N/A';
+            $reviewerRating = isset($reviewRatings['rating']) ? $reviewRatings['rating'] : 'N/A';
+            $reviewerComments = isset($reviewRatings['comments']) ? $reviewRatings['comments'] : 'N/A';       
+    
+            // Write the review data to the CSV file
+            fputcsv($output, [
+                $review['ID'], 
+                $review['reviewText'], 
+                $review['sentiment'], 
+                $reviewerName,  
+                $review['reviewType'],
+                $review['department'],
+                $review['isApproved'],
+                $reviewerRating,  
+                $reviewerCity, 
+                $reviewerState,
+                $reviewerZipCode,  
+                $reviewerComments, 
+                $review['createdOn']
+            ]);
+        }
+        
+    
+        // Close the output stream
+        fclose($output);
+    
+        // Exit to prevent any additional output
+        exit();
     }
+
 }
