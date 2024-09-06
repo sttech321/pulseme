@@ -103,7 +103,9 @@
 								<div class="col-span-2 flex justify-between items-center border-2 rounded-4px border-black p-10px">
 									<img src="" alt="" />
 									<h2 class="w-1/3 text-center text-24px font-600">Scan to save us to your contacts.</h2>
-									 <img id="qr-image" class="w-1/3" src="<?= base_url('image/qrcode.png') ?>" alt="QR Code" />
+									 <!-- <img id="qr-image" class="w-1/3" src="<?= base_url('image/qrcode.png') ?>" alt="QR Code" />
+									   -->
+									   <div id="qr-image" class="w-1/3"></div>
 								</div>
 								<button id="download-png" class="border-2 rounded-4px p-15px border-blue-500 text-blue-500 flex justify-evenly items-center">
 									<div class=""></div>
@@ -138,10 +140,12 @@
 							<div class="row p-10px flex">
 								<div class="column w-2/5 flex justify-center items-start">
 									<div class="relative">
-										<div
-											class="h-200px w-200px rounded-1/2 mt-2rem bg-center bg-contain bg-no-repeat" id="logo-upload-button" 
-											style='background-image: url("<?= base_url('/image/company-logo.jpg')?>");'
-										></div>
+									<div
+										class="h-200px w-200px rounded-1/2 mt-2rem bg-center bg-contain bg-no-repeat"
+										id="logo-upload-button"
+										style="background-image: url('<?= base_url(esc($contactcard['image']))?>');"
+									></div>
+
 										<!-- <button id="logo-upload-button" class="absolute bottom-10px right-10px h-40px w-40px flex justify-center items-center rounded-1/2 btn btn-blue">
 											<svg class="svg-inline--fa fa-pen text-white" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 												<path
@@ -183,7 +187,7 @@
 										<div class="w-auto flex flex-col items-stretch">
 											<div class="number-list flex justify-between items-center hover px-20px border hover:border-gray-500 p-10px my-10px rounded-4px">
 												<div class="number text-left mr-20px">
-													<p><?= esc($contactcards['primary_number']) ?></p>
+													<p><?= esc($contactcard['primary_number']) ? esc($contactcard['primary_number']) : '012345678'; ?></p>
 												</div>
 											</div>
 										</div>
@@ -256,7 +260,7 @@
 									<div class="submit-button"><button id="save-changes-button" class="btn btn-blue">Save Changes</button></div>
 								</div>
 							</div>
-                  </form>
+                  		</form>
 					</div>
 					<!---->
 				</div>
@@ -264,13 +268,19 @@
 		</div>
 	</div>
 </div>
+<!-- <div id="qr-svg" style="display:none;">
+
+</div> -->
 <script>
 $(document).ready(function () {
     $('#save-changes-button').on('click', function (e) {
         e.preventDefault(); // Prevent the form from submitting normally
 
-        var formData = new FormData($('#contat-card-form')[0]);
-        console.log(formData,'formdata');
+        var formData = new FormData($('#contact-card-form')[0]);
+		formData.forEach(function(value, key) {
+			console.log(key + ': ' + value);
+		});
+
 
         $.ajax({
             url: "<?= base_url('/contact-card') ?>", // Your route URL
@@ -280,8 +290,8 @@ $(document).ready(function () {
             processData: false,
             success: function (response) {
                 if (response.success) {
-                    // alert(response.message);
-					location.reload();
+                    alert(response.message);
+                    // location.reload(); // Reload the page to reflect changes
                 } else {
                     alert("There was an error processing your request.");
                 }
@@ -297,40 +307,75 @@ document.getElementById('logo-upload-button').addEventListener('click', function
 	document.getElementById('logo-upload').click();
 });
 
-	function downloadPNG() {
-      const imgElement = document.getElementById('qr-image');
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+function downloadPNG() {
+	const imgElement = document.querySelector('#qr-image img'); // Get the img element inside the div
+	const canvas = document.createElement('canvas');
+	const ctx = canvas.getContext('2d');
 
-      // Set canvas dimensions to match the image
-      canvas.width = imgElement.naturalWidth;
-      canvas.height = imgElement.naturalHeight;
+	// Set canvas dimensions to match the image
+	const img = new Image();
+	img.src = imgElement.src;
+	
+	img.onload = function() {
+		canvas.width = img.width;
+		canvas.height = img.height;
 
-      // Draw the image on the canvas
-      ctx.drawImage(imgElement, 0, 0);
+		// Draw the image on the canvas
+		ctx.drawImage(img, 0, 0);
 
-      // Convert canvas to data URL and trigger download
-      const pngUrl = canvas.toDataURL('image/png');
-      const link = document.createElement('a');
-      link.href = pngUrl;
-      link.download = 'qrcode.png';
-      link.click();
-   }
+		// Convert canvas to data URL and trigger download
+		const pngUrl = canvas.toDataURL('image/png');
+		const link = document.createElement('a');
+		link.href = pngUrl;
+		link.download = 'qrcode.png';
+		link.click();
+	};
+}
 
-   function downloadSVG() {
-      const imgElement = document.getElementById('qr-image');
-      
-      // Ensure that the image is an SVG or provide the SVG data separately
-      const svgUrl = imgElement.src; // Use SVG image URL directly
-      const link = document.createElement('a');
-      link.href = svgUrl;
-      link.download = 'qrcode.svg';
-      link.click();
-   }
+function downloadSVG() {
+    const svgElement = document.querySelector('#qr-image img');
+    
+    if (!svgElement) {
+        alert("SVG element not found!");
+        return;
+    }
 
-// Attach event listeners to buttons
-document.getElementById('download-png').addEventListener('click', downloadPNG);
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+    const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+    const svgUrl = URL.createObjectURL(svgBlob);
+
+    const link = document.createElement('a');
+    link.href = svgUrl;
+    link.download = 'qrcode.svg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 document.getElementById('download-svg').addEventListener('click', downloadSVG);
 
+document.getElementById('download-png').addEventListener('click', downloadPNG);
 </script>
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+ <script>
+	 // Create a vCard string with line breaks
+	 var vCardData = [
+		 "BEGIN:VCARD",
+		 "VERSION:3.0",
+		 "PHOTO;TYPE=JPEG:" + "<?= $contactcard['image']; ?>",
+		 "TEL;TYPE=cell:" + "<?= $contactcard['primary_number']; ?>",
+		 "EMAIL:" + "<?= $contactcard['email']; ?>",
+		 "SMS:" + "<?= $contactcard['sms_number']; ?>",
+		 "NOTE:" + "<?= $contactcard['notes']; ?>",
+		 "NOTE:" + "<?= $contactcard['searchterm']; ?>",
+		 "END:VCARD"
+	 ].join("\r\n");
+  
+	 var qrcode = new QRCode("qr-image", {
+		text: vCardData,
+		width: 210,
+		height: 210,
+		useSVG: true // Ensure that the QR code is generated as an SVG
+	});
+ </script>
 <?= $this->endsection('content') ?>			

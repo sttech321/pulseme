@@ -28,15 +28,31 @@ class TechnicianModal extends Model
     public function getTechniciansBySearch($search)
     {
         $builder = $this->db->table('campaign');
+    
+        // Select columns from campaign and aggregate counts
         $builder->select('
             campaign.*, 
+            bio_stats.total_sends,
+            bio_stats.bio_count,
+            bio_stats.pulsecheck_count,
             COALESCE(SUM(CASE WHEN reviews.sentiment = "positive" THEN 1 ELSE 0 END), 0) AS positive_count,
-            COALESCE(SUM(CASE WHEN reviews.sentiment = "negative" THEN 1 ELSE 0 END), 0) AS negative_count,
-            COALESCE(SUM(CASE WHEN customers_bio.formstatus = "bio" THEN 1 ELSE 0 END), 0) AS bio_count,
-            COALESCE(SUM(CASE WHEN customers_bio.formstatus = "pulsecheck" THEN 1 ELSE 0 END), 0) AS pulsecheck_count
+            COALESCE(SUM(CASE WHEN reviews.sentiment = "negative" THEN 1 ELSE 0 END), 0) AS negative_count
         ');
-        $builder->join('reviews', 'reviews.campaignID = campaign.id', 'left');
-        $builder->join('customers_bio', 'customers_bio.campaignID = campaign.id', 'left');
+    
+        // Subquery to calculate bio and pulsecheck counts
+        $subquery = $this->db->table('customers_bio')
+            ->select('
+                customers_bio.campaignid, 
+                COUNT(customers_bio.id) AS total_sends,
+                SUM(CASE WHEN customers_bio.formstatus = "bio" THEN 1 ELSE 0 END) AS bio_count,
+                SUM(CASE WHEN customers_bio.formstatus = "pulsecheck" THEN 1 ELSE 0 END) AS pulsecheck_count
+            ')
+            ->groupBy('customers_bio.campaignid')
+            ->getCompiledSelect();
+    
+        // Join with subquery and reviews table
+        $builder->join("($subquery) AS bio_stats", 'campaign.ID = bio_stats.campaignid', 'left');
+        $builder->join('reviews', 'campaign.ID = reviews.campaignID', 'left');
         
         // Add the search conditions before grouping
         $builder->groupStart();

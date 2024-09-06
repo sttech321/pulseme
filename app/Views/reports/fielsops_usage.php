@@ -119,7 +119,7 @@
 		console.log(fromDate, toDate);
 
 		$.ajax({
-			url: '/leaderboard/reports/campaigns/filter',
+			url: '<?=base_url('/leaderboard/reports/campaigns/filter')?>',
 			type: 'POST',
 			data: {
 				from_date: fromDate,
@@ -139,14 +139,15 @@
 					'</thead>' +
 					'<tbody>';
 				response.forEach(campaign => {
-					html += '<tr class="!bg-opacity-50 odd:bg-sky-100">' +
-						`<td class="px-20px py-15px">1B85A09AA6${campaign.ID}</td>` +
-						`<td class="px-20px py-15px">${campaign.name}</td>` +
-						`<td class="px-20px py-15px"></td>` +
-						`<td class="px-20px py-15px"></td>` +
-						`<td class="px-20px py-15px"></td>` +
-						'</tr>';
-				});
+					console.log(campaign,'sss');
+                    html += '<tr class="!bg-opacity-50 odd:bg-sky-100">' +
+                            `<td class="px-20px py-15px">1B85A09AA6${campaign.ID}</td>` +
+                            `<td class="px-20px py-15px">${campaign.name}</td>` +
+                            `<td class="px-20px py-15px">${campaign.pulsecheck_count ? campaign.pulsecheck_count : '0'}</td>` +
+                            `<td class="px-20px py-15px">${campaign.bio_count ? campaign.bio_count : '0'}</td>` +
+                            `<td class="px-20px py-15px">${campaign.total_sends ? campaign.total_sends : '0'}</td>` +
+                            '</tr>';
+                 });
 				html += '</tbody></table>';
 				// Append the constructed HTML to the target container
 				document.getElementById('table-container').innerHTML = html;

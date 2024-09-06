@@ -79,7 +79,7 @@
     <?php endif; ?>
     <?php
     $url = '/application/pulsecheck/' . $technician['employeeId'];
-    print_r($url);
+    // print_r($url);
     ?>
 
     <?php if ($technician): ?>
@@ -93,7 +93,7 @@
                                 <h3 class="title m-t-5 text-left"></h3>
                             </div>
                             <div class="col-xs-6">
-                                <img class="logo" src="<?= $technician['image'] ?>" style="">
+                                <img class="logo" src="<?= base_url($technician['image']) ?>" style="">
                             </div>
                         </div>
                         <div class="flow-card active mood" data-flow-id="1" data-flow-back="None" data-type="mood">
@@ -121,7 +121,7 @@
                                 <h3 class="title m-t-5 text-left"></h3>
                             </div>
                             <div class="col-xs-6">
-                                <img class="logo" src="<?= $technician['image'] ?>" style="">
+                                <img class="logo" src="<?= base_url(esc($technician['image'])) ?>" style="">
                             </div>
                         </div>
                         <div class="flow-card active mood" data-flow-id="1" data-flow-back="None" data-type="mood">
@@ -154,7 +154,7 @@
                                 <h3 class="title m-t-5 text-left"></h3>
                             </div>
                             <div class="col-xs-6">
-                                <img class="logo" src="<?= $technician['image'] ?>" style="">
+                                <img class="logo" src="<?= base_url(esc($technician['image'])) ?>" style="">
                             </div>
                         </div>
                         <div class="flow-card rating active" data-flow-id="62" data-flow-back="60" data-type="rating">
@@ -233,7 +233,7 @@
                                 <h3 class="title m-t-5 text-left"></h3>
                             </div>
                             <div class="col-xs-6">
-                                <img class="logo" src="<?= $technician['image'] ?>" style="">
+                                <img class="logo" src="<?= base_url(esc($technician['image'])) ?>" style="">
                             </div>
                         </div>
                         <div class="flow-card active mood" data-flow-id="1" data-flow-back="None" data-type="mood">
@@ -253,7 +253,8 @@
                                             <input type="email" class="input form-control fg-input validate" value="" name="customer_email" placeholder="customer_email">
                                             <input type="text" class="input form-control fg-input validate" value="" name="state" placeholder="state">
                                             <input type="text" class="input form-control fg-input validate" value="" name="city" placeholder="city">
-                                            <input type="number" class="input form-control fg-input validate" value="" name="zipcode" placeholder="zipcode">
+                                            <input type="text" class="input form-control fg-input validate" value="" name="address" placeholder="address">
+                                            <input type="text" class="input form-control fg-input validate" value="" name="zipcode" placeholder="zipcode">
 
                                             <div class="fg-line">
                                                 <textarea class="input form-control fg-input validate w-100" name="feedback" rows="5" placeholder="Type your feedback..." data-empty-error="Feedback cannot be left blank" data-max-length="999" spellcheck="false"></textarea>
@@ -280,7 +281,7 @@
                                 <h3 class="title m-t-5 text-left"></h3>
                             </div>
                             <div class="col-xs-6">
-                                <img class="logo" src="<?= $technician['image'] ?>" style="">
+                                <img class="logo" src="<?= base_url(esc($technician['image'])) ?>" style="">
                             </div>
                         </div>
                         <div class="flow-card social-media active" data-flow-id="20" data-flow-back="1" data-type="social-media">

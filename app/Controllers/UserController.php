@@ -17,10 +17,19 @@ class UserController extends Controller
     public function loginAuth() {
         helper(['form']);
         $model = new UserModel();
+    
         $email = $this->request->getVar('email');
-        $password = $this->request->getVar('password');      
+        $password = $this->request->getVar('password');
+    
+        // Validate email and password
+        if (!$email || !$password) {
+            session()->setFlashdata('error', 'Email and Password are required');
+            // return redirect()->to('/');
+        }
+    
+        // Check if user can log in
         $isLoggedIn = $model->userCanLogin($email, $password);
-        
+    
         if ($isLoggedIn) {
             // Set session data
             $userData = [
@@ -28,21 +37,21 @@ class UserController extends Controller
                 'isLoggedIn' => true
             ];
             session()->set($userData);
-        
+    
             // Check if a redirect URL is stored in the session
             $redirectUrl = session()->get('redirect_back') ?? '/analyze/reviews';
-        
+    
             // Clear the redirect URL from the session
             session()->remove('redirect_back');
-        
+    
             // Redirect the user to the intended page or default to the reviews page
             return redirect()->to($redirectUrl);
         } else {
-            session()->setFlashdata('error', 'Invalid username/email or password');
-            return redirect()->to('/');
+            session()->setFlashdata('error', 'Invalid email or password');
+            // return redirect()->to('/');
         }
     }
-
+    
     public function logout() {
         // Destroy session data on logout
         session()->destroy();
@@ -154,7 +163,7 @@ class UserController extends Controller
         return view('resetPassword', $data);
     }
 
-    function resetPasswordProcess () {
+    public function resetPasswordProcess () {
         // Load necessary helpers and libraries
         helper(['form']);
 
@@ -191,4 +200,41 @@ class UserController extends Controller
             }
         }
     }
+
+    public function profile()
+    {
+        $userModel = new UserModel();
+        $userdata = $userModel->findAll();
+        $admin1 = $userModel->find(1);
+        $data = [
+            'admin' => $userdata,
+            'admin1' => $admin1,
+        ];
+        return view('layouts/myprofile', $data);
+    }
+    
+    public function updateProfile($id)
+    {
+        $userModel = new UserModel();
+        $data = [
+            'first_name' => $this->request->getPost('first_name'),
+            'last_name' => $this->request->getPost('last_name'),
+            'email' => $this->request->getPost('email')
+        ];
+
+        // Update the first row (assuming 'id' is the primary key and you want to update row 1)
+        $userModel->update($id, $data);
+
+        return redirect()->to('/user-preferences')->with('status', 'Profile updated successfully');
+    }
+
+    public function clear()
+    {
+        // Execute the cache clear command
+        // system('php spark cache:clear');
+        // // Display a confirmation message
+        // echo "Cache cleared!";
+        return view('clear_cache');
+    }
+
 }

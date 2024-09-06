@@ -7292,6 +7292,12 @@ ul {
     margin-left: 30px;
 }
 
+/* upload image button */
+/* input#fileInput {
+    opacity: 0;
+} */
+
+
 /* shadow date  */
 
 .shadow-date{
@@ -7312,7 +7318,7 @@ ul {
 .uploadImgBox{text-align: center;}
 .uploadImgBox img{margin-bottom: 10px !important;}
 
-.upload-label {
+.upload-labels {
     cursor: pointer;
     display: block;
     width: 100%;
@@ -7323,12 +7329,15 @@ ul {
     border-radius: 100px;
     font-size: 16px;
 }
-.upload-input {display: none;}
+
+/* #fileInput{display: none;} */
+.upload-inputs {display: none;}
 .btn-blue:hover {background-color: #3490dc;}
 .uploadBtnWrap{
     background-color: #3490dc;
     border-radius: 35px; 
     padding: 0;
+    height: 50px;
 }
 .uploadBtnWrap label{font-size: 16px;}
 

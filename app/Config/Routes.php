@@ -15,6 +15,7 @@ $routes->set404Override();
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index', ['filter' => 'auth']);
 $routes->get('/logout', 'UserController::logout');
 $routes->post('/loginAuth', 'UserController::loginAuth');
 $routes->add('/forgot-password', 'UserController::forgotPassword');
@@ -81,17 +82,15 @@ $routes->post('analyze/reviews/social-reviews/(:num)', 'ReviewController::google
 $routes->get('/thankyou', 'ReviewController::thankyou');
 
 $routes->post('/analyze/reviews/update/(:num)', 'ReviewController::update/$1');
-$routes->get('/analyze/dispatching', 'ReportsController::dispatch');
+$routes->get('/analyze/dispatching', 'ReportsController::dispatching');
 
 $routes->get('/example', 'TestController::data');
 $routes->post('example/submit', 'CustomerController::create_dispatch');
 $routes->post('searchbar', 'Campaign::search');
 
 $routes->post('/contact-card', 'ContactcardController::create_contactcard');
-$routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 
 $routes->get('/conactcardlayout', 'ContactcardController::conactcardlayout');
-$routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 
 $route['chart'] = 'ChartController/index';
 
@@ -99,6 +98,16 @@ $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::searc
 $routes->post('/leaderboard/reports/campaigns/filter', 'ReportsController::filterCampaigns');
 $routes->post('/leaderboard/reports/filterDepartments', 'ReportsController::filterDepartments');
 
-$routes->get('/cron-job', 'ReviewController::updatestatus');
+$routes->get('/reviews/export-csv','ReviewController::exportCsv');
 
-$routes->get('reviews/export-csv','ReviewController::exportCsv');
+$routes->cli('/reviews/updatestatus/(:any)/(:any)/(:any)', 'ReviewController::updatestatus/$1/$2/$3');
+
+$routes->post('/analyze/reviews/social-reviews/update', 'ReviewController::update_social_review');
+$routes->post('/analyze/reviews/social-reviews/delete', 'ReviewController::delete_social_review');
+
+$routes->get('/user-preferences', 'UserController::profile');
+$routes->post('/user-preferences/update/(:num)', 'UserController::updateProfile/$1');
+// $routes->get('/clear-cache', 'UserController::clear');
+
+// $routes->get('guest-url', 'GuestController::index');
+// $routes->get('logged-in-url', 'UserController::index', ['filter' => 'auth']);

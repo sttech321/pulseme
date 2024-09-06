@@ -181,7 +181,7 @@
 		console.log(fromDate, toDate);
 
 		$.ajax({
-			url: '/leaderboard/reports/filterDepartments',
+			url: '<?=base_url('/leaderboard/reports/filterDepartments')?>',
 			type: 'POST',
 			data: {
 				from_date: fromDate,

@@ -33,7 +33,6 @@ class ReportsController extends BaseController {
         ]);
     }
 
-
     public function departments(): string
     {
         $model = new CampaignModel();
@@ -41,24 +40,22 @@ class ReportsController extends BaseController {
         return view('reports/departments', $data);
     }
 
-
     public function report_campaign_fieldsops(){
         $model = new CampaignModel();
         $campaignsWithSentiment = $model->getCampaignsWithSentiment();
         return view('reports/fielsops_usage',['campaigns' =>  $campaignsWithSentiment]);
     }
 
-    public function dispatch()
+    public function dispatching()
     {
         $model = new ReviewModal();
         // Call the dispatchingchart method and store the returned data
         $chartData = $model->dispatchingchart();
-    
+
         // Pass the chart data to the view
-        return view('dispatch', $chartData);
+        return view('dispatching', $chartData);
     }
     
-
     public function summary()
     {
         return view('summary');

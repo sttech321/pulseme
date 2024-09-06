@@ -14,7 +14,6 @@ class ReviewController extends BaseController
 {
     public function __construct()
     {
-        // Load session service
         $this->session = \Config\Services::session();
     }
 
@@ -33,79 +32,6 @@ class ReviewController extends BaseController
         } else {
         }
     }
-
-    // public function submitReview()
-    // {
-    //     // Load necessary helpers and libraries
-    //     helper(['form', 'url']);
-
-    //     // Validation rules
-    //     $rules = [
-    //         'feedback' => 'required',
-    //         'rating1_value' => 'required',
-    //         'rating1_text' => 'required',
-    //         'rating2_value' => 'required',
-    //         'rating2_text' => 'required',
-    //         'rating3_value' => 'required',
-    //         'rating3_text' => 'required',
-    //     ];
-
-    //     // Validate form input
-    //     if (!$this->validate($rules)) {
-    //         // Redirect back with validation errors and input data
-    //         return redirect()->back()->withInput()->with('validation', $this->validator);
-    //     }
-
-    //     $reviewModel = new ReviewModal();
-
-    //     // Collecting data from the request
-    //     $feedback = $this->request->getPost('feedback');
-    //     $rating1_value = $this->request->getPost('rating1_value');
-    //     $rating1_text = $this->request->getPost('rating1_text');
-    //     $rating2_value = $this->request->getPost('rating2_value');
-    //     $rating2_text = $this->request->getPost('rating2_text');
-    //     $rating3_value = $this->request->getPost('rating3_value');
-    //     $rating3_text = $this->request->getPost('rating3_text');
-    //     $campaignId = $this->request->getPost('ID');
-    //     $customer_name = $this->request->getPost('customer_name');
-    //     $customer_email = $this->request->getPost('customer_email');
-    //     $city = $this->request->getPost('state');
-    //     $state = $this->request->getPost('city');
-    //     $zipcode = $this->request->getPost('zipcode');
-    //     $sentiment = $this->request->getPost('result_value');
-    //     $review_type = $this->request->getPost('reviewType');
-    //     $status = $this->request->getPost('status');
-
-    //     // Preparing data for insertion
-    //     $data = [
-    //         'createdOn' => date('Y-m-d H:i:s'),
-    //         'updatedOn' => date('Y-m-d H:i:s'),
-    //         'campaignID' => $campaignId,
-    //         'reviewText' => $feedback,
-    //         'reviewType' => $review_type,
-    //         'sentiment' => $sentiment,
-    //         'reviewratings' => json_encode([
-    //             'feedback' => $feedback,
-    //             'Name' => $customer_name,
-    //             'customer_email' => $customer_email,
-    //             'status'=> $status,
-    //             'State' => $state,
-    //             'City' => $city,
-    //             'Zipcode' => $zipcode,
-    //             'rate1' => ['text' => $rating1_text, 'value' => $rating1_value],
-    //             'rate2' => ['text' => $rating2_text, 'value' => $rating2_value],
-    //             'rate3' => ['text' => $rating3_text, 'value' => $rating3_value],
-    //             'sentiment' => $sentiment,
-    //             'review_type' => $review_type
-    //         ]),
-    //     ];
-
-    //     $reviewModel->insert($data); 
-    //     // Send contact card email
-    //     $this->updatestatus($customer_email,$status);
-    //     // Display a thank you message or redirect as needed
-    //     return redirect()->to('/')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
-    // }
 
     public function submitReview()
     {
@@ -130,7 +56,6 @@ class ReviewController extends BaseController
         }
     
         $reviewModel = new ReviewModal();
-    
         // Collecting data from the request
         $feedback = $this->request->getPost('feedback');
         $rating1_value = $this->request->getPost('rating1_value');
@@ -148,6 +73,7 @@ class ReviewController extends BaseController
         $sentiment = $this->request->getPost('result_value');
         $review_type = $this->request->getPost('reviewType');
         $status = $this->request->getPost('status');
+        $address = $this->request->getPost('address');
     
         // Preparing data for insertion
         $data = [
@@ -165,6 +91,7 @@ class ReviewController extends BaseController
                 'State' => $state,
                 'City' => $city,
                 'Zipcode' => $zipcode,
+                'Address' => $address,
                 'rate1' => ['text' => $rating1_text, 'value' => $rating1_value],
                 'rate2' => ['text' => $rating2_text, 'value' => $rating2_value],
                 'rate3' => ['text' => $rating3_text, 'value' => $rating3_value],
@@ -174,49 +101,50 @@ class ReviewController extends BaseController
         ];
     
         $reviewModel->insert($data);
+        $insertedID = $reviewModel->getInsertID();
         // Send contact card email
-        $this->sendContactCard($customer_email , $status);
-        // Display a thank you message or redirect as needed
-        return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
+        // $this->updatestatus($customer_email , $status, $insertedID);
+        $phpPath = 'D:\\xampp\\php\\php.exe';
+        // // $filePath = 'C:\\xampp\\htdocs\\crm\\public\\index.php';
+         $filePath = 'D:\\xampp\\htdocs\\pulseme\\cli.php';
+         $command = "\"$phpPath\" \"$filePath\" reviews/updatestatus " . escapeshellarg($customer_email) . " " . escapeshellarg($status) . " " . escapeshellarg($insertedID);
+         $time = date('H:i', strtotime('+1 minutes'));
+         $taskCommand = "schtasks /create /tn updatestatus /tr \"$command\" /sc once /st $time /f";
+
+         return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
     }
+
+    public function updatestatus($customer_email, $status, $insertedID)
+    {
+        $reviewModel = new ReviewModal();
+        // Fetch the existing review using the inserted ID
+        $existingReview = $reviewModel->find($insertedID);
     
-    // public function updatestatus($customer_email, $status)
-    // {
-    //     $reviewModel = new ReviewModal();
-    //     // Check if a review already exists for the given customer email
-    //     $existingReview = $reviewModel->where("JSON_EXTRACT(reviewratings, '$.customer_email') =", $customer_email)
-    //                                 ->first();
-    //     if ($existingReview) {
-    //         // Check if the existing review status is 'pending'
-    //         $existingStatus = json_decode($existingReview['reviewratings'], true)['status'] ?? '';
-    //         if ($existingStatus === 'pending') {
-    //             // Prepare data for update
-    //             $data = [
-    //                 'updatedOn' => date('Y-m-d H:i:s'),
-    //                 'reviewratings' => json_encode(array_merge(
-    //                     json_decode($existingReview['reviewratings'], true),
-    //                     ['status' => 'done']
-    //                 )),
-    //             ];
-    //             // Update the existing review entry
-    //             $reviewId = $existingReview['ID'];
-    //             $reviewModel->update($reviewId, $data);
-    //         }
-    //     }
-    //     // Execute sendContactCard() function
-    //     $this->sendContactCard($customer_email);
-    // }
+        if ($existingReview) {
+            // Decode the reviewratings JSON to check and update the status
+            $reviewRatings = json_decode($existingReview['reviewratings'], true);
+            $existingStatus = $reviewRatings['status'] ?? '';
+            if ($existingStatus === 'pending') {
+                $reviewRatings['status'] = 'done'; // Update status to the provided value
+                // Prepare data for update
+                $data = [
+                    'updatedOn' => date('Y-m-d H:i:s'),
+                    'reviewratings' => json_encode($reviewRatings), // Re-encode the updated review ratings
+                ];
+                // Update the review with the new data
+                $reviewModel->update($insertedID, $data);
+                $this->sendContactCard($customer_email);
+            }
+        }
+    }
 
     public function sendContactCard($customer_email)
     {
         $contactCardModel = new ContactcardModal();
         $data['contactcard'] = $contactCardModel->first();
-
         $emailService = \Config\Services::email();
-
         // Building the email message
         $message = view('contact-card-tab/contact-card-layout', ['contactcard' => $data['contactcard']]);
-
         $emailService->initialize([
             'protocol' => 'smtp',
             'SMTPHost' => $_ENV['SMTP_HOST'],
@@ -232,19 +160,18 @@ class ReviewController extends BaseController
         $emailService->setTo($customer_email);
         $emailService->setSubject('Contact-card');
         $emailService->setMessage($message);
-
+        
         if (!$emailService->send()) {
             log_message('error', $emailService->printDebugger(['headers', 'subject', 'body']));
         }
-    }
+    } 
 
     public function social_review()
     {
-        $model = new ReviewModal();
-        $model1 = new CampaignModel();
-        $data['reviews'] = $model->getReviewsByType('google');
-        $data['reviewss'] = $model1->findAll();
-        // Load the view with data
+        $reviewModel = new ReviewModal();
+
+        $data['reviews'] = $reviewModel->getReviewsByType();
+        $data['campaigns'] = $reviewModel->get_campaign_name();
         return view('social_review', $data);
     }
 
@@ -306,15 +233,17 @@ class ReviewController extends BaseController
 
         // Convert the array to a JSON string
         $reviewinfoJson = json_encode($reviewinfo); // Corrected to encode to JSON
-
+        $credito = [$this->request->getPost('socialcampaign')];
+        $date = $this->request->getPost('date');
         $data = [
             'reviewType' => $this->request->getPost('reviewType'),
             'createdOn' => $this->request->getPost('date'),
             'sentiment' => $this->request->getPost('sentiment'),
             'campaignID' => $this->request->getPost('campaign'),
             'reviewText' => $this->request->getPost('comment'),
+            'creditTo' => json_encode($credito),
             'reviewratings' => $reviewinfoJson,  // Store the JSON string
-            'createdOn' => date('Y-m-d H:i:s'),
+            'createdOn' => $date,
             'updatedOn' => date('Y-m-d H:i:s'),
         ];
 
@@ -357,8 +286,10 @@ class ReviewController extends BaseController
         if ($this->request->isAJAX()) {
             $campaignID = $this->request->getPost('campaign_id');
             $approve = $this->request->getPost('approved');
-            $limit = intval($this->request->getPost('limit')) ?: 10;
-            $page = intval($this->request->getPost('page')) ?: 1;
+            $unapprove = $this->request->getPost('unapproved');
+            $includeAllReviews = $this->request->getPost('include_all_reviews');
+            $limit = intval($this->request->getPost('limit'))?: 10; 
+            $page = intval($this->request->getPost('page')) ?: 1;        
             $noText = $this->request->getPost('noText');
             $archive = $this->request->getPost('archive');
             $sentiment = $this->request->getPost('sentiment');
@@ -377,8 +308,15 @@ class ReviewController extends BaseController
             if (!empty($archive)) {
                 $builder->where('reviews.isArchive', $archive);
             }
-            if (!empty($approve)) {
-                $builder->where('reviews.isApproved', $approve);
+            if (!$includeAllReviews) {
+                $approved = $this->request->getPost('approved');
+                $unapproved = $this->request->getPost('unapproved');
+                if ($approved) {
+                    $builder->where('isApproved', '1');
+                }
+                if ($unapproved) {
+                   $builder->where('isApproved', '0');
+                }
             }
             if (!empty($fromdate) && !empty($todate)) {
                 $builder->where('reviews.createdOn >=', $fromdate);
@@ -486,21 +424,63 @@ class ReviewController extends BaseController
         }
     }
 
+    public function update_social_review(){
+        if ($this->request->isAJAX()) {
+        $reviewModel = new ReviewModal();
+        $data = $this->request->getPost();
+        
+            if (isset($data['buttonID']) && isset($data['campaignName'])) {
+                $buttonID = $data['buttonID'];
+            
+                $campaignName = $data['campaignName'];
+
+                // Update the review in the database
+                $result = $reviewModel->updateReviewCampaign($buttonID, $campaignName);
+
+                // Check if the update was successful
+                if ($result) {
+                    $updatedReview = $reviewModel->getReviewByID($buttonID);
+                    return $this->response->setJSON(['status' => 'success', 'creditTo' => $updatedReview['creditTo']]);
+                } else {
+                    return $this->response->setJSON(['status' => 'error']);
+                }
+            } else {
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid input.']);
+            }
+        }
+    }
+
+    public function delete_social_review() {
+        if ($this->request->isAJAX()) {
+            $data = $this->request->getPost();
+            // print_r($data);
+            // die;
+            $ID = $data['divId'];
+            $creditTo = $data['creditTo'];
+            $reviewModel = new ReviewModal();
+            // Call the model method
+            $reviewModel->deleteReviewCampaign($ID, $creditTo);
+            
+            // Send a JSON response
+           // echo json_encode(['status' => 'success']);
+        } else {
+            // Handle non-AJAX requests
+           // return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid input.']);
+        }
+    }
+
     public function exportCsv()
     {
         $reviewModel = new ReviewModal();
         $perPage = 1000; // Set a large limit to export a significant number of reviews
         $offset = 0; // Start from the beginning
-    
-        // Fetch reviews
+
         $reviews = $reviewModel->get_reviews_with_campaign($perPage, $offset);
-    
-        // Prevent any output before headers
+
         if (ob_get_length()) {
             ob_end_clean();
         }
-    
-        // Set headers to force download
+
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="reviews.csv"');
         header('Pragma: no-cache');
@@ -557,13 +537,10 @@ class ReviewController extends BaseController
                 $review['createdOn']
             ]);
         }
-        
-    
-        // Close the output stream
+
         fclose($output);
-    
-        // Exit to prevent any additional output
+
         exit();
     }
-
-}
+       
+    }

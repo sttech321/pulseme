@@ -2,9 +2,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?=base_url('/image/summitRA.jpeg')?>">
 	<title>Meet <?= esc($technician['name']) ?></title>
-	<link rel="stylesheet" type="text/css" href="/css/bio.css">
+	<link rel="stylesheet" type="text/css" href="<?=base_url('/css/bio.css')?>">
 </head>
 
 <body data-new-gr-c-s-check-loaded="14.1187.0" data-gr-ext-installed="">
@@ -21,7 +21,7 @@
 
 			<div id="bio" class="clearfix">
 				<div class="col-xs-4 text-center">
-					<img id="bio-img" src="<?= ($technician['image']) ?>" style="max-width: 100%; max-height: 160px;" />
+					<img id="bio-img" src="<?= esc($technician['image']) ?>" style="max-width: 100%; max-height: 160px;" />
 				</div>
 
 				<div id="bio-profile" class="bio-profile">

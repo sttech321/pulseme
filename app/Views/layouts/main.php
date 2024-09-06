@@ -4,10 +4,10 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title><?= $title ?? 'Untitled' ?></title>
+	<title><?= $title ?? 'SummitRA' ?></title>
 	<meta name="description" content="summitRA: The small framework with powerful features">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/png" sizes="32x32" href="/image/summitRA.jpeg">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?=base_url('/image/summitRA.jpeg')?>">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/header.css'). '?v=' . time()?>">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reset.css'). '?v=' . time() ?>">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('/css/reviews.css'). '?v=' . time() ?>">
@@ -60,12 +60,15 @@
 						<div class="user-pic">
 							<img data-v-139b8be6="" width="230" src="<?= base_url('/image/person.jpg') ?>" alt="user picture">
 						</div>
+						<?php if (!empty($admin1)): ?>
+							
 						<div class="user-info">
-							<span class="user-name">Jhon
-								<strong>Smith</strong>
+							<span class="user-name"><?= isset($admin1['first_name']) && !empty($admin1['first_name']) ? esc($admin1['first_name']) : 'George' ?>
+								<strong><?= esc($admin1['last_name']) ?></strong>
 							</span>
 							<span class="user-role">Administrator</span>
 						</div>
+						<?php endif; ?>
 					</div>
 					<div class="rightSec">
 						<div class="dropdown toggle">
@@ -78,16 +81,18 @@
 											<div class="user-pic">
 												<img data-v-139b8be6="" width="230" src="<?= base_url('/image/person.jpg') ?>" alt="user picture">
 											</div>
+											<?php if (!empty($admin1)): ?>
 											<div class="user-info">
-												<span class="user-name">Jhon
-													<strong>Smith</strong>
+												<span class="user-name"><?= esc($admin1['first_name']) ?>
+													<strong><?= esc($admin1['last_name']) ?></strong>
 												</span>
 												<span class="user-role">Administrator</span>
 											</div>
+											<?php endif; ?>
 										</div>
 									</div>
 								</li>
-								<li><a class="menuListItem" href="#"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
+								<li><a class="menuListItem" href="<?= base_url('/user-preferences')?>"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
 								<li><a class="menuListItem" href="<?= base_url('/settings/dispatch/campaigns') ?>"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
 								<!-- <li><a class="menuListItem" href="/logs/outbound"><i class="fa fa-envelope" aria-hidden="true"></i>Logs</a></li> -->
 								<li>
@@ -151,7 +156,7 @@
 										<a href="<?= base_url('/leaderboard/summary') ?>"><img width="15" src="<?= base_url('/image/summary.svg') ?>" alt="sidebar icon">Summary</a>
 									</li>
 									<li>
-										<a href="<?= base_url('/leaderboard/reports/campaigns') ?>"><img width="15" src="<?= base_url('/image/reports.svg') ?>" alt="sidebar icon">Reports</a>
+										<a href="<?= base_url('/leaderboard/reports/departments') ?>"><img width="15" src="<?= base_url('/image/reports.svg') ?>" alt="sidebar icon">Reports</a>
 									</li>
 								</ul>
 							</div>
@@ -370,5 +375,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+
 </body>
 </html>

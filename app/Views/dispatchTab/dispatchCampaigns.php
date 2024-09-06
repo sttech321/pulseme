@@ -117,13 +117,14 @@
                                                    </div>
                                                    <div class="modal-body">
                                                       <div class="grid grid-cols-2 gap-20px auto-rows-auto">
-                                                         <div class="flex w-full flex-col row-span-3">
-                                                            <img id="preview" class="preview-image w-200px h-auto" src="/image/campaignProfile.jpg" alt="Image Preview">
+                                                         <div class="flex w-full flex-col row-span-3 flex w-full flex-col row-span-3 uploadImgBox">
+                                                            <img id="preview" class="preview-image w-200px h-auto" src="<?=base_url('/image/campaignProfile.jpg')?>" alt="Image Preview">
                                                             <p class="text-md">Upload your image</p>
                                                             <p class="text-sm mb-3">The preferred size is 200x200</p>
                                                             <!-- <input id="logo-upload" hidden="" type="file"> -->
-                                                            <button class="btn btn-blue w-full mb-2" type="button">
-                                                               <input type="file" id="profile-image-upload-1" name="campaignImage" style="display: block;" accept="image/*" onchange="previewImage(event)">
+                                                            <button class="btn w-full mb-2 uploadBtnWrap" type="button">
+                                                               <label for="profile-image-upload-1" class="upload-labels">Upload your file</label>
+                                                               <input type="file" id="profile-image-upload-1" name="campaignImage" accept="image/*" onchange="previewImage(event)" class="upload-inputs">
                                                             </button>
                                                          </div>
                                                          <div class="input-group">
@@ -290,12 +291,14 @@
                                              <div class="modal-body">
                                                 <div class="grid grid-cols-2 gap-20px auto-rows-auto">
                                                    <div class="flex w-full flex-col row-span-3 uploadImgBox">
-                                                      <img id="preview" class="preview-image w-200px h-auto" src="<?= esc($campaign['image']) ?>" alt="Image Preview">
+                                                      <img id="preview" class="preview-image w-200px h-auto" src="<?= base_url(esc($campaign['image'])) ?>" alt="Image Preview">
                                                       <p class="text-md">Upload your image</p>
                                                       <p class="text-sm mb-3">The preferred size is 200x200</p>
                                                       <button class="btn w-full mb-2 uploadBtnWrap" type="button">
-                                                         <label for="profile-image-upload-1" class="upload-label">Upload your file</label>
-                                                         <input type="file" id="profile-image-upload-1" name="campaignImage" accept="image/*" onchange="previewImage(event)" class="upload-input">
+                                                         <!-- <p for="profile-image-upload-1" class="upload-labels" id="upload-labelss">Upload your file</p>
+                                                         <input type="file" id="profile-image-uploadss" name="campaignImages" accept="image/*"  class="upload-input"> -->
+                                                         <!-- <p id="fileLabel" style="cursor: pointer; color: blue; text-decoration: underline;">Upload your file</p> -->
+                                                         <input type="file" id="fileInput" name="campaignImages">
                                                       </button>
                                                    </div>
                                                    <div class="input-group">
@@ -364,7 +367,7 @@
                                     <div class="modal-dialog modalContent mx-700">
                                        <div class="modal-content">
                                           <div class="modal-body bg-white relative  my-30px rounded-4px shadow p-30px text-center flex flex-col items-center">
-                                             <div class="img mb-5 "><img class="rounded" src="<?= esc($campaign['image']) ?>" alt=""></div>
+                                             <div class="img mb-5 "><img class="rounded" src="<?= base_url(esc($campaign['image'])) ?>" alt=""></div>
                                              <h1 class="text-30px font-bold mb-15px">What would you like to see?</h1>
                                              <button type="button" class="btn-close text-gray-400 hover:text-black absolute top-20px right-10px" data-bs-dismiss="modal" aria-label="Close">
                                                 <svg class="svg-inline--fa fa-xmark text-30px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -389,7 +392,7 @@
                         <tr class="flex odd:bg-sky-100 odd:bg-opacity-50 py-15px px-10px">
                            <td class="employee flex items-center px-10px py-20px flex-shrink-0 w-1/12">
                               <div class="profile-img w-full h-auto mr-10px flex justify-center items-center">
-                                 <img w-full="" src="<?= base_url($campaign['image']) ?>" alt="">
+                                 <img w-full="" src="<?= base_url(esc($campaign['image'])) ?>" alt="">
                               </div>
                            </td>
                            <td class="employee flex items-center px-10px flex-shrink-0 w-1/6">
@@ -482,6 +485,7 @@
                $('#campaignModal').modal('hide');
                // Show success message or redirect
                alert('Campaign saved successfully!');
+               location.reload();
             } else {
                // Display validation errors
                $('#validation-errors').html('');
@@ -498,34 +502,29 @@
    });
 
    $(document).ready(function() {
-      // Bind the form submit event
       $(document).on('submit', 'form[data-ajax="true"]', function(event) {
          event.preventDefault(); // Prevent default form submission
 
          var form = $(this);
-         var formData = new FormData(form[0]); // Get form data
+         var formData = new FormData(form[0]); // Get form data, including filesa
 
          $.ajax({
             url: form.attr('action'),
-            type: 'POST',
-            data: formData,
-            processData: false, // Important: prevent jQuery from automatically transforming the data into a query string
-            contentType: false, // Important: prevent jQuery from setting the content-type header
-            success: function(response) {
-               // Handle success response here
-               if (response.success) {
-                  alert('Campaign updated successfully.');
-                  // Optionally, refresh the page or update the UI
-                  location.reload(); // Reload page to see changes
-               } else {
-                  // Handle validation errors or other response data
-                  alert('Failed to update campaign: ' + response.message);
+               type: 'POST',
+               data: formData,
+               processData: false, // Prevent jQuery from transforming the data into a query string
+               contentType: false, // Prevent jQuery from setting the content-type header
+               success: function(response) {
+                  if (response.success) {
+                     alert('Campaign updated successfully.');
+                     location.reload(); 
+                  } else {
+                     alert('Failed to update campaign: ' + response.message);
+                  }
+               },
+               error: function(xhr, status, error) {
+                  alert('An error occurred: ' + error);
                }
-            },
-            error: function(xhr, status, error) {
-               // Handle AJAX errors here
-               alert('An error occurred: ' + error);
-            }
          });
       });
    });
@@ -610,8 +609,7 @@
                                        <p class="text-md">Upload your image</p>
                                        <p class="text-sm mb-3">The preferred size is 200x200</p>
                                           <button class="btn w-full mb-2 uploadBtnWrap" type="button">
-                                             <label for="profile-image-upload-1" class="upload-label">Upload your file</label>
-                                             <input type="file" id="profile-image-upload-1" name="campaignImage" accept="image/*" onchange="previewImage(event)" class="upload-input">
+                                                <input type="file" id="fileInput" name="campaignImages">
                                           </button>
                                     </div>
                                     <div class="input-group">
@@ -686,20 +684,5 @@
       loadTechnicians();
    });
 </script>
-<script>
-   document.addEventListener("DOMContentLoaded", function() {
-      // Get the current URL path
-      const currentPath = window.location.pathname;
 
-      // Get all tab links
-      const tabs = document.querySelectorAll('.tab-link');
-
-      // Loop through the tabs and check if their href matches the current path
-      tabs.forEach(function(tab) {
-         if (tab.getAttribute('href') === currentPath) {
-            tab.classList.add('active'); // Add 'active' class to the matching tab
-         }
-      });
-   });
-</script>
 <?= $this->endsection('content') ?>

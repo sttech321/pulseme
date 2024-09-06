@@ -11,37 +11,34 @@ class UserModel extends Model
     // Construc Function
     public function __construct() {
         parent::__construct();
-        // Load table name from environment variable
-        $this->table = getenv('USER_TABLE');
-        // Load allowed fields from environment variable and convert to array
-        $fields = getenv('USER_FIELD');
-        $this->allowedFields = explode(',', $fields);
+        // Load environment variables
+        $this->table = getenv('USER.TABLE');
+        $this->primaryKey = getenv('USER.TABLE.PRIMARY_KEY');
+        $this->allowedFields = explode(',', getenv('USER.FIELD'));
     }
 
     // Function to set OTP
     public function setOtp($email, $otp) {
         $data = [
             'otp' => $otp,
-            'otp_expiry' => date('Y-m-d H:i:s', strtotime('+10 minutes', time()))// Set OTP expiration time, e.g., 10 minutes from now
+            'otp_expiry' => date('Y-m-d H:i:s', strtotime('+10 minutes', time()))
         ];
         return $this->where('email', $email)->set($data)->update();
     }
 
-    // Check user can login
+    // Check if the user can log in
     public function userCanLogin($email, $password) {
-        // Fetch user by username or email
+        // Fetch user by email
         $user = $this->where('email', $email)->first();
         if ($user) {
-            // Load security library to hash the password
-            // $this->load->library('security');
-            // Extract stored password hash from the database
+            // Extract the stored password hash from the database
             $storedPasswordHash = $user['password'];
             // Verify the provided password against the stored hash
             if (password_verify($password, $storedPasswordHash)) {
                 return true; // Passwords match, login successful
             }
         }
-        return false;
+        return false; // Login failed
     }
 
     // Function to get user by email

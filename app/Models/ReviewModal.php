@@ -85,7 +85,6 @@ class ReviewModal extends Model
         return $query->getRowArray(); 
     }
     
-
     public function get_reviews_campaignId($campaignID){
         $sql = "SELECT reviews.*, campaign.name, campaign.department, campaign.employeeId
                 FROM reviews
@@ -94,12 +93,16 @@ class ReviewModal extends Model
         $query = $this->db->query($sql, [$campaignID]);
         return $query->getRowArray(); 
     }
-    
-    public function getReviewsByType($type)
+
+    // update reviewtype function 
+    public function getReviewsByType()
     {
-        return $this->where('reviewType', $type)->findAll();
+        $sql = "SELECT reviews.ID,reviews.campaignID,reviews.creditTo, reviews.reviewText,JSON_UNQUOTE(JSON_EXTRACT(reviews.reviewratings, '$.Name')) AS Name ,reviews.createdOn FROM reviews WHERE reviewType = 'Google'";
+        $query = $this->db->query($sql);
+        return $query->getResultArray();
     }
 
+    // Create fucntion for fetch campaign name Start here 
     public function get_campaign_name() {
         $sql = "SELECT DISTINCT campaign.name, campaign.department, campaign.employeeId, campaign.ID
                 FROM campaign
@@ -108,8 +111,9 @@ class ReviewModal extends Model
         $query = $this->db->query($sql);
         return $query->getResultArray();
     }
-     
+    // Create fucntion for fetch campaign name End here  
 
+    // report Chart page fucntions start
     public function dispatchingchart(){
         // Load the database
         $db = \Config\Database::connect();
@@ -129,9 +133,9 @@ class ReviewModal extends Model
         // Initialize counters and accumulators
         $positive = 0;
         $negative = 0;
-        $ratetext1 = '';
-        $ratetext2 = '';
-        $ratetext3 = '';
+        $ratetext1 = 'How likely are you to recommend us to your friends and family?';
+        $ratetext2 = 'Professionalism';
+        $ratetext3 = 'Quality of Service';
         $rate1Sum = 0;
         $rate2Sum = 0;
         $rate3Sum = 0;
@@ -194,9 +198,9 @@ class ReviewModal extends Model
         $averagerating3 = ($rate3Count > 0) ? ($rate3Sum / $rate3Count) : 0;
     
         // Convert average ratings to half-points
-        $ratepoint1 = $averagerating1 / 2;
-        $ratepoint2 = $averagerating2 / 2;
-        $ratepoint3 = $averagerating3 / 2;
+        $ratepoint1 = $averagerating1 / 2 ? $averagerating1 / 2 : 1;
+        $ratepoint2 = $averagerating2 / 2 ? $averagerating2 / 2 : 1;
+        $ratepoint3 = $averagerating3 / 2 ? $averagerating3 / 2 : 1;
     
         // Function to generate star rating HTML
         function getStarRatingHTML($rating) {
@@ -221,6 +225,20 @@ class ReviewModal extends Model
         // Get pulse check data by month
         $pulseCheckData = $this->getPulseCheckDataByMonth();
         // print_r($pulseCheckData);
+        $statusdone = 0;
+        $statuspending = 0;
+        
+        $sql = "SELECT JSON_UNQUOTE(JSON_EXTRACT(reviewratings, '$.status')) AS status, COUNT(*) AS count FROM reviews GROUP BY status";
+        $query = $db->query($sql);
+        $results = $query->getResultArray();
+        
+        foreach ($results as $result) {
+            if ($result['status'] === 'done') {
+                $statusdone = $result['count'];
+            } elseif ($result['status'] === 'pending') {
+                $statuspending = $result['count'];
+            }
+        }
     
         // Prepare arrays for the result
         $bioDates = [];
@@ -259,6 +277,8 @@ class ReviewModal extends Model
             'pulsecheckDates' => json_encode($pulsecheckDates),
             'bioCounts'       => json_encode($bioCounts),
             'pulsecheckCounts'=> json_encode($pulsecheckCounts),
+            'statusdone'      => $statusdone,
+            'statuspending'   => $statuspending,
         ];
     }    
 
@@ -283,5 +303,73 @@ class ReviewModal extends Model
         return $results;
     
     }
+     // report Chart page fucntions END
+
+    // Social-review page update credit fucntion start here
+    public function updateReviewCampaign($reviewID, $campaignName) {
+        // Retrieve the existing 'creditTo' data for the review with the given ID
+        $review = $this->select('creditTo')
+                       ->where('ID', $reviewID)
+                       ->first();
     
+        // Initialize currentData as an empty array if the field is not present or not valid
+        $currentData = isset($review['creditTo']) ? json_decode($review['creditTo'], true) : [];
+    
+        if (!is_array($currentData)) {
+            $currentData = [];
+        }
+    
+        // Append the new campaign name if it is not already in the array
+        if (!in_array($campaignName, $currentData)) {
+            $currentData[] = $campaignName;
+    
+            // Encode the updated array back to JSON
+            $jsonData = json_encode($currentData);
+    
+            // Update the 'creditTo' field with the new JSON data
+            return $this->where('ID', $reviewID)->set(['creditTo' => $jsonData])->update();
+        }
+        
+        return false;
+    }
+
+    public function getReviewByID($reviewID) {
+        return $this->select('creditTo')
+                    ->where('ID', $reviewID)
+                    ->first();
+    }
+    
+    public function deleteReviewCampaign($ID, $creditTo) {
+        // Construct the SQL query directly
+        $sql = "
+            UPDATE reviews
+            SET creditTo = JSON_REMOVE(
+                creditTo,
+                JSON_UNQUOTE(
+                    JSON_SEARCH(creditTo, 'one', $creditTo)
+                )
+            )
+            WHERE id = $ID
+            AND JSON_SEARCH(creditTo, 'one', $creditTo) IS NOT NULL;
+        ";
+   
+        // Log the SQL query for debugging
+        log_message('debug', $sql);
+   
+        // Execute the query with the provided ID and creditTo
+        $query = $this->db->query($sql, [$creditTo, $ID, $creditTo]);
+   
+        // Check if the query executed successfully
+        if ($query) {
+            // You can check the affected rows if needed
+            $affectedRows = $this->db->affectedRows();
+            log_message('debug', 'Affected rows: ' . $affectedRows);
+        } else {
+            // Handle the query error
+            log_message('error', 'Query failed: ' . $this->db->error());
+        }
+    }
+    // Social-review page update credit fucntion End here
+    
+
 }

@@ -127,7 +127,7 @@
          <div class="p-20px bg-white">
             <h2 class="text-2xl">Reviews</h2>
          </div>
-         <div class="px-15px bg-white flex justify-start items-center tabs"><a href="/analyze/reviews" class="tab-link active border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px" aria-current="page">Reviews</a><a href="/analyze/reviews/social-reviews" id="social-reviews-tab" class="tab p-10px">Social Reviews</a></div>
+         <div class="px-15px bg-white flex justify-start items-center tabs"><a href="<?=base_url('/analyze/reviews')?>" class="tab-link active border-b-2 border-blue-500 text-blue-500 router-link-exact-active p-15px" aria-current="page">Reviews</a><a href="<?=base_url('/analyze/reviews/social-reviews') ?>" id="social-reviews-tab" class="tab p-10px">Social Reviews</a></div>
          <div class="flex-grow">
             <div data-v-428084ba="" class="py-25px">
                <div data-v-428084ba="" class="bg-white rounded-4px shadow">
@@ -213,13 +213,14 @@
                                              </div>
                                              <div class="col-12 col-md-6">
                                                 <div class="inputBox">
-                                                   <select class="form-select form-select-md mb-3" name="campaign" aria-label=".form-select-lg example">
+                                                   <select id="campaignSelect" class="form-select form-select-md mb-3" name="campaign" aria-label=".form-select-lg example">
                                                       <option disabled selected>Campaign</option>
                                                       <?php foreach ($campaigns as $reviewss): ?>
-                                                         <option data-v-428084ba="" value="<?= $reviewss['ID']; ?>"><?= $reviewss['name']; ?></option>
-                                                      <?php endforeach; ?>
-
+                                                         <option value="<?= htmlspecialchars($reviewss['ID']); ?>" data-campaign-name="<?= htmlspecialchars($reviewss['name']); ?>">
+                                                            <?= htmlspecialchars($reviewss['name']); ?>
+                                                            <?php endforeach; ?>
                                                    </select>
+                                                   <input type="hidden" id="socialcampaign" name="socialcampaign" value="">
                                                 </div>
                                              </div>
                                              <div class="col-12 col-md-12">
@@ -245,11 +246,23 @@
                                                    <input class="form-control" autocomplete="off" name="City" type="text" placeholder="City">
                                                 </div>
                                              </div>
-                                             <div class="col-12 col-md-4">
-                                                <div class="inputBox">
-                                                   <input class="form-control" autocomplete="off" name="State" type="text" placeholder="State">
-                                                </div>
-                                             </div>
+                                             <div class="col-12 col-md-6">
+                                          <div class="inputBox">
+                                             <select class="form-select form-select-md mb-3" name="State">
+                                                <option disabled selected>State</option>
+                                                   <?php
+                                                   // Define the list of states
+                                                   $locations = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+                                                   // Assuming $state contains the currently selected state
+                                                   ?>                                    
+                                                   <?php foreach ($locations as $location): ?>
+                                                      <option value="<?= $location; ?>">
+                                                         <?= $location; ?>
+                                                      </option>
+                                                   <?php endforeach; ?>
+                                                </select>
+                                          </div>
+                                       </div>
                                              <div class="col-12 col-md-4">
                                                 <div class="inputBox">
                                                    <input class="form-control" autocomplete="off" name="Zipcode" type="text" placeholder="Zipcode">
@@ -340,11 +353,11 @@
                                     <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM388.1 312.8c12.3-3.8 24.3 6.9 19.3 18.7C382.4 390.6 324.2 432 256.3 432s-126.2-41.4-151.1-100.5c-5-11.8 7-22.5 19.3-18.7c39.7 12.2 84.5 19 131.8 19s92.1-6.8 131.8-19zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
                                  </svg>
                               </button>
-                              <button data-v-428084ba="" id="neutral">
-                                 <svg data-v-428084ba="" class="svg-inline--fa fa-face-meh text-4xl text-sky-500 opacity-50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-meh" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM176.4 176a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm128 32a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM160 336H352c8.8 0 16 7.2 16 16s-7.2 16-16 16H160c-8.8 0-16-7.2-16-16s7.2-16 16-16z"></path>
-                                 </svg>
-                              </button>
+                              <!--<button data-v-428084ba="" id="neutral">-->
+                              <!--   <svg data-v-428084ba="" class="svg-inline--fa fa-face-meh text-4xl text-sky-500 opacity-50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-meh" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">-->
+                              <!--      <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM176.4 176a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm128 32a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM160 336H352c8.8 0 16 7.2 16 16s-7.2 16-16 16H160c-8.8 0-16-7.2-16-16s7.2-16 16-16z"></path>-->
+                              <!--   </svg>-->
+                              <!--</button>-->
                               <button data-v-428084ba="" id="negative">
                                  <svg data-v-428084ba="" class="svg-inline--fa fa-face-frown text-4xl text-red-500 opacity-50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-frown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                     <path class="" fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM159.3 388.7c-2.6 8.4-11.6 13.2-20 10.5s-13.2-11.6-10.5-20C145.2 326.1 196.3 288 256 288s110.8 38.1 127.3 91.3c2.6 8.4-2.1 17.4-10.5 20s-17.4-2.1-20-10.5C340.5 349.4 302.1 320 256 320s-84.5 29.4-96.7 68.7zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>
@@ -415,26 +428,36 @@
                                     </div>
                                     <?php
                                     $reviewratings = json_decode($review['reviewratings']);
-                                    $email = isset($reviewratings->customer_email) ? $reviewratings->customer_email : 'No Email Available';
-                                    $name =  isset($reviewratings->Name) ? $reviewratings->Name : 'No Name Available';
-                                    $city =  isset($reviewratings->City) ? $reviewratings->City : 'No City Available';
-                                    $state = isset($reviewratings->State) ? $reviewratings->State : 'No State Available';
-                                    $zipcode = isset($reviewratings->Zipcode) ? $reviewratings->Zipcode : 'No Zipcode Available';
+                                    $email = isset($reviewratings->customer_email) ? $reviewratings->customer_email : '';
+                                    $name =  isset($reviewratings->Name) ? $reviewratings->Name : '';
+                                    $city =  isset($reviewratings->City) ? $reviewratings->City : '';
+                                    $state = isset($reviewratings->State) ? $reviewratings->State : '';
+                                    $address = isset($reviewratings->Address) ? $reviewratings->Address : '';
+                                    // print_r($address);
+                                    $zipcode = isset($reviewratings->Zipcode) ? $reviewratings->Zipcode : '';
                                     $reviewrate1 = isset($reviewratings->rate1) ? $reviewratings->rate1->value : '';
                                     $reviewrate2 = isset($reviewratings->rate2) ? $reviewratings->rate2->value : '';
                                     $reviewrate3 = isset($reviewratings->rate3) ? $reviewratings->rate3->value : '';
+                                     // Define the list of states
+                                     
                                     ?>
                                     <div data-v-f15ab7a3="" class="info flex flex-wrap">
+                                    <?php if($name) { ?>
                                        <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
                                           <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer:</span> <?= $name; ?></p>
                                        </div>
-                                       <!---->
-                                       <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
+                                       <?php } ?>
+                                      <?php if($email){ ?>
+                                            <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
                                           <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Email:</span> <?= $email; ?></p>
                                        </div>
+                                       <?php } ?>
+                                       <!---->
+                                       <?php if($address){ ?>
                                        <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
-                                          <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> <?= $city, $state, $zipcode; ?></p>
+                                          <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Customer Address:</span> <?= $address;?></p>
                                        </div>
+                                       <?php } ?>
                                        <div data-v-f15ab7a3="" class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">
                                           <p data-v-f15ab7a3=""><span data-v-f15ab7a3="" class="font-bold">Date:</span><?= explode(' ', $review['createdOn'])[0]; ?>
                                           </p>
@@ -517,7 +540,14 @@
                                                          <input class="outline-none py-7px border-b focus:border-blue-500" name="city" value="<?= $city; ?>" type="text" placeholder="<?= $city; ?>">
                                                          <select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">
                                                             <option disabled selected>State</option>
-                                                            <option value="<?= $state; ?>"><?= $state; ?></option>
+                                                            <?php 
+                                                            $locations = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+                                                            ?>
+                                                            <?php foreach ($locations as $location): ?>
+                                                               <option value="<?= $location; ?>" <?= $location == $state ? 'selected' : ''; ?>>
+                                                                  <?= $location; ?>
+                                                               </option>
+                                                            <?php endforeach; ?>
                                                          </select>
                                                          <input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value=" <?= $zipcode; ?>" type="text" placeholder=" <?= $zipcode; ?>">
                                                       </div>
@@ -581,7 +611,7 @@
 
          if (button.hasAttribute('archive')) {
             isArchive = (isArchive === '1') ? '0' : '1';
-            console.log('Updated archive status:', isArchive);
+            // console.log('Updated archive status:', isArchive);
 
             // Define SVG icons
             const archiveSVG = `<svg class="svg-inline--fa fa-box-archive" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="box-archive" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
@@ -601,7 +631,7 @@
          parentDiv.setAttribute('data-approved', isApproved);
          parentDiv.setAttribute('data-archive', isArchive);
          $.ajax({
-            url: '/analyze/reviews/approve',
+            url: '<?= base_url('/analyze/reviews/approve') ?>',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -610,7 +640,7 @@
                archive: isArchive
             },
             success: function(response) {
-               console.table(response);
+            //   console.table(response);
                var review = response;
                var buttonHTML =
                   '<td class="p-10px w-200px">' +
@@ -633,7 +663,6 @@
                   '</svg>' +
                   'Edit' +
                   '</button>' +
-
                   '</div>' +
                   '</td>'
             }
@@ -665,7 +694,7 @@
          }
 
          function filterData() {
-            console.log('Current Shared Data:', filters);
+            // console.log('Current Shared Data:', filters);
             fetchReviews(currentPage);
          }
          $('#positive').on('click', function() {
@@ -730,15 +759,15 @@
             // Grab the values from the inputs
             fromDate = $('input[type="date"]').eq(1).val();
             toDate = $('input[type="date"]').eq(2).val();
-            console.log('Button clicked');
-            console.log('From:', fromDate);
-            console.log('To:', toDate);
+            // console.log('Button clicked');
+            // console.log('From:', fromDate);
+            // console.log('To:', toDate);
             fetchReviews(currentPage);
          });
 
          function fetchReviews(page) {
             $.ajax({
-               url: '/analyze/reviews/get',
+               url: '<?= base_url('/analyze/reviews/get') ?>',
                type: 'POST',
                data: {
                   campaign_id: filters.campaignID,
@@ -755,7 +784,7 @@
                },
                dataType: 'json',
                success: function(response) {
-                  console.table(response);
+                //   console.log(response);
                   var data = response;
                   var campaigns = data.campaigns;
 
@@ -784,6 +813,8 @@
                   }
                   //console.log('the campaign name with their values are :',campaignOptions)
                   if (Array.isArray(data.reviews) && data.reviews.length > 0) {
+                       // Define the list of states
+                  let locations = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
 
                      data.reviews.forEach(function(review) {
                         var id = review.ID;
@@ -800,11 +831,26 @@
                            '<svg class="svg-inline--fa fa-face-frown text-4xl text-red-500 opacity-50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="face-frown" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
                            '<path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM159.3 388.7c-2.6 8.4-11.6 13.2-20 10.5s-13.2-11.6-10.5-20C145.2 326.1 196.3 288 256 288s110.8 38.1 127.3 91.3c2.6 8.4-2.1 17.4-10.5 20s-17.4-2.1-20-10.5C340.5 349.4 302.1 320 256 320s-84.5 29.4-96.7 68.7zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"></path>' +
                            '</svg>';
-                        let reviewerInfo = JSON.parse(review.reviewratings);
-                        let email = reviewerInfo?.customer_email || 'No Email Available';
+                        // let reviewerInfo = JSON.parse(review.reviewratings);
+                        let reviewerInfo;
+                          try {
+                             reviewerInfo = JSON.parse(review.reviewratings);
+                          } catch (e) {
+                            //  console.error('Error parsing review ratings:', e, review.reviewratings);
+                             reviewerInfo = {}; // Fallback to an empty object or handle the error accordingly
+                          }
+                        let emaildata = ''; 
+                        let email = reviewerInfo?.customer_email || '';
+                        if(email){
+                           emaildata = '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
+                           '<p><span class="font-bold">Customer Email:</span> ' + email + '</p>' +
+                           '</div>'
+                        }
                         let rate1 = parseFloat(reviewerInfo?.rate1?.value || '');
                         let rate2 = parseFloat(reviewerInfo?.rate2?.value || '');
                         let rate3 = parseFloat(reviewerInfo?.rate3?.value || '');
+                        let customeraddress = reviewerInfo.Address;
+                        let address = '';
                         let sum = rate1 + rate2 + rate3;
                         let average = sum / 3;
                         let roundedAverage = average.toFixed(); // Calculate roundedAverage
@@ -815,6 +861,14 @@
                               '<p>' + roundedAverage + '</p>' +
                               '</div>';
                         }
+
+                        if (!(customeraddress)) {
+                           address = '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
+                                    '<p><span class="font-bold">Customer Address:</span>' + customeraddress + '</p>' +
+                                    '</div>';
+                        }
+
+                        
                         let createdOn = review.createdOn;
                         let datePart = createdOn.substring(0, 10);
                         let ratingsHtml = '';
@@ -854,12 +908,9 @@
                            '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
                            '<p><span class="font-bold">Customer:</span>' + reviewerInfo.Name + '</p>' +
                            '</div>' +
-                           '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
-                           '<p><span class="font-bold">Customer Email:</span> ' + email + '</p>' +
-                           '</div>' +
-                           '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
-                           '<p><span class="font-bold">Customer Address:</span>' + review.state + '</p>' +
-                           '</div>' +
+                           emaildata
+                            +
+                           address +
                            '<div class="info-tag bg-white opacity-40 py-5px px-10px rounded-full m-5px shadow border">' +
                            '<p><span class="font-bold">Date:</span>' + datePart + '</p>' +
                            '</div>' +
@@ -902,20 +953,24 @@
                            '<div class="modal-body">' +
                            '<form method="post" action="/analyze/reviews/update/' + review.ID + '">' +
                            '<div class="grid grid-cols-3 gap-20px text-left mb-20px">' +
-                           '<div class="flex flex-col items-stretch col-span-3">' +
-                           '<select class="outline-none py-7px border-b focus:border-blue-500" name="campaign" aria-label=".form-select-lg example">' +
-                           '<option disabled' + (filters.campaignID ? '' : ' selected') + '>Campaign</option>' + campaignOptions +
-                           '</select>' +
-                           '</div>' +
+                              '<div class="flex flex-col items-stretch col-span-3">' +
+                              '<select class="outline-none py-7px border-b focus:border-blue-500" name="campaign" aria-label=".form-select-lg example">' +
+                              '<option disabled' + (filters.campaignID ? '' : ' selected') + '>Campaign</option>' +
+                              campaignOptions +
+                              '<option value="' + review.id + '" selected>' + review.name + '</option>' +
+                              '</select>' +
+                              '</div>'+
                            '<div class="flex flex-col items-stretch col-span-3">' +
                            '<p class="text-17px">Reviewer Information</p>' +
                            '<input class="outline-none py-7px border-b focus:border-blue-500" name="customer_name" value="' + reviewerInfo.Name + '" type="text" placeholder="test">' +
                            '</div>' +
                            '<input class="outline-none py-7px border-b focus:border-blue-500" name="city" value="' + reviewerInfo.City + '" type="text" placeholder="test">' +
                            '<select class="outline-none py-7px border-b focus:border-blue-500" name="state" aria-label=".form-select-lg example">' +
-                           '<option disabled="" selected="">State</option>' +
-                           '<option value="No State Available">No State Available</option>' +
-                           '</select>' +
+                           '<option disabled="" selected="">State</option>'
+                            + locations.map(function(state) {
+                              return '<option value="' + state + '"' + (state === reviewerInfo.State ? ' selected' : '') + '>' + state + '</option>';
+                           }).join('')  +          
+                           '</select>'                           +
                            '<input class="outline-none py-7px border-b focus:border-blue-500" name="zipcode" value="' + reviewerInfo.Zipcode + '" type="text" placeholder="">' +
                            '</div>' +
                            '<div class="modal-footer">' +
@@ -941,7 +996,7 @@
                         var totalPages = data.pagination.total_pages;
                         //console.table(totalPages)
                         var currentPage = data.pagination.page;
-                        console.table(currentPage)
+                        // console.table(currentPage)
                         paginationHtml += '<ul class="pagination">';
                         for (var i = 1; i <= totalPages; i++) {
                            var activeClass = (i === currentPage) ? 'active' : '';
@@ -1019,7 +1074,7 @@
          if (isChecked) {
             selectedCheckboxes.push(checkbox[0]);
          }
-         console.log('Selected Checkboxes:', selectedCheckboxes); // Log the selected checkboxes
+        //  console.log('Selected Checkboxes:', selectedCheckboxes); // Log the selected checkboxes
       }
 
       // Function to update the visibility of the approve button
@@ -1059,8 +1114,17 @@
          // Clear the selected checkboxes array
          selectedCheckboxes = [];
          $('#flexCheckDefault').prop('checked', false);
-         console.log('Selected Checkboxes after approval:', selectedCheckboxes); // Log the empty array after approval
+        //  console.log('Selected Checkboxes after approval:', selectedCheckboxes); // Log the empty array after approval
       }
    </script>
-
+   <script>
+    document.getElementById('campaignSelect').addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        console.log(selectedOption);
+        var campaignName = selectedOption.getAttribute('data-campaign-name');
+        //console.log(campaignName);
+        document.getElementById('socialcampaign').value = campaignName;
+    });
+</script>
    <?= $this->endSection() ?>
+   
