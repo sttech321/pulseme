@@ -89,10 +89,13 @@ if (php_sapi_name() === 'cli') {
         // Handle the CLI command
         $customer_email = isset($argv[2]) ? $argv[2] : null;
         $status = isset($argv[3]) ? $argv[3] : null;
+        print_r($status);
+        print_r($customer_email);
+        // $insertedID = isset($argv[3]) ? $argv[3] : null;
  
         $controller = new \App\Controllers\ReviewController();
-        $controller->updatestatus($customer_email, $status);
-        echo "Review processed for $customer_email with status $status\n";
+        $controller->updatestatus($customer_email, $status ,$insertedID);
+        echo "Review processed for $customer_email with status $status\n with $insertedID\n";
         exit(0); // End the script after processing the command
     } else {
         echo "Unknown command: $command\n";

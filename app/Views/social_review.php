@@ -83,6 +83,7 @@
     //     });
     // });
 </script>
+
 <script>
 //     $(document).ready(function() {
 //         $(document).on('click', '.delete-button', function() {
@@ -143,3 +144,5 @@
 </script>
 
 <?= $this->endsection('content') ?>
+
+

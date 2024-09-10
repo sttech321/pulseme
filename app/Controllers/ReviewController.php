@@ -104,12 +104,27 @@ class ReviewController extends BaseController
         $insertedID = $reviewModel->getInsertID();
         // Send contact card email
         // $this->updatestatus($customer_email , $status, $insertedID);
-        $phpPath = 'D:\\xampp\\php\\php.exe';
-        // // $filePath = 'C:\\xampp\\htdocs\\crm\\public\\index.php';
-         $filePath = 'D:\\xampp\\htdocs\\pulseme\\cli.php';
-         $command = "\"$phpPath\" \"$filePath\" reviews/updatestatus " . escapeshellarg($customer_email) . " " . escapeshellarg($status) . " " . escapeshellarg($insertedID);
-         $time = date('H:i', strtotime('+1 minutes'));
-         $taskCommand = "schtasks /create /tn updatestatus /tr \"$command\" /sc once /st $time /f";
+        // Build the command for task scheduling
+        $phpPath = 'D:\\xampp\\php\\php.exe';  // Ensure this path is correct
+        $filePath = 'D:\\xampp\\htdocs\\pulseme\\cli.php';  // Ensure this path is correct
+        $command = "\"$phpPath\" \"$filePath\" reviews/updatestatus " . escapeshellarg($customer_email) . " " . escapeshellarg($status) . " " . escapeshellarg($insertedID);
+
+        // Get the current time and schedule 1 minute later
+        $time = date('H:i', strtotime('+1 minutes'));
+
+        // Build the task command
+        $taskCommand = "schtasks /create /tn \"updatestatus\" /tr \"$command\" /sc once /st $time /f";
+
+        // Execute the task command
+        exec($taskCommand, $output, $return_var);
+
+        // Check if the command was successful
+        if ($return_var === 0) {
+            echo "Task scheduled successfully.";
+        } else {
+            echo "Failed to create task scheduler.";
+            print_r($output);
+        }
 
          return redirect()->to('/thankyou')->with('message', 'Thank you for your feedback. Your feedback is important to us.');
     }
