@@ -24,7 +24,7 @@ class UserController extends Controller
         // Validate email and password
         if (!$email || !$password) {
             session()->setFlashdata('error', 'Email and Password are required');
-            // return redirect()->to('/');
+            return redirect()->to('/');
         }
     
         // Check if user can log in
@@ -48,7 +48,7 @@ class UserController extends Controller
             return redirect()->to($redirectUrl);
         } else {
             session()->setFlashdata('error', 'Invalid email or password');
-            // return redirect()->to('/');
+            return redirect()->to('/');
         }
     }
     
