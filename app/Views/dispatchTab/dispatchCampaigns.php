@@ -632,6 +632,14 @@
                                        <label class="font-bold text-sm" for="employeeID">Employee ID <span class="text-xs">(Useful for API Integrations)</span></label>
                                        <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="employeeId" id="employeeId-${technician.ID}" value="${technician.employeeId}">
                                     </div>
+                                    <div class="input-group">
+                                       <label class="font-bold text-sm" for="email">Email <span class="text-xs">(descriptor)</span></label>
+                                       <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="email" name="email" id="email" value="${technician.email}">
+                                    </div>
+                                    <div class="input-group">
+                                       <label class="font-bold text-sm" for="device">Device ID <span class="text-xs">(deviceId)</span></label>
+                                       <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="deviceId" id="${technician.employeeId}" value="b7">
+                                    </div>
                                  </div>
                               </div>
                               <div class="modal-footer">
