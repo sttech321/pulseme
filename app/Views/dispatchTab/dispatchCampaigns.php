@@ -115,6 +115,7 @@
                                                       <h5 class="modal-title" id="exampleModalLabel">Create campaign</h5>
                                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                    </div>
+                                                   <div id="validation-errors"></div>
                                                    <div class="modal-body">
                                                       <div class="grid grid-cols-2 gap-20px auto-rows-auto">
                                                          <div class="flex w-full flex-col row-span-3 flex w-full flex-col row-span-3 uploadImgBox">
@@ -638,7 +639,7 @@
                                     </div>
                                     <div class="input-group">
                                        <label class="font-bold text-sm" for="device">Device ID <span class="text-xs">(deviceId)</span></label>
-                                       <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="deviceId" id="${technician.employeeId}" value="b7">
+                                       <input class="w-full p-5px outline-none border-b focus:border-blue-500" type="text" name="deviceId" id="${technician.deviceId}" value="b7">
                                     </div>
                                  </div>
                               </div>
