@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\UserModel;
 use App\Models\CustomerModel;
 use App\Models\PulsecheckModal;
 use App\Models\TestModal;
@@ -43,6 +43,9 @@ class CustomerController extends Controller
     {
         $technicianModel = new TechnicianModal();
         $data['technicians'] = $technicianModel->findAll();
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
+        $data['admin1'] = $admin1;
         return view('dispatch', $data);
     }
 

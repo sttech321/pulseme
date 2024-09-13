@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-
+use App\Models\UserModel;
 use App\Models\ContactcardModal;
 use CodeIgniter\Controller;
 
@@ -64,6 +64,9 @@ class ContactcardController extends BaseController
         // Fetch contact card data
         $contactCardModel = new ContactcardModal();
         $data['contactcard'] = $contactCardModel->first();
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
+        $data['admin1'] = $admin1;
         // Load the view with the data
         return view('contact-card-tab/contact_information', $data);
     }
@@ -82,6 +85,9 @@ class ContactcardController extends BaseController
 
         $contactCardModel = new ContactcardModal();
         $data['contactcard'] = $contactCardModel->first();
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
+        $data['admin1'] = $admin1;
         return view('contact-card-tab/contact_templates',$data);
     }
 
@@ -97,6 +103,9 @@ class ContactcardController extends BaseController
         }
         $contactCardModel = new ContactcardModal();
         $data['contactcard'] = $contactCardModel->first();
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
+        $data['admin1'] = $admin1;
         return view('contact-card-tab/contact-card-layout',$data);
     }
 }

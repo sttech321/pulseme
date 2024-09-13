@@ -20,11 +20,6 @@ class Home extends BaseController
         return view('login/login', $data);
     }
 
-    public function overview(): string
-    {
-        return view('overview');
-    }
-
 
     public function referral(): string
     {

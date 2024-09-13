@@ -3,6 +3,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\CampaignModel;
 use App\Models\TechnicianModal;
+use App\Models\UserModel;
 use App\Models\CustomerModel;
 use App\Models\ReviewModal;
 use CodeIgniter\I18n\Time;
@@ -20,45 +21,68 @@ class ReportsController extends BaseController {
         $from_date = $this->request->getVar('from_date');
         $end_date = $this->request->getVar('to_date');
         $data['campaigns'] = $model->findAll();
-          
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
+        $data['admin1'] = $admin1;
+            
         return view('reports/campaign_review',$data);
     }
 
     public function report_campaign()
     {
         $model = new CampaignModel();
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
         $campaignsWithSentiment = $model->getCampaignsWithSentiment();
         return view('reports/campaigns', [
             'campaigns' =>  $campaignsWithSentiment,
+            'admin1'    => $admin1,
         ]);
     }
 
     public function departments(): string
     {
         $model = new CampaignModel();
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
+        $data['admin1'] = $admin1;
         $data['departments'] = $model->getUniqueDepartments();
         return view('reports/departments', $data);
     }
 
     public function report_campaign_fieldsops(){
         $model = new CampaignModel();
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
         $campaignsWithSentiment = $model->getCampaignsWithSentiment();
-        return view('reports/fielsops_usage',['campaigns' =>  $campaignsWithSentiment]);
+        return view('reports/fielsops_usage',['campaigns' =>  $campaignsWithSentiment, 'admin1'    => $admin1]);
     }
 
     public function dispatching()
     {
         $model = new ReviewModal();
+    
         // Call the dispatchingchart method and store the returned data
         $chartData = $model->dispatchingchart();
-
-        // Pass the chart data to the view
-        return view('dispatching', $chartData);
+    
+        // Fetch admin details
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
+    
+        // Merge the chart data with admin data
+        $data = array_merge($chartData, [
+            'admin1' => $admin1
+        ]);
+    
+        // Pass the merged data to the view
+        return view('dispatching', $data);
     }
     
     public function summary()
     {
-        return view('summary');
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
+        return view('summary',['admin1' => $admin1]);
     }
 
     public function search()
@@ -95,6 +119,13 @@ class ReportsController extends BaseController {
         $departments = $model->getUniqueDepartments($fromDate, $toDate);
 
         return $this->response->setJSON($departments);
+    }
+
+    public function overview()
+    {
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
+        return view('overview',['admin1' => $admin1]);
     }
 
 }

@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Models\CampaignModel;
 use App\Models\ReviewModal;
+use App\Models\UserModel;
 use CodeIgniter\Controller;
 use App\Models\CustomerModel;
 use App\Models\TechnicianModal;
@@ -26,6 +27,9 @@ class Campaign extends BaseController {
         
         $model = new CampaignModel();
         $data['campaigns'] = $model->findAll();
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
+        $data['admin1'] = $admin1;
         // print_r($data['campaigns'][0]);
         return view('dispatchTab/dispatchCampaigns',$data);
     }

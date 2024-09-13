@@ -55,57 +55,7 @@
 						<i class="fas fa-times"></i>
 					</div>
 				</div>
-				<div class="sidebar-header flexBetween">
-					<div class="leftSec">
-						<div class="user-pic">
-							<img data-v-139b8be6="" width="230" src="<?= base_url('/image/person.jpg') ?>" alt="user picture">
-						</div>
-						<?php if (!empty($admin1)): ?>
-							
-						<div class="user-info">
-							<span class="user-name"><?= isset($admin1['first_name']) && !empty($admin1['first_name']) ? esc($admin1['first_name']) : 'George' ?>
-								<strong><?= esc($admin1['last_name']) ?></strong>
-							</span>
-							<span class="user-role">Administrator</span>
-						</div>
-						<?php endif; ?>
-					</div>
-					<div class="rightSec">
-						<div class="dropdown toggle">
-							<input id="t1" type="checkbox">
-							<label for="t1" class="cursorPointer"><i class="fa fa-ellipsis-v whiteText" aria-hidden="true"></i></label>
-							<ul class="dropdown-menu-field">
-								<li class="autoHeight">
-									<div class="dropdown-top flexBetween">
-										<div class="leftSec">
-											<div class="user-pic">
-												<img data-v-139b8be6="" width="230" src="<?= base_url('/image/person.jpg') ?>" alt="user picture">
-											</div>
-											<?php if (!empty($admin1)): ?>
-											<div class="user-info">
-												<span class="user-name"><?= esc($admin1['first_name']) ?>
-													<strong><?= esc($admin1['last_name']) ?></strong>
-												</span>
-												<span class="user-role">Administrator</span>
-											</div>
-											<?php endif; ?>
-										</div>
-									</div>
-								</li>
-								<li><a class="menuListItem" href="<?= base_url('/user-preferences')?>"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
-								<li><a class="menuListItem" href="<?= base_url('/settings/dispatch/campaigns') ?>"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a> </li>
-								<!-- <li><a class="menuListItem" href="/logs/outbound"><i class="fa fa-envelope" aria-hidden="true"></i>Logs</a></li> -->
-								<li>
-									<a class="menuListItem" href="<?= base_url('/logout') ?>"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
-								</li>
-
-							</ul>
-						</div>
-
-					</div>
-
-				</div>
-
+				<?= view('layouts/profile') ?>
 				<div class="sidebar-menu">
 					<ul>
 						<li class="header-menu">

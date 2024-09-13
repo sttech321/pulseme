@@ -6,6 +6,7 @@ use CodeIgniter\I18n\Time;
 use App\Models\CampaignModel;
 use App\Models\ContactcardModal;
 use App\Models\ReviewModal;
+use App\Models\UserModel;
 use CodeIgniter\Controller;
 use CodeIgniter\Pagination\Pager;
 
@@ -117,6 +118,7 @@ class ReviewController extends BaseController
 
         // Execute the task command
         exec($taskCommand, $output, $return_var);
+        print_r($taskCommand);
 
         // Check if the command was successful
         if ($return_var === 0) {
@@ -148,6 +150,8 @@ class ReviewController extends BaseController
                 ];
                 // Update the review with the new data
                 $reviewModel->update($insertedID, $data);
+                // print_r($data);
+                // die;
                 $this->sendContactCard($customer_email);
             }
         }
@@ -274,27 +278,46 @@ class ReviewController extends BaseController
     public function reviews()
     {
         // Check if the user is logged in
-        if (!session()->get('isLoggedIn')) {
-            // Store the current URL in the session for redirecting after login
-            session()->set('redirect_back', current_url());
-
-            // Redirect to the login page
-            return redirect()->to('/');
-        }
-
+        // if (!session()->get('isLoggedIn')) {
+        //     // Store the current URL in the session for redirecting after login
+        //     session()->set('redirect_back', current_url());
+    
+        //     // Redirect to the login page
+        //     return redirect()->to('/');
+        // }
+    
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
+    
         $reviewModel = new ReviewModal();
         $perPage = 10;
         $page = $this->request->getVar('page') ?: 1;
         $offset = ($page - 1) * $perPage;
-        $data['reviews'] = $reviewModel->get_reviews_with_campaign($perPage, $offset);
+    
+        // Fetch the reviews and other required data
+        $reviews = $reviewModel->get_reviews_with_campaign($perPage, $offset);
         $totalReviews = $reviewModel->get_total_reviews_count();
+    
+        // Setup pagination
         $pager = \Config\Services::pager();
-        $data['pager'] = $pager->makeLinks($page, $perPage, $totalReviews);
-        $data['campaigns'] = $reviewModel->get_campaign_name();
-        $data['enumValues'] = $reviewModel->getEnumValues();
-
+        $pagination = $pager->makeLinks($page, $perPage, $totalReviews);
+    
+        // Fetch campaigns and enum values
+        $campaigns = $reviewModel->get_campaign_name();
+        $enumValues = $reviewModel->getEnumValues();
+    
+        // Merge all the data into one array
+        $data = [
+            'admin1' => $admin1,
+            'reviews' => $reviews,
+            'pager' => $pagination,
+            'campaigns' => $campaigns,
+            'enumValues' => $enumValues,
+        ];
+    
         return view('reviews', $data);
     }
+    
 
     public function getReviewsByCampaign()
     {
