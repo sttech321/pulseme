@@ -187,10 +187,12 @@ class ReviewController extends BaseController
 
     public function social_review()
     {
+        $userModel = new UserModel();
+        $admin1 = $userModel->find(1);
         $reviewModel = new ReviewModal();
-
         $data['reviews'] = $reviewModel->getReviewsByType();
         $data['campaigns'] = $reviewModel->get_campaign_name();
+        $data['admin1'] = $admin1;
         return view('social_review', $data);
     }
 
