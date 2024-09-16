@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Technician Bio</title>
+<title><?= $title ?? 'SummitRA' ?></title>
+<link rel="icon" type="image/png" sizes="32x32" href="<?=base_url('/image/summitRA.jpeg')?>">
     <style>
         body {
             font-family: Arial, sans-serif;

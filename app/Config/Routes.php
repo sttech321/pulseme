@@ -85,7 +85,7 @@ $routes->post('/analyze/reviews/update/(:num)', 'ReviewController::update/$1');
 $routes->get('/analyze/dispatching', 'ReportsController::dispatching');
 
 $routes->get('/example', 'TestController::data');
-$routes->post('example/submit', 'CustomerController::create_dispatch');
+$routes->post('example/submit', 'AuthController::create_dispatch');
 $routes->post('searchbar', 'Campaign::search');
 
 $routes->post('/contact-card', 'ContactcardController::create_contactcard');
@@ -111,7 +111,7 @@ $routes->cli('/reviews/updatestatus/(:any)/(:any)/(:any)', 'ReviewController::up
 $routes->get('auth/update-token', 'AuthController::updateToken');
 $routes->get('auth/auth-token', 'AuthController::lcoatedestination');
 // $routes->get('/tracker', 'AuthController::tracker');
-$routes->get('/tracker/(:segment)', 'AuthController::tracker/$1');
+$routes->get('/tracker', 'AuthController::tracker');
 
 $routes->get('/auth/statustrack/(:segment)', 'AuthController::statustrack/$1');
 $routes->get('direction/', 'AuthController::getDirection');

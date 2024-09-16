@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Technician Bio</title>
+    <title><?= $title ?? 'SummitRA' ?></title>
+	<meta name="description" content="summitRA: The small framework with powerful features">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?=base_url('/image/summitRA.jpeg')?>">
     <style>
         body {
             font-family: Arial, sans-serif;

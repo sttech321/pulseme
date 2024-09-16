@@ -28532,7 +28532,8 @@ body {
     width: 100%;
     margin: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    text-align: center;
 }
 
 .flow-card.mood>div>a {
@@ -28928,7 +28929,7 @@ ul {
 }
 
 .social-media-websites {
-    margin-left: 150px;
+    margin-left: 0px;
 }
 
 .form-control {
@@ -28944,7 +28945,7 @@ textarea.input.form-control.fg-input.validate {
 }
 
 .social-media-websites.positive {
-margin-right: 150px;
+margin-right: 0px;
 }
 
 .slider {

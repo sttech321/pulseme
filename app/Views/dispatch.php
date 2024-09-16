@@ -117,13 +117,13 @@
                                        <input
                                           class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px"
                                           type="text" name="customer_name" id="name_<?= $technician['ID'] ?>"
-                                          placeholder="Name (Optional)">
+                                          placeholder="Name">
                                     </div>
                                     <div class="input-group col-span-3 lg:col-span-4 flex items-center">
                                        <div class="mr-10px flex justify-center items-center">
 
                                        </div>
-                                       <input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="text" name="customer_address" id="address_<?= $technician['ID'] ?>" placeholder="Address (Optional)">
+                                       <input class="w-full bg-transparent outline-none border-b-1 focus:border-blue-500 py-7px" type="text" name="customer_address" id="address_<?= $technician['ID'] ?>" placeholder="Address">
                                     </div>
                                     <div class="flex justify-start items-center py-5px col-span-6">
                                        <div class="flex justify-start items-center col-span-3 cursor-pointer">
@@ -244,40 +244,75 @@
       }
    });
 
+   // function submitForm(formId, actionType) {
+   //    var form = $('#' + formId);
+   //    var actionTypeField = $('#actionType_' + formId.split('_')[1]);
+   //    actionTypeField.val(actionType);
+   //    var phone = $('.customer_phone').val();
+   //    var email = $('.customer_email').val();
+
+   //    console.log('Form Data:', form.serialize()); // Debugging statement
+   //    console.log('Action Type:', actionTypeField.val());
+
+   //    $.ajax({
+   //       url: $('#' + formId).attr('action'), // Get URL from the form action attribute
+   //       type: 'POST',
+   //       data: $('#' + formId).serialize(), // Serialize form data
+   //       dataType: 'json', // Expect JSON response
+   //       success: function(response) {
+   //          console.log('Response:', response); // Debugging statement
+   //          if (response.status === 'success') {
+   //             location.reload();
+   //          } else if (response.status === 'error') {
+   //             let errorMessage = '';
+   //             $.each(response.errors, function(field, error) {
+   //                errorMessage += error + '<br>';
+   //             });
+   //             $('.error').html(errorMessage);
+   //          } else {
+   //             console.log('Response:', response); // Debugging statement
+   //          }
+   //       },
+   //       error: function(xhr, status, error) {
+   //          console.log('Error:', error); // Debugging statement
+   //          $('.error').text('An error occurred while submitting the form.');
+   //       }
+   //    });
+   // }
+
    function submitForm(formId, actionType) {
-      var form = $('#' + formId);
-      var actionTypeField = $('#actionType_' + formId.split('_')[1]);
-      actionTypeField.val(actionType);
-      var phone = $('.customer_phone').val();
-      var email = $('.customer_email').val();
+    var form = $('#' + formId);
+    var actionTypeField = $('#actionType_' + formId.split('_')[1]);
+    actionTypeField.val(actionType);
 
-      console.log('Form Data:', form.serialize()); // Debugging statement
-      console.log('Action Type:', actionTypeField.val());
+    console.log('Form Data:', form.serialize()); // Debugging statement
+    console.log('Action Type:', actionTypeField.val());
 
-      $.ajax({
-         url: $('#' + formId).attr('action'), // Get URL from the form action attribute
-         type: 'POST',
-         data: $('#' + formId).serialize(), // Serialize form data
-         dataType: 'json', // Expect JSON response
-         success: function(response) {
+    $.ajax({
+        url: $('#' + formId).attr('action'),
+        type: 'POST',
+        data: form.serialize(), // Serialize form data
+        dataType: 'json', // Expect JSON response
+        success: function(response) {
             console.log('Response:', response); // Debugging statement
             if (response.status === 'success') {
-               location.reload();
+                location.reload();
             } else if (response.status === 'error') {
-               let errorMessage = '';
-               $.each(response.errors, function(field, error) {
-                  errorMessage += error + '<br>';
-               });
-               $('.error').html(errorMessage);
+                let errorMessage = '';
+                $.each(response.errors, function(field, error) {
+                    errorMessage += error + '<br>';
+                });
+                $('.error').html(errorMessage);
             } else {
-               console.log('Response:', response); // Debugging statement
+                console.log('Response:', response); // Debugging statement
             }
-         },
-         error: function(xhr, status, error) {
+        },
+        error: function(xhr, status, error) {
             console.log('Error:', error); // Debugging statement
             $('.error').text('An error occurred while submitting the form.');
-         }
-      });
-   }
+        }
+    });
+}
+
 </script>
 <?= $this->endsection('content') ?>
