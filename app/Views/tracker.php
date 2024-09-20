@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Map with Real-time Tracking</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .map {
+            height: 800px;
+            width: 100%;
+        }
+        .vehicle-icon {
+            width: 30px;
+            height: 30px;
+        }
+        .start-icon, .destination-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        .start-icon {
+            background-color: blue;
+        }
+        .destination-icon {
+            background-color: red;
+        }
+        .info-box {
+            padding: 10px;
+            background: white;
+            border: 1px solid #ddd;
+            width: 200px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map" class="map"></div>
+    <div id="info" class="info-box">
+        Distance Covered: <span id="distance">0.00</span>km
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([27.8550856, -82.7852595], 13);
+        // Add tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+        }).addTo(map);
+
+        // Define vehicle and marker icons
+        var vehicleIcon = L.divIcon({
+            className: 'vehicle-icon',
+            html: '<i class="fa fa-car fa-3x"></i>',
+            iconSize: [30, 42],
+            iconAnchor: [15, 42]
+        });
+
+        var startIcon = L.divIcon({
+            className: 'start-icon'
+        });
+
+        var destinationIcon = L.divIcon({
+            className: 'destination-icon'
+        });
+
+        // Variables for tracking distance
+        var totalDistance = 0.0;
+        var lastPosition = null;
+        
+        // var startMarker = L.marker([27.845180, 27.845180], { icon: startIcon }).addTo(map).bindPopup('Start');
+        var destinationMarker = L.marker([27.8550856, -82.7852595], { icon: destinationIcon }).addTo(map).bindPopup('Destination');
+        
+        var startMarker;
+
+    function updateLocation() {
+        var deviceId = '<?= $deviceId ?>'; // Fetch deviceId from PHP
+        console.log(deviceId, 'deviceId');
+        var url = `/auth/statustrack/${deviceId}`;
+        console.log(url, 'url');
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                // Extract latitude, longitude, and other data from the response
+                var currentPosition = [data.latitude, data.longitude];
+
+                if (currentPosition[0] && currentPosition[1]) {
+                    // Remove existing vehicle marker if it exists
+                    if (window.vehicleMarker) {
+                        map.removeLayer(window.vehicleMarker);
+                    }
+                    // Add the new vehicle marker at current position
+                    window.vehicleMarker = L.marker(currentPosition, { icon: vehicleIcon }).addTo(map);
+
+                    // Check if the startMarker is already initialized
+                    if (!startMarker) {
+                        // Create start marker for the first time using the current position
+                        startMarker = L.marker(currentPosition, { icon: startIcon }).addTo(map).bindPopup('Start');
+                    } else {
+                        // Update the start marker position with the fetched current position
+                        startMarker.setLatLng(currentPosition).bindPopup('Start (Updated)').update();
+                    }
+
+                    // Fetch and display route
+                    fetchRoute(currentPosition);
+
+                    // Calculate distance covered if there is a previous position
+                    if (lastPosition) {
+                        var distance = calculateDistance(lastPosition, currentPosition);
+                        totalDistance += distance;
+                        document.getElementById('distance').innerText = totalDistance.toFixed(2);
+                    }
+                    // Update last position
+                    lastPosition = currentPosition;
+                }
+            })
+            .catch(error => console.error('Error fetching location:', error));
+    }
+    // Update location every 2 seconds
+    setInterval(updateLocation, 2000);
+
+    function fetchRoute(currentPosition) {
+        var startLat = currentPosition[0];
+        var startLng = currentPosition[1];
+        var url = `/direction?origin=${startLat},${startLng}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data,'dfghjkldfghjkl');
+                if (data.routes && data.routes.length > 0) {
+                    var routeCoordinates = data.routes[0].overview_polyline.points;
+                    console.log(routeCoordinates,'routeCoordinates');
+                    var latlngs = decodePolyline(routeCoordinates);
+                    console.log(latlngs,'latlngs');
+                    if (window.routePolyline) {
+                        map.removeLayer(window.routePolyline);
+                    }
+                    window.routePolyline = L.polyline(latlngs, { color: 'blue' }).addTo(map);
+                    map.fitBounds(window.routePolyline.getBounds());
+                } else {
+                    console.error('No route data found');
+                }
+            })
+            .catch(error => console.error('Error fetching route:', error));
+    }
+
+    function calculateDistance(latlng1, latlng2) {
+        var R = 6371; // Radius of the Earth in km
+        var dLat = (latlng2[0] - latlng1[0]) * Math.PI / 180;
+        var dLng = (latlng2[1] - latlng1[1]) * Math.PI / 180;
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(latlng1[0] * Math.PI / 180) * Math.cos(latlng2[0] * Math.PI / 180) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var distance = R * c;
+        return distance;
+    }
+
+    function decodePolyline(encoded) {
+        var points = [];
+        var len = encoded.length;
+        var index = 0;
+        var lat = 0;
+        var lng = 0;
+
+        while (index < len) {
+            var b, shift = 0, result = 0;
+            do {
+                b = encoded.charCodeAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            var dlat = (result & 1) ? ~(result >> 1) : (result >> 1);
+            lat += dlat;
+            shift = 0;
+            result = 0;
+            do {
+                b = encoded.charCodeAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            var dlng = (result & 1) ? ~(result >> 1) : (result >> 1);
+            lng += dlng;
+            points.push([lat / 1E5, lng / 1E5]);
+        }
+        return points;
+    }
+
+//     async function getCoordinates(address) {
+//     const apiKey = 'AIzaSyCX5PvWwNfRmUuwNFJEtEpjorj6RdCV-PE'; // Replace with your Google API Key
+//     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
+
+//     try {
+//         const response = await fetch(url);
+//         const data = await response.json();
+
+//         if (data.status === 'OK') {
+//             const location = data.results[0].geometry.location;
+//             console.log(`Latitude: ${location.lat}, Longitude: ${location.lng}`);
+//             return location;  // Return the coordinates (lat, lng)
+//         } else {
+//             console.error('Geocoding failed:', data.status);
+//         }
+//     } catch (error) {
+//         console.error('Error fetching geocoding data:', error);
+//     }
+// }
+
+// // Usage example
+// const address = '9209 Seminole Blvd, Seminole, FL 33772, USA';
+
+// getCoordinates(address).then((location) => {
+//     // Check if location is not undefined
+//     if (location) {
+//         var destinationMarker = L.marker([location.lat, location.lng], { icon: destinationIcon })
+//             .addTo(map)
+//             .bindPopup('Destination');
+//     }
+// });
+
+    </script>
+</body>
+</html>

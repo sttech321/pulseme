@@ -88,8 +88,8 @@ $routes->get('/example', 'TestController::data');
 $routes->post('example/submit', 'AuthController::create_dispatch');
 $routes->post('searchbar', 'Campaign::search');
 
-$routes->post('/contact-card', 'ContactcardController::create_contactcard');
 
+$routes->post('/contact-card', 'ContactcardController::create_contactcard');
 $routes->get('/conactcardlayout', 'ContactcardController::conactcardlayout');
 $routes->post('/leaderboard/reports/campaigns/search', 'ReportsController::search');
 
@@ -111,7 +111,7 @@ $routes->cli('/reviews/updatestatus/(:any)/(:any)/(:any)', 'ReviewController::up
 $routes->get('auth/update-token', 'AuthController::updateToken');
 $routes->get('auth/auth-token', 'AuthController::lcoatedestination');
 // $routes->get('/tracker', 'AuthController::tracker');
-$routes->get('/tracker', 'AuthController::tracker');
+$routes->get('/tracker/(:segment)', 'AuthController::tracker/$1');
 
 $routes->get('/auth/statustrack/(:segment)', 'AuthController::statustrack/$1');
 $routes->get('direction/', 'AuthController::getDirection');

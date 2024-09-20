@@ -81,6 +81,7 @@
                               <form id="form_<?= $technician['ID'] ?>" class="ajaxForm" action="<?= base_url('example/submit') ?>" method="post">
                                  <input type="hidden" id="campaignid" value="<?= $technician['ID'] ?>" name="campaignid" required>
                                  <input type="hidden" id="employeeid" name="employeeid" value="<?= $technician['employeeId'] ?>" required>
+                                 <input type="hidden" id="deviceId" name="deviceId" value="<?= $technician['deviceId'] ?>" required>
 
                                  <td class="employee flex items-center w-1/4">
                                     <div class="profile-img w-100px h-100px rounded-1/2 bg-center bg-contain bg-no-repeat min-h-50px mr-10px flex-shrink-0"
@@ -296,7 +297,7 @@
         success: function(response) {
             console.log('Response:', response); // Debugging statement
             if (response.status === 'success') {
-                location.reload();
+               //  location.reload();
             } else if (response.status === 'error') {
                 let errorMessage = '';
                 $.each(response.errors, function(field, error) {
