@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
+use DateTime;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\TechnicianModal;
@@ -158,7 +158,7 @@ class AuthController extends BaseController
             'newline' => "\r\n"
         ]);
 
-        $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
+        $emailService->setFrom($_ENV['SMTP_USER'], 'SummitRA');
         $emailService->setTo($email);
         $emailService->setSubject('Realtime tracking system');
         $emailService->setMessage($message);
@@ -323,11 +323,11 @@ class AuthController extends BaseController
     // }
 
     public function getdeviceid($deviceId){
-        // $deviceId = 'b7';
         return $deviceId;
     }
 
-    public function lcoatedestination() {
+    public function lcoatedestination($deviceId) {
+        $deviceid = $this->getdeviceid($deviceId); 
         $authModel = new AuthModel();
         $accessToken = $authModel->find(1);
         $authtoken = $accessToken['access_token'];
@@ -341,7 +341,8 @@ class AuthController extends BaseController
             foreach ($employeecode as $employee) {
                 // Assuming your database returns 'employeeId' and 'deviceId'
                 $employeeId = strtoupper($employee['employeeId']);
-                if(!empty($employeeId)){
+                $deviceId = $employee['deviceId'];
+                if(!empty($employeeId) && !empty($deviceId)){
                     $employeeCodes[] = [
                         'employeeId' => $employee['employeeId'],
                         'deviceId' => $employee['deviceId'],
@@ -350,10 +351,12 @@ class AuthController extends BaseController
             }
         }
         $employeeIds = array_column($employeeCodes, 'employeeId');
+        $deviceId = array_column($employeeCodes, 'deviceId');
+
         $currentDate = round(microtime(true) * 1000);
         $nextDay = round(strtotime('+1 day') * 1000);
-        $startDate = '1726804800000';
-        $endDate = '1726891199000';
+        $startDate = '1727236800000';
+        $endDate = '1727323199000';
         $page = 0;
         $size = 1000;
         $sort = [];
@@ -368,7 +371,6 @@ class AuthController extends BaseController
         $zoneId = "";
         $emp1 = $employeeIds;
         sort($emp1);
-    
         $query = '
             query SearchAssignments($page: Int!, $size: Int!, $sort: [String], $startDate: String, $endDate: String, $employeeCodes: [String], $assignedFlag: Boolean, $unassignedFlag: Boolean, $unscheduledFlag: Boolean, $jobDuration: [String], $jobClass: String, $jobType: String, $priority: Boolean, $prioritySort: Boolean, $zoneId: String) {
                 searchAssignments(page: $page, size: $size, sort: $sort, startDate: $startDate, endDate: $endDate, employeeCodes: $employeeCodes, assignedFlag: $assignedFlag, unassignedFlag: $unassignedFlag, unscheduledFlag: $unscheduledFlag, jobDuration: $jobDuration, jobClass: $jobClass, jobType: $jobType, priority: $priority, prioritySort: $prioritySort, zoneId: $zoneId) {
@@ -391,6 +393,7 @@ class AuthController extends BaseController
                         isSaleEst
                         jobClass
                         jobType
+                        mapStatus
                         jobTypeDescription
                         locationAddress1
                         locationAddress2
@@ -408,14 +411,15 @@ class AuthController extends BaseController
                         locationAddressHash
                         locationTaxCode
                         locationZone
+                        startTimePreference
+                        endTimePreference
+                        timePreference
                         departmentName
                     }
                 }
             }
         ';
-    
         $curl = curl_init();
-    
         curl_setopt_array($curl, array(
             CURLOPT_URL => $apiurl,
             CURLOPT_RETURNTRANSFER => true,
@@ -459,42 +463,49 @@ class AuthController extends BaseController
             echo "cURL Error #:" . $err;
         } else {
             $response = json_decode($response);
+
             if (isset($response->data->searchAssignments->content)) {
                 foreach ($response->data->searchAssignments->content as $assignment) {
-                    $employeeCode = $assignment->employeeCode;
-                    // Find the matching employee in your database
-                    $matchingEmployee = array_filter($employeeCodes, function ($employee) use ($employeeCode) {
-                        return $employee['employeeId'] === $employeeCode;
+                    $employeeCode = strtoupper($assignment->employeeCode);
+                    // Find the matching employee in your database (adjust this to match your DB structure)
+                    $matchingEmployee = array_filter($employeeCodes, function ($employee) use ($employeeCode, $assignment) {
+                        $status = $assignment->status;
+                        $mapStatus = $assignment->mapStatus ?? '';
+                        // Ensure both statuses match 'Dispatched'
+                        if ($status === "Assigned" && $mapStatus === "Assigned") {
+                            return $employee['employeeId'] === $employeeCode;
+                        }
+                        return false;
                     });
-        
+                    // Proceed if a matching employee is found
                     if (!empty($matchingEmployee)) {
-                        // Get the deviceId of the matching employee
+                        // Get the first matching employee (array_shift removes and returns the first element)
                         $matchingEmployee = array_shift($matchingEmployee);
                         $deviceId = $matchingEmployee['deviceId'];
-                        // Construct location address
-                        $locationAddress1 = $assignment->locationAddress1 ? $assignment->locationAddress1 : '';
-                        $locationCity = $assignment->locationCity ? $assignment->locationCity : '';
-                        $locationZipCode = $assignment->locationZipCode ? $assignment->locationZipCode : '';
-                        $locationAddress = trim($locationAddress1) . ', ' . trim($locationCity) . ', ' . trim($locationZipCode);
-                        $devicedata = $this->getdeviceid($deviceId);
-                        $status = $assignment->status;
-                        // print_r($status);
-                         if($status === "Dispatched"){
-                            if($deviceId === $devicedata){
-                                return $locationAddress;
-                            }
+                        // $devicedata = $this->getdeviceid($deviceId);
+                        if ($deviceId === $deviceid) {
+                            $locationAddress1 = $assignment->locationAddress1 ?? '';
+                            $locationCity = $assignment->locationCity ?? '';
+                            $locationZipCode = $assignment->locationZipCode ?? '';
+                            // Build the full location address, ensuring to trim any whitespace
+                            $locationAddressParts = array_filter([$locationAddress1, $locationCity, $locationZipCode]);
+                            $locationAddress = implode(', ', $locationAddressParts);
+                            // Return the constructed address
+                            return $locationAddress;
+                            // return '9071 Baywood Park Dr, Seminole , 33777';
                         }
                     }
                 }
-            } else {
+            }
+             else {
                 echo "No assignments found.";
             }
         }
     }
-    
+
     public function statustrack($deviceId)
     {
-        $deviceid = $this->getdeviceid($deviceId);
+        $deviceid = $this->getdeviceid($deviceId); // Fetch the device ID
         $authModel = new AuthModel();
         $accessToken = $authModel->find(1);
         $sessionId = $accessToken['sessionID'];
@@ -563,38 +574,37 @@ class AuthController extends BaseController
         ]);
     }
 
-    public function getDirection() {
+    public function getDirection($deviceId) {
         $origin = $this->request->getGet('origin');
-        $address = $this->lcoatedestination(); 
-        $destinationAddress = trim(json_encode($address, JSON_PRETTY_PRINT), '"');
-        $geocodeApiKey = 'AIzaSyCX5PvWwNfRmUuwNFJEtEpjorj6RdCV-PE';
+        $address = $this->lcoatedestination($deviceId);
     
-        // Geocode destination address
-        $geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($destinationAddress) . "&key=" . $geocodeApiKey;
+        if (!$address) {
+            return $this->response->setJSON(['error' => 'Device address not found or deviceId does not match.']);
+        }
+    
+        $geocodeApiKey = 'AIzaSyCX5PvWwNfRmUuwNFJEtEpjorj6RdCV-PE';
+        $geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($address) . "&key=" . $geocodeApiKey;
         $client = \Config\Services::curlrequest();
-        
+    
         try {
             $geocodeResponse = $client->get($geocodeUrl);
             $geocodeData = json_decode($geocodeResponse->getBody(), true);
     
-            if ($geocodeResponse->getStatusCode() !== 200) {
-                return $this->response->setJSON(['error' => 'Geocoding API request failed.']);
-            } 
-            if (isset($geocodeData['results'][0]['geometry']['location'])) {
-                $destinationLat = $geocodeData['results'][0]['geometry']['location']['lat'];
-                $destinationLng = $geocodeData['results'][0]['geometry']['location']['lng'];
-            //    return $this->getdestination($destinationLat,$destinationLng);
-            } else {
-                return $this->response->setJSON(['error' => 'Unable to geocode destination address.']);
+            if ($geocodeResponse->getStatusCode() !== 200 || empty($geocodeData['results'])) {
+                return $this->response->setJSON(['error' => 'Failed to geocode the destination address.']);
             }
+    
+            $destinationLat = $geocodeData['results'][0]['geometry']['location']['lat'];
+            $destinationLng = $geocodeData['results'][0]['geometry']['location']['lng'];
     
             $directionsUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$destinationLat,$destinationLng&key=" . $geocodeApiKey;
             $directionsResponse = $client->get($directionsUrl);
             $directionsData = json_decode($directionsResponse->getBody(), true);
-
-            if ($directionsResponse->getStatusCode() !== 200) {
-                return $this->response->setJSON(['error' => 'Directions API request failed.']);
+    
+            if ($directionsResponse->getStatusCode() !== 200 || empty($directionsData['routes'])) {
+                return $this->response->setJSON(['error' => 'Failed to get directions.']);
             }
+    
             return $this->response->setJSON($directionsData);
         } catch (\Exception $e) {
             return $this->response->setJSON(['error' => 'An error occurred: ' . $e->getMessage()]);
@@ -611,4 +621,3 @@ class AuthController extends BaseController
         ]);
     }
 }
-

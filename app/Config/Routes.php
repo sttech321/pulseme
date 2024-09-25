@@ -109,9 +109,9 @@ $routes->post('/user-preferences/update/(:num)', 'UserController::updateProfile/
 $routes->cli('/reviews/updatestatus/(:any)/(:any)/(:any)', 'ReviewController::updatestatus/$1/$2/$3');
 
 $routes->get('auth/update-token', 'AuthController::updateToken');
-$routes->get('auth/auth-token', 'AuthController::lcoatedestination');
+$routes->get('auth/auth-token/(:segment)', 'AuthController::lcoatedestination/$1');
 // $routes->get('/tracker', 'AuthController::tracker');
 $routes->get('/tracker/(:segment)', 'AuthController::tracker/$1');
 
 $routes->get('/auth/statustrack/(:segment)', 'AuthController::statustrack/$1');
-$routes->get('direction/', 'AuthController::getDirection');
+$routes->get('direction/(:any)', 'AuthController::getDirection/$1');

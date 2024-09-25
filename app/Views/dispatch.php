@@ -245,41 +245,6 @@
       }
    });
 
-   // function submitForm(formId, actionType) {
-   //    var form = $('#' + formId);
-   //    var actionTypeField = $('#actionType_' + formId.split('_')[1]);
-   //    actionTypeField.val(actionType);
-   //    var phone = $('.customer_phone').val();
-   //    var email = $('.customer_email').val();
-
-   //    console.log('Form Data:', form.serialize()); // Debugging statement
-   //    console.log('Action Type:', actionTypeField.val());
-
-   //    $.ajax({
-   //       url: $('#' + formId).attr('action'), // Get URL from the form action attribute
-   //       type: 'POST',
-   //       data: $('#' + formId).serialize(), // Serialize form data
-   //       dataType: 'json', // Expect JSON response
-   //       success: function(response) {
-   //          console.log('Response:', response); // Debugging statement
-   //          if (response.status === 'success') {
-   //             location.reload();
-   //          } else if (response.status === 'error') {
-   //             let errorMessage = '';
-   //             $.each(response.errors, function(field, error) {
-   //                errorMessage += error + '<br>';
-   //             });
-   //             $('.error').html(errorMessage);
-   //          } else {
-   //             console.log('Response:', response); // Debugging statement
-   //          }
-   //       },
-   //       error: function(xhr, status, error) {
-   //          console.log('Error:', error); // Debugging statement
-   //          $('.error').text('An error occurred while submitting the form.');
-   //       }
-   //    });
-   // }
 
    function submitForm(formId, actionType) {
     var form = $('#' + formId);
@@ -297,7 +262,7 @@
         success: function(response) {
             console.log('Response:', response); // Debugging statement
             if (response.status === 'success') {
-               //  location.reload();
+                location.reload();
             } else if (response.status === 'error') {
                 let errorMessage = '';
                 $.each(response.errors, function(field, error) {
