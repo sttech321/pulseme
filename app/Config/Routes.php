@@ -114,4 +114,7 @@ $routes->get('auth/auth-token/(:segment)', 'AuthController::lcoatedestination/$1
 $routes->get('/tracker/(:segment)', 'AuthController::tracker/$1');
 
 $routes->get('/auth/statustrack/(:segment)', 'AuthController::statustrack/$1');
+
+$routes->get('/jobid/(:any)', 'AuthController::Jobid/$1');
+
 $routes->get('direction/(:any)', 'AuthController::getDirection/$1');

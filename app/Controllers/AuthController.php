@@ -8,6 +8,7 @@ use App\Models\TechnicianModal;
 use App\Models\CustomerModel;
 use App\Models\CampaignModel;
 use App\Models\AuthModel;
+use App\Models\JoBModel;
 use App\Models\CustomersmsbioModel;
 
 class AuthController extends BaseController
@@ -134,33 +135,6 @@ class AuthController extends BaseController
         $emailService->setFrom($_ENV['SMTP_USER'], 'summitRA');
         $emailService->setTo($email);
         $emailService->setSubject('Pulsecheck Review');
-        $emailService->setMessage($message);
-
-        if (!$emailService->send()) {
-            echo $emailService->printDebugger(['headers', 'subject', 'body']);
-        }
-    }
-
-    private function Send_technician_location($deviceId, $email)
-    {
-        $emailService = \Config\Services::email();
-        $link = base_url('tracker/' . $deviceId);
-        $message = 'Track the technician in real-time: ' . $link;
-
-        $emailService->initialize([
-            'protocol' => 'smtp',
-            'SMTPHost' => $_ENV['SMTP_HOST'],
-            'SMTPPort' => intval($_ENV['SMTP_PORT']),
-            'SMTPUser' => $_ENV['SMTP_USER'],
-            'SMTPPass' => $_ENV['SMTP_PASS'],
-            'mailType' => 'html',
-            'charset' => 'utf-8',
-            'newline' => "\r\n"
-        ]);
-
-        $emailService->setFrom($_ENV['SMTP_USER'], 'SummitRA');
-        $emailService->setTo($email);
-        $emailService->setSubject('Realtime tracking system');
         $emailService->setMessage($message);
 
         if (!$emailService->send()) {
@@ -323,11 +297,13 @@ class AuthController extends BaseController
     // }
 
     public function getdeviceid($deviceId){
+        // $deviceId = 'b7';
         return $deviceId;
     }
 
+
     public function lcoatedestination($deviceId) {
-        $deviceid = $this->getdeviceid($deviceId); 
+        $deviceid = $this->getdeviceid($deviceId);
         $authModel = new AuthModel();
         $accessToken = $authModel->find(1);
         $authtoken = $accessToken['access_token'];
@@ -395,6 +371,7 @@ class AuthController extends BaseController
                         jobType
                         mapStatus
                         jobTypeDescription
+                        customerName
                         locationAddress1
                         locationAddress2
                         locationState
@@ -433,6 +410,7 @@ class AuthController extends BaseController
                 "query" => $query,
                 "variables" => [
                     "startDate" => $startDate,
+                    "deviceid" => $deviceId,
                     "endDate" => $endDate,
                     "employeeCodes" => $emp1,
                     "page" => $page,
@@ -463,7 +441,6 @@ class AuthController extends BaseController
             echo "cURL Error #:" . $err;
         } else {
             $response = json_decode($response);
-
             if (isset($response->data->searchAssignments->content)) {
                 foreach ($response->data->searchAssignments->content as $assignment) {
                     $employeeCode = strtoupper($assignment->employeeCode);
@@ -471,8 +448,8 @@ class AuthController extends BaseController
                     $matchingEmployee = array_filter($employeeCodes, function ($employee) use ($employeeCode, $assignment) {
                         $status = $assignment->status;
                         $mapStatus = $assignment->mapStatus ?? '';
-                        // Ensure both statuses match 'Dispatched'
-                        if ($status === "Assigned" && $mapStatus === "Assigned") {
+                        $jobIds = $assignment->jobId;
+                        if ($jobIds && $status === "Assigned" && $mapStatus === "Assigned" ) {
                             return $employee['employeeId'] === $employeeCode;
                         }
                         return false;
@@ -487,6 +464,33 @@ class AuthController extends BaseController
                             $locationAddress1 = $assignment->locationAddress1 ?? '';
                             $locationCity = $assignment->locationCity ?? '';
                             $locationZipCode = $assignment->locationZipCode ?? '';
+                            $id = $assignment->id;
+                            $jobId = $assignment->jobId;
+                            $callId = $assignment->callId;
+                            $customerName = $assignment->customerName;
+                            $jobClass = $assignment->jobClass;
+                            $jobType = $assignment->jobType;
+                            $jobTypeDescription = $assignment->jobTypeDescription;
+
+                            $data = [
+                                'jobid' => $jobId,
+                                'callId' => $callId,
+                                'customerName' => $customerName,
+                                'jobClass' => $jobClass,
+                                'jobType' => $jobType,
+                                'jobTypeDescription' => $jobTypeDescription,
+                                'created_at' => date('Y-m-d H:i:s'),
+                                'updated_at' => date('Y-m-d H:i:s'),
+                            ];
+
+                            $Jobdetail = new JoBModel();
+                            // Check if the same data already exists (using jobid and callId as unique identifiers)
+                            $existingRecord = $Jobdetail->where('jobid', $jobId)->where('callId', $callId)->first();
+
+                            if (!$existingRecord) {
+                            // If no record exists, insert the new data
+                            $Jobdetail->insert($data);
+                            }
                             // Build the full location address, ensuring to trim any whitespace
                             $locationAddressParts = array_filter([$locationAddress1, $locationCity, $locationZipCode]);
                             $locationAddress = implode(', ', $locationAddressParts);
@@ -500,6 +504,184 @@ class AuthController extends BaseController
              else {
                 echo "No assignments found.";
             }
+        }
+    }
+
+    public function Jobid($deviceId) {
+        $deviceid = $this->getdeviceid($deviceId); 
+        // $email = $this->Fetch_email($email); 
+        $authModel = new AuthModel();
+        $accessToken = $authModel->find(1);
+        $authtoken = $accessToken['access_token'];
+    
+        $apiurl = 'https://office.successware.com/webg2/graphql';
+        $campaign = new CampaignModel();
+        $employeecode = $campaign->findAll(); // Fetch all employee records
+        $employeeCodes = [];
+    
+        if ($employeecode) {
+            foreach ($employeecode as $employee) {
+                // Assuming your database returns 'employeeId' and 'deviceId'
+                $employeeId = strtoupper($employee['employeeId']);
+                $deviceId = $employee['deviceId'];
+                if(!empty($employeeId) && !empty($deviceId)){
+                    $employeeCodes[] = [
+                        'employeeId' => $employee['employeeId'],
+                        'deviceId' => $employee['deviceId'],
+                    ];
+                }
+            }
+        }
+        $employeeIds = array_column($employeeCodes, 'employeeId');
+        $deviceId = array_column($employeeCodes, 'deviceId');
+
+        $currentDate = round(microtime(true) * 1000);
+        $nextDay = round(strtotime('+1 day') * 1000);
+        $startDate = '1727236800000';
+        $endDate = '1727323199000';
+        $page = 0;
+        $size = 1000;
+        $sort = [];
+        $assignedFlag = true;
+        $unassignedFlag = false;
+        $unscheduledFlag = false;
+        $jobDuration = [];
+        $jobClass = "";
+        $jobType = "";
+        $priority = false;
+        $prioritySort = true;
+        $zoneId = "";
+        $emp1 = $employeeIds;
+        sort($emp1);
+        $query = '
+            query SearchAssignments($page: Int!, $size: Int!, $sort: [String], $startDate: String, $endDate: String, $employeeCodes: [String], $assignedFlag: Boolean, $unassignedFlag: Boolean, $unscheduledFlag: Boolean, $jobDuration: [String], $jobClass: String, $jobType: String, $priority: Boolean, $prioritySort: Boolean, $zoneId: String) {
+                searchAssignments(page: $page, size: $size, sort: $sort, startDate: $startDate, endDate: $endDate, employeeCodes: $employeeCodes, assignedFlag: $assignedFlag, unassignedFlag: $unassignedFlag, unscheduledFlag: $unscheduledFlag, jobDuration: $jobDuration, jobClass: $jobClass, jobType: $jobType, priority: $priority, prioritySort: $prioritySort, zoneId: $zoneId) {
+                    totalElements
+                    totalPages
+                    pageSize
+                    pageNumber
+                    numberOfElements
+                    content {
+                        id
+                        employeeCode
+                        status
+                        assignedAt
+                        scheduledFor
+                        jobId
+                        referenceStatus
+                        callId
+                        isJobFlagged
+                        isPermitRequired
+                        isSaleEst
+                        jobClass
+                        jobType
+                        mapStatus
+                        jobTypeDescription
+
+                    }
+                }
+            }
+        ';
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $apiurl,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => json_encode([
+                "query" => $query,
+                "variables" => [
+                    "startDate" => $startDate,
+                    "deviceid" => $deviceId,
+                    "endDate" => $endDate,
+                    "employeeCodes" => $emp1,
+                    "page" => $page,
+                    "size" => $size,
+                    "sort" => $sort,
+                    "assignedFlag" => $assignedFlag,
+                    "unassignedFlag" => $unassignedFlag,
+                    "unscheduledFlag" => $unscheduledFlag,
+                    "jobDuration" => $jobDuration,
+                    "jobClass" => $jobClass,
+                    "jobType" => $jobType,
+                    "prioritySort" => $prioritySort,
+                    "zoneId" => $zoneId,
+                    "priority" => $priority
+                ]
+            ]),
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                "Authorization: Bearer " . $authtoken
+            ),
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+    
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $response = json_decode($response);
+            if (isset($response->data->searchAssignments->content)) {
+                foreach ($response->data->searchAssignments->content as $assignment) {
+                    $employeeCode = strtoupper($assignment->employeeCode);
+                    // Find the matching employee in your database (adjust this to match your DB structure)
+                    $matchingEmployee = array_filter($employeeCodes, function ($employee) use ($employeeCode, $assignment) {
+                        $status = $assignment->status;
+                        $mapStatus = $assignment->mapStatus ?? '';
+                        $jobIds = $assignment->jobId;
+                        if ($status === "Assigned" && $mapStatus === "Assigned" ) {
+                            return $employee['employeeId'] === $employeeCode;
+                        } 
+                        });
+                        if (!empty($matchingEmployee)) {
+                            // Get the first matching employee (array_shift removes and returns the first element)
+                            $matchingEmployee = array_shift($matchingEmployee);
+                            $deviceId = $matchingEmployee['deviceId'];
+                            // $devicedata = $this->getdeviceid($deviceId);
+                            if ($deviceId === $deviceid) {
+                                $jobIds = $assignment->jobId;
+                                // print_r($jobIds);
+                                return $jobIds;
+                            }
+                        }
+                }
+            }
+        }
+        
+        return null; // Return null if no matching job found
+    }
+
+    private function Send_technician_location($deviceId,$email)
+    {   
+        $jobid = $this->Jobid($deviceId);
+        $emailService = \Config\Services::email();
+        $link = base_url('tracker/' . $deviceId . '?jobid=' . $jobid);
+        $message = 'Track the technician in real-time: ' . $link;
+
+        $emailService->initialize([
+            'protocol' => 'smtp',
+            'SMTPHost' => $_ENV['SMTP_HOST'],
+            'SMTPPort' => intval($_ENV['SMTP_PORT']),
+            'SMTPUser' => $_ENV['SMTP_USER'],
+            'SMTPPass' => $_ENV['SMTP_PASS'],
+            'mailType' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ]);
+
+        $emailService->setFrom($_ENV['SMTP_USER'], 'SummitRA');
+        $emailService->setTo($email);
+        $emailService->setSubject('Realtime tracking system');
+        $emailService->setMessage($message);
+
+        if (!$emailService->send()) {
+            echo $emailService->printDebugger(['headers', 'subject', 'body']);
         }
     }
 
@@ -615,9 +797,22 @@ class AuthController extends BaseController
         if ($deviceId === null) {
             return redirect()->back()->with('error', 'No device ID provided');
         }
-        return view('tracker', [
-            'deviceId' => $deviceId,
-            
-        ]);
+        // Fetch the 'jobid' from the URL
+        $urlJobid = $this->request->getGet('jobid');
+        // Call your backend method to get the correct jobid for the deviceId
+        $jobid = $this->Jobid($deviceId);
+        print_r($jobid);
+        // Check if the 'jobid' in the URL matches the backend 'jobid'
+        if ($urlJobid === $jobid) {
+            // Jobid matches, return the tracker view
+            return view('tracker', [
+                'deviceId' => $deviceId,
+                'jobid' => $jobid
+            ]);
+        } else {
+            // Jobid does not match, redirect to the thank you page
+            return redirect()->to(base_url('thankyou'));
+        }
     }
+    
 }
