@@ -61,19 +61,15 @@ class ReportsController extends BaseController {
     public function dispatching()
     {
         $model = new ReviewModal();
-    
         // Call the dispatchingchart method and store the returned data
         $chartData = $model->dispatchingchart();
-    
         // Fetch admin details
         $userModel = new UserModel();
         $admin1 = $userModel->find(1);
-    
         // Merge the chart data with admin data
         $data = array_merge($chartData, [
             'admin1' => $admin1
-        ]);
-    
+        ]); 
         // Pass the merged data to the view
         return view('dispatching', $data);
     }

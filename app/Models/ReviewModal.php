@@ -260,6 +260,29 @@ class ReviewModal extends Model
             }
         }
 
+        $smsquery = $this->getPulseChecksmsDataByMonth();
+        // print_r($smsquery);
+
+        // Prepare arrays for the result
+        $smsbioDates = [];
+        $smspulsecheckDates = [];
+        $smsbioCounts = [];
+        $smspulsecheckCounts = [];
+        
+        foreach ($smsquery as $rows) {
+            // If there are bio entries on this date, add to bioDates
+            if ($rows['bioCount'] > 0) {
+                $smsbioDates[] = $rows['date'];
+                $smsbioCounts[] = $rows['bioCount']; 
+            }
+    
+            // If there are pulsecheck entries on this date, add to pulsecheckDates
+            if ($rows['pulsecheckCount'] > 0) {
+                $smspulsecheckDates[] = $rows['date'];
+                $smspulsecheckCounts[] = $rows['pulsecheckCount'];
+            }
+        }
+
         // Prepare the data to return
         return [
             'ratetext1'       => $ratetext1,
@@ -277,6 +300,10 @@ class ReviewModal extends Model
             'pulsecheckDates' => json_encode($pulsecheckDates),
             'bioCounts'       => json_encode($bioCounts),
             'pulsecheckCounts'=> json_encode($pulsecheckCounts),
+            'smsbioDates'        => json_encode($smsbioDates),
+            'smspulsecheckDates' => json_encode($smspulsecheckDates),
+            'smsbioCounts'       => json_encode($smsbioCounts),
+            'smspulsecheckCounts'=> json_encode($smspulsecheckCounts),
             'statusdone'      => $statusdone,
             'statuspending'   => $statuspending,
         ];
@@ -311,21 +338,16 @@ class ReviewModal extends Model
         $review = $this->select('creditTo')
                        ->where('ID', $reviewID)
                        ->first();
-    
         // Initialize currentData as an empty array if the field is not present or not valid
         $currentData = isset($review['creditTo']) ? json_decode($review['creditTo'], true) : [];
-    
         if (!is_array($currentData)) {
             $currentData = [];
         }
-    
         // Append the new campaign name if it is not already in the array
         if (!in_array($campaignName, $currentData)) {
             $currentData[] = $campaignName;
-    
             // Encode the updated array back to JSON
             $jsonData = json_encode($currentData);
-    
             // Update the 'creditTo' field with the new JSON data
             return $this->where('ID', $reviewID)->set(['creditTo' => $jsonData])->update();
         }
@@ -370,6 +392,27 @@ class ReviewModal extends Model
         }
     }
     // Social-review page update credit fucntion End here
+
+    public function getPulseChecksmsDataByMonth() {
+        // Load the database
+        $db = \Config\Database::connect();
     
+        // Write the SQL query
+        $sql = "SELECT 
+            DATE(sent_at) AS date,
+            COUNT(CASE WHEN status = 'bio' THEN 1 END) AS bioCount,
+            COUNT(CASE WHEN status = 'pulsecheck' THEN 1 END) AS pulsecheckCount
+        FROM customersmsbio
+        GROUP BY date
+        ORDER BY date";
+    
+        // Execute the query
+        $query = $db->query($sql);
+        // Fetch all results as an associative array
+        $smsquery = $query->getResultArray();
+        // Return the results
+        return $smsquery;
+   
+    }
 
 }

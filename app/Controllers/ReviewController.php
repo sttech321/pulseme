@@ -279,15 +279,7 @@ class ReviewController extends BaseController
 
     public function reviews()
     {
-        // Check if the user is logged in
-        // if (!session()->get('isLoggedIn')) {
-        //     // Store the current URL in the session for redirecting after login
-        //     session()->set('redirect_back', current_url());
-    
-        //     // Redirect to the login page
-        //     return redirect()->to('/');
-        // }
-    
+   
         $userModel = new UserModel();
         $admin1 = $userModel->find(1);
     
@@ -320,7 +312,6 @@ class ReviewController extends BaseController
         return view('reviews', $data);
     }
     
-
     public function getReviewsByCampaign()
     {
         if ($this->request->isAJAX()) {

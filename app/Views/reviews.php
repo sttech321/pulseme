@@ -990,28 +990,62 @@
 
                      });
 
-                     if (data.pagination) {
-                        //console.table(data.pagination)
-                        var paginationHtml = '<div class="pagination-container">';
-                        var totalPages = data.pagination.total_pages;
-                        //console.table(totalPages)
-                        var currentPage = data.pagination.page;
-                        // console.table(currentPage)
-                        paginationHtml += '<ul class="pagination">';
-                        for (var i = 1; i <= totalPages; i++) {
-                           var activeClass = (i === currentPage) ? 'active' : '';
-                           paginationHtml += '<li class="' + activeClass + '">';
-                           paginationHtml += '<a href="#" class="page-link" data-page="' + i + '">' + i + '</a> ';
-                           paginationHtml += '</li>';
+                     function generatePagination(paginationData) {
+                        let paginationHtml = '<div class="pagination-container"><ul class="pagination">';
+                        let totalPages = paginationData.total_pages;
+                        let currentPage = paginationData.page;
+
+                        // "First" button
+                        if (currentPage > 1) {
+                           paginationHtml += '<li><a href="#" class="page-link" data-page="1" aria-label="First"><span aria-hidden="true">First</span></a></li>';
                         }
+
+                        // "Previous" button
+                        if (currentPage > 1) {
+                           paginationHtml += '<li><a href="#" class="page-link" data-page="' + (currentPage - 1) + '" aria-label="Previous"><span aria-hidden="true">Previous</span></a></li>';
+                        }
+
+                        // Display the current page and the next two pages or the last pages accordingly
+                        if (currentPage < totalPages - 1) {
+                           // If not on the last two pages, show the current page and next two pages
+                           for (let i = currentPage; i <= currentPage + 2 && i <= totalPages; i++) {
+                                 let activeClass = (i === currentPage) ? 'active' : '';
+                                 paginationHtml += '<li class="' + activeClass + '"><a href="#" class="page-link" data-page="' + i + '">' + i + '</a></li>';
+                           }
+                        } else {
+                           // If on the last two pages, show the last three pages
+                           for (let i = Math.max(totalPages - 2, 1); i <= totalPages; i++) {
+                                 let activeClass = (i === currentPage) ? 'active' : '';
+                                 paginationHtml += '<li class="' + activeClass + '"><a href="#" class="page-link" data-page="' + i + '">' + i + '</a></li>';
+                           }
+                        }
+
+                        // "Next" button
+                        if (currentPage < totalPages) {
+                           paginationHtml += '<li><a href="#" class="page-link" data-page="' + (currentPage + 1) + '" aria-label="Next"><span aria-hidden="true">Next</span></a></li>';
+                        }
+
+                        // "Last" button
+                        if (currentPage < totalPages) {
+                           paginationHtml += '<li><a href="#" class="page-link" data-page="' + totalPages + '" aria-label="Last"><span aria-hidden="true">Last</span></a></li>';
+                        }
+
                         paginationHtml += '</ul></div>';
+                        return paginationHtml;
+                     }
+
+                     if (data.pagination) {
+                        const paginationHtml = generatePagination(data.pagination);
                         $('.pagination-container').html(paginationHtml);
+
                         $('.page-link').on('click', function(e) {
                            e.preventDefault();
-                           var page = $(this).data('page');
-                           fetchReviews(page);
+                           currentPage = $(this).data('page');
+                           fetchReviews(currentPage);
                         });
                      }
+
+
                   } else {
                      var noReviewsRow = '<tr class="flex w-full">' +
                         '<td colspan="6" class="text-center">No reviews found....</td>' +
@@ -1105,7 +1139,6 @@
          selectedCheckboxes.forEach(function(checkbox) {
             var reviewElement = $(checkbox).closest('tr');
             var approveButton = reviewElement.find('.btn-approve');
-
             if (approveButton.length > 0 && approveButton.attr('approved') === '0') {
                handleApprovalClick(approveButton[0], 'approved');
             }
@@ -1127,4 +1160,4 @@
     });
 </script>
    <?= $this->endSection() ?>
-   
+  

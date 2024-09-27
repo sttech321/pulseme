@@ -118,3 +118,4 @@ $routes->get('/auth/statustrack/(:segment)', 'AuthController::statustrack/$1');
 $routes->get('/jobid/(:any)', 'AuthController::Jobid/$1');
 
 $routes->get('direction/(:any)', 'AuthController::getDirection/$1');
+$routes->get('url-expire', 'AuthController::url_expire');

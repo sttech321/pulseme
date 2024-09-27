@@ -270,11 +270,11 @@ document.getElementById('search').addEventListener('input', function() {
                 response.forEach(campaign => {
                     html += '<tr class="!bg-opacity-50 odd:bg-sky-100">' +
                         `<td class="px-20px py-15px">1B85A09AA6${campaign.ID}</td>` +
-                        `<td class="px-20px py-15px">${campaign.name}</td>` +
-                        `<td class="px-20px py-15px">${campaign.employeeId}</td>` +
-                        `<td class="px-20px py-15px">${campaign.department}</td>` +
-                        `<td class="px-20px py-15px">${campaign.bio_count}</td>` +
-                        `<td class="px-20px py-15px">${campaign.pulsecheck_count}</td>` +
+                        `<td class="px-20px py-15px">${campaign.name || ''}</td>` +
+                        `<td class="px-20px py-15px">${campaign.employeeId || ''}</td>` +
+                        `<td class="px-20px py-15px">${campaign.department || ''}</td>` +
+                        `<td class="px-20px py-15px">${campaign.bio_count || ''}</td>` +
+                        `<td class="px-20px py-15px">${campaign.pulsecheck_count || ''}</td>` +
                         `<td class="px-20px py-15px">${campaign.review_leads || ''}</td>` +
                         `<td class="px-20px py-15px">${campaign.positive_count || ''}</td>` +
                         `<td class="px-20px py-15px">${campaign.negative_count || ''}</td>` +

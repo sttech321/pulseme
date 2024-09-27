@@ -4,9 +4,13 @@
         // Fetch and parse data from PHP variables
         var bioDates = <?= $bioDates ?>;
         var bioCounts = <?= $bioCounts ?>;
+        var smsbioDates = <?= $smsbioDates ?>;
+        var smsbioCounts = <?= $smsbioCounts ?>;
 
-        console.log('Dates:', bioDates);
-        console.log('Counts:', bioCounts);
+        console.log('Email Dates:', bioDates);
+        console.log('Email Counts:', bioCounts);
+        console.log('SMS Dates:', smsbioDates);
+        console.log('SMS Counts:', smsbioCounts);
 
         // Initialize the chart options
         var options = {
@@ -21,35 +25,35 @@
                     show: false // Hide toolbar
                 }
             },
-            plotOptions: {
-                area: {
-                    stacking: 'normal',
-                    lineTension: 0.3
-                }
-            },
             dataLabels: {
                 enabled: false
             },
             stroke: {
                 curve: 'smooth' // Smoother curve for an analog look
             },
-            colors: ['#007bff'], // Blue for Email
-            series: [{
-                name: 'Email',
-                data: bioCounts // Use the counts data for the series
-            }],
+            colors: ['#007bff', '#28a745'], // Blue for Email, Green for SMS
+            series: [
+                {
+                    name: 'Email',
+                    data: bioCounts // Use the Email counts data for the first series
+                },
+                {
+                    name: 'SMS',
+                    data: smsbioCounts // Use the SMS counts data for the second series
+                }
+            ],
             xaxis: {
-                categories: bioDates, // Use the dates for x-axis categories
+                categories: bioDates, // Use Email dates for x-axis categories (assuming both series share the same dates)
                 type: 'datetime',
                 labels: {
-                    format: 'd/M/yyyy' // Date format as day/month/year
+                    format: 'dd/MM/yyyy' // Date format as day/month/year
                 }
             },
             tooltip: {
                 shared: true,
                 intersect: false,
                 x: {
-                    format: 'd/M/yyyy' // Show full date on hover
+                    format: 'dd/MM/yyyy' // Show full date on hover
                 }
             },
             legend: {
