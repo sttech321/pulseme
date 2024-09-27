@@ -86,7 +86,6 @@
                         }
                         // Add the new vehicle marker at current position
                         window.vehicleMarker = L.marker(currentPosition, { icon: vehicleIcon }).addTo(map);
-
                         // Check if the startMarker is already initialized
                         if (!startMarker) {
                             // Create start marker for the first time using the current position
@@ -109,10 +108,44 @@
                         lastPosition = currentPosition;
                     }
                 })
-                .catch(error => console.error('Error fetching location:', error));
+                // .catch(error => console.error('Error fetching location:', error));
         }
+
+        // function updateLocation() {
+        //     var deviceId = '<?= $deviceId ?>'; // Fetch deviceId from PHP
+        //     var url = `/auth/statustrack/${deviceId}`;
+
+        //     fetch(url)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             var currentPosition = [data.latitude, data.longitude];
+
+        //             if (currentPosition[0] && currentPosition[1]) {
+        //                 // Remove existing vehicle marker if it exists
+        //                 if (window.vehicleMarker) {
+        //                     map.removeLayer(window.vehicleMarker);
+        //                 }
+        //                 // Add the new vehicle marker at current position
+        //                 window.vehicleMarker = L.marker(currentPosition, { icon: vehicleIcon }).addTo(map);
+
+        //                 // Fetch and display route immediately after obtaining initial position
+        //                 if (!lastPosition) {
+        //                     fetchRoute(currentPosition, deviceId); // Fetch route immediately
+        //                 }
+
+        //                 // Update last position
+        //                 lastPosition = currentPosition;
+        //             }
+        //         })
+        //         .catch(error => console.error('Error fetching location:', error));
+        // }
+
         // Update location every 2 seconds
         setInterval(updateLocation, 500);
+
+        // document.addEventListener('DOMContentLoaded', (event) => {
+        //     updateLocation(); // Call it immediately on page load
+        // });
 
         function fetchRoute(currentPosition, deviceId) {
             var startLat = currentPosition[0];
@@ -149,7 +182,7 @@
                     }
                 })
                 .catch(error => {
-                    console.error('Error fetching route:', error);
+                    // console.error('Error fetching route:', error);
                 });
         }
 

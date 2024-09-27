@@ -331,8 +331,8 @@ class AuthController extends BaseController
 
         $currentDate = round(microtime(true) * 1000);
         $nextDay = round(strtotime('+1 day') * 1000);
-        $startDate = '1727236800000';
-        $endDate = '1727323199000';
+        $startDate = '1727409600000';
+        $endDate = '1727495999000';
         $page = 0;
         $size = 1000;
         $sort = [];
@@ -535,8 +535,8 @@ class AuthController extends BaseController
 
         $currentDate = round(microtime(true) * 1000);
         $nextDay = round(strtotime('+1 day') * 1000);
-        $startDate = '1727236800000';
-        $endDate = '1727323199000';
+        $startDate = '1727409600000';
+        $endDate = '1727495999000';
         $page = 0;
         $size = 1000;
         $sort = [];
