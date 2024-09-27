@@ -2,14 +2,12 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Fetch and parse data from PHP variables
-        var bioDates = <?= $bioDates ?>;
-        var bioCounts = <?= $bioCounts ?>;
-        var smsbioDates = <?= $smsbioDates ?>;
-        var smsbioCounts = <?= $smsbioCounts ?>;
+        var dates = <?= $dates ?>;
+        var emailcount = <?= $emailbio ?>;
+        var smsbioCounts = <?= $smsbio ?>;
 
-        console.log('Email Dates:', bioDates);
-        console.log('Email Counts:', bioCounts);
-        console.log('SMS Dates:', smsbioDates);
+        console.log('Email Dates:', dates);
+        console.log('Email Counts:', emailcount);
         console.log('SMS Counts:', smsbioCounts);
 
         // Initialize the chart options
@@ -35,7 +33,7 @@
             series: [
                 {
                     name: 'Email',
-                    data: bioCounts // Use the Email counts data for the first series
+                    data: emailcount // Use the Email counts data for the first series
                 },
                 {
                     name: 'SMS',
@@ -43,7 +41,7 @@
                 }
             ],
             xaxis: {
-                categories: bioDates, // Use Email dates for x-axis categories (assuming both series share the same dates)
+                categories: dates, // Use Email dates for x-axis categories (assuming both series share the same dates)
                 type: 'datetime',
                 labels: {
                     format: 'dd/MM/yyyy' // Date format as day/month/year

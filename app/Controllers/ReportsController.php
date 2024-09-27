@@ -24,7 +24,6 @@ class ReportsController extends BaseController {
         $userModel = new UserModel();
         $admin1 = $userModel->find(1);
         $data['admin1'] = $admin1;
-            
         return view('reports/campaign_review',$data);
     }
 
@@ -85,7 +84,7 @@ class ReportsController extends BaseController {
     {
         $search = $this->request->getVar('search');
         $technicianModel = new TechnicianModal();      
-            $results = $technicianModel->getTechniciansBySearch($search);
+        $results = $technicianModel->getTechniciansBySearch($search);
         return $this->response->setJSON($results);
     } 
 
@@ -93,13 +92,10 @@ class ReportsController extends BaseController {
     {
         $fromDate = $this->request->getPost('from_date');
         $toDate = $this->request->getPost('to_date');
-        
         // Assuming you have a model called CampaignModel
         $campaignModel = new CampaignModel();
-    
         // Fetch campaigns with sentiment within the date range
         $campaigns = $campaignModel->getCampaignsWithSentiment($fromDate, $toDate);
-    
         // Return the campaigns as a JSON response
         return $this->response->setJSON($campaigns);
     }
@@ -107,13 +103,10 @@ class ReportsController extends BaseController {
     public function filterDepartments()
     {
         $model = new CampaignModel();
-
         $fromDate = $this->request->getPost('from_date');
         $toDate = $this->request->getPost('to_date');
-
         // Get the filtered data based on the date range
         $departments = $model->getUniqueDepartments($fromDate, $toDate);
-
         return $this->response->setJSON($departments);
     }
 

@@ -3,15 +3,13 @@
     document.addEventListener("DOMContentLoaded", function() {
 
         // Fetch and parse data from PHP variables
-        var pulsecheckDates = <?= $pulsecheckDates ?>;
-        var pulsecheckCounts = <?= $pulsecheckCounts ?>;
-        var smspulsecheckDates = <?= $smspulsecheckDates ?>;
-        var smspulsecheckCounts = <?= $smspulsecheckCounts ?>;
+        var dates = <?= $dates ?>;
+        var smspulse = <?= $smspulse ?>;
+        var emailpulse = <?= $emailpulse ?>;
 
-        console.log('Dates:', pulsecheckDates);
-        console.log('Counts:', pulsecheckCounts);
-        console.log('smsDates:', smspulsecheckDates);
-        console.log('smsCounts:', smspulsecheckCounts);
+        console.log('Dates:', dates);
+        console.log('Counts:', emailpulse);
+        console.log('smsDates:', smspulse);
 
         var options = {
             chart: {
@@ -39,23 +37,19 @@
             colors: ['#007bff', '#28a745'], // Blue for Email, Green for SMS
             series: [
                 {
-                    name: 'Email', // Label for Email data
-                    data: pulsecheckCounts
+                    name: 'Email',
+                    data: emailpulse // Use the Email counts data for the first series
                 },
                 {
-                    name: 'SMS', // Label for SMS data
-                    data: smspulsecheckCounts
+                    name: 'SMS',
+                    data: smspulse // Use the SMS counts data for the second series
                 }
             ],
             xaxis: {
-                categories: pulsecheckDates, // Date-wise categories for x-axis
+                categories: dates, // Use Email dates for x-axis categories (assuming both series share the same dates)
                 type: 'datetime',
                 labels: {
-                    format: 'dd/MM/yyyy'
-                    // formatter: function(val) {
-                    //     const date = new Date(val);
-                    //     return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear(); // Date format as day/month/year
-                    // }
+                    format: 'dd/MM/yyyy' // Date format as day/month/year
                 }
             },
             tooltip: {

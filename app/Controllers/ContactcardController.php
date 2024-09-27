@@ -48,7 +48,6 @@ class ContactcardController extends BaseController
     // Return response
     return $this->response->setJSON(['success' => true, 'message' => $message]);
 }
-
     
     public function contact_information()
     {

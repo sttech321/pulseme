@@ -449,7 +449,7 @@ class AuthController extends BaseController
                         $status = $assignment->status;
                         $mapStatus = $assignment->mapStatus ?? '';
                         $jobIds = $assignment->jobId;
-                        if ($jobIds && $status === "Completed" && $mapStatus === "Completed" ) {
+                        if ($jobIds && $status === "Dispatched" && $mapStatus === "Dispatched" ) {
                             return $employee['employeeId'] === $employeeCode;
                         }
                         return false;
@@ -493,8 +493,8 @@ class AuthController extends BaseController
                             $locationAddressParts = array_filter([$locationAddress1, $locationCity, $locationZipCode]);
                             $locationAddress = implode(', ', $locationAddressParts);
                             // Return the constructed address
-                            // return $locationAddress;
-                            return '9071 Baywood Park Dr, Seminole , 33777';
+                            return $locationAddress;
+                            // return '9071 Baywood Park Dr, Seminole , 33777';
                         }
                     }
                 }
@@ -633,7 +633,7 @@ class AuthController extends BaseController
                         $status = $assignment->status;
                         $mapStatus = $assignment->mapStatus ?? '';
                         $jobIds = $assignment->jobId;
-                        if ($status === "Completed" && $mapStatus === "Completed" ) {
+                        if ($status === "Dispatched" && $mapStatus === "Dispatched" ) {
                             return $employee['employeeId'] === $employeeCode;
                         } 
                         });
@@ -645,8 +645,8 @@ class AuthController extends BaseController
                             if ($deviceId === $deviceid) {
                                 $jobIds = $assignment->jobId;
                                 // print_r($jobIds);
-                                // return $jobIds;
-                                return '637980976403815480';
+                                return $jobIds;
+                                // return '637980976403815480';
                             }
                         }
                 }

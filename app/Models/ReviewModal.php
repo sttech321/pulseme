@@ -222,9 +222,6 @@ class ReviewModal extends Model
             $negative = ($negative / $total) * 100;
         }
          
-        // Get pulse check data by month
-        $pulseCheckData = $this->getPulseCheckDataByMonth();
-        // print_r($pulseCheckData);
         $statusdone = 0;
         $statuspending = 0;
         
@@ -240,49 +237,25 @@ class ReviewModal extends Model
             }
         }
     
-        // Prepare arrays for the result
-        $bioDates = [];
-        $pulsecheckDates = [];
-        $bioCounts = [];
-        $pulsecheckCounts = [];
-    
-        foreach ($pulseCheckData as $row) {
-            // If there are bio entries on this date, add to bioDates
-            if ($row['bioCount'] > 0) {
-                $bioDates[] = $row['date'];
-                $bioCounts[] = $row['bioCount'];
-            }
-    
-            // If there are pulsecheck entries on this date, add to pulsecheckDates
-            if ($row['pulsecheckCount'] > 0) {
-                $pulsecheckDates[] = $row['date'];
-                $pulsecheckCounts[] = $row['pulsecheckCount'];
-            }
-        }
+        $pulseCheckData = $this->getPulseCheckDataByMonth();
 
-        $smsquery = $this->getPulseChecksmsDataByMonth();
-        // print_r($smsquery);
-
-        // Prepare arrays for the result
-        $smsbioDates = [];
-        $smspulsecheckDates = [];
-        $smsbioCounts = [];
-        $smspulsecheckCounts = [];
+        $date = [];
+        $bioCount = []; // Correctly named
+        $pulsecheckCount = [];
+        $pulseBioCount = [];
+        $pulsePulsecheckCount = [];
         
-        foreach ($smsquery as $rows) {
-            // If there are bio entries on this date, add to bioDates
-            if ($rows['bioCount'] > 0) {
-                $smsbioDates[] = $rows['date'];
-                $smsbioCounts[] = $rows['bioCount']; 
-            }
-    
-            // If there are pulsecheck entries on this date, add to pulsecheckDates
-            if ($rows['pulsecheckCount'] > 0) {
-                $smspulsecheckDates[] = $rows['date'];
-                $smspulsecheckCounts[] = $rows['pulsecheckCount'];
+        foreach ($pulseCheckData as $row) {
+            // If there are bio entries on this date, add to the corresponding arrays
+            if ($row) {
+                $date[] = $row['date'];
+                $bioCount[] = $row['bioCount']; // Use $bioCount instead of $bioCounts
+                $pulsecheckCount[] = $row['pulsecheckCount'];
+                $pulseBioCount[] = $row['pulseBioCount'];
+                $pulsePulsecheckCount[] = $row['pulsePulsecheckCount'];               
             }
         }
-
+        
         // Prepare the data to return
         return [
             'ratetext1'       => $ratetext1,
@@ -296,14 +269,11 @@ class ReviewModal extends Model
             'ratepoint3'      => round($ratepoint3, 1),
             'happyPercentage' => round($positive, 2),
             'unhappyPercentage' => round($negative, 2),
-            'bioDates'        => json_encode($bioDates),
-            'pulsecheckDates' => json_encode($pulsecheckDates),
-            'bioCounts'       => json_encode($bioCounts),
-            'pulsecheckCounts'=> json_encode($pulsecheckCounts),
-            'smsbioDates'        => json_encode($smsbioDates),
-            'smspulsecheckDates' => json_encode($smspulsecheckDates),
-            'smsbioCounts'       => json_encode($smsbioCounts),
-            'smspulsecheckCounts'=> json_encode($smspulsecheckCounts),
+            'dates'        => json_encode($date),
+            'smsbio' => json_encode($bioCount),
+            'smspulse'       => json_encode($pulsecheckCount),
+            'emailbio'=> json_encode($pulseBioCount),
+            'emailpulse'        => json_encode($pulsePulsecheckCount),
             'statusdone'      => $statusdone,
             'statuspending'   => $statuspending,
         ];
@@ -315,11 +285,51 @@ class ReviewModal extends Model
     
         // Write the SQL query
         $sql = "SELECT 
-            DATE(created_at) AS date,
-            COUNT(CASE WHEN formstatus = 'bio' THEN 1 END) AS bioCount,
-            COUNT(CASE WHEN formstatus = 'pulsecheck' THEN 1 END) AS pulsecheckCount
-        FROM customers_bio
-        GROUP BY date
+            COALESCE(bio.date, pulse.date) AS date,
+            COALESCE(bio.bioCount, 0) AS bioCount,
+            COALESCE(bio.pulsecheckCount, 0) AS pulsecheckCount,
+            0 AS pulseBioCount, -- Placeholder for pulseBioCount
+            0 AS pulsePulsecheckCount -- Placeholder for pulsePulsecheckCount
+        FROM 
+            (SELECT 
+                DATE(sent_at) AS date,
+                COUNT(CASE WHEN status = 'bio' THEN 1 END) AS bioCount,
+                COUNT(CASE WHEN status = 'pulsecheck' THEN 1 END) AS pulsecheckCount
+            FROM customersmsbio
+            GROUP BY DATE(sent_at)) AS bio
+        LEFT JOIN 
+            (SELECT 
+                DATE(created_at) AS date,
+                COUNT(CASE WHEN formstatus = 'bio' THEN 1 END) AS bioCount,
+                COUNT(CASE WHEN formstatus = 'pulsecheck' THEN 1 END) AS pulsecheckCount
+            FROM customers_bio
+            GROUP BY DATE(created_at)) AS pulse
+        ON bio.date = pulse.date
+
+        UNION ALL
+
+        SELECT 
+            COALESCE(bio.date, pulse.date) AS date,
+            0 AS bioCount, -- Placeholder for bioCount
+            0 AS pulsecheckCount, -- Placeholder for pulsecheckCount
+            pulse.bioCount,
+            pulse.pulsecheckCount
+        FROM 
+            (SELECT 
+                DATE(sent_at) AS date,
+                COUNT(CASE WHEN status = 'bio' THEN 1 END) AS bioCount,
+                COUNT(CASE WHEN status = 'pulsecheck' THEN 1 END) AS pulsecheckCount
+            FROM customersmsbio
+            GROUP BY DATE(sent_at)) AS bio
+        RIGHT JOIN 
+            (SELECT 
+                DATE(created_at) AS date,
+                COUNT(CASE WHEN formstatus = 'bio' THEN 1 END) AS bioCount,
+                COUNT(CASE WHEN formstatus = 'pulsecheck' THEN 1 END) AS pulsecheckCount
+            FROM customers_bio
+            GROUP BY DATE(created_at)) AS pulse
+        ON bio.date = pulse.date
+
         ORDER BY date";
     
         // Execute the query
@@ -393,26 +403,26 @@ class ReviewModal extends Model
     }
     // Social-review page update credit fucntion End here
 
-    public function getPulseChecksmsDataByMonth() {
-        // Load the database
-        $db = \Config\Database::connect();
+    // public function getPulseChecksmsDataByMonth() {
+    //     // Load the database
+    //     $db = \Config\Database::connect();
     
-        // Write the SQL query
-        $sql = "SELECT 
-            DATE(sent_at) AS date,
-            COUNT(CASE WHEN status = 'bio' THEN 1 END) AS bioCount,
-            COUNT(CASE WHEN status = 'pulsecheck' THEN 1 END) AS pulsecheckCount
-        FROM customersmsbio
-        GROUP BY date
-        ORDER BY date";
+    //     // Write the SQL query
+    //     $sql = "SELECT 
+    //         DATE(sent_at) AS date,
+    //         COUNT(CASE WHEN status = 'bio' THEN 1 END) AS bioCount,
+    //         COUNT(CASE WHEN status = 'pulsecheck' THEN 1 END) AS pulsecheckCount
+    //     FROM customersmsbio
+    //     GROUP BY date
+    //     ORDER BY date";
     
-        // Execute the query
-        $query = $db->query($sql);
-        // Fetch all results as an associative array
-        $smsquery = $query->getResultArray();
-        // Return the results
-        return $smsquery;
+    //     // Execute the query
+    //     $query = $db->query($sql);
+    //     // Fetch all results as an associative array
+    //     $smsquery = $query->getResultArray();
+    //     // Return the results
+    //     return $smsquery;
    
-    }
+    // }
 
 }
