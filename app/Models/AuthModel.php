@@ -111,3 +111,4 @@ class AuthModel extends Model
         }
     }
 }
+

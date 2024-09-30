@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use DateTime;
+use DateTimeZone;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\TechnicianModal;
@@ -328,11 +329,17 @@ class AuthController extends BaseController
         }
         $employeeIds = array_column($employeeCodes, 'employeeId');
         $deviceId = array_column($employeeCodes, 'deviceId');
-
-        $currentDate = round(microtime(true) * 1000);
-        $nextDay = round(strtotime('+1 day') * 1000);
-        $startDate = '1727409600000';
-        $endDate = '1727495999000';
+        // Set the timezone
+        $timezone = new DateTimeZone('America/New_York');
+        // Get the current date and set time to 00:00:00
+        $currentDate = new DateTime('now', $timezone);
+        $currentDate->setTime(0, 0, 0);
+        $startDate = $currentDate->getTimestamp() * 1000; // Convert to milliseconds
+        // Set time to 23:59:59
+        $currentDate->setTime(23, 59, 59);
+        $endDate = $currentDate->getTimestamp() * 1000; // Convert to milliseconds
+        $startDate = (string)$startDate;
+        $endDate = (string)$endDate;
         $page = 0;
         $size = 1000;
         $sort = [];
@@ -441,6 +448,8 @@ class AuthController extends BaseController
             echo "cURL Error #:" . $err;
         } else {
             $response = json_decode($response);
+            echo'<pre>';
+            print_r($response);
             if (isset($response->data->searchAssignments->content)) {
                 foreach ($response->data->searchAssignments->content as $assignment) {
                     $employeeCode = strtoupper($assignment->employeeCode);
@@ -533,10 +542,17 @@ class AuthController extends BaseController
         $employeeIds = array_column($employeeCodes, 'employeeId');
         $deviceId = array_column($employeeCodes, 'deviceId');
 
-        $currentDate = round(microtime(true) * 1000);
-        $nextDay = round(strtotime('+1 day') * 1000);
-        $startDate = '1727409600000';
-        $endDate = '1727495999000';
+        // Set the timezone
+        $timezone = new DateTimeZone('America/New_York');
+        // Get the current date and set time to 00:00:00
+        $currentDate = new DateTime('now', $timezone);
+        $currentDate->setTime(0, 0, 0);
+        $startDate = $currentDate->getTimestamp() * 1000; // Convert to milliseconds
+        // Set time to 23:59:59
+        $currentDate->setTime(23, 59, 59);
+        $endDate = $currentDate->getTimestamp() * 1000; // Convert to milliseconds
+        $startDate = (string)$startDate;
+        $endDate = (string)$endDate;
         $page = 0;
         $size = 1000;
         $sort = [];

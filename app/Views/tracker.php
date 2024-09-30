@@ -50,6 +50,7 @@
         var vehicleIcon = L.divIcon({
             className: 'vehicle-icon',
             html: '<i class="fa fa-car fa-3x"></i>',
+            // html: '<img src="<?= base_url('/image/car-jump.gif')?>" alt="Vehicle" style="background-color:none; width: 100px; height: 100px;">',
             iconSize: [30, 42],
             iconAnchor: [15, 42]
         });
@@ -63,7 +64,7 @@
         });
 
         // Variables for tracking distance
-        var totalDistance = 0.0;
+        // var totalDistance = 0.0;
         var lastPosition = null; 
         var startMarker;
 
@@ -99,13 +100,13 @@
                         fetchRoute(currentPosition, deviceId);
 
                         // Calculate distance covered if there is a previous position
-                        if (lastPosition) {
-                            var distance = calculateDistance(lastPosition, currentPosition);
-                            totalDistance += distance;
-                            document.getElementById('distance').innerText = totalDistance.toFixed(2);
-                        }
+                        // if (lastPosition) {
+                        //     var distance = calculateDistance(lastPosition, currentPosition);
+                        //     totalDistance += distance;
+                        //     document.getElementById('distance').innerText = totalDistance.toFixed(2);
+                        // }
                         // Update last position
-                        lastPosition = currentPosition;
+                        // lastPosition = currentPosition;
                     }
                 })
                 // .catch(error => console.error('Error fetching location:', error));
@@ -141,7 +142,7 @@
         // }
 
         // Update location every 2 seconds
-        setInterval(updateLocation, 500);
+        setInterval(updateLocation, 2000);
 
         // document.addEventListener('DOMContentLoaded', (event) => {
         //     updateLocation(); // Call it immediately on page load
@@ -186,17 +187,17 @@
                 });
         }
 
-        function calculateDistance(latlng1, latlng2) {
-            var R = 6371; // Radius of the Earth in km
-            var dLat = (latlng2[0] - latlng1[0]) * Math.PI / 180;
-            var dLng = (latlng2[1] - latlng1[1]) * Math.PI / 180;
-            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                    Math.cos(latlng1[0] * Math.PI / 180) * Math.cos(latlng2[0] * Math.PI / 180) *
-                    Math.sin(dLng / 2) * Math.sin(dLng / 2);
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            var distance = R * c;
-            return distance;
-        }
+        // function calculateDistance(latlng1, latlng2) {
+        //     var R = 6371; // Radius of the Earth in km
+        //     var dLat = (latlng2[0] - latlng1[0]) * Math.PI / 180;
+        //     var dLng = (latlng2[1] - latlng1[1]) * Math.PI / 180;
+        //     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        //             Math.cos(latlng1[0] * Math.PI / 180) * Math.cos(latlng2[0] * Math.PI / 180) *
+        //             Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        //     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        //     var distance = R * c;
+        //     return distance;
+        // }
 
         function decodePolyline(encoded) {
             var points = [];
