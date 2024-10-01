@@ -285,52 +285,62 @@ class ReviewModal extends Model
     
         // Write the SQL query
         $sql = "SELECT 
-            COALESCE(bio.date, pulse.date) AS date,
-            COALESCE(bio.bioCount, 0) AS bioCount,
-            COALESCE(bio.pulsecheckCount, 0) AS pulsecheckCount,
-            0 AS pulseBioCount, -- Placeholder for pulseBioCount
-            0 AS pulsePulsecheckCount -- Placeholder for pulsePulsecheckCount
-        FROM 
-            (SELECT 
-                DATE(sent_at) AS date,
-                COUNT(CASE WHEN status = 'bio' THEN 1 END) AS bioCount,
-                COUNT(CASE WHEN status = 'pulsecheck' THEN 1 END) AS pulsecheckCount
-            FROM customersmsbio
-            GROUP BY DATE(sent_at)) AS bio
-        LEFT JOIN 
-            (SELECT 
-                DATE(created_at) AS date,
-                COUNT(CASE WHEN formstatus = 'bio' THEN 1 END) AS bioCount,
-                COUNT(CASE WHEN formstatus = 'pulsecheck' THEN 1 END) AS pulsecheckCount
-            FROM customers_bio
-            GROUP BY DATE(created_at)) AS pulse
-        ON bio.date = pulse.date
+                date,
+                MAX(bioCount) AS bioCount,
+                MAX(pulsecheckCount) AS pulsecheckCount,
+                MAX(pulseBioCount) AS pulseBioCount,
+                MAX(pulsePulsecheckCount) AS pulsePulsecheckCount
+            FROM (
+                -- First part: left join to get data from `customersmsbio` with any matching rows from `customers_bio`
+                SELECT 
+                    bio.date AS date,
+                    COALESCE(bio.bioCount, 0) AS bioCount,
+                    COALESCE(bio.pulsecheckCount, 0) AS pulsecheckCount,
+                    COALESCE(pulse.bioCount, 0) AS pulseBioCount,
+                    COALESCE(pulse.pulsecheckCount, 0) AS pulsePulsecheckCount
+                FROM 
+                    (SELECT 
+                        DATE(sent_at) AS date,
+                        COUNT(CASE WHEN status = 'bio' THEN 1 END) AS bioCount,
+                        COUNT(CASE WHEN status = 'pulsecheck' THEN 1 END) AS pulsecheckCount
+                    FROM customersmsbio
+                    GROUP BY DATE(sent_at)) AS bio
+                LEFT JOIN 
+                    (SELECT 
+                        DATE(created_at) AS date,
+                        COUNT(CASE WHEN formstatus = 'bio' THEN 1 END) AS bioCount,
+                        COUNT(CASE WHEN formstatus = 'pulsecheck' THEN 1 END) AS pulsecheckCount
+                    FROM customers_bio
+                    GROUP BY DATE(created_at)) AS pulse
+                ON bio.date = pulse.date
 
-        UNION ALL
+                UNION ALL
 
-        SELECT 
-            COALESCE(bio.date, pulse.date) AS date,
-            0 AS bioCount, -- Placeholder for bioCount
-            0 AS pulsecheckCount, -- Placeholder for pulsecheckCount
-            pulse.bioCount,
-            pulse.pulsecheckCount
-        FROM 
-            (SELECT 
-                DATE(sent_at) AS date,
-                COUNT(CASE WHEN status = 'bio' THEN 1 END) AS bioCount,
-                COUNT(CASE WHEN status = 'pulsecheck' THEN 1 END) AS pulsecheckCount
-            FROM customersmsbio
-            GROUP BY DATE(sent_at)) AS bio
-        RIGHT JOIN 
-            (SELECT 
-                DATE(created_at) AS date,
-                COUNT(CASE WHEN formstatus = 'bio' THEN 1 END) AS bioCount,
-                COUNT(CASE WHEN formstatus = 'pulsecheck' THEN 1 END) AS pulsecheckCount
-            FROM customers_bio
-            GROUP BY DATE(created_at)) AS pulse
-        ON bio.date = pulse.date
-
-        ORDER BY date";
+                -- Second part: right join to get data from `customers_bio` where there is no match in `customersmsbio`
+                SELECT 
+                    pulse.date AS date,
+                    COALESCE(bio.bioCount, 0) AS bioCount,
+                    COALESCE(bio.pulsecheckCount, 0) AS pulsecheckCount,
+                    COALESCE(pulse.bioCount, 0) AS pulseBioCount,
+                    COALESCE(pulse.pulsecheckCount, 0) AS pulsePulsecheckCount
+                FROM 
+                    (SELECT 
+                        DATE(sent_at) AS date,
+                        COUNT(CASE WHEN status = 'bio' THEN 1 END) AS bioCount,
+                        COUNT(CASE WHEN status = 'pulsecheck' THEN 1 END) AS pulsecheckCount
+                    FROM customersmsbio
+                    GROUP BY DATE(sent_at)) AS bio
+                RIGHT JOIN 
+                    (SELECT 
+                        DATE(created_at) AS date,
+                        COUNT(CASE WHEN formstatus = 'bio' THEN 1 END) AS bioCount,
+                        COUNT(CASE WHEN formstatus = 'pulsecheck' THEN 1 END) AS pulsecheckCount
+                    FROM customers_bio
+                    GROUP BY DATE(created_at)) AS pulse
+                ON bio.date = pulse.date
+            ) AS combined_data
+            GROUP BY date
+            ORDER BY date";
     
         // Execute the query
         $query = $db->query($sql);
